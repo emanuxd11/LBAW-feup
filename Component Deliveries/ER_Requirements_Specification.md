@@ -2,6 +2,10 @@
 
 ## A1: Project Management
 
+This artefact aims to provide a comprehensive description of the project, including its objectives, key stakeholders, and the underlying motivations that drive its development.
+
+### Project Description
+
 The primary objective of this project is to develop an efficient information system, featuring an intuitive web interface tailored to meet intricate project requirements and attract organizations for enhanced productivity. Our core mission is to provide users with a robust yet user-friendly and reliable project management platform.
 
 Within the application, organizations can seamlessly oversee multiple projects simultaneously. Each project includes tasks, team members, and well-defined deadlines. Crucially, our platform incorporates a chat forum that facilitates collaboration among users working on the same project.
@@ -156,25 +160,75 @@ The main goal of this artifact is to identify and describe our system's actors a
 
 ## A3: Information Architecture
 
-> Brief presentation of the artifact goals.
+This artifact primarily aims to craft a prototype for the user interface, incorporating essential features through wireframes, while also detailing the connections between the system's core pages.
 
 
 ### 1. Sitemap
 
-> Sitemap presenting the overall structure of the web application.  
-> Each page must be identified in the sitemap.  
-> Multiple instances of the same page (e.g. student profile in SIGARRA) are presented as page stacks.
+A sitemap serves as a graphical depiction illustrating the interconnections among various web pages within a website, offering a comprehensive overview of how the content is structured and interconnected. It encompasses all intended web pages and offers a bird's-eye view of the website's information architecture, revealing the arrangement and hierarchy of information within the site.
+
+![Sitemap](images\sitemap_2363.png)
+
+
+The ProjectSync system is structured into four primary domains, encompassing static pages for system information dissemination (Static Pages), pages facilitating the exploration and organization of the project teams and tasks (Project Pages), individual user-specific pages such as the user profile (Authenticated User Pages), authentication pages for user login and registration (Users Authentication Pages), and sections dedicated to administrative functionalities (Admin Pages).
+
+
+
+
+
+
 
 
 ### 2. Wireframes
 
-> Wireframes for, at least, two main pages of the web application.
-> Do not include trivial use cases (e.g. about page, contacts).
+Wireframes serve as essential blueprints in the realm of web design and application development. They offer a structured visualization of layout concepts, content placement, and the overarching design at the page level. These wireframes meticulously allocate space, provide a clear hierarchy of content, and illuminate the availability of various features within the design canvas. Furthermore, wireframes are invaluable tools that help streamline the decision-making process and ensure that design ideas are effectively communicated among team members and stakeholders.
+
+For the ProjectSync system, the wireframes for the **HomePage (UI01)**, the **Project Workspace (UI07)**, and the **Login page (UI06)** are presented below.
+
+#### UI01: HomePage
+
+![Homepage](images\wireframe_1.png)
+
+- `1` Users can click in the website logo in order to go to the home page.
+- `2` Users can login in their accounts or create a new by registering.
+- `3` This area contains the pages related to the FAQ's or additional information abou the platform.
+- `4` The images showcase how the website looks and functions.
+- `5` Another way for users to access the login and/or register area.
+
+#### UI07: Project Workspace
+
+![Homepage](images\wireframe_2.png)
+
+- `1` Users can click in the website logo in order to go to the home page.
+- `2` This area contains the users notifications warning and the option to sign out of the account session.
+- `3` By clicking at the star next to the project name, the user selects this projet as a favourite.
+- `4` The search bar is dedicated to the finding of project tasks.
+- `5` Button that redirects the user to the list of project members.
+- `6` Projects boards that showcase the current tasks status and the completion of the project.
+- `7` Side bar that allows project switching and returning to the User home page.
+- `8` Side bar that allows to create another project and to go to the user profile by clicking in the user icon.
 
 
-#### UIxx: Page Name
+#### UI06: Login
 
-#### UIxx: Page Name
+![Homepage](images\wireframe_login.png)
+
+- `1` Users can click in the website logo in order to go to the home page.
+- `3` This area contains the pages related to the FAQ's or additional information abou the platform.
+- `4` In case the user already have an account, he can fill the form with his personal info and login by clicking the button.
+- `5` If the user do not have an account, he can click in the register button to be redirected to the register page.
+
+
+### Extra Wireframes
+
+#### UI07: Project Options in workspace
+
+![Homepage](images\wireframe_project_options.png)
+
+
+#### UI08: Create Project 
+
+![Homepage](images\wireframe_create_project.png)
 
 
 ---
