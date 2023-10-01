@@ -6,7 +6,7 @@ This artefact aims to provide a comprehensive description of the project, includ
 
 ### Project Description
 
-The primary objective of this project is to develop an efficient information system, featuring an intuitive web interface tailored to meet intricate project requirements and attract organizations for enhanced productivity. Our core mission is to provide users with a robust yet user-friendly and reliable project management platform.
+The primary objective of **ProjectSync** is to develop an efficient information system, featuring an intuitive web interface tailored to meet intricate project requirements and attract organizations for enhanced productivity. Our core mission is to provide users with a robust yet user-friendly and reliable project management platform.
 
 Within the application, organizations can seamlessly oversee multiple projects simultaneously. Each project includes tasks, team members, and well-defined deadlines. Crucially, our platform incorporates a chat forum that facilitates collaboration among users working on the same project.
 
@@ -30,7 +30,9 @@ The main goal of this artifact is to identify and describe our system's actors a
 
 
 ### 1. Actors
-![actor_diagram_def](uploads/bd9564861d2ba46b3c8adccd0156abc4/actor_diagram_def.jpg)
+![actor_diagram_def](images\diagram.png)
+
+<br><br><br>
 
 | Identifier          | Description                                                                                                                                   |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -158,6 +160,7 @@ The main goal of this artifact is to identify and describe our system's actors a
 
 ---
 
+
 ## A3: Information Architecture
 
 This artifact primarily aims to craft a prototype for the user interface, incorporating essential features through wireframes, while also detailing the connections between the system's core pages.
@@ -170,20 +173,14 @@ A sitemap serves as a graphical depiction illustrating the interconnections amon
 ![Sitemap](images\sitemap_2363.png)
 
 
-The ProjectSync system is structured into four primary domains, encompassing static pages for system information dissemination (Static Pages), pages facilitating the exploration and organization of the project teams and tasks (Project Pages), individual user-specific pages such as the user profile (Authenticated User Pages), authentication pages for user login and registration (Users Authentication Pages), and sections dedicated to administrative functionalities (Admin Pages).
-
-
-
-
-
-
+The **ProjectSync** system is structured into five primary domains, encompassing static pages for system information dissemination (Static Pages), pages facilitating the exploration and organization of the project teams and tasks (Project Pages), individual user-specific pages such as the user profile (Authenticated User Pages), authentication pages for user login and registration (Users Authentication Pages), and sections dedicated to administrative functionalities (Admin Pages).
 
 
 ### 2. Wireframes
 
 Wireframes serve as essential blueprints in the realm of web design and application development. They offer a structured visualization of layout concepts, content placement, and the overarching design at the page level. These wireframes meticulously allocate space, provide a clear hierarchy of content, and illuminate the availability of various features within the design canvas. Furthermore, wireframes are invaluable tools that help streamline the decision-making process and ensure that design ideas are effectively communicated among team members and stakeholders.
 
-For the ProjectSync system, the wireframes for the **HomePage (UI01)**, the **Project Workspace (UI07)**, and the **Login page (UI06)** are presented below.
+For the **ProjectSync** system, the wireframes for the **HomePage (UI01)**, the **Login page (UI06)** and the **Project Workspace (UI07)** are presented below.
 
 #### UI01: HomePage
 
@@ -195,9 +192,22 @@ For the ProjectSync system, the wireframes for the **HomePage (UI01)**, the **Pr
 - `4` The images showcase how the website looks and functions.
 - `5` Another way for users to access the login and/or register area.
 
+<br><br><br><br>
+
+#### UI06: Login
+
+![Login](images\wireframe_login.png)
+
+- `1` Users can click in the website logo in order to go to the home page.
+- `3` This area contains the pages related to the FAQ's or additional information abou the platform.
+- `4` In case the user already have an account, he can fill the form with his personal info and login by clicking the button.
+- `5` If the user do not have an account, he can click in the register button to be redirected to the register page.
+
+
+
 #### UI07: Project Workspace
 
-![Homepage](images\wireframe_2.png)
+![ProjectWorkspace](images\wireframe_2.png)
 
 - `1` Users can click in the website logo in order to go to the home page.
 - `2` This area contains the users notifications warning and the option to sign out of the account session.
@@ -209,26 +219,16 @@ For the ProjectSync system, the wireframes for the **HomePage (UI01)**, the **Pr
 - `8` Side bar that allows to create another project and to go to the user profile by clicking in the user icon.
 
 
-#### UI06: Login
-
-![Homepage](images\wireframe_login.png)
-
-- `1` Users can click in the website logo in order to go to the home page.
-- `3` This area contains the pages related to the FAQ's or additional information abou the platform.
-- `4` In case the user already have an account, he can fill the form with his personal info and login by clicking the button.
-- `5` If the user do not have an account, he can click in the register button to be redirected to the register page.
-
-
 ### Extra Wireframes
 
 #### UI07: Project Options in workspace
 
-![Homepage](images\wireframe_project_options.png)
+![ProjectOptions](images\wireframe_project_options.png)
 
 
 #### UI08: Create Project 
 
-![Homepage](images\wireframe_create_project.png)
+![CreateProject](images\wireframe_create_project.png)
 
 
 ---
@@ -239,7 +239,7 @@ For the ProjectSync system, the wireframes for the **HomePage (UI01)**, the **Pr
 
 
 ***
-GROUP2363, 26/09/2023
+GROUP2363, 01/10/2023
 
 | Name                  | E-Mail            |
 | --------------------- | ----------------- |
