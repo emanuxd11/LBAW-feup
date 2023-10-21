@@ -12,7 +12,7 @@ The class diagram is developed by starting to include only the classes and their
 
 The diagram in this section represents the main organizational titles, the relationships between them, attributes, multiplicity, and other constraints.
 
-![UML_lbaw](https://git.fe.up.pt/lbaw/lbaw2324/lbaw2363/-/raw/main/Component%20Deliveries/images/UML_UPDATED.png?ref_type=heads)
+![UML_lbaw](https://git.fe.up.pt/lbaw/lbaw2324/lbaw2363/-/raw/main/Component%20Deliveries/images/~Updated_UML.png?ref_type=heads)
 
 ### 2. Additional Business Rules
 
