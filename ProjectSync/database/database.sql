@@ -1,8 +1,7 @@
 -- Drop existing tables if they exist
-DROP SCHEMA IF EXISTS thingy CASCADE;
-CREATE SCHEMA thingy;
--- mudar thingy para test ou para o crl que foda
-SET search_path TO thingy;
+DROP SCHEMA IF EXISTS lbaw2363 CASCADE;
+CREATE SCHEMA lbaw2363;
+SET search_path TO lbaw2363;
 
 DROP TABLE IF EXISTS "User" CASCADE;
 DROP TABLE IF EXISTS Admin CASCADE;
