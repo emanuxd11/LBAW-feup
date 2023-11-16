@@ -7,6 +7,7 @@ use App\Http\Controllers\ItemController;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 // Home
 Route::redirect('/', '/login');
+Route::get('/adminPage', [AdminController::class,'showAdminPage']);
 
 // Cards
 Route::controller(CardController::class)->group(function () {
