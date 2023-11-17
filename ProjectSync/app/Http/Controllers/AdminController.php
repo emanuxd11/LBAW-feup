@@ -18,7 +18,12 @@ class AdminController extends Controller{
             return redirect("/cards");
         }
         if (Auth::check() && $this->isAdmin(Auth::user()->id)) {
-            return view('pages.adminPage');
+            $userResults = User::all();
+            $projectResults = [];
+            return view('pages.adminPage', [
+                'userResults' => $userResults,
+                'projectResults' => $projectResults,
+            ]);
         }
 
         abort(403, 'Unauthorized'); // Or redirect to a different page
@@ -26,6 +31,22 @@ class AdminController extends Controller{
 
     public function isAdmin($userId){
         return DB::table('admin')->where('id', $userId)->exists();
+    }
+
+    public function search(Request $request)
+    {
+        $userQuery = $request->input('user_query');
+        $projectQuery = $request->input('project_query');
+
+        $userResults = User::where('username','LIKE','%'.$userQuery.'%')->paginate(10);
+        $projectResults = [];
+
+        return view('pages.adminPage', [
+            'userQuery' => $userQuery,
+            'projectQuery' => $projectQuery,
+            'userResults' => $userResults,
+            'projectResults' => $projectResults,
+        ]);
     }
 }
 

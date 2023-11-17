@@ -22,7 +22,10 @@ use App\Http\Controllers\AdminController;
 
 // Home
 Route::redirect('/', '/login');
-Route::get('/adminPage', [AdminController::class,'showAdminPage']);
+
+//Admin
+Route::get('/adminPage', [AdminController::class, 'showAdminPage'])->name('adminPage');
+Route::get('/adminPage/search', [AdminController::class, 'search'])->name('adminPage.search');
 
 // Cards
 Route::controller(CardController::class)->group(function () {
