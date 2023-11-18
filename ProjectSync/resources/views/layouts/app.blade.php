@@ -26,7 +26,7 @@
                 <h1><a href="{{ url('/cards') }}">Thingy!</a></h1>
                 @if (Auth::check())
                     <a class="button" href="{{ url('/logout') }}"> Logout </a>
-                    <a href="{{ route('profilePage', ['user' => Auth::user()]) }}"><span>{{ Auth::user()->name }}</span></a>
+                    <a href="{{ route('profilePage', ['username' => Auth::user()->username]) }}"><span>{{ Auth::user()->name }}</span></a>
                 @endif
             </header>
             <section id="content">

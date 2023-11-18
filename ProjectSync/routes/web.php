@@ -61,4 +61,4 @@ Route::controller(RegisterController::class)->group(function () {
 });
 
 // Profile Page
-Route::get('/profile/{user}', [ProfileController::class, 'showProfilePage'])->name('profilePage');
+Route::get('/profile/{username}', [ProfileController::class, 'showProfilePage'])->name('profilePage');
