@@ -29,6 +29,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',
+        'phonenumber',
     ];
 
     /**
@@ -58,5 +60,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Card::class);
     }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'Project', 'id', 'name', 'archived')
+        ->withPivot(['isCoordinator', 'isFavorite'])
+        ->withTimestamps();
+    }
+
 
 }
