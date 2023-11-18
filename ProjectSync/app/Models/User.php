@@ -52,11 +52,12 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the cards for a user.
+     * Get the projects for a user.
      */
-    public function cards(): HasMany
+    public function projects()
     {
-        return $this->hasMany(Card::class);
+        return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')
+            ->where('archived', FALSE);
     }
 
 }

@@ -12,9 +12,23 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Project extends Model
 {
     use HasFactory;
+    
+    protected $table = 'project';
 
     // Don't add create and update timestamps in database.
     public $timestamps = false;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'start_date',
+        'delivery_date',
+        'archived',
+    ];
 
     /**
      * Define the many-to-many relationship with users through the ProjectMember pivot table.
@@ -22,8 +36,7 @@ class Project extends Model
     public function members()
     {
         return $this->belongsToMany(User::class, 'ProjectMember', 'idProject', 'idUser')
-            ->withPivot(['isCoordinator', 'isFavorite'])
-            ->withTimestamps();
+            ->withPivot(['isCoordinator', 'isFavorite']);
     }
 
     /**
