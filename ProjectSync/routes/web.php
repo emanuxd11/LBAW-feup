@@ -27,6 +27,7 @@ Route::redirect('/', '/login');
 //Admin
 Route::get('/adminPage', [AdminController::class, 'showAdminPage'])->name('adminPage');
 Route::get('/adminPage/search', [AdminController::class, 'search'])->name('adminPage.search');
+Route::post('/block_user', [AdminController::class, 'blockUser'])->name('adminPage.block');
 
 // Projects
 Route::controller(ProjectController::class)->group(function () {

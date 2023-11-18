@@ -15,7 +15,7 @@
                         <p>Email: {{ $user->email }}</p>
                         <p>Phone Number: {{ $user->phonenumber ?? 'N/A'}}</p>
 
-                        @if($user->isDeactivated)
+                        @if($user->isdeactivated)
                             <p>Status: Deactivated</p>
                         @else
                             <p>Status: Activated</p>

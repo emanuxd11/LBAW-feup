@@ -175,7 +175,7 @@ paths:
                  description: 'Failed authentication. Redirect to register form.'
                  value: '/register'
 
-  /users/{username}:
+  /profile/{username}:
    get:
      operationId: R206
      summary: 'R206: View user profile'
@@ -194,7 +194,7 @@ paths:
        '200':
          description: 'Ok. Show User Profile UI'
 
-  /users/{username}/edit:
+  /profile/{username}/edit:
     get:
       operationId: R207
       summary: 'R207: Get user profile form'

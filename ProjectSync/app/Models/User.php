@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 // Added to define Eloquent relationships.
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -31,6 +32,7 @@ class User extends Authenticatable
         'password',
         'username',
         'phonenumber',
+        'isdeactivated',
     ];
 
     /**
@@ -52,6 +54,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    protected $appends = ['isAdmin'];
 
     /**
      * Get the projects for a user.
@@ -60,5 +63,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')
             ->where('archived', FALSE);
+    }
+
+    //If I am right, this will won't go to the database everytime it needs to check if the user is an admin
+    //This way it checks if the user is one or not and keeps the var stored in the class.
+    public function getIsAdminAttribute()
+    {
+        return $this->admin ?? DB::table('admin')->where('id', $this->id)->exists();
     }
 }
