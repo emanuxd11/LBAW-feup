@@ -61,13 +61,4 @@ class User extends Authenticatable
         return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')
             ->where('archived', FALSE);
     }
-
-    public function projects()
-    {
-        return $this->belongsToMany(Project::class, 'Project', 'id', 'name', 'archived')
-        ->withPivot(['isCoordinator', 'isFavorite'])
-        ->withTimestamps();
-    }
-
-
 }
