@@ -15,18 +15,22 @@ class ProjectController extends Controller
     /**
      * Show the project for a given id.
      */
-    public function show(string $id): View
+    public function show(string $id)
     {
-        // Get the project.
-        $project = Project::findOrFail($id);
+        try {
+            // Get the project.
+            $project = Project::findOrFail($id);
 
-        // Check if the current user can see (show) the project.
-        $this->authorize('show', $project);  
+            // Check if the current user can see (show) the project.
+            $this->authorize('show', $project);
 
-        // Use the pages.project template to display the project.
-        return view('pages.project', [
-            'project' => $project
-        ]);
+            // User is authorized, continue with displaying the project.
+            return view('pages.project', [
+                'project' => $project
+            ]);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect('/projects');
+        }
     }
 
     /**
@@ -43,7 +47,7 @@ class ProjectController extends Controller
             // The user is logged in.
 
             // Get projects for user ordered by id.
-            $projects = Auth::user()->projects()->get();
+            $projects = Auth::user()->projects;
 
             // Check if the current user can list the projects.
             $this->authorize('list', Project::class);

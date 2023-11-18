@@ -24,7 +24,7 @@ class ProjectPolicy
     public function show(User $user, Project $project): bool
     {
         // Only a project member can see a project.
-        return $user->id === $project->isMember($user);
+        return $project->isMember($user);
     }
 
     /**
@@ -52,6 +52,6 @@ class ProjectPolicy
     public function close(User $user, Project $project): bool
     {
       // Only a project coordinator can close it.
-      return $user->id === $project->isCoordinator($user);
+      return $project->isCoordinator($user);
     }
 }
