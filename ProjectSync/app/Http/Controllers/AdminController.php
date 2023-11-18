@@ -15,7 +15,7 @@ class AdminController extends Controller{
             return redirect("/login");
         }
         if(!$this->isAdmin(Auth::user()->id)){
-            return redirect("/cards");
+            return redirect("/projects");
         }
         if (Auth::check() && $this->isAdmin(Auth::user()->id)) {
             $userResults = User::all();
