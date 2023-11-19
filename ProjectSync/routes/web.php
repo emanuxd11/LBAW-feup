@@ -38,7 +38,7 @@ Route::post('/block_user', [AdminController::class, 'blockUser'])->name('adminPa
 Route::controller(ProjectController::class)->group(function () {
     Route::get('/projects', 'list')->name('projects');
     Route::get('/projects/{id}', 'show');
-    Route::put('/api/projects', 'create');
+    Route::put('/api/projects', 'create')->name('create_project');
     Route::delete('/api/projects/{project_id}', 'delete');
 });
 

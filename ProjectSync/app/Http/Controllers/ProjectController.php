@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Project;
 
@@ -72,17 +73,30 @@ class ProjectController extends Controller
     public function create(Request $request)
     {
         // Create a blank new Project.
-        $project = new Project();
+        $project = new Project([
+            'name' => $request->input('name'),
+            'start_date' => date('Y/m/d'),
+            'delivery_date' => $request->input('delivery_date'),
+            'archived' => false,
+        ]);
+
+
 
         // Check if the current user is authorized to create this project.
-        $this->authorize('create', $project);
-
-        // Set project details.
-        $project->name = $request->input('name');
-        $project->user_id = Auth::user()->id;
+        // $this->authorize('create', $project);
 
         // Save the project and return it as JSON.
         $project->save();
+        dd($project->id);
+
+        // Add coordinator
+        // $data = [
+        //     'iduser' => Auth::user()->id,
+        //     'idproject' => $project->id,
+        //     'iscoordinator' => true,
+        // ];
+        // DB::table('projectmember')->insert($data);
+        
         return response()->json($project);
     }
 

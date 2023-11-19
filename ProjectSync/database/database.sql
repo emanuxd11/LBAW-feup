@@ -56,7 +56,7 @@ CREATE TABLE Project (
     name VARCHAR NOT NULL,
     start_date DATE,
     delivery_date DATE,
-    archived BOOLEAN,
+    archived BOOLEAN, --DEFAULT FALSE
     UNIQUE (name),
     CHECK (delivery_date >= start_date)
 );

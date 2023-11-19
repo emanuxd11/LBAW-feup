@@ -57,7 +57,7 @@ class Project extends Model
 
     /**
      * Check if a user is a coordinator of the project.
-     */
+     */k
     public function isCoordinator(User $user): bool
     {
         return $this->members
