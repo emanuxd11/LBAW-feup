@@ -13,9 +13,15 @@
         </ul>
             
         <h3>Tasks</h3>
-        <!-- show tasks -->
-        <form class="new_task">
-            <input type="text" name="description" placeholder="new task">
+        <form class="new_task_form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
+            @method('PUT')
+            @csrf
+            Name: <input type="text" name="name"required>
+            Description: <input type="text" name="description" required>
+            Delivery Date: <input type="date" name="delivery_date">
+            <button type="submit" class="button">+</button>
         </form>
+        <!-- show tasks -->
+
     </section>
 @endsection

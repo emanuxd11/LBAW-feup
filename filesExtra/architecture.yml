@@ -365,12 +365,12 @@ paths:
              examples:
                302Success:
                  description: 'Successful creation. Redirect to projects page.'
-                 value: '/project/{projectId}/'
+                 value: '/project/{project_id}/'
                302Failure:
                  description: 'Failed creation. Redirect to create project form.'
                  value: '/createProject'
 
-  /project/{projectId}/settings:
+  /projects/{project_id}/settings:
     get:
      operationId: R304
      summary: 'R304: Get Project settings Page'
@@ -419,12 +419,12 @@ paths:
              examples:
                302Success:
                  description: 'Successful edit. Redirect to projects page.'
-                 value: '/project/{projectId}/'
+                 value: '/project/{project_id}/'
                302Failure:
                  description: 'Failed edit. Redirect to edit form.'
-                 value: '/project/{projectId}/settings'
+                 value: '/project/{project_id}/settings'
   
-  /project/{projectId}/:
+  /projects/{project_id}/:
     get:
      operationId: R306
      summary: 'R306: Get Project Page'
@@ -441,7 +441,7 @@ paths:
        '200':
          description: 'Ok. Show project page'
 
-  /project/{projectId}/createTask:
+  /projects/{project_id}/createTask:
     get:
      operationId: R307
      summary: 'R307: Get task creation page'
@@ -502,10 +502,10 @@ paths:
              examples:
                302Success:
                  description: 'Successful creation. Redirect to project page.'
-                 value: '/project/{projectId}/'
+                 value: '/project/{project_id}/'
                302Failure:
                  description: 'Failed creation. Redirect to create project form.'
-                 value: '/project/{projectId}/createTask'
+                 value: '/project/{project_id}/createTask'
 
   /api/task/{id}:
     get:
@@ -574,11 +574,22 @@ paths:
 
   /adminPage:
     get:
-      operationId: R402
-      summary: 'R402: AdminPage'
+      operationId: R401
+      summary: 'R401: AdminPage'
       description: 'Get admin page. Access: ADM'
       tags:
       - 'M04: Administration'
       responses:
        '200':
         description: 'Ok. Show About Us page' 
+
+  /block_user:
+    post:
+      operationId: R402
+      summary: 'R402: Block or Unblock user'
+      description: 'Block or Unblock user. Access: ADM'
+      tags:
+        - 'M04: Administration'
+      responses:
+        '200':
+          description: 'Ok. User has been blocker or unblocked'

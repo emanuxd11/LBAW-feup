@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\ItemController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,11 +42,11 @@ Route::controller(ProjectController::class)->group(function () {
     Route::delete('/api/projects/{project_id}', 'delete');
 });
 
-// Items
-Route::controller(ItemController::class)->group(function () {
-    Route::put('/api/projects/{project_id}', 'create');
-    Route::post('/api/item/{id}', 'update');
-    Route::delete('/api/item/{id}', 'delete');
+// Task
+Route::controller(TaskController::class)->group(function () {
+    Route::put('/api/projects/{project_id}', 'create')->name('create_task');
+    Route::post('/api/task/{id}', 'update');
+    Route::delete('/api/task/{id}', 'delete');
 });
 
 // Authentication
