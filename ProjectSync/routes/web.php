@@ -45,8 +45,8 @@ Route::controller(ProjectController::class)->group(function () {
 // Task
 Route::controller(TaskController::class)->group(function () {
     Route::put('/api/projects/{project_id}', 'create')->name('create_task');
-    Route::post('/api/task/{id}', 'update');
-    Route::delete('/api/task/{id}', 'delete');
+    Route::post('/api/task/{id}', 'update')->name('edit_task');
+    Route::delete('/api/task/{id}', 'delete')->name('delete_task');
 });
 
 // Authentication
