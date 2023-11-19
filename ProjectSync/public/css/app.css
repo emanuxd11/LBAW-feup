@@ -15,7 +15,7 @@ main > header {
 main > header h1 {
   margin: 0;
   font-size: 1.8rem; /* Adjust font size */
-  color: #f7f3e9; /* White text color */
+  color: c; /* White text color */
 }
 
 #cards article.card {

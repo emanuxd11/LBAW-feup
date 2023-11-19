@@ -12,13 +12,13 @@
     border: 1px solid #006aa7;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 106, 167, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 106, 167, 0.4); /* More noticeable shadow */
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .faq-card:hover {
     transform: scale(1.02);
-    box-shadow: 0 6px 12px rgba(0, 106, 167, 0.2);
+    box-shadow: 0 12px 24px rgba(0, 106, 167, 0.6); /* Enhance shadow on hover */
     background-color: #f6e3b2;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .active_faq .faq-page:after {
-    content: "\25BC"; /* Down arrow icon */
+    content: "\25B2"; /* Up arrow icon */
 }
 
 #faq-heading {
@@ -51,7 +51,7 @@
 }
 
 .faq-page:after {
-    content: "\25B2"; /* Up arrow icon */
+    content: "\25BC"; /* Down arrow icon */
     font-size: 13px;
     float: right;
     margin-left: 5px;
