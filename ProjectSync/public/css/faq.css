@@ -1,0 +1,17 @@
+/* FAQ Page Styles */
+.card {
+    margin-bottom: 20px;
+}
+
+.card-body {
+    border-top: 1px solid #ddd;
+}
+
+.btn-link {
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

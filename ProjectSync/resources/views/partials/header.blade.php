@@ -1,5 +1,8 @@
-<header>
-    <h1><a href="{{ url('/') }}">ProjectSync</a></h1>
+<!-- Include header.css -->
+<link rel="stylesheet" href="{{ url('css/header.css') }}">
+
+<header class="modern-header">
+    <h1 id="projectSyncLogo"><a href="{{ url('/') }}">ProjectSync</a></h1>
     <nav>
         @if (Auth::check())
             <a class="button" href="{{ url('/logout') }}">Logout</a>

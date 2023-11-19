@@ -11,9 +11,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ url('css/milligram.min.css') }}" rel="stylesheet">
-    <link href="{{ url('css/app.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="{{ url('js/app.js') }}" defer></script>
+    <link href="{{ asset('css/milligram.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/header.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
     <main>
@@ -22,5 +24,6 @@
             @yield('content')
         </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
