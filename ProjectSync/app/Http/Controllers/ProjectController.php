@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Project;
 
+use App\Http\Controllers\AdminController;
+
 class ProjectController extends Controller
 {
     /**
@@ -43,6 +45,9 @@ class ProjectController extends Controller
             // Not logged in, redirect to login.
             return redirect('/login');
 
+        }
+        else if(Auth::user()->isAdmin){
+            return redirect('/adminPage');
         } else {
             // The user is logged in.
 

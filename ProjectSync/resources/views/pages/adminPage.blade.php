@@ -18,8 +18,16 @@
             <div class="showUsers">
                 @forelse ($userResults as $user)
                 <div class="user">
-                    <h4>{{$user->name}}</h4>
-                    <h4>{{$user->email}}</h4>
+                    <h4><a href="{{ route('profilePage', ['username' => $user->username]) }}"><span>{{ $user->name }}</span></a></h4>
+                    <h5>
+                        Username: {{$user->username}} | Email: {{$user->email}}
+                        <form method="POST" action="{{ route('adminPage.block') }}">
+                            @csrf
+                            @method('POST')
+                            <input type="hidden" name="userId" value="{{ $user->id }}">
+                            <button type="submit" class="button">@if(!$user->isdeactivated)Block User @else Unblock User @endif</button>
+                        </form>
+                    </h5>
                 </div>
                 @empty
                 <h4>No users found</h4>
