@@ -1,0 +1,74 @@
+body {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+/* Modern Header Styles */
+.modern-header {
+    background-color: #006aa7; /* Light blue background */
+    padding: 20px;
+    color: #172b4d; /* Dark text color */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modern-header h1 {
+    margin: 0;
+    font-size: 36px; /* Increase the font size for ProjectSync */
+    font-family: 'YourNewFont', sans-serif; /* Change 'YourNewFont' to the desired font-family */
+    color: #f7f3e9; /* Match the background color of the app */
+    display: flex; /* Use flexbox for the logo */
+    align-items: center; /* Center the text and icon vertically */
+}
+
+.modern-header #projectSyncLogo:hover {
+    transform: scale(1.05); /* Add scaling effect on hover */
+    transition: transform 0.5s ease; /* Adjust the duration for a slower effect */
+}
+
+.modern-header h1 img {
+    margin-right: 10px; /* Add some spacing between text and icon */
+    transition: transform 0.3s ease, filter 0.3s ease; /* Add smooth transition for transform and filter */
+}
+
+.modern-header h1:hover img {
+    transform: rotate(360deg); /* Rotate the icon on hover */
+    filter: brightness(1.5); /* Add brightness effect on hover */
+}
+
+.modern-header h1:hover {
+    cursor: pointer; /* Add pointer cursor on hover */
+}
+
+.modern-header nav {
+    display: flex;
+}
+
+.modern-header a {
+    color: #f7f3e9;
+    text-decoration: none;
+    margin-left: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.modern-header .button {
+    background-color: #f7f3e9; /* Bright beige button background */
+    color: #172b4d; /* Dark text color */
+    padding: 15px 25px;
+    border-radius: 5px;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center the text horizontally */
+    align-items: center; /* Center the text vertically */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modern-header .button:hover {
+    background-color: #ffe4b5; /* Lighter beige on hover */
+    transform: scale(1.05);
+}
+
+.modern-header .button:active {
+    transform: scale(0.95);
+}
