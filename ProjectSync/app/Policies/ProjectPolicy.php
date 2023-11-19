@@ -24,7 +24,7 @@ class ProjectPolicy
     public function show(User $user, Project $project): bool
     {
         // Only a project member can see a project.
-        return $project->isMember($user);
+        return $project->isMember($user) or $user->isAdmin;
     }
 
     /**
