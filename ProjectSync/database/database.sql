@@ -261,7 +261,7 @@ INSERT INTO "User" (id, name, username, email, password, phoneNumber, isDeactiva
 
 INSERT INTO Admin (id) VALUES (1);
 
-INSERT INTO Project (id,name,start_date,delivery_date,archived) VALUES
+INSERT INTO Project (id, name, start_date, delivery_date, archived) VALUES
     (1,'Project1', '2023-10-20', '2024-10-22', FALSE),
     (2,'Project2', '2023-10-20', '2024-10-22', FALSE),
     (3,'Project3', '2023-10-20', '2024-10-22', FALSE),
@@ -274,5 +274,5 @@ INSERT INTO ProjectMember (idUser,idProject,isCoordinator,isFavorite) VALUES
     (2,4,FALSE,TRUE),
     (3,1,FALSE,TRUE),
     (3,2,FALSE,TRUE),
-    (3,3,FALSE,TRUE),
+    -- (3,3,FALSE,TRUE),
     (3,4,FALSE,TRUE);

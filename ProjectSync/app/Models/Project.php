@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Project extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'project';
 
     // Don't add create and update timestamps in database.
@@ -35,8 +35,8 @@ class Project extends Model
      */
     public function members()
     {
-        return $this->belongsToMany(User::class, 'ProjectMember', 'idProject', 'idUser')
-            ->withPivot(['isCoordinator', 'isFavorite']);
+        return $this->belongsToMany(User::class, 'projectmember', 'idproject', 'iduser')
+            ->withPivot(['iscoordinator', 'isfavorite']);
     }
 
     /**
@@ -44,9 +44,7 @@ class Project extends Model
      */
     public function isMember(User $user): bool
     {
-        return $this->members()
-            ->where('idUser', $user->id)
-            ->exists();
+        return $this->members->contains('id', $user->id);
     }
 
     /**
@@ -54,9 +52,18 @@ class Project extends Model
      */
     public function isCoordinator(User $user): bool
     {
-        return $this->members()
-            ->where('idUser', $user->id)
-            ->where('isCoordinator', true)
+        return $this->members
+            ->where('iduser', $user->id)
+            ->where('iscoordinator', true)
             ->exists();
+    }
+
+    /**
+     * Get project coordinator.
+     */
+    public function getCoordinator()
+    {
+        return $this->members()
+            ->wherePivot('iscoordinator', true)->get()->first();
     }
 }
