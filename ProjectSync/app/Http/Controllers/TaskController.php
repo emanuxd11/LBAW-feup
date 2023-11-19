@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Task;
 use App\Models\Project;
+use App\Models\User;
 
 class TaskController extends Controller
 {
@@ -46,6 +47,10 @@ class TaskController extends Controller
         // Check if the current user is authorized to update this item.
         $this->authorize('update', $task);
 
+        if($request->input('name')){
+            $task->name = $request->input('name');
+        }
+
         if($request->input('status')){
             $task->status = $request->input('status');
         }
@@ -58,9 +63,10 @@ class TaskController extends Controller
             $task->description = $request->input('description');
         }
 
-        if($request->input('userId')){
+        if($request->input('username')){
+            $user = User::where('username', $request->input('username'))->first();
             $data = [
-                'user_id' => $request->input('userId'),
+                'user_id' => $user->id,
                 'task_id' => $task->id,
             ];
             
@@ -79,12 +85,12 @@ class TaskController extends Controller
     {
         // Find the item.
         $task = Task::find($id);
+        $project_id = $task->project_id;
 
         // Check if the current user is authorized to delete this item.
         $this->authorize('delete', $task);
 
-        // Delete the item and return it as JSON.
         $task->delete();
-        return redirect('/projects/' . $task->project_id);
+        return redirect('/projects/' . $project_id);
     }
 }
