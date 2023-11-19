@@ -1,14 +1,12 @@
 <?php
-
-use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\ItemController;
-
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ItemController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +20,11 @@ use App\Http\Controllers\ProfileController;
 */
 
 // Home
-Route::redirect('/', '/login');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+});
 
-//Admin
+// Admin
 Route::get('/adminPage', [AdminController::class, 'showAdminPage'])->name('adminPage');
 Route::get('/adminPage/search', [AdminController::class, 'search'])->name('adminPage.search');
 
@@ -32,14 +32,11 @@ Route::get('/adminPage/search', [AdminController::class, 'search'])->name('admin
 Route::controller(ProjectController::class)->group(function () {
     Route::get('/projects', 'list')->name('projects');
     Route::get('/projects/{id}', 'show');
-});
-
-// API
-Route::controller(ProjectController::class)->group(function () {
     Route::put('/api/projects', 'create');
     Route::delete('/api/projects/{project_id}', 'delete');
 });
 
+// Items
 Route::controller(ItemController::class)->group(function () {
     Route::put('/api/projects/{project_id}', 'create');
     Route::post('/api/item/{id}', 'update');
@@ -60,3 +57,4 @@ Route::controller(RegisterController::class)->group(function () {
 
 // Profile Page
 Route::get('/profile/{username}', [ProfileController::class, 'showProfilePage'])->name('profilePage');
+
