@@ -63,3 +63,5 @@ Route::controller(RegisterController::class)->group(function () {
 
 // Profile Page
 Route::get('/profile/{username}', [ProfileController::class, 'showProfilePage'])->name('profilePage');
+Route::get('/profile/{username}/edit', [ProfileController::class, 'editProfile'])->name('editProfile');
+Route::match(['post', 'put'],'/profile/{username}/update', [ProfileController::class, 'updateProfile'])->name('updateProfile');
