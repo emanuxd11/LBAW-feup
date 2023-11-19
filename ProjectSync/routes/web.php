@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -20,9 +21,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Home
-Route::middleware(['auth'])->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// FAQ
+Route::view('/faq', 'pages.faq')->name('faq');
+
+// About Us
+Route::view('/aboutUs', 'pages.aboutUs')->name('aboutUs');
 
 // Admin
 Route::get('/adminPage', [AdminController::class, 'showAdminPage'])->name('adminPage');
@@ -58,4 +63,3 @@ Route::controller(RegisterController::class)->group(function () {
 
 // Profile Page
 Route::get('/profile/{username}', [ProfileController::class, 'showProfilePage'])->name('profilePage');
-
