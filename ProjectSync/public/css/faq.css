@@ -1,17 +1,58 @@
 /* FAQ Page Styles */
-.card {
-    margin-bottom: 20px;
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.card-body {
-    border-top: 1px solid #ddd;
-}
-
-.btn-link {
-    text-decoration: none;
-}
-
-.btn-link:hover {
-    text-decoration: underline;
+.faq-card {
     cursor: pointer;
+    margin-bottom: 20px;
+    width: 70%;
+    border: 1px solid #006aa7;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 106, 167, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.faq-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 106, 167, 0.2);
+    background-color: #f6e3b2;
+}
+
+.faq-page {
+    color: #006aa7;
+    padding: 20px;
+    width: 100%;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+.faq-body {
+    text-align: center;
+    padding: 20px;
+    background-color: #006aa7;
+    color: #f7f3e9;
+    display: none;
+    overflow: hidden;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.active_faq .faq-page:after {
+    content: "\25BC"; /* Down arrow icon */
+}
+
+#faq-heading {
+    color: #006aa7;
+}
+
+.faq-page:after {
+    content: "\25B2"; /* Up arrow icon */
+    font-size: 13px;
+    float: right;
+    margin-left: 5px;
 }
