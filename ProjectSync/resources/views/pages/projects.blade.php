@@ -5,12 +5,14 @@
 @section('content')
 
 <section id="projects">
-    @each('partials.project', $projects, 'project')
-    <article class="project">
+    <article class="project-form">
         <form class="new_project">
             <input type="text" name="name" placeholder="new project">
         </form>
     </article>
+    
+    @each('partials.project', $projects, 'project')
+    
 </section>
 
 @endsection

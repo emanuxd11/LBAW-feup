@@ -44,7 +44,7 @@ class Project extends Model
      */
     public function isMember(User $user): bool
     {
-        return $this->members()->get()->contains('id', $user->id);
+        return $this->members->contains('id', $user->id);
     }
 
     /**
@@ -52,9 +52,18 @@ class Project extends Model
      */
     public function isCoordinator(User $user): bool
     {
-        return $this->members()
+        return $this->members
             ->where('iduser', $user->id)
             ->where('iscoordinator', true)
             ->exists();
+    }
+
+    /**
+     * Get project coordinator.
+     */
+    public function getCoordinator()
+    {
+        return $this->members()
+            ->wherePivot('iscoordinator', true)->get()->first();
     }
 }
