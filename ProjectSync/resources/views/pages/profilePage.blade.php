@@ -20,6 +20,10 @@
                         @else
                             <p>Status: Activated</p>
                         @endif
+
+                        @if(Auth::check() && Auth::user()->is($user))
+                            <a href="{{ route('editProfile', ['username' => $user->username]) }}" class="btn btn-primary">Edit Profile</a>
+                        @endif
                     </div>
                 </div>
             </div>
