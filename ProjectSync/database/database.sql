@@ -261,11 +261,11 @@ INSERT INTO "User" (id, name, username, email, password, phoneNumber, isDeactiva
 
 INSERT INTO Admin (id) VALUES (1);
 
-INSERT INTO Project (id, name, start_date, delivery_date, archived) VALUES
-    (1,'Project1', '2023-10-20', '2024-10-22', FALSE),
-    (2,'Project2', '2023-10-20', '2024-10-22', FALSE),
-    (3,'Project3', '2023-10-20', '2024-10-22', FALSE),
-    (4,'Project4', '2023-10-20', '2024-10-22', FALSE);
+INSERT INTO Project (name, start_date, delivery_date, archived) VALUES
+    ('Project1', '2023-10-20', '2024-10-22', FALSE),
+    ('Project2', '2023-10-20', '2024-10-22', FALSE),
+    ('Project3', '2023-10-20', '2024-10-22', FALSE),
+    ('Project4', '2023-10-20', '2024-10-22', FALSE);
 
 INSERT INTO ProjectMember (idUser,idProject,isCoordinator,isFavorite) VALUES
     (2,1,TRUE,TRUE),

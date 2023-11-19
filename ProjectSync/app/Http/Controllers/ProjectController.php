@@ -83,21 +83,20 @@ class ProjectController extends Controller
 
 
         // Check if the current user is authorized to create this project.
-        // $this->authorize('create', $project);
+        $this->authorize('create', $project);
 
         // Save the project and return it as JSON.
         $project->save();
-        dd($project->id);
 
         // Add coordinator
-        // $data = [
-        //     'iduser' => Auth::user()->id,
-        //     'idproject' => $project->id,
-        //     'iscoordinator' => true,
-        // ];
-        // DB::table('projectmember')->insert($data);
+        $data = [
+            'iduser' => Auth::user()->id,
+            'idproject' => $project->id,
+            'iscoordinator' => true,
+        ];
+        DB::table('projectmember')->insert($data);
         
-        return response()->json($project);
+        return redirect('/projects');
     }
 
     /**
