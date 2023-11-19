@@ -9,19 +9,25 @@
 
         <h3>Project Members</h3>
         <ul id="project-member-list">
-            @each('partials.item', $project->members, 'user')
+            @each('partials.member', $project->members, 'user')
         </ul>
             
-        <h3>Tasks</h3>
-        <form class="new_task_form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
-            @method('PUT')
-            @csrf
-            Name: <input type="text" name="name"required>
-            Description: <input type="text" name="description" required>
-            Delivery Date: <input type="date" name="delivery_date">
-            <button type="submit" class="button">+</button>
-        </form>
-        <!-- show tasks -->
+        <div id="tasks">
+            <h3>Tasks</h3>
+            <form class="new_task_form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
+                @method('PUT')
+                @csrf
+                Name: <input type="text" name="name"required>
+                Description: <input type="text" name="description" required>
+                Delivery Date: <input type="date" name="delivery_date">
+                <button type="submit" class="button">+</button>
+            </form>
 
+            <!-- show tasks -->
+            <ul id="task-list">
+                @each('partials.task', $project->tasks, 'task')
+            </ul>
+
+        </div>
     </section>
 @endsection

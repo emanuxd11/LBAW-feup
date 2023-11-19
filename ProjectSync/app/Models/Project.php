@@ -31,6 +31,14 @@ class Project extends Model
     ];
 
     /**
+     * Define the many-to-many relationship with tasks through the ProjectMember pivot table.
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'project_id');
+    }
+
+    /**
      * Define the many-to-many relationship with users through the ProjectMember pivot table.
      */
     public function members()
