@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Task;
 use App\Models\Project;
@@ -50,11 +51,20 @@ class TaskController extends Controller
         }
 
         if($request->input('delivery_date')){
-            $task->status = $request->input('delivery_date');
+            $task->delivery_date = $request->input('delivery_date');
         }
 
         if($request->input('description')){
-            $task->status = $request->input('description');
+            $task->description = $request->input('description');
+        }
+
+        if($request->input('userId')){
+            $data = [
+                'user_id' => $request->input('userId'),
+                'task_id' => $task->id,
+            ];
+            
+            DB::table('projectmembertask')->insert($data);
         }
 
         // Save the item and return it as JSON.
