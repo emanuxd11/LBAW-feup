@@ -276,3 +276,14 @@ INSERT INTO ProjectMember (idUser,idProject,isCoordinator,isFavorite) VALUES
     (3,2,FALSE,TRUE),
     -- (3,3,FALSE,TRUE),
     (3,4,FALSE,TRUE);
+
+INSERT INTO Task (name, description, start_date, delivery_date, status, project_id) VALUES
+    ('Task 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    ', '2023-10-20', '2024-1-31', 'Doing', 1),
+    ('Christmas 24', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tempus Natalis advenit, cum festivitates et gaudia in omni domo manifestantur. Inter omnia haec, cura nostra sit ut pueros instruamus in viam salutis et bonae valetudinis.
+Docemus eos, non solum gaudere donis dulcibus, sed etiam cibum eleganter eligere. Meminerint, bonae consuetudines in dieta et motu corpus valentem efficiunt. Non est nobis propositum condemnare traditionem, sed potius suadere moderationem in omnibus.
+Optemus ut Natalis festum sit occasio ad discendum qualis sit via ad vitam sanam et activam. Pulchritudo est in bono statu corporis et animi, et hoc spectaculum valeat ut pueros doceat, non ut excludat aut condemnet.
+In huius festi temporibus, tradamus eis sapientiam ut crescant in amore erga suum corpus, ut gaudium Natalis sit non solum de donis, sed etiam de gratia vitae sanitateque.
+    ', '2024-12-24', '2024-12-25', 'To Do', 1),
+    ('Task 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    ', '2023-11-19', '2024-1-31', 'Done', 1);

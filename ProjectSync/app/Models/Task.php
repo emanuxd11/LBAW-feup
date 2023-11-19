@@ -32,7 +32,7 @@ class Task extends Model
     ];
 
     /**
-     * Get the card where the item is included.
+     * Get the task's project.
      */
     public function project(): BelongsTo
     {

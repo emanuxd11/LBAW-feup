@@ -19,7 +19,7 @@ class TaskPolicy
     /**
      * Determine if a user can create a task.
      */
-    public function create(User $user,$task): bool
+    public function create(User $user, $task): bool
     {
         // Retrieve the project by its ID
         $project = Project::find($task->project_id);
