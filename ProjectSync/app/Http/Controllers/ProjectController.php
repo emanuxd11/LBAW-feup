@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Project;
 use App\Models\User;
+use App\Models\Task;
 
 use App\Http\Controllers\AdminController;
 
@@ -164,5 +165,23 @@ class ProjectController extends Controller
         $project->members()->attach($userId, ['iscoordinator' => false, 'isfavorite' => false]);
 
         return response()->json(['success' => true]);
+    }
+
+    public function search_task(Request $request, $projectId)
+    {
+        $term = $request->input('term');
+
+        // Get the project members
+        $tasks = Project::findOrFail($projectId)->tasks()->pluck('id')->toArray();
+        
+        // Perform your user search based on the $term (case-insensitive) and exclude project members
+        $results = Task::where(function ($query) use ($term) {
+            $query->where('name', 'ilike', '%' . $term . '%') // ilike for case-insensitive search
+                ->orWhere('status', 'ilike', '%' . $term . '%');
+        })
+        ->whereIn('id', $tasks)
+        ->get();
+
+        return response()->json($results);
     }
 }

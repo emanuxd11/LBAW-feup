@@ -43,6 +43,7 @@ Route::controller(ProjectController::class)->group(function () {
     // the ajax part
     Route::get('/projects/{id}/search_user', 'search_user')->name('project_search_user');
     Route::post('/projects/{id}/add_user', 'addUserToProject')->name('project_add_user');
+    Route::get('/projects/{id}/search_task', 'search_task')->name('project_search_task');
 });
 
 // Task
@@ -50,6 +51,7 @@ Route::controller(TaskController::class)->group(function () {
     Route::put('/api/projects/{project_id}', 'create')->name('create_task');
     Route::post('/api/task/{id}', 'update')->name('edit_task');
     Route::delete('/api/task/{id}', 'delete')->name('delete_task');
+    Route::get('/api/projects/{project_id}/task/{id}', 'show')->name('show_task');
 });
 
 // Authentication

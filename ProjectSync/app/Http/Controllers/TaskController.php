@@ -12,6 +12,14 @@ use App\Models\User;
 
 class TaskController extends Controller
 {
+
+    public function show(Request $request, $project_id,$task_id){
+        if (!Auth::check()){
+            return redirect("/login");
+        }
+        $task = Task::find($task_id);
+        return view("pages.task",compact('task'));
+    }
     /**
      * Creates a new item.
      */

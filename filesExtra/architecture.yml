@@ -235,7 +235,9 @@ paths:
                   type: string
                 email:
                   type: string
-                bio:
+                phonenumber:
+                  type: string
+                password:
                   type: string
       responses:
         '302':
@@ -247,70 +249,10 @@ paths:
               examples:
                 302Success:
                   description: 'User information edited successfully. Redirects user to their profile page.'
-                  value: '/user/{username}'
+                  value: '/profile/{username}/edit'
                 302Failure:
                   description: 'User information editing failed. Stay in edit page.'
-                  value: '/user/{username}/edit'
-  /change_password:
-    get:
-      operationId: R209
-      summary: 'R209: Get user password edit form'
-      description: 'Show the individual user password edit form. Access: OWN'
-      tags:
-        - 'M02: Authentication and Individual Profile'
-      responses:
-        '200':
-          description: 'Ok. Show edit password UI'
-
-    post:
-      operationId: R210
-      summary: 'R210: Change user password'
-      description: Change the user's password.
-      tags:
-        - 'M02: Authentication and Individual Profile'
-      requestBody:
-        description: New password data
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                old_password:
-                  type: string
-                new_password:
-                  type: string
-                repeat_new_password:
-                  type: string
-              required:
-                - old_password
-                - new_password
-                - repeat_new_password
-      responses:
-        '302':
-          description: 'Redirect member after editing their password.'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'Password edited successfully. Redirects user to their profile page.'
-                  value: '/user/{username}'
-                302Failure:
-                  description: 'Password editing failed. Stay in edit page.'
-                  value: '/change_password'
-  
-  /delete_user:
-    get:
-      operationId: R211
-      summary: 'R211: Delete user'
-      description: 'Delete user. Access: OWN'
-      tags:
-        - 'M02: Authentication and Individual Profile'
-      responses:
-        '200':
-          description: 'Ok. User has been deleted'
+                  value: '/profile/{username}/edit'
 
 #-------------------------------- M03 -----------------------------------------
 
@@ -325,7 +267,7 @@ paths:
        '200':
          description: 'Ok. Show Projects page'
   
-  /createProject:
+  /api/projects:
     get:
      operationId: R302
      summary: 'R302: Get Projects Creation Page'
@@ -369,65 +311,11 @@ paths:
                302Failure:
                  description: 'Failed creation. Redirect to create project form.'
                  value: '/createProject'
-
-  /projects/{project_id}/settings:
-    get:
-     operationId: R304
-     summary: 'R304: Get Project settings Page'
-     description: 'Get Projects settings page. Access: PC'
-     tags:
-       - 'M03: Project Area'
-     parameters:
-        - in: path
-          name: projectId
-          schema:
-            type: string
-          required: true
-     responses:
-       '200':
-         description: 'Ok. Show project settings page'
-    post:
-      operationId: R305
-      summary: 'R305: Change projects page'
-      description: 'Create a project. Access: PC'
-      tags:
-        - 'M03: Project Area'
-      parameters:
-        - in: path
-          name: projectId
-          schema:
-            type: string
-          required: true
-      requestBody:
-       required: true
-       content:
-         application/x-www-form-urlencoded:
-           schema:
-             type: object
-             properties:
-               name:
-                 type: string
-               deliveryDate:
-                 type: string
-      responses:
-       '302':
-         description: 'Redirect after processing the project information.'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'Successful edit. Redirect to projects page.'
-                 value: '/project/{project_id}/'
-               302Failure:
-                 description: 'Failed edit. Redirect to edit form.'
-                 value: '/project/{project_id}/settings'
   
   /projects/{project_id}/:
     get:
-     operationId: R306
-     summary: 'R306: Get Project Page'
+     operationId: R303
+     summary: 'R303: Get Project Page'
      description: 'Get Projects page. Access: PM'
      tags:
        - 'M03: Project Area'
@@ -441,25 +329,10 @@ paths:
        '200':
          description: 'Ok. Show project page'
 
-  /projects/{project_id}/createTask:
-    get:
-     operationId: R307
-     summary: 'R307: Get task creation page'
-     description: 'Get task creation page. Access: PM'
-     tags:
-       - 'M03: Project Area'
-     parameters:
-        - in: path
-          name: projectId
-          schema:
-            type: string
-          required: true
-     responses:
-       '200':
-         description: 'Ok. Show task creation page'
+  /api/projects/{project_id}/:
     post:
-      operationId: R308
-      summary: 'R308: Create a task'
+      operationId: R304
+      summary: 'R304: Create a task'
       description: 'Create a task. Access: PM'
       tags:
         - 'M03: Project Area'
@@ -482,16 +355,10 @@ paths:
                  type: string
                deliveryDate:
                  type: string
-               priority:
-                 type: string
-               task-members:
-                 type: array
              required:
                 - name
                 - description
                 - deliveryDate
-                - priority
-                - task-members
       responses:
        '302':
          description: 'Redirect after processing the task information.'
@@ -505,32 +372,12 @@ paths:
                  value: '/project/{project_id}/'
                302Failure:
                  description: 'Failed creation. Redirect to create project form.'
-                 value: '/project/{project_id}/createTask'
+                 value: '/project/{project_id}/'
 
   /api/task/{id}:
-    get:
-      operationId: R308
-      summary: "R308: Get task info"
-      description: "Get the task's information. Access: PM"
-      tags:
-        - 'M03: Project Area'
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
-
-      responses:
-        '200':
-          description: 'Ok. Show task page UI'
-          content:
-            application/json:
-              schema:
-                type: array
     delete:
-      operationId: R309
-      summary: "R309: Delete task"
+      operationId: R305
+      summary: "R305: Delete task"
       description: "Delete a task. Access: PM"
       tags:
         - 'M03: Project Area'
@@ -540,16 +387,21 @@ paths:
           schema:
             type: integer
           required: true
-
       responses:
         '200':
          description: 'Ok. Task deleted'
     post:
-      operationId: R310
-      summary: "R310: Update task info"
+      operationId: R306
+      summary: "R306: Update task info"
       description: "Update the task's information. Access: PM"
       tags:
         - 'M03: Project Area'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
       requestBody:
         required: true
         content:
@@ -564,8 +416,6 @@ paths:
                 members:
                   type: array
                 deleveryDate:
-                  type: string
-                priority:
                   type: string
       responses:
         '200':
