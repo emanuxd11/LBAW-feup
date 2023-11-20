@@ -26,37 +26,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function displaySearchResults(results, projectId) {
         searchResults.innerHTML = '';
-
+    
         results.forEach(function (user) {
             var resultItem = document.createElement('div');
             resultItem.textContent = user.name;
-
+    
             resultItem.addEventListener('click', function () {
                 searchInput.value = user.name;
                 searchResults.innerHTML = '';
-
-                addUserToProject(user.id, projectId);
+    
+                addUserToProject(user, projectId); // Pass the entire user object
             });
-
+    
             searchResults.appendChild(resultItem);
         });
     }
-
-    function addUserToProject(userId, projectId) {
+    
+    function addUserToProject(user, projectId) {
         fetch(`/projects/${projectId}/add_user`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             },
-            body: JSON.stringify({ userId: userId })
+            body: JSON.stringify({ userId: user.id })
         })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // If addition was successful, append the user to the project-member-list
                 var listItem = document.createElement('li');
-                listItem.textContent = data.userName; // Adjust based on your user model
+                listItem.textContent = user.name;
                 projectMemberList.appendChild(listItem);
             } else {
                 console.error('Error adding user to the project:', data.error);

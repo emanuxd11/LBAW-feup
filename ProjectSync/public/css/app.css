@@ -46,7 +46,7 @@ button,
 a.button,
 a.button.button-outline,
 a {
-  color: #ffefc8; /* Set text color for buttons and links */
+  color: #172b4d; /* Set text color for buttons and links */
 }
 
 button,
@@ -63,4 +63,8 @@ input[type=text]:focus,
 input[type=email]:focus,
 input[type=password]:focus {
   border-color: #006aa7; /* Blue border color for focused inputs */
+}
+
+a.button {
+  color: white;
 }

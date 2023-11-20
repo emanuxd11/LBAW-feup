@@ -1,0 +1,531 @@
+openapi: 3.0.0
+
+info:
+ version: '1.0'
+ title: 'LBAW ProjectSync'
+ description: 'Web Resources Specification (A7) for ProjectSync'
+
+servers:
+- url: http://lbaw2363.lbaw.fe.up.pt
+  description: Production server
+
+tags:
+ - name: 'M01: Static Pages'
+ - name: 'M02: Authentication and Individual Profile'
+ - name: 'M03: Project Area'
+ - name: 'M04: Administration'
+
+paths:
+#-------------------------------- M01 -----------------------------------------
+  /:
+    get:
+      operationId: R101
+      summary: 'R101: See the home page'
+      description: 'See the home page when you access the website. Access: PUB'
+      tags:
+      - 'M01: Static Pages'
+      responses:
+       '200':
+        description: 'Ok. Show homepage' 
+
+  /about-us/:
+    get:
+      operationId: R102
+      summary: 'R102: See About Us'
+      description: 'Provide description about the website and its creators. Access: PUB'
+      tags:
+      - 'M01: Static Pages'
+      responses:
+       '200':
+        description: 'Ok. Show About Us page' 
+ 
+  /faq/:
+    get:
+      operationId: R103
+      summary: 'R103: See Frequently Asked Questions (FAQ)'
+      description: 'Provide frequently asked questions about our website. Access: PUB'
+      tags:
+      - 'M01: Static Pages'
+      responses:
+       '200':
+        description: 'Ok. Show the FAQ page'
+
+#-------------------------------- M02 -----------------------------------------
+
+  /login:
+    get:
+     operationId: R201
+     summary: 'R201: Login Form'
+     description: 'Provide login form. Access: PUB'
+     tags:
+       - 'M02: Authentication and Individual Profile'
+     responses:
+       '200':
+         description: 'Ok. Show Log-in UI'
+    post:
+     operationId: R202
+     summary: 'R202: Login Action'
+     description: 'Processes the login form submission. Access: PUB'
+     tags:
+       - 'M02: Authentication and Individual Profile'
+
+     requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               email:          # <!--- form field name
+                 type: string
+               password:    # <!--- form field name
+                 type: string
+             required:
+                  - email
+                  - password
+
+     responses:
+       '302':
+         description: 'Redirect after processing the login credentials.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful authentication. Redirect to projects page.'
+                 value: '/projects'
+               302Error:
+                 description: 'Failed authentication. Redirect to login form.'
+                 value: '/login'
+
+  /logout:
+    get:
+      operationId: R203
+      summary: 'R203: Logout'
+      description: 'Endpoint to log out the user. Access: USR'
+      tags:
+        - 'M02: Authentication and Individual Profile'
+      responses:
+        '200':
+          description: 'User successfully logged out.'
+
+  /register:
+    get:
+     operationId: R204
+     summary: 'R204: Register Form'
+     description: 'Provide new user registration form. Access: PUB'
+     tags:
+       - 'M02: Authentication and Individual Profile'
+     responses:
+       '200':
+         description: 'Ok. Show Sign-Up UI'
+
+    post:
+     operationId: R205
+     summary: 'R205: Register Action'
+     description: 'Processes the new user registration form submission. Access: PUB'
+     tags:
+       - 'M02: Authentication and Individual Profile'
+
+     requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               name:
+                 type: string
+               username:
+                 type: string
+               email:
+                 type: string
+               phonenumber:
+                 type: string
+               password:
+                 type: string
+               repeat_password:
+                 type: string
+             required:
+                - name
+                - username
+                - email
+                - phonenumber
+                - password
+                - repeat_password
+
+     responses:
+       '302':
+         description: 'Redirect after processing the new user information.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful authentication. Redirect to projects page.'
+                 value: '/projects'
+               302Failure:
+                 description: 'Failed authentication. Redirect to register form.'
+                 value: '/register'
+
+  /profile/{username}:
+   get:
+     operationId: R206
+     summary: 'R206: View user profile'
+     description: 'Show the individual user profile. Access: USR'
+     tags:
+       - 'M02: Authentication and Individual Profile'
+
+     parameters:
+       - in: path
+         name: username
+         schema:
+           type: string
+         required: true
+
+     responses:
+       '200':
+         description: 'Ok. Show User Profile UI'
+
+  /profile/{username}/edit:
+    get:
+      operationId: R207
+      summary: 'R207: Get user profile form'
+      description: 'Show the individual user profile edit form. Access: ADM,OWN'
+      tags:
+        - 'M02: Authentication and Individual Profile'
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: 'Ok. Show edit profile UI'
+
+  /profile/{username}/update:
+    post:
+      operationId: R208
+      summary: 'R208: Update Profile'
+      description: 'Endpoint to update user profile. ADM,OWN'
+      tags:
+        - 'Profile'
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+                phonenumber:
+                  type: string
+        description: 'Fields to be updated in the profile.'
+      responses:
+        '200':
+          description: 'Profile updated successfully.'
+
+#-------------------------------- M03 -----------------------------------------
+
+  /projects:
+    get:
+     operationId: R301
+     summary: 'R301: Projects'
+     description: 'Projects page. Access: USR'
+     tags:
+       - 'M03: Project Area'
+     responses:
+       '200':
+         description: 'Ok. Show Projects page'
+  
+  /api/projects:
+    put:
+      operationId: R302
+      summary: 'R302: Create a project'
+      description: 'Create a project. Access: USR'
+      tags:
+        - 'M03: Project Area'
+      requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               name:
+                 type: string
+               deliveryDate:
+                 type: string
+             required:
+                - name
+      responses:
+       '302':
+         description: 'Redirect after processing the project information.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful creation. Redirect to projects page.'
+                 value: '/projects'
+               302Failure:
+                 description: 'Failed creation. Redirect to create project form.'
+                 value: '/projects:'
+  
+  /projects/{project_id}/:
+    get:
+     operationId: R303
+     summary: 'R303: Get Project Page'
+     description: 'Get Projects page. Access: PM'
+     tags:
+       - 'M03: Project Area'
+     parameters:
+        - in: path
+          name: projectId
+          schema:
+            type: string
+          required: true
+     responses:
+       '200':
+         description: 'Ok. Show project page'
+
+  /api/projects/{project_id}/:
+    put:
+      operationId: R304
+      summary: 'R304: Create a task'
+      description: 'Create a task. Access: PM'
+      tags:
+        - 'M03: Project Area'
+      parameters:
+        - in: path
+          name: projectId
+          schema:
+            type: string
+          required: true
+      requestBody:
+       required: true
+       content:
+         application/x-www-form-urlencoded:
+           schema:
+             type: object
+             properties:
+               name:
+                 type: string
+               description:
+                 type: string
+               deliveryDate:
+                 type: string
+             required:
+                - name
+                - description
+                - deliveryDate
+      responses:
+       '302':
+         description: 'Redirect after processing the task information.'
+         headers:
+           Location:
+             schema:
+               type: string
+             examples:
+               302Success:
+                 description: 'Successful creation. Redirect to project page.'
+                 value: '/project/{project_id}/'
+               302Failure:
+                 description: 'Failed creation. Redirect to create project form.'
+                 value: '/project/{project_id}/'
+
+  /api/task/{id}:
+    delete:
+      operationId: R305
+      summary: "R305: Delete task"
+      description: "Delete a task. Access: PM"
+      tags:
+        - 'M03: Project Area'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+         description: 'Ok. Task deleted'
+    post:
+      operationId: R306
+      summary: "R306: Update task info"
+      description: "Update the task's information. Access: PM"
+      tags:
+        - 'M03: Project Area'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                members:
+                  type: array
+                deleveryDate:
+                  type: string
+      responses:
+        '200':
+          description: 'Task updated'
+
+  /api/projects/{project_id}/task/{id}/:
+    get:
+     operationId: R307
+     summary: 'R307: Get Task Page'
+     description: 'Get Task page. Access: PM'
+     tags:
+       - 'M03: Project Area'
+     parameters:
+        - in: path
+          name: project_id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+     responses:
+       '200':
+         description: 'Ok. Show Task page'
+
+  /projects/{id}/search_user:
+    get:
+      operationId: R308
+      summary: 'R308: Search Users in Project'
+      description: 'Endpoint to search users in a project. Access: PM'
+      tags:
+        - 'M03: Project Area'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 'The search term for users.'
+      responses:
+        '200':
+          description: 'Successful response.'
+
+  /projects/{id}/add_user:
+    post:
+      operationId: R309
+      summary: 'R309: Add User to Project'
+      description: 'Endpoint to add a user to a project. Access: PC'
+      tags:
+        - 'M03: Project Area'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+              required:
+                - user_id
+      responses:
+        '200':
+          description: 'User added successfully.'
+
+  /projects/{id}/search_task:
+    get:
+      operationId: R310
+      summary: 'R310: Search Tasks in Project'
+      description: 'Endpoint to search tasks in a project. Access: PM'
+      tags:
+        - 'M03: Project Area'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 'The search term for tasks.'
+      responses:
+        '200':
+          description: 'Successful response.'
+#-------------------------------- M04 -----------------------------------------
+
+  /adminPage:
+    get:
+      operationId: R401
+      summary: 'R401: AdminPage'
+      description: 'Get admin page. Access: ADM'
+      tags:
+      - 'M04: Administration'
+      responses:
+       '200':
+        description: 'Ok. Show About Us page' 
+
+  /block_user:
+    post:
+      operationId: R402
+      summary: 'R402: Block or Unblock user'
+      description: 'Block or Unblock user. Access: ADM'
+      tags:
+        - 'M04: Administration'
+      responses:
+        '200':
+          description: 'Ok. User has been blocker or unblocked'
+  
+  /adminPage/search:
+    get:
+      operationId: R403
+      summary: 'R402: Search in Admin Page'
+      description: 'Endpoint to perform a search in the admin page. Access: ADM'
+      tags:
+        - 'Admin Page'
+      parameters:
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 'The search term.'
+      responses:
+        '200':
+          description: 'Successful response.'

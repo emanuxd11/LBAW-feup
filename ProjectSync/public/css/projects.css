@@ -1,0 +1,41 @@
+.project-form {
+    width: 30%;
+}
+
+.project-form input {
+    font-size: 15px;
+    background-color: white;
+}
+
+.project-form input[type='date'] {
+    width: 130px;
+}
+
+.project-form input[type='text'] {
+    width: 300px;
+}
+
+.task > p {
+    font-size: 20px;
+}
+
+i {
+    font-size: 17px;
+}
+
+.project-form {
+    font-size: 16px;
+}
+
+.hidden {
+    display: none;
+}
+
+.task {
+    list-style-type: none;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 400px;
+}
