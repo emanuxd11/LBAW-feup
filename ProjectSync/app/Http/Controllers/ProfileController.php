@@ -32,8 +32,8 @@ class ProfileController extends Controller
 
         $user = User::where('username', $username)->first();
         
-        // Check if the authenticated user is the same as the user being edited
-        if (Auth::user()->id !== $user->id) {
+        // Check if the authenticated user is the same as the user being edited and if is not an admin
+        if (Auth::user()->id !== $user->id && !Auth::user()->isAdmin) {
             // If not the same user, you might want to handle unauthorized access
             return redirect()->route('profilePage', ['username' => $user->username]);
         }
@@ -51,7 +51,7 @@ class ProfileController extends Controller
         $user = User::where('username', $username)->first();
 
         // Check if the authenticated user is the same as the user being edited
-        if (Auth::user()->id !== $user->id) {
+        if (Auth::user()->id !== $user->id && !Auth::user()->isAdmin) {
             // If not the same user, you might want to handle unauthorized access
             return redirect()->route('profilePage', ['username' => $user->username]);
         }
