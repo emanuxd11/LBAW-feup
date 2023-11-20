@@ -3,7 +3,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container mt-2"> <!-- Further reduced the top margin -->
+        <div class="text-center mb-3">
+            <p class="login-section-text" style="color: #006aa7;">
+                Welcome to our website! Please log in to access your account and explore our services.
+            </p>
+        </div>
         <div class="login-container">
             <div class="card login-card">
                 <div class="card-body">

@@ -13,8 +13,9 @@
     border: 1px solid #006aa7;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 106, 167, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 106, 167, 0.1), 0 8px 16px rgba(0, 106, 167, 0.1); /* Added shadow */
     transition: transform 0.3s, box-shadow 0.3s;
+    margin-top: -35vh; /* Adjusted margin-top */
 }
 
 .login-card .card-body {
@@ -84,7 +85,7 @@
 
 .login-form .separator hr {
     border: 0;
-    height: 2px; /* Increased thickness */
+    height: 2px;
     background: #006aa7;
     background-image: linear-gradient(to right, #006aa7, #f7f3e9, #006aa7);
     margin: 10px 0;
@@ -100,6 +101,13 @@
     font-weight: bold;
 }
 
-#no-account, .remember-text{
+#no-account, .remember-text {
     color: #172b4d;
+}
+
+.login-section-text {
+    font-size: larger;
+    font-weight: bold;
+    color: #006aa7; /* Adjusted text color */
+    margin-top: 100px; /* Added margin-bottom */
 }
