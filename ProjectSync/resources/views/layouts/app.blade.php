@@ -16,6 +16,7 @@
     <link href="{{ asset('css/faq.css') }}" rel="stylesheet">
     <link href="{{ asset('css/about.css') }}" rel="stylesheet">
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/task.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/faq.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/about.js') }}" defer></script>

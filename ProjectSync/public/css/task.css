@@ -1,0 +1,86 @@
+/* Updated task.css */
+
+.task-profile {
+    background-color: #006aa7;
+    color: #f7f3e9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 106, 167, 0.8); /* Darker shadow values */
+    width: 70%;
+    max-width: 600px;
+    margin: 50px auto;
+}
+
+.task-header {
+    background-color: #172b4d; /* Updated background color for a card-like appearance */
+    border-radius: 8px; /* Added border-radius for a rounded corner effect */
+    padding: 15px; /* Added padding for better spacing */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.task-header h1 {
+    font-size: 24px;
+    color: #f7f3e9; /* Updated text color for better contrast */
+}
+
+.task-status {
+    font-size: 18px;
+    color: #f7f3e9; /* Updated text color for better contrast */
+}
+
+.task-details {
+    margin-bottom: 20px;
+}
+
+.task-info {
+    margin: 10px 0;
+}
+
+.task-info p {
+    margin: 10px 0;
+}
+
+.assigned-members {
+    margin-bottom: 20px;
+}
+
+.assigned-members ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.task-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.edit-button,
+.delete-button {
+    background-color: #f7f3e9;
+    color: #172b4d;
+    padding: 10px 20px;
+    border: 2px solid #172b4d;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s ease, border 0.3s, box-shadow 0.3s;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+    background-color: #006aa7;
+    color: #f7f3e9;
+    border-color: #006aa7;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 106, 167, 0.2);
+}

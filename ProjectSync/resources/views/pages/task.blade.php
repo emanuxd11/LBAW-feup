@@ -1,38 +1,58 @@
+<!-- Updated task.blade.php -->
+
 @extends('layouts.app')
 
 @section('title', $task->name)
 
 @section('content')
-<div id="divtask">
-    <h3>{{$task->name}}</h3>
-    <p>Description: {{$task->description}}</p>
-    <p>Task started on {{$task->start_date}}</p>
-    <p>Needs to be done by {{$task->delivery_date}}</p>
-    <p>Status: {{$task->status}}</p>
-    <p>Assigned to:</p> <p>@each('partials.member', $task->members, 'user')</p>
-    <form method="POST" action="{{ route('edit_task',['id' => $task->id]) }}">
-        @method('POST')
-        @csrf
-        Name: <input type="text" name="name">
-        Description: <input type="text" name="description">
-        <label for="status">Status:</label>
-        <select id="status" name="status">
-            <option value="" selected disabled>{{$task->status}}</option>
-            <option value="To Do">To Do</option>
-            <option value="Doing">Doing</option>
-            <option value="Done">Done</option>
-        </select>
-        Delivery Date: <input type="date" name="delivery_date">
-        Add user: <input type="text" name="username">
-        <button type="submit" class="button">Edit</button>
-    </form>
+    <div class="task-profile">
+        <div class="task-header">
+            <h1 class="task-title">{{$task->name}}</h1>
+            <p class="task-status">Status: {{$task->status}}</p>
+        </div>
 
-    <form method="POST" action="{{ route('delete_task',['id' => $task->id]) }}">
-        @method('DELETE')
-        @csrf
-        <button type="submit" class="button">Delete</button>
-    </form>
-    
-</div>
+        <div class="task-details">
+            <div class="task-card">
+                <div class="card-content">
+                    <p class="info-label">Description:</p>
+                    <p>{{$task->description}}</p>
+                </div>
+            </div>
 
+            <div class="task-card">
+                <div class="card-content">
+                    <p class="info-label">Task started on:</p>
+                    <p>{{$task->start_date}}</p>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="card-content">
+                    <p class="info-label">Needs to be done by:</p>
+                    <p>{{$task->delivery_date}}</p>
+                </div>
+            </div>
+
+            <div class="assigned-members">
+                <p class="info-label">Assigned to:</p>
+                    <ul>
+                        @each('partials.member', $task->members, 'user')
+                    </ul>
+            </div>
+        </div>
+
+        <div class="task-actions">
+            <form method="POST" action="{{ route('edit_task',['id' => $task->id]) }}">
+                @method('POST')
+                @csrf
+                <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
+            </form>
+
+            <form method="POST" action="{{ route('delete_task',['id' => $task->id]) }}">
+                @method('DELETE')
+                @csrf
+                <button type="submit" class="button delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
+            </form>
+        </div>
+    </div>
 @endsection
