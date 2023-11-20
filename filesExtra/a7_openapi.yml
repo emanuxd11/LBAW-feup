@@ -212,7 +212,7 @@ paths:
       summary: 'R208: Update Profile'
       description: 'Endpoint to update user profile. ADM,OWN'
       tags:
-        - 'Profile'
+        - 'M02: Authentication and Individual Profile'
       parameters:
         - in: path
           name: username
@@ -516,10 +516,10 @@ paths:
   /adminPage/search:
     get:
       operationId: R403
-      summary: 'R402: Search in Admin Page'
+      summary: 'R403: Search in Admin Page'
       description: 'Endpoint to perform a search in the admin page. Access: ADM'
       tags:
-        - 'Admin Page'
+        - 'M04: Administration'
       parameters:
         - in: query
           name: term
