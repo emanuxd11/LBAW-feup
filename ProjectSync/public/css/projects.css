@@ -39,3 +39,8 @@ i {
     margin-bottom: 10px;
     width: 400px;
 }
+
+#content {
+    width: 96.3%;
+    margin: 0 auto;
+}

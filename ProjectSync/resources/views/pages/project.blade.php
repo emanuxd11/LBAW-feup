@@ -3,6 +3,9 @@
 @section('title', $project->name)
 
 @section('content')
+
+    <link href="{{ asset('css/projects.css') }}" rel="stylesheet">
+
     <section id="project">
         <h2>{{ $project->name }}</h2>
         <p>Coordinator: <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}"><span>{{ $project->getCoordinator()->name }}</span></a></p>
@@ -39,9 +42,9 @@
 
             <!-- task search -->
             <div class="search_task">
-                <form class="search_task_form" id="search_task_form">
-                    Search for task:
-                    <input type="text" name="task" required placeholder="name or status" id="search_task_input">
+                <form class="project-form" id="search_task_form">
+                    <label for="search_task_input">Search for task:</label>
+                    <input type="text" name="task" required placeholder="name or status" id="search_task_input" class="project-form">
                     <ul id="search_task_results">
                         <script>
                             window.csrf_token = "{{ csrf_token() }}";
