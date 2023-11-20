@@ -43,15 +43,39 @@
             <!-- task search -->
             <div class="search_task">
                 <form class="project-form" id="search_task_form">
-                    <label for="search_task_input">Search for task:</label>
+                    <p hidden id="hidden_task_attr">Looks like there are no tasks.</p>
+                    <label id="hidden_task_search" for="search_task_input">Search for task:</label>
                     <input type="text" name="task" required placeholder="name or status" id="search_task_input" class="project-form">
                     <ul id="search_task_results">
-                        <script>
-                            window.csrf_token = "{{ csrf_token() }}";
-                        </script>
                     </ul>
                 </form>
-
+                
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Function to check and show/hide the message
+                        function checkAndDisplayMessage() {
+                            var ulElement = document.getElementById('search_task_results');
+                            var pElement = document.getElementById('hidden_task_attr');
+                
+                            // Check if the ul is empty
+                            if (ulElement && ulElement.childElementCount === 0) {
+                                // If it's empty, unhide the p element
+                                pElement.removeAttribute('hidden');
+                            } else {
+                                // If it's not empty, hide the p element
+                                pElement.setAttribute('hidden', 'true');
+                            }
+                        }
+                
+                        // Call the function initially
+                        checkAndDisplayMessage();
+                
+                        // Listen for changes in the ul (e.g., when AJAX content is added)
+                        var observer = new MutationObserver(checkAndDisplayMessage);
+                        observer.observe(document.getElementById('search_task_results'), { childList: true });
+                    });
+                </script>
+                
                 <script src="{{ asset('js/search_tasks.js') }}" defer></script>
             </div>
         </div>
