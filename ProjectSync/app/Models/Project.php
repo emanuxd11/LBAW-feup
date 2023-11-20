@@ -56,22 +56,19 @@ class Project extends Model
     }
 
     /**
-     * Check if a user is a coordinator of the project.
-     */
-    public function isCoordinator(User $user): bool
-    {
-        return $this->members
-            ->where('iduser', $user->id)
-            ->where('iscoordinator', true)
-            ->exists();
-    }
-
-    /**
      * Get project coordinator.
      */
     public function getCoordinator()
     {
         return $this->members()
             ->wherePivot('iscoordinator', true)->get()->first();
+    }
+
+    /**
+     * Check if a user is a coordinator of the project.
+     */
+    public function isCoordinator(User $user): bool
+    {
+        return $user->id === $this->getCoordinator()->id;
     }
 }
