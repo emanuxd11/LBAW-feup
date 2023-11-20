@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\View\View;
 
+use App\Models\User;
+
 class LoginController extends Controller
 {
 
@@ -34,6 +36,14 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
+        $user = User::where('email', $credentials['email'])->first();
+
+        if($user && $user->isdeactivated) {
+            return back()->withErrors([
+                'email' => 'The provided user is blocked.',
+            ])->onlyInput('email');
+        }
  
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();

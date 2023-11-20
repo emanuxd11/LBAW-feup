@@ -254,10 +254,10 @@ CREATE TRIGGER one_coordinator_restriction_trigger
 
 
 -- insert some stuff to get started
-INSERT INTO "User" (id, name, username, email, password, phoneNumber, isDeactivated) VALUES 
-    (1,'Rúben Fonseca', 'rubenf11', 'ruben@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '913111111', FALSE),
-    (2,'Miguel Marinho', 'kiriu', 'marinho@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '912111111', FALSE),
-    (3,'Emanuel Maia', 'manu', 'manu@mail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '914111111', FALSE);
+INSERT INTO "User" (name, username, email, password, phoneNumber, isDeactivated) VALUES 
+    ('Rúben Fonseca', 'rubenf11', 'ruben@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '913111111', FALSE),
+    ('Miguel Marinho', 'kiriu', 'marinho@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '912111111', FALSE),
+    ('Emanuel Maia', 'manu', 'manu@mail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '914111111', FALSE);
 
 INSERT INTO Admin (id) VALUES (1);
 

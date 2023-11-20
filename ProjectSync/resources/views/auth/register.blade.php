@@ -3,17 +3,28 @@
 @extends('layouts.app')
 
 @section('content')
+    <link href="{{ asset('css/register.css') }}" rel="stylesheet">
     <div class="container mt-2">
         <div class="text-center mb-3">
             <p class="login-section-text" style="color: #006aa7;">
                 Create an account to get started and enjoy our services.
             </p>
         </div>
-        <div class="login-container">
-            <div class="card login-card">
+        <div class="register-container">
+            <div class="card register-card">
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" class="login-form">
                         {{ csrf_field() }}
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input id="username" type="text" name="username" value="{{ old('username') }}" required autofocus class="form-control">
+                            @if ($errors->has('username'))
+                                <span class="error">
+                                    {{ $errors->first('username') }}
+                                </span>
+                            @endif
+                        </div>
 
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
@@ -31,6 +42,16 @@
                             @if ($errors->has('email'))
                                 <span class="error">
                                     {{ $errors->first('email') }}
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phonenumber" class="form-label">Phone Number</label>
+                            <input id="phonenumber" type="text" name="phonenumber" value="{{ old('phonenumber') }}" class="form-control">
+                            @if ($errors->has('phonenumber'))
+                                <span class="error">
+                                    {{ $errors->first('phonenumber') }}
                                 </span>
                             @endif
                         </div>
