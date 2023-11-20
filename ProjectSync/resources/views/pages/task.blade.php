@@ -3,6 +3,9 @@
 @section('title', $task->name)
 
 @section('content')
+
+<link href="{{ asset('css/projects.css') }}" rel="stylesheet">
+
 <div id="divtask">
     <h3>{{$task->name}}</h3>
     <p>Description: {{$task->description}}</p>

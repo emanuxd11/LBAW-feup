@@ -4,6 +4,8 @@
 
 @section('content')
 
+<link href="{{ asset('css/projects.css') }}" rel="stylesheet">
+
 <section id="projects">
     <article>
         <h2>Create New Project</h2>
