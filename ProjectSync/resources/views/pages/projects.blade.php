@@ -5,20 +5,26 @@
 @section('content')
 
 <section id="projects">
-    <article class="project-form">
-        <h3>Create New Project</h3>
-        <form class="new_project_form" method="POST" action="{{ route('create_project') }}">
+    <article>
+        <h2>Create New Project</h2>
+        <form class="project-form" method="POST" action="{{ route('create_project') }}">
             @method('PUT')
             @csrf
-            Project Name: <input type="text" name="name"required>
+            Project Name: <br><input type="text" name="name" class="project-form" required>
             {{-- Description: <input type="text" name="description" required> --}}
-            Delivery Date: <input type="date" name="delivery_date">
+            <br>Delivery Date:<br><input type="date" name="delivery_date" class="project-form" required>
+            <br>
             <button type="submit" class="button">+</button>
         </form>
     </article>
-    
-    @each('partials.project', $projects, 'project')
-    
+
+    <h2>Your active projects:</h2>    
+    @if (count($projects) > 0)
+        @each('partials.project', $projects, 'project')
+    @else
+        <p>Looks like you aren't related to any currenly active projects. You can start by creating a new one!</p>
+    @endif
+
 </section>
 
 @endsection
