@@ -12,21 +12,21 @@
             <div class="card-body">
                 <form method="post" action="{{ route('updateProfile', ['username' => $user->username]) }}">
                     @csrf
-                    @method('put')
+                    @method('post')
 
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" name="name" id="name" value="{{ $user->name }}" required>
+                        <input type="text" name="name" id="name" placeholder="{{ $user->name }}">
                     </div>
 
                     <div class="form-group">
                         <label for="username">Username:</label>
-                        <input type="text" name="username" id="username" value="{{ $user->username }}" required>
+                        <input type="text" name="username" id="username" placeholder="{{ $user->username }}">
                     </div>
 
                     <div class="form-group">
                         <label for="phonenumber">Phone Number:</label>
-                        <input type="text" name="phonenumber" id="phonenumber" value="{{ $user->phonenumber }}">
+                        <input type="text" name="phonenumber" id="phonenumber" placeholder="{{ $user->phonenumber }}">
                     </div>
 
                     <div class="form-group">
@@ -36,6 +36,19 @@
 
                     <button type="submit">Save Changes</button>
                 </form>
+
+                @if (session('success'))
+                    <div class="error_message">
+                        <p>{{session('success')}}</p>
+                    </div>
+                @else
+                    <div class="error_message">
+                        <p>{{session('error')}}</p>
+                    </div>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach 
+                @endif
             </div>
         </div>
     </div>
