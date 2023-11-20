@@ -212,7 +212,7 @@ paths:
       summary: 'R208: Update Profile'
       description: 'Endpoint to update user profile. ADM,OWN'
       tags:
-        - 'Profile'
+        - 'M02: Authentication and Individual Profile'
       parameters:
         - in: path
           name: username
