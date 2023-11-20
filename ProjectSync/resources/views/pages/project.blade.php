@@ -36,9 +36,22 @@
             </form>
 
             <!-- show tasks -->
-            <ul id="task-list">
+            <div class="search_task">
+                <form class="search_task_form" id="search_task_form">
+                    Search for task:
+                    <input type="text" name="task" required placeholder="name or status" id="search_task_input">
+                    <ul id="search_task_results">
+                        <script>
+                            window.csrf_token = "{{ csrf_token() }}";
+                        </script>
+                    </ul>
+                </form>
+
+                <script src="{{ asset('js/search_tasks.js') }}" defer></script>
+            </div>
+            <!--<ul id="task-list">
                 @each('partials.task', $project->tasks, 'task')
-            </ul>
+            </ul>-->
 
         </div>
     </section>
