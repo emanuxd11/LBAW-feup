@@ -100,23 +100,15 @@ paths:
                  value: '/login'
 
   /logout:
-    post:
-     operationId: R203
-     summary: 'R203: Logout Action'
-     description: 'Logout the current authenticated user. Access: USR, ADM'
-     tags:
-       - 'M02: Authentication and Individual Profile'
-     responses:
-       '302':
-         description: 'Redirect after processing logout.'
-         headers:
-           Location:
-             schema:
-               type: string
-             examples:
-               302Success:
-                 description: 'Successful logout. Redirect to login form.'
-                 value: '/login'
+    get:
+      operationId: R203
+      summary: 'R203: Logout'
+      description: 'Endpoint to log out the user. Access: USR'
+      tags:
+        - 'Authentication'
+      responses:
+        '200':
+          description: 'User successfully logged out.'
 
   /register:
     get:
@@ -149,6 +141,8 @@ paths:
                  type: string
                email:
                  type: string
+               phonenumber:
+                 type: string
                password:
                  type: string
                repeat_password:
@@ -157,6 +151,7 @@ paths:
                 - name
                 - username
                 - email
+                - phonenumber
                 - password
                 - repeat_password
 
@@ -198,7 +193,7 @@ paths:
     get:
       operationId: R207
       summary: 'R207: Get user profile form'
-      description: 'Show the individual user profile edit form. Access: OWN'
+      description: 'Show the individual user profile edit form. Access: ADM,OWN'
       tags:
         - 'M02: Authentication and Individual Profile'
       parameters:
@@ -210,12 +205,14 @@ paths:
       responses:
         '200':
           description: 'Ok. Show edit profile UI'
+
+  /profile/{username}/update:
     post:
       operationId: R208
-      summary: 'R208: Edit Profile Action'
-      description: 'Allows a user to edit his information. Access: OWN'
+      summary: 'R208: Update Profile'
+      description: 'Endpoint to update user profile. ADM,OWN'
       tags:
-        - 'M02: Authentication and Individual Profile'
+        - 'Profile'
       parameters:
         - in: path
           name: username
@@ -225,7 +222,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
               type: object
               properties:
@@ -233,26 +230,14 @@ paths:
                   type: string
                 username:
                   type: string
-                email:
+                password:
                   type: string
                 phonenumber:
                   type: string
-                password:
-                  type: string
+        description: 'Fields to be updated in the profile.'
       responses:
-        '302':
-          description: 'Redirect member after editing profile.'
-          headers:
-            Location:
-              schema:
-                type: string
-              examples:
-                302Success:
-                  description: 'User information edited successfully. Redirects user to their profile page.'
-                  value: '/profile/{username}/edit'
-                302Failure:
-                  description: 'User information editing failed. Stay in edit page.'
-                  value: '/profile/{username}/edit'
+        '200':
+          description: 'Profile updated successfully.'
 
 #-------------------------------- M03 -----------------------------------------
 
@@ -268,19 +253,9 @@ paths:
          description: 'Ok. Show Projects page'
   
   /api/projects:
-    get:
-     operationId: R302
-     summary: 'R302: Get Projects Creation Page'
-     description: 'Get Projects page. Access: USR'
-     tags:
-       - 'M03: Project Area'
-     responses:
-       '200':
-         description: 'Ok. Show project creator form'
-    
-    post:
-      operationId: R303
-      summary: 'R303: Create a project'
+    put:
+      operationId: R302
+      summary: 'R302: Create a project'
       description: 'Create a project. Access: USR'
       tags:
         - 'M03: Project Area'
@@ -307,10 +282,10 @@ paths:
              examples:
                302Success:
                  description: 'Successful creation. Redirect to projects page.'
-                 value: '/project/{project_id}/'
+                 value: '/projects'
                302Failure:
                  description: 'Failed creation. Redirect to create project form.'
-                 value: '/createProject'
+                 value: '/projects:'
   
   /projects/{project_id}/:
     get:
@@ -330,7 +305,7 @@ paths:
          description: 'Ok. Show project page'
 
   /api/projects/{project_id}/:
-    post:
+    put:
       operationId: R304
       summary: 'R304: Create a task'
       description: 'Create a task. Access: PM'
@@ -420,6 +395,100 @@ paths:
       responses:
         '200':
           description: 'Task updated'
+
+  /api/projects/{project_id}/task/{id}/:
+    get:
+     operationId: R307
+     summary: 'R307: Get Task Page'
+     description: 'Get Task page. Access: PM'
+     tags:
+       - 'M03: Project Area'
+     parameters:
+        - in: path
+          name: project_id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+     responses:
+       '200':
+         description: 'Ok. Show Task page'
+
+  /projects/{id}/search_user:
+    get:
+      operationId: R308
+      summary: 'R308: Search Users in Project'
+      description: 'Endpoint to search users in a project. Access: PM'
+      tags:
+        - 'M03: Project Area'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 'The search term for users.'
+      responses:
+        '200':
+          description: 'Successful response.'
+
+  /projects/{id}/add_user:
+    post:
+      operationId: R309
+      summary: 'R309: Add User to Project'
+      description: 'Endpoint to add a user to a project. Access: PC'
+      tags:
+        - 'M03: Project Area'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+              required:
+                - user_id
+      responses:
+        '200':
+          description: 'User added successfully.'
+
+  /projects/{id}/search_task:
+    get:
+      operationId: R310
+      summary: 'R310: Search Tasks in Project'
+      description: 'Endpoint to search tasks in a project. Access: PM'
+      tags:
+        - 'M03: Project Area'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 'The search term for tasks.'
+      responses:
+        '200':
+          description: 'Successful response.'
 #-------------------------------- M04 -----------------------------------------
 
   /adminPage:
@@ -443,3 +512,20 @@ paths:
       responses:
         '200':
           description: 'Ok. User has been blocker or unblocked'
+  
+  /adminPage/search:
+    get:
+      operationId: R403
+      summary: 'R402: Search in Admin Page'
+      description: 'Endpoint to perform a search in the admin page. Access: ADM'
+      tags:
+        - 'Admin Page'
+      parameters:
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 'The search term.'
+      responses:
+        '200':
+          description: 'Successful response.'
