@@ -105,7 +105,7 @@ paths:
       summary: 'R203: Logout'
       description: 'Endpoint to log out the user. Access: USR'
       tags:
-        - 'Authentication'
+        - 'M02: Authentication and Individual Profile'
       responses:
         '200':
           description: 'User successfully logged out.'
