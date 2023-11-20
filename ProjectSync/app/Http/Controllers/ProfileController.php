@@ -59,39 +59,41 @@ class ProfileController extends Controller
         // Validate the form data
         $request->validate([
             'name' => 'nullable|string|max:255',
-            'username' => 'required|string|max:255|unique:User,username,' . $user->id,
+            'username' => 'nullable|string|max:255|unique:User,username,' . $user->id,
             'phonenumber' => 'nullable|string|max:9|min:9',
             'password' => 'nullable|string|min:8',
         ]);
 
-        $user->username = $request->username;
+        $altered = false;
+
+        if ($request->filled('username')) {
+            $user->username = $request->username;
+            $altered = true;
+        }
 
         if ($request->filled('name')) {
             $user->name = $request->name;
+            $altered = true;
         }
 
         if ($request->filled('phonenumber')) {
             $user->phonenumber = $request->phonenumber;
+            $altered = true;
         }
 
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
+            $altered = true;
         }
-/*
-        // Update the user
-        $passwordUpdated = $user->update([
-            'username' => $request->username,
-            
-            'password' => $request->filled('password') ? Hash::make($request->password) : $user->password,
-        ]);
-*/
-        $userUpdated = $user->save();
+        
+        if($altered){
+            $user->save();
+            return redirect()->route('editProfile', ['username' => $user->username])->with('success', 'Profile updated successfully.');
+        }
+        else{
+            return redirect()->route('editProfile', ['username' => $user->username])->with('error', 'Failed to update profile. Please try again.');
+        }
 
-        if ($userUpdated) {
-            return redirect()->route('profilePage', ['username' => $user->username])->with('success', 'Profile updated successfully.');
-        } else {
-            return redirect()->route('profilePage', ['username' => $user->username])->with('error', 'Failed to update profile. Please try again.');
-        }
     }
 
 }

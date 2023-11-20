@@ -274,8 +274,8 @@ INSERT INTO ProjectMember (idUser,idProject,isCoordinator,isFavorite) VALUES
     (2,4,FALSE,TRUE),
     (3,1,FALSE,TRUE),
     (3,2,FALSE,TRUE),
-    -- (3,3,FALSE,TRUE),
-    (3,4,FALSE,TRUE);
+    (3,3,TRUE,TRUE),
+    (3,4,TRUE,TRUE);
 
 INSERT INTO Task (name, description, start_date, delivery_date, status, project_id) VALUES
     ('Task 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
