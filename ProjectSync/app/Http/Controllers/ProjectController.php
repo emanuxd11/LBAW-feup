@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Project;
+use App\Models\User;
 
 use App\Http\Controllers\AdminController;
 
@@ -113,5 +114,55 @@ class ProjectController extends Controller
         // Delete the project and return it as JSON.
         $project->delete();
         return response()->json($project);
+    }
+
+    /**
+     * Searches users, based on their name or username,
+     * that are available to join a project.
+     */
+    public function search_user(Request $request, $projectId)
+    {
+        $term = $request->input('term');
+
+        // Get the project members
+        $projectMembers = Project::findOrFail($projectId)->members()->pluck('id')->toArray();
+        
+        // Perform your user search based on the $term (case-insensitive) and exclude project members
+        $results = User::where(function ($query) use ($term) {
+            $query->where('name', 'ilike', '%' . $term . '%') // ilike for case-insensitive search
+                ->orWhere('username', 'ilike', '%' . $term . '%');
+        })
+        ->whereNotIn('id', $projectMembers)
+        ->whereNotIn('id', function ($query) {
+            $query->select('id')->from('admin');
+        })
+        ->get();
+
+        return response()->json($results);
+    }
+
+    /**
+     * Adds user to project.
+     */
+    public function addUserToProject(Request $request, $projectId)
+    {
+        $userId = $request->input('userId');
+
+        // Check if the user is an administrator
+        $user = User::find($userId);
+        if ($user && $user->isAdmin) {
+            return response()->json(['error' => 'Cannot add an administrator to the project'], 400);
+        }
+
+        // Check if the user is already a member of the project
+        $project = Project::find($projectId);
+        if ($project->isMember(User::find($userId))) {
+            return response()->json(['error' => 'User is already a member of the project'], 400);
+        }
+
+        // Add the user to the project
+        $project->members()->attach($userId, ['iscoordinator' => false, 'isfavorite' => false]);
+
+        return response()->json(['success' => true]);
     }
 }
