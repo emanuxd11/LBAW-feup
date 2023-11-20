@@ -9,7 +9,7 @@
     <p>Task started on {{$task->start_date}}</p>
     <p>Needs to be done by {{$task->delivery_date}}</p>
     <p>Status: {{$task->status}}</p>
-    <p>Assigned to: {{$task->status}}</p>
+    <p>Assigned to:</p> <p>@each('partials.member', $task->members, 'user')</p>
     <form method="POST" action="{{ route('edit_task',['id' => $task->id]) }}">
         @method('POST')
         @csrf
@@ -24,7 +24,7 @@
         </select>
         Delivery Date: <input type="date" name="delivery_date">
         Add user: <input type="text" name="username">
-        <button type="submit" class="button">+</button>
+        <button type="submit" class="button">Edit</button>
     </form>
 
     <form method="POST" action="{{ route('delete_task',['id' => $task->id]) }}">

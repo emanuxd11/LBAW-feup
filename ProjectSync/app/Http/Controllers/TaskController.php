@@ -18,6 +18,10 @@ class TaskController extends Controller
             return redirect("/login");
         }
         $task = Task::find($task_id);
+        $project = Project::find($project_id);
+        if(!$project->isMember(Auth::user())){
+            return redirect("/projects");
+        }
         return view("pages.task",compact('task'));
     }
     /**
