@@ -34,7 +34,7 @@
                         <input type="password" name="password" id="password">
                     </div>
 
-                    <button type="submit">Save Changes</button>
+                    <button type="submit" class="button">Save Changes</button>
                 </form>
 
                 @if (session('success'))

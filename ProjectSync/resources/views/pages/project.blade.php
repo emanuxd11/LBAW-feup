@@ -14,8 +14,8 @@
             </ul>
             
             @if($project->isCoordinator(Auth::user()))
-                <form class="new_member_form" id="addMemberForm">
-                    Add new team members:
+                <form class="project-form" id="addMemberForm">
+                    Add new team members:<br>
                     <input type="text" name="name" required placeholder="name or username" id="searchInput">
                     <ul id="searchResults"></ul>
                 </form>
@@ -25,18 +25,20 @@
         </div>
             
         <div id="tasks">
-            <h3>Tasks</h3>
-            <form class="new_task_form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
+            <h3>Create New Task</h3>
+            <form class="project-form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
                 @method('PUT')
                 @csrf
-                Name: <input type="text" name="name"required>
-                Description: <input type="text" name="description" required>
-                Delivery Date: <input type="date" name="delivery_date">
-                <button type="submit" class="button">+</button>
+                Name: <br><input type="text" name="name"required>
+                <br>Description: <br><input type="text" name="description" required>
+                <br>Delivery Date: <br><input type="date" name="delivery_date">
+                <br><button type="submit" class="button">+</button>
             </form>
 
-            <!-- show tasks -->
-            <div class="search_task">
+            <h3>Your pending tasks:<h3>
+
+            <!-- task search -->
+            {{-- <div class="search_task">
                 <form class="search_task_form" id="search_task_form">
                     Search for task:
                     <input type="text" name="task" required placeholder="name or status" id="search_task_input">
@@ -48,10 +50,16 @@
                 </form>
 
                 <script src="{{ asset('js/search_tasks.js') }}" defer></script>
-            </div>
-            <!--<ul id="task-list">
-                @each('partials.task', $project->tasks, 'task')
-            </ul>-->
+            </div> --}}
+
+            <ul id="task-list">
+                @if ($project->tasks !== null)
+                    @each('partials.task', $project->tasks, 'task')
+                @else
+                    <p>Looks like you've completed all your tasks!</p>
+                @endif
+
+            </ul>
 
         </div>
     </section>
