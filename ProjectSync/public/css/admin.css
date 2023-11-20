@@ -22,7 +22,7 @@
 }
 
 .admin-page input[type="text"] {
-    flex-grow: 1; /* Allow the input to grow and take available space */
+    flex-grow: 1; /* Adjust the width of the input */
     margin-right: 10px; /* Add space between input and button */
 }
 
@@ -77,4 +77,43 @@
 
 .search-bar{
     flex-grow: 1; /* Allow the search bar to grow and take available space */
+}
+
+.search-bar button{
+    margin-bottom: 15px;
+}
+
+admin-page .current-users,
+.admin-page .current-projects {
+    margin-top: 30px; /* Adjust the margin for spacing */
+}
+
+.admin-page .current-projects {
+    border-top: 1.5px solid #ccc; /* Add a 2px solid border on the top */
+}
+
+.admin-page .current-projects {
+    padding-top: 30px; /* Adjust padding for spacing */
+}
+
+
+.admin-page .show-projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.admin-page .show-projects .user {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.admin-page .show-projects .user h4 {
+    font-size: 20px; 
+    font-weight: bold;
+}
+
+.admin-page .show-projects .user h4:hover {
+    color: #000000;
 }
