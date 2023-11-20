@@ -54,14 +54,14 @@
                 <p class="info-label">Description:</p>
                 <input type="text" name="description" class="project-form">
                 <p class="info-label">Status:</p>
-                <select id="status" name="status" class="project-form">
+                <select id="status" name="status" class="">
                     <option value="" selected disabled>{{$task->status}}</option>
                     <option value="To Do">To Do</option>
                     <option value="Doing">Doing</option>
                     <option value="Done">Done</option>
                 </select>
                 <p class="info-label">Delivery Date:</p>
-                <input type="date" name="delivery_date" class="project-form">
+                <input type="date" name="delivery_date" class="">
                 <p class="info-label">Add user:</p>
                 <input type="text" name="username" class="project-form">
                 <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
