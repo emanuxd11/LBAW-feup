@@ -1,35 +1,63 @@
-/* Modern Home Styles */
-.modern-home {
+/* home.css */
+
+/* Hero Section */
+#hero-section {
+    background-color: #f7f3e9;
+    color: #172b4d;
     text-align: center;
-    margin-top: 50px;
+    padding: 100px 0;
 }
 
-.modern-home h1 {
+#hero-section .container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#hero-section h1 {
     font-size: 36px;
-    color: #2c3e50; /* Dark blue-gray text color */
 }
 
-.modern-home p {
+#hero-section p {
     font-size: 18px;
-    color: #7f8c8d; /* Medium gray text color */
+    margin-bottom: 30px;
+}
+
+/* Features Section */
+#features-section {
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 50px 0;
+}
+
+#features-section .container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#features-section .feature {
+    text-align: center;
+    max-width: 300px;
+    margin: 20px;
+    background-color: #f7f3e9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 106, 167, 0.1);
+}
+
+#features-section .feature i {
+    font-size: 48px;
+    color: #3498db;
     margin-bottom: 20px;
 }
 
-.modern-home .button {
-    background-color: #006aa7; /* Bright beige button background */
-    color: #f7f3e9; /* Dark text color */
-    padding: 10px 20px; /* Adjusted padding */
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform for hover animation */
-    display: inline-flex; /* Use flexbox for centering */
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
+#features-section .feature h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #172b4d;
 }
 
-.modern-home .button:hover {
-    background-color: #ffe4b5; /* Lighter beige on hover */
-    transform: scale(1.05); /* Add scaling effect on hover */
-    color: #172b4d; /* Dark text color */
+#features-section .feature p {
+    font-size: 16px;
+    color: #485460;
 }
