@@ -38,7 +38,7 @@
             <h3>Your pending tasks:<h3>
 
             <!-- task search -->
-            {{-- <div class="search_task">
+            <div class="search_task">
                 <form class="search_task_form" id="search_task_form">
                     Search for task:
                     <input type="text" name="task" required placeholder="name or status" id="search_task_input">
@@ -50,17 +50,7 @@
                 </form>
 
                 <script src="{{ asset('js/search_tasks.js') }}" defer></script>
-            </div> --}}
-
-            <ul id="task-list">
-                @if ($project->tasks !== null)
-                    @each('partials.task', $project->tasks, 'task')
-                @else
-                    <p>Looks like you've completed all your tasks!</p>
-                @endif
-
-            </ul>
-
+            </div>
         </div>
     </section>
 @endsection
