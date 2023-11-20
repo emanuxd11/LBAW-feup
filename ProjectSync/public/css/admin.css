@@ -1,0 +1,80 @@
+/* Admin Styles */
+.admin-page {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.admin-page h3 {
+    font-size: 36px;
+    color: #2c3e50; /* Dark blue-gray text color */
+    margin-top: 40px;
+}
+
+.admin-page .searchUsers {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Add space between items */
+}
+
+.admin-page form {
+    display: flex;
+    align-items: center;
+}
+
+.admin-page input[type="text"] {
+    flex-grow: 1; /* Allow the input to grow and take available space */
+    margin-right: 10px; /* Add space between input and button */
+}
+
+.admin-page h4 {
+    font-size: 18px;
+    color: #7f8c8d; /* Medium gray text color */
+}
+
+.admin-page h5 {
+    font-size: 16px;
+    color: #7f8c8d; /* Medium gray text color */
+}
+
+.admin-page .user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user h5{
+    display: flex; /* Use flexbox for centering */
+    align-items: center; /* Center vertically */
+    flex-direction: column;
+}
+
+.admin-page .button {
+    background-color: #ff0000; /* Red button background */
+    color: #f7f3e9; /* Dark text color */
+    /*padding: 10px 20px; /* Adjusted padding */
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform for hover animation */
+    margin-top: 5px; /* Adjusted margin to center vertically with h5 */
+}
+
+.admin-page .button:hover {
+    background-color: #d60000; /* Darker red on hover */
+    transform: scale(1.05); /* Add scaling effect on hover */
+    color: #f7f3e9; /* Dark text color */
+}
+
+.show-users span {
+    font-size: 18px;
+    color: #6e7474;
+    font-weight: bold;
+}
+
+.show-users span:hover {
+    color: #000000;
+}
+
+.search-bar{
+    flex-grow: 1; /* Allow the search bar to grow and take available space */
+}
