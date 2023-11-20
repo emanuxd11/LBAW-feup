@@ -64,3 +64,7 @@ input[type=email]:focus,
 input[type=password]:focus {
   border-color: #006aa7; /* Blue border color for focused inputs */
 }
+
+a.button {
+  color: white;
+}
