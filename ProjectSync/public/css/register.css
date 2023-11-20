@@ -1,0 +1,109 @@
+/* register.css */
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-card {
+    width: 70%;
+    max-width: 400px;
+    border: 1px solid #006aa7;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 106, 167, 0.1), 0 8px 16px rgba(0, 106, 167, 0.1); /* Added shadow */
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-top: -35vh; /* Adjusted margin-top */
+}
+
+.register-card .card-body {
+    padding: 20px;
+    background-color: #f7f3e9;
+}
+
+.login-form .form-label {
+    color: #006aa7;
+}
+
+.login-form .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #006aa7;
+    border-radius: 4px;
+}
+
+.login-form .btn-primary,
+.login-form .btn-outline-primary,
+.login-form .btn-register {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.login-form .btn-primary,
+.login-form .btn-outline-primary {
+    background-color: #006aa7;
+    color: #f7f3e9;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.login-form .btn-register {
+    background-color: #f7f3e9;
+    color: #006aa7;
+    padding: 10px 20px;
+    border: 1px solid #006aa7;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.login-form .btn-primary:hover {
+    background-color: #005091;
+}
+
+.login-form .btn-outline-primary:hover,
+.login-form .btn-register:hover {
+    background-color: #005091;
+    color: #f7f3e9;
+}
+
+.login-form .separator {
+    margin: 15px 0;
+}
+
+.login-form .separator hr {
+    border: 0;
+    height: 2px;
+    background: #006aa7;
+    background-image: linear-gradient(to right, #006aa7, #f7f3e9, #006aa7);
+    margin: 10px 0;
+    width: 100%;
+}
+
+.login-form .separator span {
+    display: inline-block;
+    background-color: #f7f3e9;
+    padding: 0 10px;
+    position: relative;
+    top: -10px;
+    font-weight: bold;
+}
+
+#no-account, .remember-text {
+    color: #172b4d;
+}
+
+.login-section-text {
+    font-size: larger;
+    font-weight: bold;
+    color: #006aa7; /* Adjusted text color */
+    margin-top: 100px; /* Added margin-bottom */
+}

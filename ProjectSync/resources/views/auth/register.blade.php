@@ -1,39 +1,71 @@
+<!-- register.blade.php -->
+
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="{{ route('register') }}">
-    {{ csrf_field() }}
+    <div class="container mt-2">
+        <div class="text-center mb-3">
+            <p class="login-section-text" style="color: #006aa7;">
+                Create an account to get started and enjoy our services.
+            </p>
+        </div>
+        <div class="login-container">
+            <div class="card login-card">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}" class="login-form">
+                        {{ csrf_field() }}
 
-    <label for="name">Name</label>
-    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
-    @if ($errors->has('name'))
-      <span class="error">
-          {{ $errors->first('name') }}
-      </span>
-    @endif
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus class="form-control">
+                            @if ($errors->has('name'))
+                                <span class="error">
+                                    {{ $errors->first('name') }}
+                                </span>
+                            @endif
+                        </div>
 
-    <label for="email">E-Mail Address</label>
-    <input id="email" type="email" name="email" value="{{ old('email') }}" required>
-    @if ($errors->has('email'))
-      <span class="error">
-          {{ $errors->first('email') }}
-      </span>
-    @endif
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input id="email" type="email" name="email" value="{{ old('email') }}" required class="form-control">
+                            @if ($errors->has('email'))
+                                <span class="error">
+                                    {{ $errors->first('email') }}
+                                </span>
+                            @endif
+                        </div>
 
-    <label for="password">Password</label>
-    <input id="password" type="password" name="password" required>
-    @if ($errors->has('password'))
-      <span class="error">
-          {{ $errors->first('password') }}
-      </span>
-    @endif
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input id="password" type="password" name="password" required class="form-control">
+                            @if ($errors->has('password'))
+                                <span class="error">
+                                    {{ $errors->first('password') }}
+                                </span>
+                            @endif
+                        </div>
 
-    <label for="password-confirm">Confirm Password</label>
-    <input id="password-confirm" type="password" name="password_confirmation" required>
+                        <div class="mb-3">
+                            <label for="password-confirm" class="form-label">Confirm Password</label>
+                            <input id="password-confirm" type="password" name="password_confirmation" required class="form-control">
+                        </div>
 
-    <button type="submit">
-      Register
-    </button>
-    <a class="button button-outline" href="{{ route('login') }}">Login</a>
-</form>
+                        <button type="submit" class="btn btn-primary">
+                            Register
+                        </button>
+
+                        <div class="separator text-center">
+                            <hr>
+                            <span id="no-account">Already have an account?</span>
+                            <hr>
+                        </div>
+
+                        <a class="btn btn-primary btn-register register-button" href="{{ route('login') }}">
+                            Login
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
