@@ -41,14 +41,14 @@
                         fetch(`/projects/${projectId}/search_user?term=${encodeURIComponent(searchTerm)}`)
                             .then(response => response.json())
                             .then(data => {
-                                displaySearchResults(data);
+                                displaySearchResults(data, projectId);
                             })
                             .catch(error => {
                                 console.error('Error fetching search results:', error);
                             });
                     });
 
-                    function displaySearchResults(results) {
+                    function displaySearchResults(results, projectId) {
                         searchResults.innerHTML = '';
 
                         results.forEach(function (user) {
@@ -59,14 +59,14 @@
                                 searchInput.value = user.name;
                                 searchResults.innerHTML = '';
 
-                                addUserToProject(user.id);
+                                addUserToProject(user.id, projectId);
                             });
 
                             searchResults.appendChild(resultItem);
                         });
                     }
 
-                    function addUserToProject(userId) {
+                    function addUserToProject(userId, projectId) {
                         fetch(`/projects/${projectId}/add_user`, {
                             method: 'POST',
                             headers: {

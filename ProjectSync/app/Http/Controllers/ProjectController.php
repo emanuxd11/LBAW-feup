@@ -127,18 +127,15 @@ class ProjectController extends Controller
         // Get the project members
         $projectMembers = Project::findOrFail($projectId)->members()->pluck('id')->toArray();
         
-        // $adminIds = Admin::pluck('id')->toArray();
-        // var_dump($adminIds);
-
-        // Combine project members and admin ids
-        // $excludeIds = array_merge($projectMembers, $adminIds);
-
         // Perform your user search based on the $term (case-insensitive) and exclude project members
         $results = User::where(function ($query) use ($term) {
             $query->where('name', 'ilike', '%' . $term . '%') // ilike for case-insensitive search
                 ->orWhere('username', 'ilike', '%' . $term . '%');
         })
         ->whereNotIn('id', $projectMembers)
+        ->whereNotIn('id', function ($query) {
+            $query->select('id')->from('admin');
+        })
         ->get();
 
         return response()->json($results);
