@@ -101,7 +101,7 @@ class TaskController extends Controller
 
         // Check if the current user is authorized to delete this item.
         $this->authorize('delete', $task);
-
+        DB::table('projectmembertask')->where('task_id', $task->id)->delete();
         $task->delete();
         return redirect('/projects/' . $project_id);
     }

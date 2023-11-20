@@ -2,22 +2,31 @@ document.addEventListener('DOMContentLoaded', function () {
     var searchInput = document.getElementById('search_task_input');
     var searchResults = document.getElementById('search_task_results');
 
+    // Fetch tasks when the page loads
+    const projectId = window.location.pathname.split('/').pop();
+    fetchTasks(projectId, '');
+
     searchInput.addEventListener('input', function () {
         var searchTerm = searchInput.value.trim();
+        fetchTasks(projectId, searchTerm);
+    });
 
-        const projectId = window.location.pathname.split('/').pop();
+    function fetchTasks(projectId, searchTerm) {
+        const url = searchTerm
+            ? `/projects/${projectId}/search_task?term=${encodeURIComponent(searchTerm)}`
+            : `/projects/${projectId}/search_task`;
 
-        fetch(`/projects/${projectId}/search_task?term=${encodeURIComponent(searchTerm)}`)
+        fetch(url)
             .then(response => response.json())
             .then(data => {
-                displaySearchResults(data,projectId);
+                displaySearchResults(data, projectId);
             })
             .catch(error => {
                 console.error('Error fetching search results:', error);
             });
-    });
+    }
 
-    function displaySearchResults(data,project_id) {
+    function displaySearchResults(data, project_id) {
         searchResults.innerHTML = '';
         data.forEach(function (task) {
             var taskItem = document.createElement('li');
@@ -28,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
             taskLink.href = `/api/projects/${project_id}/task/${task.id}`;
             taskLink.innerHTML = `<h3>${task.name}</h3>`;
 
-            taskLink.addEventListener('click', function(event) {
+            taskLink.addEventListener('click', function (event) {
                 event.preventDefault();
                 window.location.href = taskLink.href;
             });
@@ -42,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <p>Needs to be done by ${task.delivery_date}</p>
                 <p>Status: ${task.status}</p>
             `;
-            
+
             searchResults.appendChild(taskItem);
         });
     }
