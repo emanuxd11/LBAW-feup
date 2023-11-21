@@ -77,6 +77,13 @@ class TaskController extends Controller
 
         if($request->input('username')){
             $user = User::where('username', $request->input('username'))->first();
+            $isInTask = DB::table('projectmembertask')->where('task_id', $task->id)->where('user_id', $user->id)->exists();
+            $isInProject = Project::find($task->project_id)->isMember($user);
+
+            if(!$isInProject || $isInTask){
+                return redirect()->route('show_task', ['project_id' => $task->project_id,'id' => $task->id])->with('error', 'Failed to update profile. Please try again.');
+            }
+
             $data = [
                 'user_id' => $user->id,
                 'task_id' => $task->id,
