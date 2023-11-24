@@ -49,7 +49,7 @@ class TaskController extends Controller
     
 
     /**
-     * Updates the state of an individual item.
+     * Updates the state of an individual task.
      */
     public function update(Request $request, $id)
     {
@@ -77,11 +77,16 @@ class TaskController extends Controller
 
         if($request->input('username')){
             $user = User::where('username', $request->input('username'))->first();
+
+            if(!$user){
+                return redirect()->route('show_task', ['project_id' => $task->project_id,'id' => $task->id])->with('error', 'Failed to find this user');
+            }
+
             $isInTask = DB::table('projectmembertask')->where('task_id', $task->id)->where('user_id', $user->id)->exists();
             $isInProject = Project::find($task->project_id)->isMember($user);
 
             if(!$isInProject || $isInTask){
-                return redirect()->route('show_task', ['project_id' => $task->project_id,'id' => $task->id])->with('error', 'Failed to update profile. Please try again.');
+                return redirect()->route('show_task', ['project_id' => $task->project_id,'id' => $task->id])->with('error', 'Failed to add this user');
             }
 
             $data = [
@@ -94,11 +99,12 @@ class TaskController extends Controller
 
         // Save the item and return it as JSON.
         $task->save();
-        return redirect('/projects/' . $task->project_id);
+        return redirect()->route('show_task', ['project_id' => $task->project_id, 'id' => $task->id])
+                    ->with('success', 'Task updated successfully.');
     }
 
     /**
-     * Deletes a specific item.
+     * Deletes a specific task.
      */
     public function delete(Request $request, $id)
     {
@@ -111,5 +117,14 @@ class TaskController extends Controller
         DB::table('projectmembertask')->where('task_id', $task->id)->delete();
         $task->delete();
         return redirect('/projects/' . $project_id);
+    }
+
+    public function removeUserFromTask(Request $request, $id){
+        $task = Task::find($id);
+        $this->authorize('update', $task);
+
+        DB::table('projectmembertask')->where('task_id', $task->id)->where('user_id',$request->input('user_id'))->delete();
+        return redirect()->route('show_task', ['project_id' => $task->project_id, 'id' => $task->id])
+                    ->with('success', 'User removed successfully.');
     }
 }

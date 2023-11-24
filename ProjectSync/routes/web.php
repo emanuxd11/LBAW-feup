@@ -52,6 +52,7 @@ Route::controller(TaskController::class)->group(function () {
     Route::post('/api/task/{id}', 'update')->name('edit_task');
     Route::delete('/api/task/{id}', 'delete')->name('delete_task');
     Route::get('/api/projects/{project_id}/task/{id}', 'show')->name('show_task');
+    Route::delete('/api/task/{id}/remove-user', 'removeUserFromTask')->name('task.remove.user');
 });
 
 // Authentication

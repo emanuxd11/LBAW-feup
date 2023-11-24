@@ -55,3 +55,19 @@ i {
     background-color: #f7f3e9;
     color: #172b4d;
 }
+
+.member-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: -30px;
+}
+
+.button.delete-button-user {
+    margin-bottom: -20vh;
+    padding: 5px;
+    margin-top: 8px;
+}
+
+.button.delete-button-user:hover {
+    background-color: #006aa7;
+}

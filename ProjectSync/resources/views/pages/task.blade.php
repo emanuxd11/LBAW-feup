@@ -39,7 +39,17 @@
             <div class="assigned-members">
                 <p class="info-label">Assigned to:</p>
                     <ul>
-                        @each('partials.member', $task->members, 'user')
+                        @foreach ($task->members as $user)
+                            <div class="member-container">
+                                @include('partials.member', ['user' => $user])
+                                <form method="POST" action="{{ route('task.remove.user',['id' => $task->id]) }}" class="project-form">
+                                    @method('DELETE')
+                                    @csrf
+                                    <input type="hidden" name="user_id" value="{{$user->id}}" class="project-form">
+                                    <button type="submit" class="button delete-button-user"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                        @endforeach
                     </ul>
             </div>
         </div>
@@ -66,8 +76,17 @@
                 <input type="text" name="username" class="project-form">
                 <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
             </form>
-        
 
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @elseif(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+        
             <form method="POST" action="{{ route('delete_task',['id' => $task->id]) }}">
                 @method('DELETE')
                 @csrf
