@@ -41,6 +41,9 @@ CREATE TABLE "User" (
     email VARCHAR NOT NULL UNIQUE,
     password VARCHAR NOT NULL,
     phoneNumber VARCHAR,
+    remember_token VARCHAR,
+    bio VARCHAR,
+    profile_pic VARCHAR,
     isDeactivated BOOLEAN
 );
 
@@ -56,8 +59,10 @@ CREATE TABLE Project (
     name VARCHAR NOT NULL,
     start_date DATE,
     delivery_date DATE,
-    archived BOOLEAN, --DEFAULT FALSE
+    archived BOOLEAN,
     UNIQUE (name),
+    description VARCHAR,
+    icon_pic VARCHAR,
     CHECK (delivery_date >= start_date)
 );
 
@@ -74,7 +79,6 @@ CREATE TABLE ProjectMember (
 CREATE TABLE ProjectMemberInvitation (
     idUser INT REFERENCES "User"(id),
     idProject INT REFERENCES Project(id),
-    inviteAccepted BOOLEAN,
     PRIMARY KEY (idUser, idProject)
 );
 
