@@ -55,7 +55,13 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             if (data.success) {
                 var listItem = document.createElement('li');
-                listItem.textContent = user.name;
+                listItem.classList.add('project-member'); // Add the class
+                var profilePageUrl = `/profile/${user.username}`;
+                listItem.innerHTML = `
+                    <a href="${profilePageUrl}">
+                        <span>${user.name} (${user.username})</span>
+                    </a>
+                `;
                 projectMemberList.appendChild(listItem);
             } else {
                 console.error('Error adding user to the project:', data.error);
@@ -65,4 +71,5 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error adding user to the project:', error);
         });
     }
+    
 });
