@@ -32,7 +32,10 @@ Route::view('/aboutUs', 'pages.aboutUs')->name('aboutUs');
 // Admin
 Route::get('/adminPage', [AdminController::class, 'showAdminPage'])->name('adminPage');
 Route::get('/adminPage/search', [AdminController::class, 'search'])->name('adminPage.search');
+Route::get('/create_user_form', [AdminController::class, 'showCreateUserForm'])->name('adminPage.create_user_form');
 Route::post('/block_user', [AdminController::class, 'blockUser'])->name('adminPage.block');
+Route::put('/create_user', [AdminController::class, 'createUser'])->name('adminPage.create_user');
+Route::delete('/delete_user', [AdminController::class, 'deleteUser'])->name('adminPage.delete');
 
 // Projects
 Route::controller(ProjectController::class)->group(function () {

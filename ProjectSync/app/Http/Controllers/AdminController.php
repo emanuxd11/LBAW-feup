@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 use App\Models\Project;
+use App\Models\Post;
+use App\Models\PostComment;
+use App\Models\Message;
+use App\Models\Changes;
 
 class AdminController extends Controller{
     public function showAdminPage()
@@ -30,6 +35,20 @@ class AdminController extends Controller{
         abort(403, 'Unauthorized'); // Or redirect to a different page
     }
 
+    public function showCreateUserForm(){
+        if (!Auth::check()){
+            return redirect("/login");
+        }
+        if(!Auth::user()->isAdmin){
+            return redirect("/projects");
+        }
+        if (Auth::check() && Auth::user()->isAdmin) {
+            return view('pages.adminCreateUser');
+        }
+
+        abort(403, 'Unauthorized'); // Or redirect to a different page
+    }
+
     public function search(Request $request)
     {
         $userQuery = $request->input('user_query');
@@ -44,16 +63,75 @@ class AdminController extends Controller{
         ]);
     }
 
+    public function createUser(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|string|max:250|unique:User,username',
+            'name' => 'required|string|max:250',
+            'email' => 'required|email|max:250|unique:User,email',
+            'phonenumber' => 'nullable|string|max:9|min:9',
+            'password' => 'required|min:8|confirmed'
+        ]);
+
+        $user = Auth::user();
+
+        // Check if the current user is authorized to do this.
+        if(!$user->isAdmin){
+            return redirect('/');
+        }
+
+        User::create([
+            'username' => $request->username,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phonenumber' => $request->phonenumber,
+            'password' => Hash::make($request->password),
+            'isdeactivated' => false,
+        ]);
+    
+        return redirect()->route('adminPage')->with('success','User created successfully');
+    }
+
+    public function deleteUser(Request $request){
+        $userId = $request->input('userId');
+        $user = User::findOrFail($userId);
+        if($user->isAdmin){
+            return redirect()->route('adminPage')->with('error','Cant delete an admin');
+        }
+
+        if(!Auth::user()->isAdmin){
+            return redirect('/');
+        }
+
+        DB::table('projectmembertask')->where('user_id', $user->id)->delete();
+        DB::table('projectmember')->where('iduser', $user->id)->delete();
+        DB::table('projectmemberinvitation')->where('iduser', $user->id)->delete();
+        Post::where('author_id', $userId)->update(['author_id' => null]);
+        PostComment::where('author_id', $userId)->update(['author_id' => null]);
+        Message::where('sender_id', $userId)->update(['sender_id'=> null]);
+        Message::where('receiver_id', $userId)->update(['receiver_id'=> null]);
+        Changes::where('user_id', $userId)->update(['user_id'=> null]);
+        DB::table('usernotification')->where('user_id', $user->id)->delete();
+        
+        $user->delete();
+
+        return redirect()->route('adminPage')->with('success','User deleted successfully');
+    }
+
     public function blockUser(Request $request){
         $userId = $request->input('userId');
         $user = User::findOrFail($userId);
         if($user->isAdmin){
-            return redirect()->route('adminPage')->with('failed','Cant block an admin');
+            return redirect()->route('adminPage')->with('error','Cant block an admin');
         }
         $user->isdeactivated = !$user->isdeactivated;
         $user->save();
 
-        return redirect()->route('adminPage')->with('success','User blocked successfully');
+        if($user->isdeactivated){
+            return redirect()->route('adminPage')->with('success','User blocked successfully');
+        }
+
+        return redirect()->route('adminPage')->with('success','User unblocked successfully');
     }
 }
 
