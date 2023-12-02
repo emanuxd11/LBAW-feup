@@ -24,8 +24,8 @@ class AdminController extends Controller{
             return redirect("/projects");
         }
         if (Auth::check() && Auth::user()->isAdmin) {
-            $userResults = User::paginate(5);
-            $projectResults = Project::paginate(5);
+            $userResults = User::paginate(5,['*'], 'users');
+            $projectResults = Project::paginate(5,['*'], 'projects');
             return view('pages.adminPage', [
                 'userResults' => $userResults,
                 'projectResults' => $projectResults,
@@ -54,8 +54,8 @@ class AdminController extends Controller{
         $userQuery = $request->input('user_query');
         $projectQuery = $request->input('project_query');
 
-        $userResults = User::where('username','LIKE','%'.$userQuery.'%')->paginate(5);
-        $projectResults = Project::where('name','LIKE','%'.$projectQuery.'%')->paginate(5);
+        $userResults = User::where('username','LIKE','%'.$userQuery.'%')->paginate(5,['*'], 'users');
+        $projectResults = Project::where('name','LIKE','%'.$projectQuery.'%')->paginate(5,['*'], 'projects');
 
         return view('pages.adminPage', [
             'userResults' => $userResults,

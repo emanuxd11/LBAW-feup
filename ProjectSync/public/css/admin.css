@@ -96,13 +96,6 @@ admin-page .current-users,
     padding-top: 30px; /* Adjust padding for spacing */
 }
 
-
-.admin-page .show-projects {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
 .admin-page .show-projects .user {
     width: calc(33.33% - 20px);
     margin-bottom: 20px;
