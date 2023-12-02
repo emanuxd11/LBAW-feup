@@ -55,6 +55,11 @@
                     @empty
                         <h4>No users found</h4>
                     @endforelse
+
+                    <div class="linksToPage">
+                        {{ $userResults->links('pagination::bootstrap-4') }}
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -76,6 +81,10 @@
                     @empty
                         <h4>No projects found</h4>
                     @endforelse
+
+                    <div class="linksToPage">
+                        {{ $projectResults->links('pagination::bootstrap-4') }}
+                    </div>
                 </div>
             </div>
         </div>

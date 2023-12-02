@@ -137,3 +137,7 @@ admin-page .current-users,
     border: none;
     cursor: pointer;
 }
+
+.pagination {
+    justify-content: center;
+}
