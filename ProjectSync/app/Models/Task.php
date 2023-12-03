@@ -44,4 +44,9 @@ class Task extends Model
     {
         return $this->belongsToMany(User::class, 'projectmembertask','task_id','user_id');
     }
+
+    public function members_not_in_task(){
+        $ids_from_members_not_in_task = $this->members()->pluck('id');
+        return $this->project->members()->whereNotIn('id', $ids_from_members_not_in_task);
+    }
 }
