@@ -62,7 +62,7 @@
                 <p class="info-label">Name:</p>
                 <input type="text" name="name" class="project-form">
                 <p class="info-label">Description:</p>
-                <input type="text" name="description" class="project-form">
+                <textarea name="description" class="task_description"></textarea>
                 <p class="info-label">Status:</p>
                 <select id="status" name="status" class="">
                     <option value="" selected disabled>{{$task->status}}</option>
@@ -73,7 +73,13 @@
                 <p class="info-label">Delivery Date:</p>
                 <input type="date" name="delivery_date" class="">
                 <p class="info-label">Add user:</p>
-                <input type="text" name="username" class="project-form">
+                <select id="username" name="username" class="project-form">
+                    <option value="" selected disabled>--------</option>
+                    @foreach($task->members_not_in_task as $user)
+                    <option value={{$user->username}}>{{ $user->name . ' (' . $user->username . ')' }}</option>
+                    @endforeach
+                    
+                </select>
                 <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
             </form>
 

@@ -89,3 +89,20 @@
 .edit-task{
     text-align: start;
 }
+
+.project-member-list span{
+    color: #f7f3e9;
+}
+
+.assigned-members .user_list_task span{
+    color: #f7f3e9;
+}
+
+.project-form {
+    resize: both;
+}
+
+textarea.task_description {
+    background-color: #ffffff;width: 300px;height: 125px; resize: none;
+}
+

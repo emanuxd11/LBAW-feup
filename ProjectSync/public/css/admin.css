@@ -96,13 +96,6 @@ admin-page .current-users,
     padding-top: 30px; /* Adjust padding for spacing */
 }
 
-
-.admin-page .show-projects {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
 .admin-page .show-projects .user {
     width: calc(33.33% - 20px);
     margin-bottom: 20px;
@@ -116,4 +109,28 @@ admin-page .current-users,
 
 .admin-page .show-projects .user h4:hover {
     color: #000000;
+}
+
+.deleteOrBlock{
+    display: flex;
+    gap:20px
+}
+
+.addUser-link {
+    text-decoration: none;
+    color: #fff;
+}
+
+.addUserButton {
+    font-size: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #3490dc;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.pagination {
+    justify-content: center;
 }
