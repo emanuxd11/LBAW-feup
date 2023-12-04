@@ -13,19 +13,38 @@
                     <div class="card-header">{{ $user->name }}'s Profile</div>
 
                     <div class="card-body">
-                        <p>Username: {{ $user->username }}</p>
-                        <p>Email: {{ $user->email }}</p>
-                        <p>Phone Number: {{ $user->phonenumber ?? 'N/A'}}</p>
 
-                        @if($user->isdeactivated)
-                            <p>Status: Deactivated</p>
-                        @else
-                            <p>Status: Activated</p>
-                        @endif
+                        <div class="profile-info">
+                            <div class="profile-details">
+                                <p>Username: {{ $user->username }}</p>
+                                <p>Email: {{ $user->email }}</p>
+                                <p>Phone Number: {{ $user->phonenumber ?? 'N/A'}}</p>
 
-                        @if(Auth::check() && (Auth::user()->is($user) || Auth::user()->isAdmin))
-                            <a href="{{ route('editProfile', ['username' => $user->username]) }}" class="btn btn-primary">Edit Profile</a>
-                        @endif
+                                @if($user->isdeactivated)
+                                    <p>Status: Deactivated</p>
+                                @else
+                                    <p>Status: Activated</p>
+                                @endif
+
+                                @if(Auth::check() && (Auth::user()->is($user) || Auth::user()->isAdmin))
+                                    <a href="{{ route('editProfile', ['username' => $user->username]) }}" class="btn btn-primary">Edit Profile</a>
+                                @endif
+
+                            </div>
+
+                            <div class="profile-image">
+                                @if($user->profile_pic !== null && $user->profile_pic !== '')
+                                    <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="Profile Picture">
+                                @else
+                                    <img src="{{ asset('storage/profile_pictures/default-profile-pic.jpg') }}" alt="Default Profile Picture">
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="bio-class">
+                            <h3>Bio</h3>
+                            <p>{{ $user->bio }}</p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -33,6 +33,15 @@
                 <div class="show-users">
                     @forelse ($userResults as $user)
                     <div class="user">
+                        
+                        <div class="profile-image">
+                            @if($user->profile_pic !== null && $user->profile_pic !== '')
+                                <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="Profile Picture">
+                            @else
+                                <img src="{{ asset('storage/profile_pictures/default-profile-pic.jpg') }}" alt="Default Profile Picture">
+                            @endif
+                        </div>
+
                         <h4><a href="{{ route('profilePage', ['username' => $user->username]) }}"><span>{{ $user->name }}</span></a></h4>
                         <h5 style="align-items: center;">
                             Username: {{$user->username}} | Email: {{$user->email}}
