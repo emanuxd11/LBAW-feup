@@ -10,7 +10,7 @@
             <div class="card-header">Edit Profile: {{ $user->name }}</div>
 
             <div class="card-body">
-                <form method="post" action="{{ route('updateProfile', ['username' => $user->username]) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('updateProfile', ['username' => $user->username]) }}">
                     @csrf
                     @method('post')
 
@@ -34,30 +34,20 @@
                         <input type="password" name="password" id="password">
                     </div>
 
-                    <div class="form-group">
-                        <label for="bio">Change Bio:</label>
-                        <textarea name="bio" id="bio" rows="5" style="height: 300px; resize: none;" placeholder="{{ $user->bio }}"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="profile_pic">Profile Picture:</label>
-                        <input type="file" name="profile_pic" id="profile_pic">
-                    </div>
-
                     <button type="submit" class="button">Save Changes</button>
                 </form>
 
                 @if (session('success'))
                     <div class="error_message">
-                        <p>{{ session('success') }}</p>
+                        <p>{{session('success')}}</p>
                     </div>
                 @else
                     <div class="error_message">
-                        <p>{{ session('error') }}</p>
+                        <p>{{session('error')}}</p>
                     </div>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
-                    @endforeach
+                    @endforeach 
                 @endif
             </div>
         </div>

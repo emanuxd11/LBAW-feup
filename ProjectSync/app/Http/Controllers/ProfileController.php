@@ -62,8 +62,6 @@ class ProfileController extends Controller
             'username' => 'nullable|string|max:255|unique:User,username,' . $user->id,
             'phonenumber' => 'nullable|string|max:9|min:9',
             'password' => 'nullable|string|min:8',
-            'bio' => 'nullable|string|max:500',
-            'profile_pic' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         $altered = false;
@@ -85,18 +83,6 @@ class ProfileController extends Controller
 
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
-            $altered = true;
-        }
-
-        if ($request->filled('bio')) {
-            $user->bio = $request->bio;
-            $altered = true;
-        }
-
-        if ($request->hasFile('profile_pic')) {
-            $profilePicture = $request->file('profile_pic');
-            $path = $profilePicture->storeAs('profile_pictures', $username . '.' . $profilePicture->getClientOriginalExtension(), 'public');
-            $user->profile_pic = 'profile_pictures/' . $username . '.' . $profilePicture->getClientOriginalExtension();
             $altered = true;
         }
         
