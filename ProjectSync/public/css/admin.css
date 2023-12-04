@@ -83,10 +83,6 @@
     margin-bottom: 15px;
 }
 
-.current-users{
-    margin-bottom: -30px;
-}
-
 admin-page .current-users,
 .admin-page .current-projects {
     margin-top: 30px; /* Adjust the margin for spacing */
