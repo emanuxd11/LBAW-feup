@@ -83,6 +83,10 @@
     margin-bottom: 15px;
 }
 
+.current-users{
+    margin-bottom: -30px;
+}
+
 admin-page .current-users,
 .admin-page .current-projects {
     margin-top: 30px; /* Adjust the margin for spacing */
@@ -116,4 +120,14 @@ admin-page .current-users,
 
 .admin-page .show-projects .user h4:hover {
     color: #000000;
+}
+
+.profile-image img {
+    width: 10%;
+    height: auto;
+    border-radius: 50%; /* Make the image circular */
+    border: 3px solid #fff; /* Add a white border */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    aspect-ratio: 1 / 1;
+    margin-bottom: 4px;
 }
