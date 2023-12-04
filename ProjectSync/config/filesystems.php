@@ -42,6 +42,7 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
+            'allowed_types' => ['jpg', 'jpeg', 'png'],
         ],
 
         's3' => [
