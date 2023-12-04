@@ -71,5 +71,4 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error adding user to the project:', error);
         });
     }
-    
 });
