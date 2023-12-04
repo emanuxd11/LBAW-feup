@@ -83,6 +83,10 @@
     margin-bottom: 15px;
 }
 
+.current-users{
+    margin-bottom: -30px;
+}
+
 admin-page .current-users,
 .admin-page .current-projects {
     margin-top: 30px; /* Adjust the margin for spacing */
@@ -96,11 +100,6 @@ admin-page .current-users,
     padding-top: 30px; /* Adjust padding for spacing */
 }
 
-.admin-page .show-projects .user {
-    width: calc(33.33% - 20px);
-    margin-bottom: 20px;
-    box-sizing: border-box;
-}
 
 .admin-page .show-projects .user h4 {
     font-size: 20px; 
@@ -131,6 +130,55 @@ admin-page .current-users,
     cursor: pointer;
 }
 
-.pagination {
+.linksToPage {
+    width: 100%;
+    display: flex;
     justify-content: center;
+    margin-top: 20px; /* Adjust the margin as needed */
+}
+
+.admin-page .current-projects .show-projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.admin-page .current-projects .show-projects .project {
+    width: calc(25% - 20px);
+    margin: 0 10px 20px;
+    box-sizing: border-box;
+}
+
+.admin-page .current-users .show-users {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.admin-page .current-users .show-users .user {
+    width: calc(50% - 20px);
+    margin: 0 10px 20px;
+    box-sizing: border-box;
+}
+
+.admin-page .current-projects .show-projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.admin-page .current-projects .show-projects .project {
+    width: calc(20% - 30px);
+    margin: 0 10px 20px 30px;
+    box-sizing: border-box;
+}
+
+.profile-image img {
+    width: 15%;
+    height: auto;
+    border-radius: 50%; /* Make the image circular */
+    border: 3px solid #fff; /* Add a white border */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    aspect-ratio: 1 / 1; /* Ensure a perfect circle */
+    margin-bottom: 4px;
 }
