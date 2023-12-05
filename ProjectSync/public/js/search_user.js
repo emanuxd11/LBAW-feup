@@ -29,15 +29,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const resultItem = document.createElement('div');
             resultItem.textContent = user.name;
 
-            resultItem.addEventListener('click', () => {
-                searchInput.value = user.name;
-                searchResults.innerHTML = '';
-
-                addUserToProject(user, projectId);
+            resultItem.addEventListener('click', async () => {
+                const updatedResults = results.filter(u => u.id !== user.id);
+                displaySearchResults(updatedResults, projectId);
+                await addUserToProject(user, projectId);
             });
 
             searchResults.appendChild(resultItem);
         });
+
+        if (results.length == 0) {
+            const resultItem = document.createElement('div');
+            resultItem.textContent = "There are no available users that match the search.";
+            searchResults.appendChild(resultItem);
+        }
     }
 
     async function addUserToProject(user, projectId) {
@@ -87,4 +92,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
-

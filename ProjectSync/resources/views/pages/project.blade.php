@@ -32,7 +32,7 @@
                                 <div class="confirmation-popup hidden">
                                     <p>Are you sure you want to remove {{ $user->name }} from the project?</p>
                                     <button class="button" onclick="cancelRemoval(); return false;">No</button>
-                                    <button class="button" onclick="document.getElementById('removeMemberForm').submit();">Yes</button>
+                                    <button class="button">Yes</button>
                                 </div>
                             </form>
                         @endif
