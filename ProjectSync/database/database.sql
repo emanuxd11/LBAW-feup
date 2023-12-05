@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS Post CASCADE;
 DROP TABLE IF EXISTS PostComment CASCADE;
 DROP TABLE IF EXISTS Task CASCADE;
 DROP TABLE IF EXISTS ProjectMemberTask CASCADE;
+DROP TABLE IF EXISTS TaskComents CASCADE;
 DROP TABLE IF EXISTS Message CASCADE;
 DROP TABLE IF EXISTS Changes CASCADE;
 DROP TABLE IF EXISTS Notification CASCADE;
@@ -123,6 +124,16 @@ CREATE TABLE ProjectMemberTask (
     user_id INT REFERENCES "User"(id),
     task_id INT REFERENCES Task(id),
     PRIMARY key (user_id,task_id)
+);
+
+-- Create Table TaskComent
+CREATE TABLE TaskComents(
+    id SERIAL PRIMARY KEY,
+    comment VARCHAR NOT NULL,
+    created_at DATE NOT NULL,
+    isEdited BOOLEAN NOT NULL,
+    task_id INT REFERENCES Task(id),
+    user_id INT REFERENCES "User"(id)
 );
 
 -- Create Message Table
