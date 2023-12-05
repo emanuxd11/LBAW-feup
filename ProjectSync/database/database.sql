@@ -303,3 +303,9 @@ In huius festi temporibus, tradamus eis sapientiam ut crescant in amore erga suu
     ', '2024-12-24', '2024-12-25', 'To Do', 1),
     ('Task 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
     ', '2023-11-19', '2024-1-31', 'Done', 1);
+
+
+INSERT INTO Post (title, description, upvotes, date, author_id, project_id) VALUES
+    ('Post1', 'this is a description ma friend', '7', '2024-1-31', 2, 1),
+    ('Post2', 'this is a description ma friend', '7', '2024-1-31', 3, 2),
+    ('Post3', 'this is a description ma friend', '7', '2024-1-31', 4, 3);
