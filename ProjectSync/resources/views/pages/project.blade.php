@@ -5,6 +5,7 @@
 @section('content')
 
     <link href="{{ asset('css/projects.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('js/user_delete_popup.js') }}" defer></script>
 
     <section id="project">
         <h2>{{ $project->name }}</h2>
@@ -13,7 +14,38 @@
         <div id="project-members">
             <h3>Project Members</h3>
             <ul id="project-member-list">
-                @each('partials.member', $project->members, 'user')
+                @if(count($project->members) <= 1)
+                    <p id="no-members">Looks like nobody has been added to the project yet.<p>
+                @endif
+
+                @foreach($project->members as $user)
+                    @if($project->isCoordinator($user))
+                        @continue
+                    @endif
+
+                    <li class="user_list_task" data-id="{{ $user->id }}">
+                        <a href="{{ route('profilePage', ['username' => $user->username]) }}">
+                            <span>{{ $user->name . ' (' . $user->username . ')' }}</span>
+                        </a>
+                        
+                        @if($project->isCoordinator(Auth::user()))
+                            <button class="remove-member-button button" onclick="showConfirmationPopup(event);">
+                                <i class="fas fa-trash"></i>
+                            </button>
+
+                            <form class="project-form" method="POST" action="{{ route('remove_member', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="removeMemberForm">
+                                @method('DELETE')
+                                @csrf
+
+                                <div class="confirmation-popup hidden">
+                                    <p>Are you sure you want to remove {{ $user->name }} from the project?</p>
+                                    <button class="button" onclick="cancelRemoval(); return false;">No</button>
+                                    <button class="button">Yes</button>
+                                </div>
+                            </form>
+                        @endif
+                    </li>
+                @endforeach
             </ul>
             
             @if($project->isCoordinator(Auth::user()))
