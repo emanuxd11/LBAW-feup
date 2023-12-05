@@ -164,7 +164,7 @@ admin-page .current-users,
 .admin-page .current-projects .show-projects {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .admin-page .current-projects .show-projects .project {
