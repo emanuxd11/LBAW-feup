@@ -1,7 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResults');
     const projectMemberList = document.getElementById('project-member-list');
+    const noMembersElement = document.getElementById('no-members');
 
     searchInput.addEventListener('input', async () => {
         const searchTerm = searchInput.value.trim();
@@ -42,6 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const resultItem = document.createElement('div');
             resultItem.textContent = "There are no available users that match the search.";
             searchResults.appendChild(resultItem);
+        } else {
+            // Show the no-members element
+            noMembersElement.style.display = 'block';
         }
     }
 
@@ -84,6 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
 
                 projectMemberList.appendChild(listItem);
+
+                // Hide the no-members element
+                noMembersElement.style.display = 'none';
             } else {
                 console.error('Error adding user to the project:', data.error);
             }

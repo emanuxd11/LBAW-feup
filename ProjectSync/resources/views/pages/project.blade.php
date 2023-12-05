@@ -14,13 +14,21 @@
         <div id="project-members">
             <h3>Project Members</h3>
             <ul id="project-member-list">
+                @if(count($project->members) <= 1)
+                    <p id="no-members">Looks like nobody has been added to the project yet.<p>
+                @endif
+
                 @foreach($project->members as $user)
+                    @if($project->isCoordinator($user))
+                        @continue
+                    @endif
+
                     <li class="user_list_task" data-id="{{ $user->id }}">
                         <a href="{{ route('profilePage', ['username' => $user->username]) }}">
                             <span>{{ $user->name . ' (' . $user->username . ')' }}</span>
                         </a>
                         
-                        @if($project->isCoordinator(Auth::user()) && Auth::user()->id != $user->id)
+                        @if($project->isCoordinator(Auth::user()))
                             <button class="remove-member-button button" onclick="showConfirmationPopup(event);">
                                 <i class="fas fa-trash"></i>
                             </button>
