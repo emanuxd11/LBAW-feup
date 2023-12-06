@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,14 @@ Route::controller(ProjectController::class)->group(function () {
 // Forum
 Route::controller(ForumController::class)->group(function () {
     Route::get('/projects/{id}/forum', 'show')->name('forum.show');
+});
+
+//Post
+Route::controller(PostController::class)->group(function () {
+    Route::get('/projects/{project_id}/forum/post/{id}', 'show')->name('post.show');
+    Route::put('/createPost', 'create')->name('post.create');
+    Route::post('/post/{id}', 'update')->name('post.update');
+    Route::delete('/post/{id}', 'delete')->name('post.delete');
 });
 
 // Task

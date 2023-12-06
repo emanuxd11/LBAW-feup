@@ -1,5 +1,7 @@
 <li class="post" data-id="{{$post->id}}">
-    <h3>{{$post->title}}</h3>
-    <p>Description: {{$post->description}}</p>
-    <p>Upvotes {{$post->upvotes}}</p>
+    <a href="{{ route('post.show', ['project_id' => $post->project_id,'id' => $post->id]) }}" class="post">
+        <h3>{{ $post->title }}</h3>
+        <p>Description: {{ \Illuminate\Support\Str::limit($post->description, $limit = 50, $end = '...') }}</p>
+        <p>Upvotes {{ $post->upvotes }}</p>
+    </a>
 </li>

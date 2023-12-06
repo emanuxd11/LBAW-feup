@@ -132,7 +132,7 @@ CREATE TABLE ProjectMemberTask (
 );
 
 -- Create Table TaskComent
-CREATE TABLE TaskComents(
+CREATE TABLE TaskComments(
     id SERIAL PRIMARY KEY,
     comment VARCHAR NOT NULL,
     created_at DATE NOT NULL,

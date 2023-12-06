@@ -13,6 +13,8 @@ use App\Models\Post;
 use App\Models\PostComment;
 use App\Models\Message;
 use App\Models\Changes;
+use App\Models\TaskComments;
+
 
 class AdminController extends Controller{
     public function showAdminPage()
@@ -112,6 +114,7 @@ class AdminController extends Controller{
         Message::where('receiver_id', $userId)->update(['receiver_id'=> null]);
         Changes::where('user_id', $userId)->update(['user_id'=> null]);
         DB::table('usernotification')->where('user_id', $user->id)->delete();
+        TaskComments::where('user_id', $userId)->update(['user_id' => null]);
         
         $user->delete();
 
