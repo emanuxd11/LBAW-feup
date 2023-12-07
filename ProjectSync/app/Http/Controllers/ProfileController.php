@@ -21,7 +21,6 @@ class ProfileController extends Controller
         $user = User::where('username', $username)->first();
 
         return view('pages.profilePage', compact('user'));
-
     }
 
     public function editProfile($username)

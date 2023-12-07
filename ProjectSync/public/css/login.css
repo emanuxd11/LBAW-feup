@@ -1,13 +1,15 @@
 /* login.css */
 
-.login-container {
+.login-container,
+.email-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.login-card {
+.login-card,
+.email-card {
     width: 70%;
     max-width: 400px;
     border: 1px solid #006aa7;
@@ -18,7 +20,8 @@
     margin-top: -35vh; /* Adjusted margin-top */
 }
 
-.login-card .card-body {
+.login-card .card-body,
+.email-card .card-body {
     padding: 20px;
     background-color: #f7f3e9;
 }
@@ -98,7 +101,7 @@
     background-color: #f7f3e9;
     padding: 0 10px;
     position: relative;
-    top: -10px;
+    /* top: -10px; */
     font-weight: bold;
 }
 
@@ -111,4 +114,13 @@
     font-weight: bold;
     color: #006aa7; /* Adjusted text color */
     margin-top: 100px; /* Added margin-bottom */
+}
+
+.form-check {
+    display: flex;
+}
+
+a.forgot-text {
+    margin-left: 93px;
+    text-decoration: underline;
 }
