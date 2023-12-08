@@ -41,7 +41,7 @@ class EmailController extends Controller
             'created_at' => now(),
         ]);
 
-        Mail::to($email)->send(new ResetPassword($token));
+        Mail::to($email)->send(new ResetPassword($token, $user->username));
 
         Session::flash('success', 'Password reset email sent! Please check ' . $email . '.');
         return view('auth.passwords.email');

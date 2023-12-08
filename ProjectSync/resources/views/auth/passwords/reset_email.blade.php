@@ -71,13 +71,13 @@
     <div class="email-content">
         <h1>Password Reset</h1>
 
-        <p>Hello!</p>
+        <p>Hello, {{ $username }}!</p>
 
         <p>
-            You are receiving this email because we 
+            You are receiving this email because we
             received a password reset request for your account.
         </p>
-    
+
         <p>Please click the following link to reset your password:</p>
         <p class="centered-text">
             <a class="button" href="{{ route('password.reset', $token) }}">
