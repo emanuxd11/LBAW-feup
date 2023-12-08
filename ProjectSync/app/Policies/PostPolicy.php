@@ -33,6 +33,11 @@ class PostPolicy
         return $user->id == $post->author_id;
     }
 
+    public function upvote(User $user, Project $project)
+    {
+        return Auth::check() && ($project->isMember($user) || $user->isAdmin);
+    }
+
     public function delete(User $user, Post $post): bool
     {
         return $user->id == $post->author_id || $user->isAdmin;

@@ -6,6 +6,8 @@
 
 @section('content')
 
+<script type="text/javascript" src="{{ asset('js/post_upvotes.js') }}" defer></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="ForumBody">
     <div class="backButton">
         <h3><a href="/projects/{{ request('id') }}">&larr;</a>List of Posts</h3>

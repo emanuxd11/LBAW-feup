@@ -14,9 +14,10 @@
 
 li.post{
     background-color: #006aa7;
+    list-style-type: none
 }
 
-li.post:hover{
+li.post .preview:hover{
     background-color: #46b2f1;
 }
 
@@ -36,3 +37,39 @@ li.post:hover{
 p.noPosts{
     color: black
 }
+
+.post_content_preview{
+    display: flex;
+}
+
+form.upvote{
+    margin-bottom: -10px;
+}
+
+form.downvote{
+    margin:auto
+}
+
+.upvote-downvote{
+    width: 10%;
+}
+
+.upvote-button, .downvote-button{
+    font-size: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.upvotes-count{
+    font-size: 20px;
+    margin-right: 2px;
+}
+
+.preview{
+    width: 110%;
+}
+
+
+
+
+

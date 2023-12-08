@@ -7,7 +7,7 @@
     justify-content: center;
 }
 
-.createComment, .alterPostOptions, .editComment{
+.createComment, .alterPostOptions, .editComment, .upvote-downvote{
     width: 50%;
     margin: auto;
 }
@@ -23,4 +23,24 @@
     width: 50%;
     margin: auto;
     text-align: start;
+}
+
+.upvote-downvote {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.upvote-button,
+.downvote-button {
+    background-color: #3490dc;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.upvotes-count {
+    margin-right: 5px;
 }

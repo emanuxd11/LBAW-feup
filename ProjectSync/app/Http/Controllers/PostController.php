@@ -71,14 +71,6 @@ class PostController extends Controller{
         if($request->input('description')){
             $post->description = $request->input('description');
         }
-
-        if($request->input('upvote') == 'down'){
-            $post->upvotes--;
-        }
-
-        if($request->input('upvote') == 'up'){
-            $post->upvotes++;
-        }
     
         $post->save();
         return redirect('projects/' . $project->id . '/forum/post/' . $post->id)->with('success', 'Post updated successfully.');
@@ -96,6 +88,27 @@ class PostController extends Controller{
         $post->delete();
         
         return redirect('projects/' . $project->id . '/forum')->with('success', 'Post deleted successfully.');
+    }
+
+    public function upvote(Request $request,$id){
+
+        $post = Post::find($id);    
+        $project = Project::findorfail($post->project_id);
+
+        $this->authorize('show', $project);
+
+        $upvoteType = $request->json('upvote');
+
+        if($upvoteType == 'down'){
+            $post->upvotes--;
+        }
+
+        if($upvoteType == 'up'){
+            $post->upvotes++;
+        }
+    
+        $post->save();
+        return response()->json(['upvotes' => $post->upvotes]);
     }
 
     
