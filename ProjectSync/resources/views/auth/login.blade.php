@@ -3,7 +3,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-2"> <!-- Further reduced the top margin -->
+    <div class="container mt-2">
         <div class="text-center mb-3">
             <p class="login-section-text" style="color: #006aa7;">
                 Welcome to our website! Please log in to access your account and explore our services.
@@ -15,6 +15,11 @@
                     <form method="POST" action="{{ route('login') }}" class="login-form">
                         {{ csrf_field() }}
 
+                        @if (session('success'))
+                            <p class="success">
+                                {{ session('success') }}
+                            </p>
+                        @endif
                         <div class="mb-3">
                             <label for="email" class="form-label">E-mail</label>
                             <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus class="form-control">
@@ -38,6 +43,9 @@
                         <div class="mb-3 form-check">
                             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} class="form-check-input">
                             <label class="form-check-label remember-text">Remember Me</label>
+                            <a class="forgot-text" href="{{ route('password.request') }}">
+                                Forgot Password?
+                            </a>
                         </div>
 
                         <button type="submit" class="btn btn-primary">
@@ -53,11 +61,6 @@
                         <a class="btn btn-primary btn-register register-button" href="{{ route('register') }}">
                             Register
                         </a>
-                        @if (session('success'))
-                            <p class="success">
-                                {{ session('success') }}
-                            </p>
-                        @endif
                     </form>
                 </div>
             </div>

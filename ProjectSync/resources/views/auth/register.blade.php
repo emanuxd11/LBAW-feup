@@ -13,7 +13,7 @@
         <div class="register-container">
             <div class="card register-card">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" class="login-form">
+                    <form method="POST" action="{{ route('register') }}" class="login-form" onsubmit="return validateForm()">
                         {{ csrf_field() }}
 
                         <div class="mb-3">
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="phonenumber" class="form-label">Phone Number</label>
+                            <label for="phonenumber" class="form-label">Phone Number (optional)</label>
                             <input id="phonenumber" type="text" name="phonenumber" value="{{ old('phonenumber') }}" class="form-control">
                             @if ($errors->has('phonenumber'))
                                 <span class="error">
@@ -58,20 +58,17 @@
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input id="password" type="password" name="password" required class="form-control">
-                            @if ($errors->has('password'))
-                                <span class="error">
-                                    {{ $errors->first('password') }}
-                                </span>
-                            @endif
+                            <input id="password" type="password" name="password" required class="form-control" minlength="8" oninput="validatePassword()">
+                            <span id="password-error" class="error"></span>
                         </div>
 
                         <div class="mb-3">
                             <label for="password-confirm" class="form-label">Confirm Password</label>
-                            <input id="password-confirm" type="password" name="password_confirmation" required class="form-control">
+                            <input id="password-confirm" type="password" name="password_confirmation" required class="form-control" oninput="validatePassword()" onblur="validatePassword()">
+                            <span id="password-confirm-error" class="error"></span>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" id="submit-button" class="btn btn-primary" disabled>
                             Register
                         </button>
 

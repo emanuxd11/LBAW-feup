@@ -11,21 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="{{ asset('css/milligram.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/header.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/home.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/faq.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/about.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/recover.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/task.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('js/faq.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('js/about.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('js/password_forms.js') }}" defer></script>
 </head>
 <body>
     <main>
-        @include('partials.header')
         <section id="content">
             @yield('content')
         </section>
