@@ -1,9 +1,16 @@
-<!-- resources/views/reset_password.blade.php -->
+{{-- resources/views/emails/reset-password.blade.php --}}
 
 <p>Hello!</p>
 
-<p>You are receiving this email because a password reset request was made for your account.</p>
+<p>You are receiving this email because we received a password reset request for your account.</p>
 
-<!-- Include any reset link or instructions here -->
+<p>
+    Click the following link to reset your password:
+    <a href="{{ route('password.reset', $token) }}">
+        Reset Password
+    </a>
+</p>
 
-<p>If you did not request a password reset, no further action is required.</p>
+<p>
+    If you did not request a password reset, no further action is required.
+</p>

@@ -90,5 +90,5 @@ Route::controller(EmailController::class)->group(function() {
 Route::controller(ResetPasswordController::class)->group(function() {
     Route::get('password/reset', 'showLinkRequestForm')->name('password.request');
     Route::get('password/reset/{token}', 'showResetForm')->name('password.reset');
-    Route::post('password/reset', 'reset')->name('password.update');
+    Route::post('password/reset', 'resetPassword')->name('password.update');
 });

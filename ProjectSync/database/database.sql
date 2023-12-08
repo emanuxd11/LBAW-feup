@@ -34,6 +34,16 @@ DROP FUNCTION IF EXISTS one_coordinator_restriction;
 
 CREATE TYPE TaskStatus AS ENUM('To Do','Doing', 'Done');
 
+-- Create password_resets table
+-- (for password reset tokens,
+-- added during development)
+CREATE TABLE password_reset_tokens (
+    email TEXT NOT NULL,
+    token TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE,
+    PRIMARY KEY(email,token)
+);
+
 -- Create User Table
 CREATE TABLE "User" (
     id SERIAL PRIMARY KEY,
