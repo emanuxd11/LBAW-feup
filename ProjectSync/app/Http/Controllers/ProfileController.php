@@ -21,7 +21,6 @@ class ProfileController extends Controller
         $user = User::where('username', $username)->first();
 
         return view('pages.profilePage', compact('user'));
-
     }
 
     public function editProfile($username)
@@ -94,9 +93,10 @@ class ProfileController extends Controller
         }
 
         if ($request->hasFile('profile_pic')) {
-            $profilePicture = $request->file('profile_pic');
-            $path = $profilePicture->storeAs('profile_pictures', $username . '.' . $profilePicture->getClientOriginalExtension(), 'public');
-            $user->profile_pic = 'profile_pictures/' . $username . '.' . $profilePicture->getClientOriginalExtension();
+            $file = $request->file('profile_pic');
+            $fileNameExtension = ".jpg";
+            $user->profile_pic = '/images/avatars/' . ($user->username). '.jpg';
+            $file->move(public_path('/images/avatars'), ($user->username) . $fileNameExtension);
             $altered = true;
         }
 

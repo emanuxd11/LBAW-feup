@@ -53,6 +53,23 @@ body {
     overflow: hidden;
 }
 
+.modern-header .buttons-container {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+}
+
+.modern-header .profile-button {
+    margin-left: 15px; /* Adjust the spacing between profile pic and other buttons */
+}
+
+.modern-header .button,
+.modern-header .profile-button {
+    color: #f7f3e9;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
 .modern-header .button {
     background-color: #f7f3e9; /* Bright beige button background */
     color: #172b4d; /* Dark text color */
@@ -72,3 +89,16 @@ body {
 .modern-header .button:active {
     transform: scale(0.95);
 }
+
+.modern-header a img {
+    width: 100%;
+    height: 50px;
+    border-radius: 50%; /* Make the image circular */
+    border: 3px solid #fff; /* Add a white border */
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    aspect-ratio: 1 / 1; /* Ensure a perfect circle */
+    margin-bottom: 6px;
+}
+
+
+

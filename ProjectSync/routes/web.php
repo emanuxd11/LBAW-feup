@@ -10,6 +10,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\PostCommentController;
+use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\EmailController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -91,6 +94,7 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('/logout', 'logout')->name('logout');
 });
 
+// Register
 Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'showRegistrationForm')->name('register');
     Route::post('/register', 'register');
@@ -100,3 +104,15 @@ Route::controller(RegisterController::class)->group(function () {
 Route::get('/profile/{username}', [ProfileController::class, 'showProfilePage'])->name('profilePage');
 Route::get('/profile/{username}/edit', [ProfileController::class, 'editProfile'])->name('editProfile');
 Route::match(['post', 'put'],'/profile/{username}/update', [ProfileController::class, 'updateProfile'])->name('updateProfile');
+
+// Emails
+Route::controller(EmailController::class)->group(function() {
+    Route::post('password/email', 'sendResetLink')->name('password.email');
+});
+
+// Password Reset
+Route::controller(ResetPasswordController::class)->group(function() {
+    Route::get('password/reset', 'showLinkRequestForm')->name('password.request');
+    Route::get('password/reset/{token}', 'showResetForm')->name('password.reset');
+    Route::post('password/reset', 'resetPassword')->name('password.update');
+});
