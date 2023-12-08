@@ -47,7 +47,7 @@
                     <ul>
                         @foreach ($task->members as $user)
                             <div class="member-container">
-                                @include('partials.member', ['user' => $user])
+                                @include('partials.task_member', ['user' => $user])
                                 <form method="POST" action="{{ route('task.remove.user',['id' => $task->id]) }}" class="project-form">
                                     @method('DELETE')
                                     @csrf

@@ -82,8 +82,6 @@ class ProjectController extends Controller
             'archived' => false,
         ]);
 
-
-
         // Check if the current user is authorized to create this project.
         $this->authorize('create', $project);
 
@@ -183,5 +181,21 @@ class ProjectController extends Controller
         ->get();
 
         return response()->json($results);
+    }
+
+    public function remove_member($projectId, $userId)
+    {
+        $project = Project::findOrFail($projectId);
+
+        $this->authorize('remove_member', [$project, Auth::user()]);
+
+        $project->members()->detach($userId);
+
+        // Remove the user from all tasks in the project
+        foreach ($project->tasks as $task) {
+            $task->members()->detach($userId);
+        }
+
+        return redirect()->back()->with('success', 'User removed successfully.');
     }
 }

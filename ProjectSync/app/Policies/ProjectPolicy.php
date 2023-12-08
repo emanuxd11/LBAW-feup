@@ -54,4 +54,13 @@ class ProjectPolicy
       // Only a project coordinator can close it.
       return $project->isCoordinator($user);
     }
+
+    /**
+     * Determine if the current user can remove a member (user has to be project coorinator). 
+     */
+    public function remove_member(User $user, Project $project): bool
+    {
+        // Only a project coordinator can do this.
+        return $project->isCoordinator($user);
+    }
 }
