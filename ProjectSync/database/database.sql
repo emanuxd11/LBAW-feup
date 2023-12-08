@@ -280,18 +280,18 @@ CREATE TRIGGER one_coordinator_restriction_trigger
 
 -- insert some stuff to get started
 INSERT INTO "User" (name, username, email, password, phoneNumber, isDeactivated) VALUES 
-    ('Rúben Fonseca', 'rubenf11', 'ruben@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '913111111', FALSE),
-    ('Miguel Marinho', 'kiriu', 'marinho@gmail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '912111111', FALSE),
-    ('Emanuel Maia', 'manu', 'manu@mail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '914111111', FALSE),
-    ('Useless User', 'uselessler', 'useless@mail.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '915111111', FALSE);
+    ('Rúben Fonseca', 'rubenf11', 'up202108830@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '913111111', FALSE),
+    ('Miguel Marinho', 'kiryu', 'up202108822@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '912111111', FALSE),
+    ('Emanuel Maia', 'manu', 'up202107486@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '914111111', FALSE),
+    ('Alberto Serra', 'i_love_naruto', 'up202103627@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '915111111', FALSE);
 
 INSERT INTO Admin (id) VALUES (1);
 
 INSERT INTO Project (name, start_date, delivery_date, archived) VALUES
-    ('Project1', '2023-10-20', '2024-10-22', FALSE),
-    ('Project2', '2023-10-20', '2024-10-22', FALSE),
-    ('Project3', '2023-10-20', '2024-10-22', FALSE),
-    ('Project4', '2023-10-20', '2024-10-22', FALSE);
+    ('LBAW', '2023-10-20', '2024-10-22', FALSE),
+    ('FSI', '2023-10-20', '2024-10-22', FALSE),
+    ('RCOM', '2023-10-20', '2024-10-22', FALSE),
+    ('PFL', '2023-10-20', '2024-10-22', FALSE);
 
 INSERT INTO ProjectMember (idUser,idProject,isCoordinator,isFavorite) VALUES
     (2,1,TRUE,TRUE),
