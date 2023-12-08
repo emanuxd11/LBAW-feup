@@ -5,8 +5,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Controller;
+use App\Mail\ResetPassword;
+
 
 class EmailController extends Controller
 {
@@ -21,11 +24,10 @@ class EmailController extends Controller
         $email = $request->input('email');
 
         // Logic to send a password reset email
-        // ...
+        Mail::to($email)->send(new ResetPassword());
 
-        // Example: Send email using Laravel's Mail facade
-        Mail::to($email)->send(new YourCustomEmail($email));
+        Session::flash('status', 'Password reset email sent! Please check ' . $email . '.');
 
-        // Return a response or redirect as needed
+        return view('auth.passwords.email');
     }
 }
