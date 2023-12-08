@@ -5,7 +5,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
+    margin-top: 500px;
+}
+
+div.login-container {
+    margin-top: 400px;
 }
 
 .login-card,
