@@ -64,7 +64,7 @@ class PostController extends Controller{
 
         $user = Auth::user();
         $post = Post::find($id);    
-        $project = Project::where('id', $post->'project_id')->first();
+        $project = Project::where('id', $post->project_id)->first();
 
         $this->authorize('update', $project);
 
