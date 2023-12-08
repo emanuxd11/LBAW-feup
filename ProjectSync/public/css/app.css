@@ -68,3 +68,11 @@ input[type=password]:focus {
 a.button {
   color: white;
 }
+
+.success {
+  color: green
+}
+
+.error {
+  color: red;
+}

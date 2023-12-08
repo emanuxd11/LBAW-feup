@@ -16,8 +16,6 @@
                             create a new password via email.
                         </p>
 
-                        
-
                         <div class="mb-3">
                             <label for="email" class="form-label">E-mail</label>
                             <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus class="form-control">
@@ -32,9 +30,13 @@
                             Send Email
                         </button>
 
-                        @if (Session::has('status'))
-                            <p class="reset-email-success">
-                                {{ Session::get('status') }}
+                        @if (Session::has('success'))
+                            <p class="success">
+                                {{ Session::get('success') }}
+                            </p>
+                        @elseif (Session::has('error'))
+                            <p class="error">
+                                {{ Session::get('error') }}
                             </p>
                         @endif
                     </form>

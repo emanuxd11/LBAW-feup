@@ -124,3 +124,7 @@ a.forgot-text {
     margin-left: 93px;
     text-decoration: underline;
 }
+
+.login-form h3 {
+    text-align: center;
+}

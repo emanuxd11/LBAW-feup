@@ -43,7 +43,7 @@ class EmailController extends Controller
 
         Mail::to($email)->send(new ResetPassword($token));
 
-        Session::flash('status', 'Password reset email sent! Please check ' . $email . '.');
+        Session::flash('success', 'Password reset email sent! Please check ' . $email . '.');
         return view('auth.passwords.email');
     }
 }
