@@ -29,7 +29,7 @@ class EmailController extends Controller
 
         $user = User::where('email', $email)->first();
         if (!$user) {
-            Session::flash('status', 'The email you provided couldn\'t be found in our database.');
+            Session::flash('error', 'The email you provided couldn\'t be found in our database.');
             return view('auth.passwords.email');
         }
     

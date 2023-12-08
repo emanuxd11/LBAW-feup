@@ -21,6 +21,7 @@
     <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/faq.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/about.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/password_forms.js') }}" defer></script>
 </head>
 <body>
     <main>
