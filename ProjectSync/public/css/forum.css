@@ -1,0 +1,38 @@
+.backButton h3 a{
+    color: darkblue
+}
+
+.ForumBody{
+    text-align: center;
+    justify-content: center;
+}
+
+.createPost{
+    width: 50%;
+    margin: auto;
+}
+
+li.post{
+    background-color: #006aa7;
+}
+
+li.post:hover{
+    background-color: #46b2f1;
+}
+
+.listOfPosts{
+    margin: auto;
+    width: 50%;
+}
+
+.listOfPosts h3{
+    color: white;
+}
+
+.listOfPosts p{
+    color: white;
+}
+
+p.noPosts{
+    color: black
+}

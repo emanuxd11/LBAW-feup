@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('css/post.css') }}">
+<link rel="stylesheet" href="{{ asset('css/forum.css') }}">
 
 @extends('layouts.app')
 
@@ -49,7 +49,7 @@
             @forelse ($forumPosts as $post)
                 @include('partials.post_preview', ['post' => $post])
             @empty
-                <p>No posts</p>   
+                <p class="noPosts">No posts</p>   
             @endforelse
         </ul>
     </div>

@@ -2,33 +2,25 @@
     color: darkblue
 }
 
-.ForumBody{
+.PostBody{
     text-align: center;
     justify-content: center;
 }
 
-.createPost{
+.createComment, .alterPostOptions, .editComment{
     width: 50%;
     margin: auto;
 }
 
-li.post{
-    background-color: #006aa7;
-}
-
-li.post:hover{
-    background-color: #46b2f1;
-}
-
-.listOfPosts{
-    margin: auto;
+.commentHeader{
+    display: flex;
+    justify-content: space-between;
     width: 50%;
+    margin: auto;
 }
 
-.listOfPosts h3{
-    color: white;
-}
-
-.listOfPosts p{
-    color: white;
+.commentBody{
+    width: 50%;
+    margin: auto;
+    text-align: start;
 }

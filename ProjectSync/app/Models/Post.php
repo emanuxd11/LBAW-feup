@@ -32,5 +32,14 @@ class Post extends Model
         'project_id',
     ];
 
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
     
 }

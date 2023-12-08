@@ -24,7 +24,9 @@ class PostController extends Controller{
 
         $post = Post::find($id);
 
-        return view("pages.post",compact('post'));
+        $postComments = PostComment::where('post_id',$post->id)->get();
+
+        return view("pages.post",compact('post','postComments'));
     }
 
     public function create(Request $request){
@@ -58,17 +60,25 @@ class PostController extends Controller{
     public function update(Request $request,$id){
 
         $request->validate([
-            'title' => 'nullable|string|max:30',
             'description' => 'nullable|string|max:255',
         ]);
 
-        $user = Auth::user();
         $post = Post::find($id);    
-        $project = Project::where('id', $post->project_id)->first();
+        $project = Project::find($post->project_id)->first();
 
-        $this->authorize('update', $project);
+        $this->authorize('update', $post);
+        
+        if($request->input('description')){
+            $post->description = $request->input('description');
+        }
 
+        if($request->input('upvote') == 'down'){
+            $post->upvotes--;
+        }
 
+        if($request->input('upvote') == 'up'){
+            $post->upvotes++;
+        }
     
         $post->save();
         return redirect('projects/' . $project->id . '/forum/post/' . $post->id)->with('success', 'Post updated successfully.');
@@ -76,28 +86,14 @@ class PostController extends Controller{
 
     public function delete(Request $request,$id){
 
-        $request->validate([
-            'title' => 'nullable|string|max:30',
-            'description' => 'nullable|string|max:255',
-        ]);
-
         $user = Auth::user();
+        $project = Project::find($request->input('project_id'))->first();
+        $post = Post::find($id);
 
-        $post = new Post([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'date' => date('Y/m/d'),
-            'upvotes' => 0,
-            'isEdited' => false,
-            'author_id'=> $user->id,
-            'project_id' => $request->input('project_id'),
-        ]);
+        $this->authorize('delete', $post);
 
-        $project = Project::where('id', $request->input('project_id'))->first();
-
-        $this->authorize('delete', $project);
-    
-        $post->save();
+        PostComment::where('post_id', $post->id)->delete();  
+        $post->delete();
         
         return redirect('projects/' . $project->id . '/forum')->with('success', 'Post deleted successfully.');
     }

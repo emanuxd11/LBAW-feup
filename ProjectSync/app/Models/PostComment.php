@@ -31,5 +31,14 @@ class PostComment extends Model
         'parent_comment_id',
     ];
 
+    public function post(): BelongsTo
+    {
+        return $this->belongsTo(Post::class);
+    }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
     
 }

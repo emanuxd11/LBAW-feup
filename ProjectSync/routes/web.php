@@ -9,6 +9,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\PostCommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,6 +65,13 @@ Route::controller(PostController::class)->group(function () {
     Route::put('/createPost', 'create')->name('post.create');
     Route::post('/post/{id}', 'update')->name('post.update');
     Route::delete('/post/{id}', 'delete')->name('post.delete');
+});
+
+//PostComment
+Route::controller(PostCommentController::class)->group(function () {
+    Route::put('/createPostComment', 'create')->name('postComment.create');
+    Route::post('/postComment/{id}', 'update')->name('postComment.update');
+    Route::delete('/postComment/{id}', 'delete')->name('postComment.delete');
 });
 
 // Task

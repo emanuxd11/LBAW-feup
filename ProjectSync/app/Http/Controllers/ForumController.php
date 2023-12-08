@@ -24,7 +24,7 @@ class ForumController extends Controller{
 
         $project = Project::findOrFail($projectId);
 
-        if(!$project->isMember(Auth::user())){
+        if(!$project->isMember(Auth::user()) && !Auth::user()->isAdmin){
             return redirect("/projects");
         }
 
