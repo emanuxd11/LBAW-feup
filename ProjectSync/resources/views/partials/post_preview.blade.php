@@ -25,7 +25,7 @@
         <div class="preview">
             <a href="{{ route('post.show', ['project_id' => $post->project_id,'id' => $post->id]) }}" class="post">
                 <h3>{{ $post->title }}</h3>
-                <p>Author {{ $post->author->username }}</p>
+                <p>Created by: {{ $post->author->username }}  Date: {{$post->date}}</p>
                 <p>Description: {{ \Illuminate\Support\Str::limit($post->description, $limit = 100, $end = '...') }}</p>
             </a>
         </div>
