@@ -18,6 +18,7 @@
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/recover.css') }}" rel="stylesheet">
     <link href="{{ asset('css/task.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/faq.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/about.js') }}" defer></script>
@@ -30,10 +31,7 @@
             @yield('content')
         </section>
     </main>
-
-    <footer>
-        <p>&copy; {{ date('Y') }} ProjectSync. All rights reserved.</p>
-    </footer>
+    @include('partials.footer')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
