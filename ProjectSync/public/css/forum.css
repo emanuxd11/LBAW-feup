@@ -54,10 +54,14 @@ form.downvote{
     width: 10%;
 }
 
-.upvote-button, .downvote-button{
+.upvote-button, .downvote-button,.upvote-button-pressed, .downvote-button-pressed{
     font-size: 30px;
     padding-left: 0px;
     padding-right: 0px;
+}
+
+.upvote-button-pressed, .downvote-button-pressed{
+    color: orange
 }
 
 .upvotes-count{

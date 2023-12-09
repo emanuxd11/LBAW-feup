@@ -8,7 +8,7 @@
 
 <script type="text/javascript" src="{{ asset('js/post_upvotes.js') }}" defer></script>
 <div class="post" data-id="{{$post->id}}">
-    <div class="PostBody">
+    <div class="Body">
         <div class="errors">
             @if(session('success'))
                 <div class="alert alert-success">
@@ -24,60 +24,84 @@
                 </div>
             @endif
         </div>
+
         <div class="backButton">
-            <h3><a href="/projects/{{ request('project_id') }}/forum">&larr;</a></h3>
+            <h3><a href="/projects/{{ request('project_id') }}/forum">&larr;Go Back</a></h3>
         </div>
-    
-        <div class="postTitle">
-            <h3>{{$post->title}}</h3>
-        </div>
-    
-        <div class="upvote-downvote">
-            <form method="POST" action="{{ route('post.upvote', ['id' => $post->id]) }}">
-                @csrf
-                <input type="hidden" name="upvote" class="post-form" value="{{ 'up' }}">
-                <button type="submit" class="upvote-button" data-action="up">&#9650;</button>
-            </form>
-            <span class="upvotes-count">{{ $post->upvotes }}</span>
-            <form method="POST" action="{{ route('post.upvote', ['id' => $post->id]) }}">
-                @csrf
-                <input type="hidden" name="upvote" class="post-form" value="{{ 'down' }}">
-                <button type="submit" class="downvote-button" data-action="down">&#9660;</button>
-            </form>
-        </div>
-    
-        <div class="author">
-            <p>{{$post->author->username}}</p>
-        </div>
-    
-        <div class="postDescription">
-            <p>{{$post->description}}</p>
-        </div>
-    
-        @if (Auth::user()->id == $post->author_id || Auth::user()->isAdmin)
-        <div class="alterPostOptions">
-            @if (Auth::user()->id == $post->author_id)
-            <div class="editPost">
-                <form method="POST" action="{{ route('post.update', ['id' => $post->id]) }}" class="updatePostForm">
-                    @csrf
-                    @method('POST')
-                    <p class="createPost">Description:</p>
-                    <textarea name="description" class="post-form" placeholder="{{ $post->description }}"></textarea>
-                    <input type="hidden" name="project_id" class="post-form" value="{{ $post->project_id }}">
-                    <button type="submit" class="editPost">Edit</button>
-                </form> 
+
+        <div class="actualPost">
+            <div class="postHeader">
+                <div class="upvote-downvote">
+                    <form method="POST" action="{{ route('post.upvote', ['id' => $post->id]) }}">
+                        @csrf
+                        <input type="hidden" name="upvote" class="post-form" value="{{ 'up' }}">
+                        @if ($post->user_upvoted(Auth::user()))
+                        <button type="submit" class="upvote-button-pressed" data-action="up">&#9650;</button>
+                        @else
+                        <button type="submit" class="upvote-button" data-action="up">&#9650;</button>
+                        @endif
+                    </form>
+                    <span class="upvotes-count">{{ $post->upvotes }}</span>
+                    <form method="POST" action="{{ route('post.upvote', ['id' => $post->id]) }}">
+                        @csrf
+                        <input type="hidden" name="upvote" class="post-form" value="{{ 'down' }}">
+                        @if ($post->user_downvoted(Auth::user()))
+                        <button type="submit" class="downvote-button-pressed" data-action="down">&#9660;</button>
+                        @else
+                        <button type="submit" class="downvote-button" data-action="down">&#9660;</button>
+                        @endif
+                    </form>
+                </div>
+        
+                <div class="postInfo">
+                    <div class="postTitle">
+                        <h3>{{$post->title}}</h3>
+                    </div>
+                
+                    <div class="author">
+                        <p>Created by: {{$post->author->username}}</p>
+                        <p>Date: {{$post->date}}</p>
+                        @if ($post->isedited)
+                           <p>(edited)</p>
+                        @endif
+                    </div>
+
+                    <div class="postDescription">
+                        <p>{{$post->description}}</p>
+                    </div>
+                </div>
             </div>
-            @endif
-            <div class="deletePost">
-                <form method="POST" action="{{ route('post.delete', ['id' => $post->id]) }}" class="deletePostForm">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="project_id" class="post-form" value="{{ $post->project_id }}">
-                    <button type="submit" class="deletePost">Delete</button>
-                </form>            
+
+            <div class="postBody">
+
+                @if (Auth::user()->id == $post->author_id || Auth::user()->isAdmin)
+                <div class="alterPostOptions">
+                    <h3>Edit Post</h3>
+                    @if (Auth::user()->id == $post->author_id)
+                    <div class="editPost">
+                        <form method="POST" action="{{ route('post.update', ['id' => $post->id]) }}" class="updatePostForm">
+                            @csrf
+                            @method('POST')
+                            <p class="createPost">Description:</p>
+                            <textarea name="description" class="post-form" placeholder="{{ $post->description }}"></textarea>
+                            <input type="hidden" name="project_id" class="post-form" value="{{ $post->project_id }}">
+                            <button type="submit" class="editPost">Edit</button>
+                        </form> 
+                    </div>
+                    @endif
+                    <div class="deletePost">
+                        <form method="POST" action="{{ route('post.delete', ['id' => $post->id]) }}" class="deletePostForm">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="project_id" class="post-form" value="{{ $post->project_id }}">
+                            <button type="submit" class="deletePost">Delete</button>
+                        </form>            
+                    </div>
+                </div>
+                @endif
+
             </div>
         </div>
-        @endif
     
         <div class="createComment">
             <form method="POST" action="{{ route('postComment.create') }}" class="createPostCommentForm">

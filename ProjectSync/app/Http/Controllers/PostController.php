@@ -32,8 +32,8 @@ class PostController extends Controller{
     public function create(Request $request){
 
         $request->validate([
-            'title' => 'string|max:30',
-            'description' => 'string|max:255',
+            'title' => 'string|max:50',
+            'description' => 'string|max:1000',
         ]);
 
         $user = Auth::user();
@@ -60,7 +60,7 @@ class PostController extends Controller{
     public function update(Request $request,$id){
 
         $request->validate([
-            'description' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:10000',
         ]);
 
         $post = Post::find($id);    
@@ -70,6 +70,7 @@ class PostController extends Controller{
         
         if($request->input('description')){
             $post->description = $request->input('description');
+            $post->isedited = true;
         }
     
         $post->save();
@@ -84,7 +85,8 @@ class PostController extends Controller{
 
         $this->authorize('delete', $post);
 
-        PostComment::where('post_id', $post->id)->delete();  
+        PostComment::where('post_id', $post->id)->delete(); 
+        DB::table('postupvote')->where('post_id', $post->id)->delete(); 
         $post->delete();
         
         return redirect('projects/' . $project->id . '/forum')->with('success', 'Post deleted successfully.');
@@ -94,17 +96,33 @@ class PostController extends Controller{
 
         $post = Post::find($id);    
         $project = Project::findorfail($post->project_id);
+        $user = Auth::user();
 
         $this->authorize('show', $project);
 
         $upvoteType = $request->json('upvote');
+        $existingVote = DB::table('postupvote')->where('user_id', $user->id)->where('post_id', $post->id)->first();
 
-        if($upvoteType == 'down'){
-            $post->upvotes--;
+        if($existingVote){
+            if ($existingVote->upvote_type == $upvoteType) {
+                $post->upvotes -= ($upvoteType == 'up') ? 1 : -1;
+                DB::table('postupvote')->where('user_id', $user->id)->where('post_id', $post->id)->delete();
+            } else {
+                $existingVote->type = $upvoteType;
+                DB::table('postupvote')->where('user_id', $user->id)->where('post_id', $post->id)->update(['upvote_type' => $upvoteType]);
+                $post->upvotes += ($upvoteType == 'up') ? 2 : -2;
+            }
         }
 
-        if($upvoteType == 'up'){
-            $post->upvotes++;
+        else{
+            $post->upvotes += ($upvoteType == 'up') ? 1 : -1;
+            $data = [
+                'user_id' => $user->id,
+                'post_id' => $post->id,
+                'upvote_type' => $upvoteType,
+            ];
+            
+            DB::table('postupvote')->insert($data);
         }
     
         $post->save();

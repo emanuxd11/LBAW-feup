@@ -113,6 +113,7 @@ class AdminController extends Controller{
         Message::where('sender_id', $userId)->update(['sender_id'=> null]);
         Message::where('receiver_id', $userId)->update(['receiver_id'=> null]);
         Changes::where('user_id', $userId)->update(['user_id'=> null]);
+        DB::table('postupvote')->where('user_id', $user->id)->delete();
         DB::table('usernotification')->where('user_id', $user->id)->delete();
         TaskComments::where('user_id', $userId)->update(['user_id' => null]);
         

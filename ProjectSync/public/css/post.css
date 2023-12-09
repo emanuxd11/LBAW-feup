@@ -1,46 +1,78 @@
 .backButton h3 a{
-    color: darkblue
+    color: black;
 }
 
-.PostBody{
-    text-align: center;
-    justify-content: center;
-}
-
-.createComment, .alterPostOptions, .editComment, .upvote-downvote{
-    width: 50%;
-    margin: auto;
-}
-
-.commentHeader{
-    display: flex;
-    justify-content: space-between;
-    width: 50%;
-    margin: auto;
-}
-
-.commentBody{
-    width: 50%;
-    margin: auto;
+.backButton{
+    justify-content: start;
     text-align: start;
 }
 
-.upvote-downvote {
+.backButton h3 a:hover{
+    color: #3490dc;
+}
+
+.Body{
+    text-align: center;
+    justify-content: center;
+    padding-left: 30vh;
+    width: 75%;
+}
+
+form.upvote{
+    margin-bottom: -10px;
+}
+
+form.downvote{
+    margin:auto
+}
+
+.upvote-downvote{
+    width: 10%;
+}
+
+.upvote-button, .downvote-button,.upvote-button-pressed, .downvote-button-pressed{
+    font-size: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.upvote-button-pressed, .downvote-button-pressed{
+    color: orange;
+}
+
+.upvote-button, .upvote-button-pressed{
+    margin-bottom: -23px;
+}
+
+.upvotes-count{
+    font-size: 20px;
+    margin-right: 2px;
+}
+
+.postHeader {
     display: flex;
+    justify-content: start; 
     align-items: center;
-    margin-bottom: 10px;
+    text-align: center;
 }
 
-.upvote-button,
-.downvote-button {
-    background-color: #3490dc;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    margin-right: 5px;
-    cursor: pointer;
+.author{
+    margin-top: -3vh;
+    display: flex;
 }
 
-.upvotes-count {
-    margin-right: 5px;
+.author p {
+    margin-right: 1vh;
+}
+
+.postInfo{
+    margin-left: -2vh;
+}
+
+.postDescription {
+    text-align: start;
+}
+
+.postTitle, .postBody{
+    text-align: start;
 }
