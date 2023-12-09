@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var searchInput = document.getElementById('search_task_input');
     var searchResults = document.getElementById('search_task_results');
 
-    // Fetch tasks when the page loads
     const projectId = window.location.pathname.split('/').pop();
     fetchTasks(projectId, '');
 

@@ -56,8 +56,8 @@ class AdminController extends Controller{
         $userQuery = $request->input('user_query');
         $projectQuery = $request->input('project_query');
 
-        $userResults = User::where('username','LIKE','%'.$userQuery.'%')->paginate(4,['*'], 'users');
-        $projectResults = Project::where('name','LIKE','%'.$projectQuery.'%')->paginate(4,['*'], 'projects');
+        $userResults = User::where('username','ilike','%'.$userQuery.'%')->paginate(4,['*'], 'users');
+        $projectResults = Project::where('name','ilike','%'.$projectQuery.'%')->paginate(4,['*'], 'projects');
 
         return view('pages.adminPage', [
             'userResults' => $userResults,

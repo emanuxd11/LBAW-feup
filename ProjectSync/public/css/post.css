@@ -76,3 +76,22 @@ form.downvote{
 .postTitle, .postBody{
     text-align: start;
 }
+
+.commentHeader{
+    display: flex;
+    justify-content: start; 
+    align-items: center;
+    text-align: center;
+}
+
+.commentHeader p{
+    margin-right: 1vh;
+}
+
+.commentBody p{
+    text-align: start;
+}
+
+.editComment{
+    text-align: start;
+}

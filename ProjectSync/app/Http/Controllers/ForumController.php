@@ -32,6 +32,36 @@ class ForumController extends Controller{
 
         return view('pages.forumPage', compact('forumPosts'));
     }
+
+    public function search(Request $request, $projectId)
+    {
+        if (!Auth::check()){
+            return redirect("/login");
+        }
+
+        $project = Project::findOrFail($projectId,);
+
+        if(!$project->isMember(Auth::user()) && !Auth::user()->isAdmin){
+            return redirect("/projects");
+        }
+
+        $query = $request->input('query');
+
+        if($request->input('best')){
+            $forumPosts = Post::where('project_id', $projectId)->where('title','ilike','%'.$query.'%')->orderby('upvotes','desc')->get();
+        }
+        else if($request->input('newest')){
+            $forumPosts = Post::where('project_id', $projectId)->where('title','ilike','%'.$query.'%')->orderby('date','asc')->get();
+        }
+        else if($request->input('oldest')){
+            $forumPosts = Post::where('project_id', $projectId)->where('title','ilike','%'.$query.'%')->orderby('date','desc')->get();
+        }
+        else{
+            $forumPosts = Post::where('project_id', $projectId)->where('title','ilike','%'.$query.'%')->get();
+        }
+
+        return view('pages.forumPage', compact('forumPosts'));
+    }
     
 }
 

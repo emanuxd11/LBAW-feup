@@ -120,18 +120,18 @@
             <div class="commentCard">
                 <div class="commentHeader">
                     <p>Author:{{$postComment->author->username}}</p>
+                    <p>Date:{{$postComment->date}}</p>
                     @if($postComment->isedited)
                         <p>Edited</p>
                     @endif
-                    <p>Date:{{$postComment->date}}</p>
                 </div>
     
                 <div class="commentBody">
-                    <h4>Comment</h4>
                     <p>{{$postComment->comment}}</p>
                 </div>
     
                 <div class="editComment">
+                    <h4>Edit Comment</h4>
                     @if (Auth::user()->id == $postComment->author_id || Auth::user()->isAdmin)
                         @if (Auth::user()->id == $postComment->author_id)
                             <form method="POST" action="{{ route('postComment.update', ['id' => $postComment->id]) }}" class="updatePostForm">

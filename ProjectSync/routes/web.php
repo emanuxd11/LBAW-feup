@@ -60,6 +60,7 @@ Route::controller(ProjectController::class)->group(function () {
 // Forum
 Route::controller(ForumController::class)->group(function () {
     Route::get('/projects/{id}/forum', 'show')->name('forum.show');
+    Route::get('/projects/{id}/forum/search', 'search')->name('forum.search');
 });
 
 //Post

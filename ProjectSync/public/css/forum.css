@@ -73,6 +73,29 @@ form.downvote{
     width: 110%;
 }
 
+.search-bar{
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+    width: 50%;
+}
+
+.search-bar p{
+    color: white;
+}
+
+.filters{
+    display: flex;
+}
+
+.filters label{
+    margin-right: 10px;
+}
+
+.searchBarFlex{
+    display: flex;
+}
+
 
 
 

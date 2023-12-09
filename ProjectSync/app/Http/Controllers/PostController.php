@@ -24,7 +24,7 @@ class PostController extends Controller{
 
         $post = Post::find($id);
 
-        $postComments = PostComment::where('post_id',$post->id)->get();
+        $postComments = PostComment::where('post_id',$post->id)->orderBy('date')->get();
 
         return view("pages.post",compact('post','postComments'));
     }
