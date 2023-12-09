@@ -10,7 +10,7 @@
     <section id="project">
         <h2>{{ $project->name }}</h2>
         <p>Coordinator: <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}"><span>{{ $project->getCoordinator()->name }}</span></a></p>
-
+        <p><a href="{{ route('forum.show', ['id' => $project->id]) }}"><span>Forum</span></a></p>
         <div id="project-members">
             <h3>Project Members</h3>
             <ul id="project-member-list">

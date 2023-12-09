@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class PostComment extends Model
+class TaskComments extends Model
 {
     use HasFactory;
 
-    protected $table = 'postcomment';
+    protected $table = 'taskcomments';
 
     // Don't add create and update timestamps in database.
     public $timestamps = false;
@@ -24,21 +24,11 @@ class PostComment extends Model
      */
     protected $fillable = [
         'comment',
-        'date',
+        'created_at',
         'isedited',
-        'author_id',
-        'post_id',
-        'parent_comment_id',
+        'user_id',
+        'task_id',
     ];
 
-    public function post(): BelongsTo
-    {
-        return $this->belongsTo(Post::class);
-    }
-
-    public function author(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
     
 }

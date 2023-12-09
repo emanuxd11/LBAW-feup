@@ -9,8 +9,14 @@
     <link href="{{ asset('css/projects.css') }}" rel="stylesheet">
 
     <div class="task-profile">
+
         <div class="task-header">
-            <h1 class="task-title">{{$task->name}}</h1>
+            <div class="task-title-div">
+                <div class="backButton">
+                    <h3><a href="/projects/{{ request('project_id') }}">&larr;</a></h3>
+                </div>
+                <h1 class="task-title">{{$task->name}}</h1>
+            </div>
             <p class="task-status">Status: {{$task->status}}</p>
         </div>
 

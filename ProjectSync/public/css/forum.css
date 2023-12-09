@@ -1,0 +1,102 @@
+.backButton h3 a{
+    color: darkblue
+}
+
+.ForumBody{
+    text-align: center;
+    justify-content: center;
+}
+
+.createPost{
+    width: 50%;
+    margin: auto;
+}
+
+li.post{
+    background-color: #006aa7;
+    list-style-type: none
+}
+
+li.post .preview:hover{
+    background-color: #46b2f1;
+}
+
+.listOfPosts{
+    margin: auto;
+    width: 50%;
+}
+
+.listOfPosts h3{
+    color: white;
+}
+
+.listOfPosts p{
+    color: white;
+}
+
+p.noPosts{
+    color: black
+}
+
+.post_content_preview{
+    display: flex;
+}
+
+form.upvote{
+    margin-bottom: -10px;
+}
+
+form.downvote{
+    margin:auto
+}
+
+.upvote-downvote{
+    width: 10%;
+}
+
+.upvote-button, .downvote-button,.upvote-button-pressed, .downvote-button-pressed{
+    font-size: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.upvote-button-pressed, .downvote-button-pressed{
+    color: orange
+}
+
+.upvotes-count{
+    font-size: 20px;
+    margin-right: 2px;
+}
+
+.preview{
+    width: 110%;
+}
+
+.search-bar{
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+    width: 50%;
+}
+
+.search-bar p{
+    color: white;
+}
+
+.filters{
+    display: flex;
+}
+
+.filters label{
+    margin-right: 10px;
+}
+
+.searchBarFlex{
+    display: flex;
+}
+
+
+
+
+

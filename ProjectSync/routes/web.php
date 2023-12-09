@@ -6,7 +6,10 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ForumController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EmailController;
 
@@ -52,6 +55,28 @@ Route::controller(ProjectController::class)->group(function () {
     Route::get('/projects/{id}/search_user', 'search_user')->name('project_search_user');
     Route::post('/projects/{id}/add_user', 'addUserToProject')->name('project_add_user');
     Route::get('/projects/{id}/search_task', 'search_task')->name('project_search_task');
+});
+
+// Forum
+Route::controller(ForumController::class)->group(function () {
+    Route::get('/projects/{id}/forum', 'show')->name('forum.show');
+    Route::get('/projects/{id}/forum/search', 'search')->name('forum.search');
+});
+
+//Post
+Route::controller(PostController::class)->group(function () {
+    Route::get('/projects/{project_id}/forum/post/{id}', 'show')->name('post.show');
+    Route::put('/createPost', 'create')->name('post.create');
+    Route::post('/post/{id}', 'update')->name('post.update');
+    Route::post('/post/{id}/upvote', 'upvote')->name('post.upvote');
+    Route::delete('/post/{id}', 'delete')->name('post.delete');
+});
+
+//PostComment
+Route::controller(PostCommentController::class)->group(function () {
+    Route::put('/createPostComment', 'create')->name('postComment.create');
+    Route::post('/postComment/{id}', 'update')->name('postComment.update');
+    Route::delete('/postComment/{id}', 'delete')->name('postComment.delete');
 });
 
 // Task

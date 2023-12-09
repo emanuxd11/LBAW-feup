@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS Project CASCADE;
 DROP TABLE IF EXISTS ProjectMember CASCADE;
 DROP TABLE IF EXISTS ProjectMemberInvitation CASCADE;
 DROP TABLE IF EXISTS Post CASCADE;
+DROP TABLE IF EXISTS PostUpvote CASCADE;
 DROP TABLE IF EXISTS PostComment CASCADE;
 DROP TABLE IF EXISTS Task CASCADE;
 DROP TABLE IF EXISTS ProjectMemberTask CASCADE;
@@ -24,6 +25,7 @@ DROP TABLE IF EXISTS Notification CASCADE;
 DROP TABLE IF EXISTS UserNotification CASCADE;
 
 DROP TYPE IF EXISTS TaskStatus;
+DROP TYPE IF EXISTS UpvoteType;
 
 DROP INDEX IF EXISTS index_projectmember_iduser;
 DROP INDEX IF EXISTS index_message_sender_receiver;
@@ -38,6 +40,17 @@ DROP FUNCTION IF EXISTS one_coordinator_restriction;
 
 
 CREATE TYPE TaskStatus AS ENUM('To Do','Doing', 'Done');
+CREATE TYPE UpvoteType AS ENUM('up','down');
+
+-- Create password_resets table
+-- (for password reset tokens,
+-- added during development)
+CREATE TABLE password_reset_tokens (
+    email TEXT NOT NULL,
+    token TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE,
+    PRIMARY KEY(email,token)
+);
 
 -- Create User Table
 CREATE TABLE "User" (
@@ -101,6 +114,13 @@ CREATE TABLE Post (
     project_id INT REFERENCES Project(id)
 );
 
+CREATE TABLE PostUpvote (
+    user_id INT REFERENCES "User"(id),
+    post_id INT REFERENCES Post(id),
+    upvote_type UpvoteType NOT NULL,
+    PRIMARY key (user_id,post_id)
+);
+
 -- Create PostComment Table
 CREATE TABLE PostComment (
     id SERIAL PRIMARY KEY,
@@ -132,7 +152,7 @@ CREATE TABLE ProjectMemberTask (
 );
 
 -- Create Table TaskComent
-CREATE TABLE TaskComents(
+CREATE TABLE TaskComments(
     id SERIAL PRIMARY KEY,
     comment VARCHAR NOT NULL,
     created_at DATE NOT NULL,
@@ -174,7 +194,6 @@ CREATE TABLE UserNotification(
     PRIMARY KEY (user_id,notification_id),
     isChecked BOOLEAN NOT NULL
 );
-
 
 --INDEX 1
 CREATE INDEX index_projectmember_iduser ON ProjectMember USING btree(idUser); CLUSTER ProjectMember USING index_projectmember_iduser;

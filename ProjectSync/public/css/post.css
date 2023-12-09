@@ -1,0 +1,97 @@
+.backButton h3 a{
+    color: black;
+}
+
+.backButton{
+    justify-content: start;
+    text-align: start;
+}
+
+.backButton h3 a:hover{
+    color: #3490dc;
+}
+
+.Body{
+    text-align: center;
+    justify-content: center;
+    padding-left: 30vh;
+    width: 75%;
+}
+
+form.upvote{
+    margin-bottom: -10px;
+}
+
+form.downvote{
+    margin:auto
+}
+
+.upvote-downvote{
+    width: 10%;
+}
+
+.upvote-button, .downvote-button,.upvote-button-pressed, .downvote-button-pressed{
+    font-size: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.upvote-button-pressed, .downvote-button-pressed{
+    color: orange;
+}
+
+.upvote-button, .upvote-button-pressed{
+    margin-bottom: -23px;
+}
+
+.upvotes-count{
+    font-size: 20px;
+    margin-right: 2px;
+}
+
+.postHeader {
+    display: flex;
+    justify-content: start; 
+    align-items: center;
+    text-align: center;
+}
+
+.author{
+    margin-top: -3vh;
+    display: flex;
+}
+
+.author p {
+    margin-right: 1vh;
+}
+
+.postInfo{
+    margin-left: -2vh;
+}
+
+.postDescription {
+    text-align: start;
+}
+
+.postTitle, .postBody{
+    text-align: start;
+}
+
+.commentHeader{
+    display: flex;
+    justify-content: start; 
+    align-items: center;
+    text-align: center;
+}
+
+.commentHeader p{
+    margin-right: 1vh;
+}
+
+.commentBody p{
+    text-align: start;
+}
+
+.editComment{
+    text-align: start;
+}

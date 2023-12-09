@@ -19,6 +19,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    padding-bottom: -1px;
 }
 
 .task-header h1 {
@@ -105,4 +106,19 @@
 textarea.task_description {
     background-color: #ffffff;width: 300px;height: 125px; resize: none;
 }
+
+.backButton a{
+    color: white;
+}
+
+.task-title-div{
+    display: flex;
+    align-items: center;
+}
+
+.backButton {
+    margin-right: 5px;
+    margin-bottom: 4px;
+}
+
 

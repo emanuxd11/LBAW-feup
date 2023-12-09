@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TaskComments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,13 @@ class TaskController extends Controller
      */
     public function create(Request $request, $project_id)
     {
-        // Create a blank new task.
+
+        $request->validate([
+            'name' => 'required|string|max:30',
+            'description' => 'required|string|max:255',
+            'delivery_date' => 'nullable|date',
+        ]);
+
         $task = new Task([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -55,6 +62,14 @@ class TaskController extends Controller
     {
         // Find the item.
         $task = Task::find($id);
+
+        $request->validate([
+            'name' => 'nullable|string|max:30',
+            'description' => 'nullable|string|max:255',
+            'delivery_date' => 'nullable|date',
+            'status' => 'nullable|in:To Do,Doing,Done',
+            'username' => 'nullable|string|max:255',
+        ]);
 
         // Check if the current user is authorized to update this item.
         $this->authorize('update', $task);
@@ -115,6 +130,7 @@ class TaskController extends Controller
         // Check if the current user is authorized to delete this item.
         $this->authorize('delete', $task);
         DB::table('projectmembertask')->where('task_id', $task->id)->delete();
+        TaskComments::where('task_id', $task->id)->delete();
         $task->delete();
         return redirect('/projects/' . $project_id);
     }

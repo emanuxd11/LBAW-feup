@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS Project CASCADE;
 DROP TABLE IF EXISTS ProjectMember CASCADE;
 DROP TABLE IF EXISTS ProjectMemberInvitation CASCADE;
 DROP TABLE IF EXISTS Post CASCADE;
+DROP TABLE IF EXISTS PostUpvote CASCADE;
 DROP TABLE IF EXISTS PostComment CASCADE;
 DROP TABLE IF EXISTS Task CASCADE;
 DROP TABLE IF EXISTS ProjectMemberTask CASCADE;
@@ -19,6 +20,7 @@ DROP TABLE IF EXISTS Notification CASCADE;
 DROP TABLE IF EXISTS UserNotification CASCADE;
 
 DROP TYPE IF EXISTS TaskStatus;
+DROP TYPE IF EXISTS UpvoteType;
 
 DROP INDEX IF EXISTS index_projectmember_iduser;
 DROP INDEX IF EXISTS index_message_sender_receiver;
@@ -33,6 +35,7 @@ DROP FUNCTION IF EXISTS one_coordinator_restriction;
 
 
 CREATE TYPE TaskStatus AS ENUM('To Do','Doing', 'Done');
+CREATE TYPE UpvoteType AS ENUM('up','down');
 
 -- Create password_resets table
 -- (for password reset tokens,
@@ -106,6 +109,13 @@ CREATE TABLE Post (
     project_id INT REFERENCES Project(id)
 );
 
+CREATE TABLE PostUpvote (
+    user_id INT REFERENCES "User"(id),
+    post_id INT REFERENCES Post(id),
+    upvote_type UpvoteType NOT NULL,
+    PRIMARY key (user_id,post_id)
+);
+
 -- Create PostComment Table
 CREATE TABLE PostComment (
     id SERIAL PRIMARY KEY,
@@ -137,7 +147,7 @@ CREATE TABLE ProjectMemberTask (
 );
 
 -- Create Table TaskComent
-CREATE TABLE TaskComents(
+CREATE TABLE TaskComments(
     id SERIAL PRIMARY KEY,
     comment VARCHAR NOT NULL,
     created_at DATE NOT NULL,
@@ -313,3 +323,9 @@ In huius festi temporibus, tradamus eis sapientiam ut crescant in amore erga suu
     ', '2024-12-24', '2024-12-25', 'To Do', 1),
     ('Task 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
     ', '2023-11-19', '2024-1-31', 'Done', 1);
+
+
+INSERT INTO Post (title, description, upvotes, date, author_id, project_id) VALUES
+    ('Post1', 'this is a description ma friend', '7', '2024-1-31', 2, 1),
+    ('Post2', 'this is a description ma friend', '7', '2024-1-31', 3, 2),
+    ('Post3', 'this is a description ma friend', '7', '2024-1-31', 4, 3);
