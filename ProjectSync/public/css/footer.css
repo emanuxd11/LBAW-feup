@@ -5,7 +5,7 @@ footer {
     justify-content: space-around; /* Adjust as needed */
     align-items: center;
     flex-wrap: wrap;
-    height: 300px;
+    height: 235px;
 }
 
 #modern-footer {
@@ -17,7 +17,7 @@ footer {
 #modern-footer .footer-section {
     flex: 1; /* Equal width for all sections */
     margin: 10px;
-    padding: 20px;
+    padding: 5px;
     border-radius: 8px;
     box-sizing: border-box;
 }
