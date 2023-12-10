@@ -35,6 +35,10 @@ Route::view('/faq', 'pages.faq')->name('faq');
 // About Us
 Route::view('/aboutUs', 'pages.aboutUs')->name('aboutUs');
 
+// Contacts
+Route::view('/contacts', 'pages.contacts')->name('contacts');
+
+
 // Admin
 Route::get('/adminPage', [AdminController::class, 'showAdminPage'])->name('adminPage');
 Route::get('/adminPage/search', [AdminController::class, 'search'])->name('adminPage.search');
