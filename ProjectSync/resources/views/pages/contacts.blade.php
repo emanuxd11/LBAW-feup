@@ -29,10 +29,10 @@
         </div>
 
         <div class="contacts-card" onclick="toggleContacts(this)">
-            <h2 class="contacts-page">Adresse <i class="fas fa-address-card"></i>
+            <h2 class="contacts-page">Address <i class="fas fa-address-card"></i>
             </h2>
             <div class="contacts-body">
-                <p>Come visit us! Our current adresse:</p>
+                <p>Come visit us! Our current Address:</p>
                 <ul class="contacts-list">
                     <li class="animated-icon"> 123 Main Street</li>
                     <li class="animated-icon"> Anytown, CA 12345</li>
