@@ -1,0 +1,81 @@
+/* Contact Page Styles */
+
+.contacts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contacts-card {
+    cursor: pointer;
+    margin-bottom: 20px;
+    width: 70%;
+    border: 1px solid #006aa7;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 106, 167, 0.4); /* More noticeable shadow */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.contacts-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 106, 167, 0.6); /* Enhance shadow on hover */
+    background-color: #f6e3b2;
+}
+
+.contacts-page {
+    color: #006aa7;
+    padding: 20px;
+    width: 100%;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+.contacts-body {
+    text-align: center;
+    padding: 20px;
+    background-color: #006aa7;
+    color: #f7f3e9;
+    display: none;
+    overflow: hidden;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.active_contacts .contacts-page:after {
+    content: "\25B2"; /* Up arrow icon */
+}
+
+#contacts-heading {
+    color: #006aa7;
+}
+
+.contacts-card .contacts-body {
+    font-size: 20px;
+  }
+
+.contacts-page:after {
+    content: "\25BC"; /* Down arrow icon */
+    font-size: 13px;
+    float: right;
+    margin-left: 5px;
+}
+
+.get-in-touch h2 {
+    text-align: center;
+    margin: 0;
+  }
+
+  ul.list-inline {
+    display: flex;
+    justify-content: center;
+  }
+  
+  ul.list-inline li:not(:last-child) {
+    margin-right: 30px;
+  }
+
+  ul.list-inline li a i {
+    color: #006aa7;
+  }

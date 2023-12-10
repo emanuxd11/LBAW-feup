@@ -7,7 +7,7 @@
         <div class="buttons-container">
             <a class="button" href="{{ url('/faq') }}">FAQ</a>
             <a class="button" href="{{ route('aboutUs') }}">About Us</a>
-
+            <a class="button" href="{{ route('contacts') }}">Contacts</a>
             @if (Auth::check())
                 <a class="button" href="{{ url('/logout') }}">Logout</a>
                 <a class="profile-button" href="{{ route('profilePage', ['username' => Auth::user()->username]) }}">
