@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
             taskItem.innerHTML += `
                 <p>Description: ${task.description}</p>
                 <p>Task started on ${task.start_date}</p>
-                <p>Needs to be done by ${task.delivery_date}</p>
+                <p>Needs to be done by ${task.delivery_date ?? "No delivery date available"}</p>
                 <p>Status: ${task.status}</p>
             `;
 

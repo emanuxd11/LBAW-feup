@@ -1,8 +1,8 @@
 <li class="task" data-id="{{$task->id}}">
     <h3>{{$task->name}}</h3>
     <p>Description: {{$task->description}}</p>
-    <p>Task started on {{$task->start_date}}</p>
-    <p>Needs to be done by {{$task->delivery_date}}</p>
+    <p>Task started on: {{$task->start_date}}</p>
+    <p>Delivery Date: {{$task->delivery_date ?? "No delivery date available"}}</p>
     <p>Status: {{$task->status}}</p>
 
     <button id="toggleTaskWrapper" type="button" class="button">

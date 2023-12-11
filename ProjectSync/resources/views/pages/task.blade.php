@@ -7,6 +7,7 @@
 @section('content')
 
     <link href="{{ asset('css/projects.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('js/task.js') }}" defer></script>
 
     <div class="task-profile">
         @if(session('success'))
@@ -47,7 +48,7 @@
             <div class="task-card">
                 <div class="card-content">
                     <p class="info-label">Needs to be done by:</p>
-                    <p>{{$task->delivery_date}}</p>
+                    <p>{{$task->delivery_date ?? "No delivery date available"}}</p>
                 </div>
             </div>
 
@@ -69,15 +70,15 @@
             </div>
         </div>
 
-        <div class="task-actions">
-            <h3 class="edit-task">Edit Task</h3>
+        <button onclick="toggleEditTask()" id="toggle_task_edit">Show Edit Settings</button>
+        <div class="task-actions" id="task-actions" style="display:none;">
             <form method="POST" action="{{ route('edit_task',['id' => $task->id]) }}" class="project-form">
                 @method('POST')
                 @csrf
                 <p class="info-label">Name:</p>
                 <input type="text" name="name" class="project-form">
                 <p class="info-label">Description:</p>
-                <textarea name="description" class="task_description"></textarea>
+                <textarea name="description" class="task_description_area"></textarea>
                 <p class="info-label">Status:</p>
                 <select id="status" name="status" class="">
                     <option value="" selected disabled>{{$task->status}}</option>
@@ -131,9 +132,11 @@
                         <p>{{$taskComment->comment}}</p>
                     </div>
         
-                    <div class="editComment">
+                    @if (Auth::user()->id == $taskComment->user_id || Auth::user()->isAdmin)
+                    <button onclick="toggleEditComment({{$taskComment->id}})" class="toggle_comment_edit" id="toggle_comment_edit" data-id="{{ $taskComment->id }}">Edit</button>
+
+                    <div class="editComment" id="editComment" data-id="{{ $taskComment->id }}" style="display:none;">
                         <h4>Edit Comment</h4>
-                        @if (Auth::user()->id == $taskComment->user_id || Auth::user()->isAdmin)
                             @if (Auth::user()->id == $taskComment->user_id)
                                 <form method="POST" action="{{ route('taskComment.update', ['id' => $task->id]) }}" class="updatePostForm">
                                     @csrf
@@ -144,15 +147,15 @@
                                     <button type="submit" class="editPost">Edit</button>
                                 </form> 
                             @endif
-        
+
                             <form method="POST" action="{{ route('taskComment.delete', ['id' => $task->id]) }}" class="deletePostForm">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" class="post-form" value="{{ $taskComment->id }}">
                                 <button type="submit" class="deletePost">Delete</button>
                             </form>
-                        @endif
                     </div>
+                    @endif
                 </div>
             @empty
             <p class="noPosts">No posts</p>

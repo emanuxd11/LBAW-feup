@@ -20,7 +20,7 @@ class TaskController extends Controller
         }
         $task = Task::find($task_id);
         $project = Project::find($project_id);
-        if(!$project->isMember(Auth::user())){
+        if(!$project->isMember(Auth::user()) && !Auth::user()->isAdmin){
             return redirect("/projects");
         }
         $taskComments = TaskComments::where('task_id',$task->id)->get();
