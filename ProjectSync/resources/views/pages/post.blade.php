@@ -7,6 +7,7 @@
 @section('content')
 
 <script type="text/javascript" src="{{ asset('js/post_upvotes.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/post.js') }}" defer></script>
 <div class="post" data-id="{{$post->id}}">
     <div class="Body">
         <div class="errors">
@@ -75,7 +76,8 @@
             <div class="postBody">
 
                 @if (Auth::user()->id == $post->author_id || Auth::user()->isAdmin)
-                <div class="alterPostOptions">
+                <button onclick="toggleEditPost()" id="toggle_post_edit">Show Edit Settings</button>
+                <div id= "alterPostOptions" class="alterPostOptions" style="display: none;">
                     <h3>Edit Post</h3>
                     @if (Auth::user()->id == $post->author_id)
                     <div class="editPost">
@@ -129,10 +131,11 @@
                 <div class="commentBody">
                     <p>{{$postComment->comment}}</p>
                 </div>
-    
-                <div class="editComment">
-                    <h4>Edit Comment</h4>
-                    @if (Auth::user()->id == $postComment->author_id || Auth::user()->isAdmin)
+
+                @if (Auth::user()->id == $postComment->author_id || Auth::user()->isAdmin)
+                    <button onclick="toggleEditComment({{$postComment->id}})" class="toggle_comment_edit" id="toggle_comment_edit" data-id="{{ $postComment->id }}">Edit</button>
+                    <div class="editComment" id="editComment" data-id="{{ $postComment->id }}" style="display:none;">
+                        <h4>Edit Comment</h4>
                         @if (Auth::user()->id == $postComment->author_id)
                             <form method="POST" action="{{ route('postComment.update', ['id' => $postComment->id]) }}" class="updatePostForm">
                                 @csrf
@@ -143,15 +146,15 @@
                                 <button type="submit" class="editPost">Edit</button>
                             </form> 
                         @endif
-    
+
                         <form method="POST" action="{{ route('postComment.delete', ['id' => $postComment->id]) }}" class="deletePostForm">
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="project_id" class="post-form" value="{{ request('project_id') }}">
                             <button type="submit" class="deletePost">Delete</button>
                         </form>
-                    @endif
-                </div>
+                    </div>
+                @endif
             </div>
             @empty
                <p>No comments</p>
