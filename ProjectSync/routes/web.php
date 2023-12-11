@@ -53,7 +53,7 @@ Route::controller(ProjectController::class)->group(function () {
     Route::get('/projects', 'list')->name('projects');
     Route::get('/projects/{id}', 'show');
     Route::put('/api/projects', 'create')->name('create_project');
-    Route::delete('/api/projects/{project_id}', 'delete');
+    Route::post('/api/projects/{project_id}', 'archive')->name('archive');
     Route::delete('/projects/{project_id}/remove_member/{user_id}', 'remove_member')->name('remove_member');
     Route::delete('/projects/{project_id}/member_leave/{user_id}', 'member_leave')->name('member_leave');
     // the ajax part

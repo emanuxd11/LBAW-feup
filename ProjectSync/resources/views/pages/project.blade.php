@@ -5,6 +5,10 @@
 @section('content')
 
     <link href="{{ asset('css/project.css') }}" rel="stylesheet">
+
+    @if($project->archived)
+        <h1>This project is has been archived by the coordinator.</h1>
+    @endif
     <section id="project">
         <div id="project-info-card">
             <h2>{{ $project->name }}</h2>
@@ -13,12 +17,31 @@
                     <i class="fas fa-user"></i>
                     <p>{{ $project->getCoordinator()->name }}</p>
                 </a>
+                
+                @if($project->isCoordinator(Auth::user()))
+                    <button class="member-leave-button button" onclick="showConfirmationPopup(event);">
+                        <i class="fa-solid fa-box-archive"></i><br>(archive, fix css)
+                    </button>
+                    <form class="project-form" method="POST" 
+                            action="{{ route('archive', ['project_id' => $project->id]) }}" 
+                            id="archiveProjectForm">
+                        @method('POST')
+                        @csrf
+                        <div id="confirmation-popup" class="confirmation-popup hidden">
+                            <p>Are you sure you want to archive "{{ $project->name }}"? (This action cannot be undone!)</p>
+                            <button class="button cancel-button">No</button>
+                            <button class="button confirm-button">Yes</button>
+                        </div>
+                    </form>
+                @endif
+
                 <a href="{{ route('forum.show', ['id' => $project->id]) }}" class="link">
                     <i class="fas fa-comments"></i>
                     <p>Forum</p>
                 </a>
             </div>
         </div>
+        
         <div id="project-members">
             <h3>Project Members</h3>
             <ul id="project-member-list">

@@ -126,16 +126,16 @@ class AdminController extends Controller{
         $userId = $request->input('userId');
         $user = User::findOrFail($userId);
         if($user->isAdmin){
-            return redirect()->route('adminPage')->with('error','Cant block an admin');
+            return redirect()->route('adminPage')->with('error','You cannot block another administrator.');
         }
         $user->isdeactivated = !$user->isdeactivated;
         $user->save();
 
         if($user->isdeactivated){
-            return redirect()->route('adminPage')->with('success','User blocked successfully');
+            return redirect()->route('adminPage')->with('success','User blocked successfully.');
         }
 
-        return redirect()->route('adminPage')->with('success','User unblocked successfully');
+        return redirect()->route('adminPage')->with('success','User unblocked successfully.');
     }
 }
 

@@ -46,13 +46,14 @@ class ProjectPolicy
     }
 
     /**
-     * Determine if a project can be closed by a user (user has to be project coorinator). 
-     * (projects cannot be deleted, only archived or "closed")
+     * Determine if a project can be archived by a user 
+     * (the user has to be project coordinator and the 
+     * project can't already be archived). 
+     * (projects cannot be deleted, only archived)
      */
-    public function close(User $user, Project $project): bool
+    public function archive(User $user, Project $project): bool
     {
-      // Only a project coordinator can close it.
-      return $project->isCoordinator($user);
+      return (Auth::user()->is_admin || $project->isCoordinator($user)) && !$project->archived;
     }
 
     /**

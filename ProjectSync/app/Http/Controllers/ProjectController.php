@@ -100,19 +100,22 @@ class ProjectController extends Controller
     }
 
     /**
-     * Delete a project.
+     * Archive a project.
      */
-    public function delete(Request $request, $id)
+    public function archive($project_id)
     {
-        // Find the project.
-        $project = Project::find($id);
+        $project = Project::findOrFail($project_id);
 
-        // Check if the current user is authorized to delete this project.
-        $this->authorize('delete', $project);
+        $this->authorize('archive', $project);
 
-        // Delete the project and return it as JSON.
-        $project->delete();
-        return response()->json($project);
+        if ($project->archived) {
+            return redirect('/projects')->with('error','This project is already archived.');
+        }
+
+        $project->archived = true;
+        $project->save();
+
+        return redirect('/projects')->with('success', '\"' . $project->name . '\" archived.');
     }
 
     /**
@@ -150,13 +153,13 @@ class ProjectController extends Controller
         // Check if the user is an administrator
         $user = User::find($userId);
         if ($user && $user->isAdmin) {
-            return response()->json(['error' => 'Cannot add an administrator to the project'], 400);
+            return response()->json(['error' => 'You cannot add an administrator to the project.'], 400);
         }
 
         // Check if the user is already a member of the project
         $project = Project::find($projectId);
         if ($project->isMember(User::find($userId))) {
-            return response()->json(['error' => 'User is already a member of the project'], 400);
+            return response()->json(['error' => 'This user is already a member of the project.'], 400);
         }
 
         // Add the user to the project

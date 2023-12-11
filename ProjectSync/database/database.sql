@@ -236,8 +236,9 @@ $BODY$
 BEGIN
         IF NEW.archived = TRUE THEN
             UPDATE ProjectMember SET isFavorite = FALSE WHERE idProject = NEW.id;
-            RETURN NULL;
-            END IF;
+            RETURN NEW;
+        END IF;
+        
         RETURN NEW;
 END
 $BODY$
@@ -248,19 +249,25 @@ CREATE TRIGGER remove_favorite_trigger
         FOR EACH ROW
         EXECUTE PROCEDURE remove_favorite();
 
-
 --TRIGGER 2
 CREATE FUNCTION favorite_restriction() RETURNS TRIGGER AS
 $BODY$
+DECLARE
+    favorite_count INTEGER;
 BEGIN
-        IF NEW.isCoordinator IS NOT NULL THEN
-            IF EXISTS (SELECT COUNT(*) FROM ProjectMember WHERE NEW.idUser = idUser AND isFavorite = TRUE) = 10 THEN
-                RAISE EXCEPTION 'An user cannot have more than 10 favorite projects.';
-                RETURN NULL;
-            END IF;
-        END IF;
-        RETURN NEW;
-END
+    -- Count the number of favorite projects for the current user
+    SELECT COUNT(*)
+    INTO favorite_count
+    FROM ProjectMember
+    WHERE idUser = NEW.idUser AND isFavorite = TRUE;
+
+    -- Check if the count is greater than 10
+    IF favorite_count > 10 THEN
+        RAISE EXCEPTION 'A project member cannot have more than 10 favorite projects.';
+    END IF;
+
+    RETURN NEW;
+END;
 $BODY$
 LANGUAGE plpgsql;
 
@@ -273,22 +280,29 @@ CREATE TRIGGER favorite_restriction_trigger
 CREATE FUNCTION one_coordinator_restriction() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-        IF EXISTS (SELECT COUNT(*) FROM ProjectMember WHERE NEW.idProject = idProject AND isCoordinator = TRUE ) > 0 THEN
-           RAISE EXCEPTION 'A project cannot have more than 1 coordinator.';
-           RETURN NULL;
-        END IF;
-        RETURN NEW;
-END
+    -- Check if there is more than one coordinator for the project
+    IF EXISTS (
+        SELECT 1
+        FROM ProjectMember
+        WHERE idProject = NEW.idProject AND isCoordinator = TRUE
+        HAVING COUNT(*) > 1
+    ) THEN
+        RAISE EXCEPTION 'A project cannot have more than one coordinator.';
+    END IF;
+
+    RETURN NEW;
+END;
 $BODY$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER one_coordinator_restriction_trigger
-        BEFORE UPDATE ON ProjectMember
-        FOR EACH ROW
-        EXECUTE PROCEDURE one_coordinator_restriction();
+-- CREATE TRIGGER one_coordinator_restriction_trigger
+--         BEFORE UPDATE ON ProjectMember
+--         FOR EACH ROW
+--         EXECUTE PROCEDURE one_coordinator_restriction();
 
 
--- insert some stuff to get started
+-- Insert some stuff to get started
+
 INSERT INTO "User" (name, username, email, password, phoneNumber, isDeactivated, profile_pic) VALUES 
     ('Rúben Fonseca', 'rubenf11', 'up202108830@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '913111111', FALSE, NULL),
     ('Miguel Marinho', 'kiryu', 'up202108822@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '912111111', FALSE, NULL),
