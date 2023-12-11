@@ -75,10 +75,16 @@
                 <form class="task-form project-form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
                     @method('PUT')
                     @csrf
-                    Name: <br><input type="text" name="name" required>
-                    <br>Description: <br><input type="text" name="description" required>
-                    <br>Delivery Date: <br><input type="date" name="delivery_date">
-                    <br><button type="submit" class="button"><i class="fas fa-plus"></i></button>
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" required placeholder="ex: Create New Navbar">
+                    <br>
+                    <label for="description">Description:</label><br>
+                    <input type="text" id="description" name="description" required placeholder="ex: Create Navbar with four different buttons ...">
+                    <br>
+                    <label for="delivery_date">Delivery Date:</label><br>
+                    <input type="date" id="delivery_date" name="delivery_date">
+                    <br>
+                    <button type="submit" class="button"><i class="fas fa-plus"></i></button>
                 </form>
             </div>
         
@@ -89,7 +95,7 @@
                 <form class="task-form project-form" id="search_task_form">
                     <p hidden id="hidden_task_attr">Looks like there are no tasks.</p>
                     <label id="hidden_task_search" for="search_task_input">Search for task:</label>
-                    <input type="text" name="task" required placeholder="name or status" id="search_task_input" class="project-form">
+                    <input type="text" name="task" required placeholder="Search by name or status" id="search_task_input" class="project-form">
                     <ul id="search_task_results"></ul>
                 </form>
         
