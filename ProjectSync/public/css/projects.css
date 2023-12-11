@@ -1,85 +1,141 @@
-.project-form {
-    width: 30%;
-}
-
-.project-form input {
-    font-size: 15px;
-    background-color: white;
-}
-
-.project-form input[type='date'] {
-    width: 130px;
-    display: block;
-}
-
-.project-form input[type='text'] {
-    width: 300px;
-}
-
-.project-form select {
-    width: 300px;
-    background-color: white;
-}
-
-.task > p {
-    font-size: 20px;
-}
-
-i {
-    font-size: 17px;
-}
-
-.project-form {
-    font-size: 16px;
-}
-
-.hidden {
-    display: none;
-}
-
-.task {
-    list-style-type: none;
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 400px;
-}
-
-#content {
-    width: 96.3%;
-    margin: 0 auto;
-}
-
-.task-actions .button:hover {
+#projects {
     background-color: #f7f3e9;
+    color: #172b4d;
+    margin: 40px auto;
+    text-align: center;
+    padding: 20px;
+    width: 80%;
+}
+
+#create-project {
+    background-color: #3498db;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    width: 60%;
+    margin: 40px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+.input-group {
+    width: 48%;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.project-input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #172b4d;
+    background-color: #f7f3e9;
+    color: #172b4d;
+    border-radius: 4px;
+}
+
+#project-name, #delivery-date {
+    background-color: #f7f3e9;
+    border-color: #172b4d;
+    border-radius: 10px;
+    border-width: 2px;
     color: #172b4d;
 }
 
-.member-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: -30px;
-}
-
-.button.delete-button-user {
-    margin-bottom: -20vh;
-    padding: 5px;
-    margin-top: 8px;
-}
-
-.button.delete-button-user:hover {
-    background-color: #006aa7;
-}
-
-.remove-member-button,
-.remove-member-button:hover,
-.remove-member-button:focus,
-.remove-member-button:active {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
+#create-project-button {
+    background-color: #172b4d;
+    color: #f7f3e9;
+    padding: 12px;
     cursor: pointer;
-    color: #d60000;
+    width: 160px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    font-size: 13px;
+    text-align: center;
+    line-height: 150%;
+    border-radius: 5px;
+}
+
+#create-project-button i {
+    margin-right: 5px;
+}
+
+#create-project-button:hover {
+    background-color: #0e1a2d;
+    transform: scale(1.05);
+}
+
+#active-projects {
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.project {
+    background-color: #3498db;
+    color: #f7f3e9;
+    padding: 15px;
+    border-radius: 8px;
+    width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.project:hover {
+    transform: scale(1.05);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+.project h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.project-icons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    cursor: pointer;
+}
+
+.project-icons i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.project-icons i:hover {
+    color: #f7f3e9;
+    transform: scale(1.05);
+}
+
+#toggle-create-project {
+    background-color: #3498db;
+    color: #f7f3e9;
+    padding: 12px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    width: 60%;
+    margin: 20px auto;
+    margin-bottom: 50px;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-color: #172b4d;
+    border-width: 10px;
+    border-radius: 10px;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+#toggle-create-project:hover {
+    background-color: #2980b9;
+}
+.hidden {
+    display: none;
 }

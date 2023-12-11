@@ -7,26 +7,34 @@
 <link href="{{ asset('css/projects.css') }}" rel="stylesheet">
 
 <section id="projects">
-    <article>
+    <div id="toggle-create-project" class="hover-card">
         <h2>Create New Project</h2>
         <form class="project-form" method="POST" action="{{ route('create_project') }}">
             @method('PUT')
             @csrf
-            Project Name: <br><input type="text" name="name" class="project-form" required>
-            {{-- Description: <input type="text" name="description" required> --}}
-            <br>Delivery Date:<br><input type="date" name="delivery_date" class="project-form" required>
-            <br>
-            <button type="submit" class="button">+</button>
+            <div class="input-group">
+                <label for="project-name">Project Name:</label>
+                <input type="text" name="name" id="project-name" class="project-input" required placeholder="ex: Project X">
+            </div>
+            
+            <div class="input-group">
+                <label for="delivery-date">Delivery Date:</label>
+                <input type="date" name="delivery_date" id="delivery-date" class="project-input" required placeholder="ex: 2023-12-31">
+            </div>
+            <button type="submit" id="create-project-button">
+                <i class="fas fa-plus"></i> Add Project
+            </button>
         </form>
-    </article>
+    </div>
 
     <h2>Your active projects:</h2>    
-    @if (count($projects) > 0)
-        @each('partials.project', $projects, 'project')
-    @else
-        <p>Looks like you aren't related to any currenly active projects. You can start by creating a new one!</p>
-    @endif
-
+    <div id="active-projects">
+        @if (count($projects) > 0)
+            @each('partials.project', $projects, 'project')
+        @else
+            <p>Looks like you aren't related to any currently active projects. You can start by creating a new one!</p>
+        @endif
+    </div>
 </section>
 
 @endsection
