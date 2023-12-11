@@ -25,6 +25,7 @@
     <script type="text/javascript" src="{{ asset('js/contacts.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/about.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/password_forms.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/user_delete_popup.js') }}" defer></script>
 </head>
 <body>
     <main>
