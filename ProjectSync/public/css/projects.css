@@ -18,12 +18,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    border-radius: 5px;
-    border-color: #172b4d;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
 }
 
 .input-group {
-    width: 48%; /* Adjust as needed */
+    width: 48%;
     display: inline-block;
     box-sizing: border-box;
     margin-bottom: 10px;
@@ -33,10 +32,10 @@
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
-    border: 1px solid #172b4d; /* Dark blue border */
+    border: 1px solid #172b4d;
     background-color: #f7f3e9;
-    color: #172b4d; /* Dark blue text color */
-    placeholder: #172b4d; /* Dark blue placeholder color */
+    color: #172b4d;
+    border-radius: 4px;
 }
 
 #project-name, #delivery-date {
@@ -44,25 +43,29 @@
     border-color: #172b4d;
     border-radius: 10px;
     border-width: 2px;
-    color: #172b4d; 
+    color: #172b4d;
 }
 
 #create-project-button {
     background-color: #172b4d;
     color: #f7f3e9;
     padding: 12px;
-    border: none;
-    border-radius: 5px;
     cursor: pointer;
-    width: 150px;
-    transition: background-color 0.3s ease-in-out;
+    width: 160px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
     font-size: 13px;
     text-align: center;
-    line-height: 150%; 
+    line-height: 150%;
+    border-radius: 5px;
 }
 
 #create-project-button i {
     margin-right: 5px;
+}
+
+#create-project-button:hover {
+    background-color: #0e1a2d;
+    transform: scale(1.05);
 }
 
 #active-projects {
@@ -79,8 +82,8 @@
     padding: 15px;
     border-radius: 8px;
     width: 200px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,6 +91,7 @@
 
 .project:hover {
     transform: scale(1.05);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
 }
 
 .project h3 {
@@ -100,6 +104,7 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
+    cursor: pointer;
 }
 
 .project-icons i {
@@ -108,27 +113,29 @@
 }
 
 .project-icons i:hover {
-    color: #172b4d;
+    color: #f7f3e9;
+    transform: scale(1.05);
 }
 
 #toggle-create-project {
     background-color: #3498db;
-    color: #fff;
+    color: #f7f3e9;
     padding: 12px;
     cursor: pointer;
-    border: none;
-    border-radius: 4px;
     margin-bottom: 20px;
     width: 60%;
     margin: 20px auto;
     margin-bottom: 50px;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-color: #172b4d;
+    border-width: 10px;
+    border-radius: 10px;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
 }
 
 #toggle-create-project:hover {
     background-color: #2980b9;
 }
-
 .hidden {
     display: none;
 }

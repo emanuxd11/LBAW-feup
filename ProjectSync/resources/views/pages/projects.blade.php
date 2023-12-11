@@ -14,12 +14,12 @@
             @csrf
             <div class="input-group">
                 <label for="project-name">Project Name:</label>
-                <input type="text" name="name" id="project-name" class="project-input" required>
+                <input type="text" name="name" id="project-name" class="project-input" required placeholder="ex: Project X">
             </div>
-    
+            
             <div class="input-group">
                 <label for="delivery-date">Delivery Date:</label>
-                <input type="date" name="delivery_date" id="delivery-date" class="project-input" required>
+                <input type="date" name="delivery_date" id="delivery-date" class="project-input" required placeholder="ex: 2023-12-31">
             </div>
             <button type="submit" id="create-project-button">
                 <i class="fas fa-plus"></i> Add Project
