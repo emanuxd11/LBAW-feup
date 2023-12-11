@@ -1,0 +1,323 @@
+
+#project {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#project-info-card {
+    background-color: #006aa7;
+    color: #f7f3e9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 60%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+#project-info-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+#project-info-card h2 {
+    margin-bottom: 10px;
+}
+
+#project-links {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.link {
+    background-color: #f7f3e9;
+    color: #172b4d;
+    border: solid;
+    border-radius: 8px;
+    padding-top: 20px;
+    border-color: #172b4d;
+    border-width: 3px;
+    width: 150px;
+    margin-bottom: 20px;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.link:hover {
+    background-color: #a79c8b;
+}
+
+.link a {
+    color: #172b4d;
+    text-decoration: none;
+}
+
+.link i {
+    margin-bottom: 5px;
+    color: #172b4d;
+    font-size: 24px;
+}
+
+#project-members-card {
+    background-color: #f7f3e9;
+    color: #172b4d;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    width: 60%;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#project-members-card:hover {
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+#project-members h3 {
+    margin-bottom: 10px;
+}
+
+#project-member-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-list-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #006aa7;
+    border: solid;
+    border-color: #172b4d;
+    border-width: 2px;
+    color: #f7f3e9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.user-list-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.user-list-content {
+    display: flex;
+    align-items: center;
+}
+
+#user-name-project {
+    color: #f7f3e9;
+    margin-right: 150px;
+}
+
+.remove-member-button {
+    background-color: #172b4d;
+    color: #f7f3e9;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.remove-member-button i {
+    font-size: 24px;
+}
+
+.remove-member-button:hover i {
+    transform: scale(1.05);
+}
+
+.confirmation-popup {
+    display: none;
+}
+
+.confirmation-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #f7f3e9;
+    background-color: #172b4d;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.confirmation-popup p {
+    margin-bottom: 15px;
+}
+
+.confirmation-popup button {
+    margin-right: 10px;
+}
+
+#addMemberForm {
+    background-color: #172b4d;
+    color: #f7f3e9;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    width: 450px; 
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#searchInput{
+    margin-top: 20px;
+    width: 200px;
+    background-color: #f7f3e9;
+    color: #172b4d;
+}
+
+#addMemberForm:hover {
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+#addMemberForm input {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 80%;
+}
+
+#searchResults {
+    list-style-type: none;
+    padding: 0;
+}
+
+#searchResults li {
+    background-color: #f7f3e9;
+    color: #172b4d;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+#tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.task-card {
+    background-color: #006aa7;
+    color: #f7f3e9;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 8px 16px rgba(23, 43, 77, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 100%;
+}
+
+.task-card:hover {
+    box-shadow: 0 16px 32px rgba(23, 43, 77, 0.2);
+}
+
+.task-card h3 {
+    margin-bottom: 10px;
+}
+
+.task-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task-form input {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #172b4d;
+    width: 80%;
+    background-color: #f7f3e9;
+    color: #172b4d;
+}
+
+.task-form button {
+    background-color: #172b4d;
+    color: #f7f3e9;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.task-form button:hover {
+    background-color: #006aa7;
+}
+
+.search_task {
+    margin-top: 20px;
+}
+
+.search_task label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#search_task_input {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #172b4d;
+    background-color: #f7f3e9;
+    color: #172b4d;
+}
+
+#search_task_results {
+    list-style-type: none;
+    padding: 0;
+}
+
+#search_task_results li {
+    background-color: #006aa7;
+    color: #f7f3e9;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+#tasks button {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    background-color: #172b4d;
+    color: #f7f3e9;
+    padding: 20px 28px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#tasks button i {
+    font-size: 30px;
+    margin-top: -2px; /* Adjust as needed */
+}
+
+#tasks button:hover {
+    background-color: #011b34;
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}

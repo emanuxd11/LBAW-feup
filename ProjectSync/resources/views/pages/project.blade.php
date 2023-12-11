@@ -4,99 +4,95 @@
 
 @section('content')
 
-    <link href="{{ asset('css/projects.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="{{ asset('js/user_delete_popup.js') }}" defer></script>
-
+    <link href="{{ asset('css/project.css') }}" rel="stylesheet">
     <section id="project">
-        <div class="errors">
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @elseif ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+        <div id="project-info-card">
+            <h2>{{ $project->name }}</h2>
+            <div id="project-links">
+                <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" class="link">
+                    <i class="fas fa-user"></i>
+                    <p>{{ $project->getCoordinator()->name }}</p>
+                </a>
+                <a href="{{ route('forum.show', ['id' => $project->id]) }}" class="link">
+                    <i class="fas fa-comments"></i>
+                    <p>Forum</p>
+                </a>
+            </div>
         </div>
-        <h2>{{ $project->name }}</h2>
-        <p>Coordinator: <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}"><span>{{ $project->getCoordinator()->name }}</span></a></p>
-        <p><a href="{{ route('forum.show', ['id' => $project->id]) }}"><span>Forum</span></a></p>
         <div id="project-members">
             <h3>Project Members</h3>
             <ul id="project-member-list">
                 @if(count($project->members) <= 1)
-                    <p id="no-members">Looks like nobody has been added to the project yet.<p>
+                    <p id="no-members">Looks like nobody has been added to the project yet.</p>
                 @endif
-
+        
                 @foreach($project->members as $user)
                     @if($project->isCoordinator($user))
                         @continue
                     @endif
-
-                    <li class="user_list_task" data-id="{{ $user->id }}">
-                        <a href="{{ route('profilePage', ['username' => $user->username]) }}">
-                            <span>{{ $user->name . ' (' . $user->username . ')' }}</span>
-                        </a>
-                        
-                        @if($project->isCoordinator(Auth::user()))
-                            <button class="remove-member-button button" onclick="showConfirmationPopup(event);">
-                                <i class="fas fa-trash"></i>
-                            </button>
-
-                            <form class="project-form" method="POST" action="{{ route('remove_member', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="removeMemberForm">
-                                @method('DELETE')
-                                @csrf
-
-                                <div class="confirmation-popup hidden">
-                                    <p>Are you sure you want to remove {{ $user->name }} from the project?</p>
-                                    <button class="button" onclick="cancelRemoval(); return false;">No</button>
-                                    <button class="button">Yes</button>
+                    <li data-id="{{ $user->id }}">
+                        <div class="user-list-card">
+                            <a href="{{ route('profilePage', ['username' => $user->username]) }}">
+                                <div class="user-list-content">
+                                    <span id="user-name-project">{{ $user->name . ' (' . $user->username . ')' }}</span>
                                 </div>
-                            </form>
-                        @endif
+                            </a>
+                            @if($project->isCoordinator(Auth::user()))
+                                <button class="remove-member-button button" onclick="showConfirmationPopup(event);">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <form class="project-form" method="POST" action="{{ route('remove_member', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="removeMemberForm">
+                                    @method('DELETE')
+                                    @csrf
+                                    
+                                </form>
+                                <div id="confirmation-popup" class="confirmation-popup hidden">
+                                    <p>Are you sure you want to remove {{ $user->name }} from the project?</p>
+                                    <button class="button cancel-button">No</button>
+                                    <button class="button confirm-button">Yes</button>
+                                </div>
+                            @endif
+                        </div>
                     </li>
+
                 @endforeach
             </ul>
             
             @if($project->isCoordinator(Auth::user()))
                 <form class="project-form" id="addMemberForm">
-                    Add new team members:<br>
+                    Add new team members<br>
                     <input type="text" name="name" required placeholder="name or username" id="searchInput">
                     <ul id="searchResults"></ul>
                 </form>
-
+        
                 <script src="{{ asset('js/search_user.js') }}" defer></script>
             @endif
         </div>
             
         <div id="tasks">
-            <h3>Create New Task</h3>
-            <form class="project-form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
-                @method('PUT')
-                @csrf
-                Name: <br><input type="text" name="name"required>
-                <br>Description: <br><input type="text" name="description" required>
-                <br>Delivery Date: <br><input type="date" name="delivery_date">
-                <br><button type="submit" class="button">+</button>
-            </form>
-
-            <h3>Your pending tasks:<h3>
-
+            <div class="task-card">
+                <h3>Create New Task</h3>
+                <form class="task-form project-form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
+                    @method('PUT')
+                    @csrf
+                    Name: <br><input type="text" name="name" required>
+                    <br>Description: <br><input type="text" name="description" required>
+                    <br>Delivery Date: <br><input type="date" name="delivery_date">
+                    <br><button type="submit" class="button"><i class="fas fa-plus"></i></button>
+                </form>
+            </div>
+        
+            <h3>Your pending tasks:</h3>
+        
             <!-- task search -->
-            <div class="search_task">
-                <form class="project-form" id="search_task_form">
+            <div class="task-card search_task">
+                <form class="task-form project-form" id="search_task_form">
                     <p hidden id="hidden_task_attr">Looks like there are no tasks.</p>
                     <label id="hidden_task_search" for="search_task_input">Search for task:</label>
                     <input type="text" name="task" required placeholder="name or status" id="search_task_input" class="project-form">
-                    <ul id="search_task_results">
-                    </ul>
+                    <ul id="search_task_results"></ul>
                 </form>
-                
+        
                 <script>
                     document.addEventListener('DOMContentLoaded', function () {
                         // Function to check and show/hide the message
@@ -122,7 +118,7 @@
                         observer.observe(document.getElementById('search_task_results'), { childList: true });
                     });
                 </script>
-                
+
                 <script src="{{ asset('js/search_tasks.js') }}" defer></script>
             </div>
         </div>
