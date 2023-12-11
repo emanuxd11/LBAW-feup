@@ -6,6 +6,22 @@
 
     <link href="{{ asset('css/project.css') }}" rel="stylesheet">
     <section id="project">
+        <div class="errors">
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @elseif ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
+        
         <div id="project-info-card">
             <h2>{{ $project->name }}</h2>
             <div id="project-links">
