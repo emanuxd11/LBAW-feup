@@ -198,4 +198,22 @@ class ProjectController extends Controller
 
         return redirect()->back()->with('success', 'User removed successfully.');
     }
+
+    public function member_leave($projectId, $userId)
+    {
+        $project = Project::findOrFail($projectId);
+
+        $this->authorize('member_leave', [$project, Auth::user()]);
+
+        $project->members()->detach($userId);
+
+        // Remove the user from all tasks in the project
+        foreach ($project->tasks as $task) {
+            $task->members()->detach($userId);
+        }
+
+        var_dump("cringe");
+
+        return redirect()->back()->with('success', 'You are no longer part of \"' . $project->name . '\"!');
+    }
 }

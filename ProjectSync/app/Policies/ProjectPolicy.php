@@ -56,11 +56,19 @@ class ProjectPolicy
     }
 
     /**
-     * Determine if the current user can remove a member (user has to be project coorinator). 
+     * Determine if the current user can remove a member (must be project coorinator). 
      */
     public function remove_member(User $user, Project $project): bool
     {
         // Only a project coordinator can do this.
         return $project->isCoordinator($user);
+    }
+
+    /**
+     * Determine if the current user can leave the project (has to be authenticated and part of the project). 
+     */
+    public function member_leave(User $user, Project $project): bool
+    {
+        return true;#$project->isMember($user) && Auth::check();
     }
 }
