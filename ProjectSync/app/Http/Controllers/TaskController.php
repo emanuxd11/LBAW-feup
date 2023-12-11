@@ -23,7 +23,9 @@ class TaskController extends Controller
         if(!$project->isMember(Auth::user())){
             return redirect("/projects");
         }
-        return view("pages.task",compact('task'));
+        $taskComments = TaskComments::where('task_id',$task->id)->get();
+
+        return view("pages.task",compact('task','taskComments'));
     }
     /**
      * Creates a new item.
@@ -132,7 +134,7 @@ class TaskController extends Controller
         DB::table('projectmembertask')->where('task_id', $task->id)->delete();
         TaskComments::where('task_id', $task->id)->delete();
         $task->delete();
-        return redirect('/projects/' . $project_id);
+        return redirect('/projects/' . $project_id)->with('success', 'Task removed successfully.');
     }
 
     public function removeUserFromTask(Request $request, $id){

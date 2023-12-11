@@ -8,6 +8,21 @@
     <script type="text/javascript" src="{{ asset('js/user_delete_popup.js') }}" defer></script>
 
     <section id="project">
+        <div class="errors">
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @elseif ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
         <h2>{{ $project->name }}</h2>
         <p>Coordinator: <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}"><span>{{ $project->getCoordinator()->name }}</span></a></p>
         <p><a href="{{ route('forum.show', ['id' => $project->id]) }}"><span>Forum</span></a></p>

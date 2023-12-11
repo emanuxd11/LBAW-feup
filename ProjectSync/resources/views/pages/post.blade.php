@@ -116,7 +116,7 @@
         </div>
     
         <div class="showComments">
-            @foreach ($postComments as $postComment)
+            @forelse ($postComments as $postComment)
             <div class="commentCard">
                 <div class="commentHeader">
                     <p>Author:{{$postComment->author->username}}</p>
@@ -153,7 +153,9 @@
                     @endif
                 </div>
             </div>
-            @endforeach
+            @empty
+               <p>No comments</p>
+            @endforelse
         </div>
     
     </div>

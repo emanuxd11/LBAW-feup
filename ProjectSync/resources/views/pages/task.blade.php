@@ -9,6 +9,15 @@
     <link href="{{ asset('css/projects.css') }}" rel="stylesheet">
 
     <div class="task-profile">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @elseif(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <div class="task-header">
             <div class="task-title-div">
@@ -88,22 +97,66 @@
                 </select>
                 <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
             </form>
-
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @elseif(session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
         
             <form method="POST" action="{{ route('delete_task',['id' => $task->id]) }}">
                 @method('DELETE')
                 @csrf
                 <button type="submit" class="button delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
             </form>
+        </div>
+
+        <h3>Comments</h3>
+
+        <div class="createComment">
+            <form method="POST" action="{{ route('taskComment.create',['id' => $task->id]) }}">
+                @method('PUT')
+                @csrf
+                <textarea name="comment" class="comment_creator"></textarea>
+                <button type="submit" class="submit">Create</button>
+            </form>
+        </div>
+
+        <div class="listOfComments">
+            @forelse ($taskComments as $taskComment)
+                <div class="commentCard">
+                    <div class="commentHeader">
+                        <p>Author:{{$taskComment->user->username}}</p>
+                        <p>Date:{{$taskComment->created_at}}</p>
+                        @if($taskComment->isedited)
+                            <p>Edited</p>
+                        @endif
+                    </div>
+        
+                    <div class="commentBody">
+                        <p>{{$taskComment->comment}}</p>
+                    </div>
+        
+                    <div class="editComment">
+                        <h4>Edit Comment</h4>
+                        @if (Auth::user()->id == $taskComment->user_id || Auth::user()->isAdmin)
+                            @if (Auth::user()->id == $taskComment->user_id)
+                                <form method="POST" action="{{ route('taskComment.update', ['id' => $task->id]) }}" class="updatePostForm">
+                                    @csrf
+                                    @method('POST')
+                                    <p class="createPost">Comment:</p>
+                                    <textarea name="comment" class="post-form" placeholder="{{ $taskComment->comment }}"></textarea>
+                                    <input type="hidden" name="id" class="post-form" value="{{ $taskComment->id }}">
+                                    <button type="submit" class="editPost">Edit</button>
+                                </form> 
+                            @endif
+        
+                            <form method="POST" action="{{ route('taskComment.delete', ['id' => $task->id]) }}" class="deletePostForm">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="id" class="post-form" value="{{ $taskComment->id }}">
+                                <button type="submit" class="deletePost">Delete</button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+            @empty
+            <p class="noPosts">No posts</p>
+            @endforelse
         </div>
     </div>
 @endsection
