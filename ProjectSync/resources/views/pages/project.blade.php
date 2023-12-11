@@ -48,29 +48,27 @@
                                         id="memberLeaveForm">
                                     @method('DELETE')
                                     @csrf
-                                    
+                                    <div id="confirmation-popup" class="confirmation-popup hidden">
+                                        <p>Are you sure you want to leave "{{ $project->name }}"?</p>
+                                        <button class="button cancel-button">No</button>
+                                        <button class="button confirm-button">Yes</button>
+                                    </div>
                                 </form>
-                                <div id="confirmation-popup" class="confirmation-popup hidden">
-                                    <p>Are you sure you want to leave "{{ $project->name }}"?</p>
-                                    <button class="button cancel-button">No</button>
-                                    <button class="button confirm-button">Yes</button>
-                                </div>
-                            @endif
-                            
-                            @if($project->isCoordinator(Auth::user()))
+                                
+                            @elseif($project->isCoordinator(Auth::user()))
                                 <button class="remove-member-button button" onclick="showConfirmationPopup(event);">
                                     <i class="fas fa-trash"></i>
                                 </button>
                                 <form class="project-form" method="POST" action="{{ route('remove_member', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="removeMemberForm">
                                     @method('DELETE')
                                     @csrf
-                                    
+                                    <div id="confirmation-popup" class="confirmation-popup hidden">
+                                        <p>Are you sure you want to remove {{ $user->name }} from the project?</p>
+                                        <button class="button cancel-button">No</button>
+                                        <button class="button confirm-button">Yes</button>
+                                    </div>
                                 </form>
-                                <div id="confirmation-popup" class="confirmation-popup hidden">
-                                    <p>Are you sure you want to remove {{ $user->name }} from the project?</p>
-                                    <button class="button cancel-button">No</button>
-                                    <button class="button confirm-button">Yes</button>
-                                </div>
+                                
                             @endif
 
                         </div>

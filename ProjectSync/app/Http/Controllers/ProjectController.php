@@ -212,8 +212,6 @@ class ProjectController extends Controller
             $task->members()->detach($userId);
         }
 
-        var_dump("cringe");
-
         return redirect()->back()->with('success', 'You are no longer part of \"' . $project->name . '\"!');
     }
 }

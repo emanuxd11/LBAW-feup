@@ -68,7 +68,7 @@ Route::controller(ForumController::class)->group(function () {
     Route::get('/projects/{id}/forum/search', 'search')->name('forum.search');
 });
 
-//Post
+// Post
 Route::controller(PostController::class)->group(function () {
     Route::get('/projects/{project_id}/forum/post/{id}', 'show')->name('post.show');
     Route::put('/createPost', 'create')->name('post.create');
@@ -77,7 +77,7 @@ Route::controller(PostController::class)->group(function () {
     Route::delete('/post/{id}', 'delete')->name('post.delete');
 });
 
-//PostComment
+// PostComment
 Route::controller(PostCommentController::class)->group(function () {
     Route::put('/createPostComment', 'create')->name('postComment.create');
     Route::post('/postComment/{id}', 'update')->name('postComment.update');

@@ -69,6 +69,6 @@ class ProjectPolicy
      */
     public function member_leave(User $user, Project $project): bool
     {
-        return true;#$project->isMember($user) && Auth::check();
+        return $project->isMember($user) && Auth::check();
     }
 }
