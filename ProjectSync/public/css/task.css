@@ -5,16 +5,16 @@
     color: #f7f3e9;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 8px 20px rgba(0, 106, 167, 0.8); /* Darker shadow values */
+    box-shadow: 0 8px 20px rgba(0, 106, 167, 0.8); 
     width: 70%;
     max-width: 600px;
     margin: 50px auto;
 }
 
 .task-header {
-    background-color: #172b4d; /* Updated background color for a card-like appearance */
-    border-radius: 8px; /* Added border-radius for a rounded corner effect */
-    padding: 15px; /* Added padding for better spacing */
+    background-color: #172b4d; 
+    border-radius: 8px; 
+    padding: 15px; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,12 +24,17 @@
 
 .task-header h1 {
     font-size: 24px;
-    color: #f7f3e9; /* Updated text color for better contrast */
+    color: #f7f3e9; 
+}
+
+.task-header a{
+    color: #f7f3e9; 
+
 }
 
 .task-status {
     font-size: 18px;
-    color: #f7f3e9; /* Updated text color for better contrast */
+    color: #f7f3e9; 
 }
 
 .task-details {
@@ -104,11 +109,11 @@
 }
 
 textarea.task_description {
-    background-color: #ffffff;width: 300px;height: 125px; resize: none;
+    background-color: #f7f3e9;width: 300px;height: 125px; resize: none;
 }
 
 .backButton a{
-    color: white;
+    color: f7f3e9;
 }
 
 .task-title-div{
@@ -121,4 +126,20 @@ textarea.task_description {
     margin-bottom: 4px;
 }
 
+#toggle_task_edit, #submit-create-comment, #editPost, #deletePost, #toggle_comment_edit{
+    color: #f7f3e9;
+    background-color: #172b4d;
+}
 
+#toggle_task_edit:hover, #submit-create-comment:hover, #editPost:hover, #deletePost:hover, #toggle_comment_edit:hover{
+    transform: scale(1.05);
+}
+
+.task_description_area, .post-form, .comment_creator{
+    background-color: #f7f3e9;
+}
+
+.project-form-input{
+    background-color: #f7f3e9;
+    color: #172b4d;
+}

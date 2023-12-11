@@ -76,20 +76,20 @@
                 @method('POST')
                 @csrf
                 <p class="info-label">Name:</p>
-                <input type="text" name="name" class="project-form">
+                <input type="text" name="name" class="project-form-input" placeholder="ex: Create Articles" style="background-color: #f7f3e9; color: #172b4d;">
                 <p class="info-label">Description:</p>
-                <textarea name="description" class="task_description_area"></textarea>
+                <textarea name="description" class="task_description_area" placeholder="ex: Create Navbar with four different buttons ..."></textarea>
                 <p class="info-label">Status:</p>
-                <select id="status" name="status" class="">
+                <select id="status" name="status" class="project-form-input">
                     <option value="" selected disabled>{{$task->status}}</option>
                     <option value="To Do">To Do</option>
                     <option value="Doing">Doing</option>
                     <option value="Done">Done</option>
                 </select>
                 <p class="info-label">Delivery Date:</p>
-                <input type="date" name="delivery_date" class="">
+                <input type="date" name="delivery_date" class="project-form-input" style="background-color: #f7f3e9; color: #172b4d;">
                 <p class="info-label">Add user:</p>
-                <select id="username" name="username" class="project-form">
+                <select id="username" name="username" class="project-form-input">
                     <option value="" selected disabled>--------</option>
                     @foreach($task->members_not_in_task as $user)
                     <option value={{$user->username}}>{{ $user->name . ' (' . $user->username . ')' }}</option>
@@ -112,8 +112,8 @@
             <form method="POST" action="{{ route('taskComment.create',['id' => $task->id]) }}">
                 @method('PUT')
                 @csrf
-                <textarea name="comment" class="comment_creator"></textarea>
-                <button type="submit" class="submit">Create</button>
+                <textarea name="comment" class="comment_creator" placeholder="ex: I can take this task..."></textarea>
+                <button type="submit" id="submit-create-comment">Create</button>
             </form>
         </div>
 
@@ -144,7 +144,7 @@
                                     <p class="createPost">Comment:</p>
                                     <textarea name="comment" class="post-form" placeholder="{{ $taskComment->comment }}"></textarea>
                                     <input type="hidden" name="id" class="post-form" value="{{ $taskComment->id }}">
-                                    <button type="submit" class="editPost">Edit</button>
+                                    <button type="submit" id="editPost">Edit</button>
                                 </form> 
                             @endif
 
@@ -152,7 +152,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" class="post-form" value="{{ $taskComment->id }}">
-                                <button type="submit" class="deletePost">Delete</button>
+                                <button type="submit" id="deletePost">Delete</button>
                             </form>
                     </div>
                     @endif
