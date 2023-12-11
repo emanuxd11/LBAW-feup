@@ -4,13 +4,23 @@
 
 @section('content')
 
-    <link href="{{ asset('css/projects.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/project.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ asset('js/user_delete_popup.js') }}" defer></script>
 
     <section id="project">
-        <h2>{{ $project->name }}</h2>
-        <p>Coordinator: <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}"><span>{{ $project->getCoordinator()->name }}</span></a></p>
-        <p><a href="{{ route('forum.show', ['id' => $project->id]) }}"><span>Forum</span></a></p>
+        <div id="project-info-card">
+            <h2>{{ $project->name }}</h2>
+            <div id="project-links">
+                <div class="link">
+                    <i class="fas fa-user"></i>
+                    <p><a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}">{{ $project->getCoordinator()->name }}</a></p>
+                </div>
+                <div class="link">
+                    <i class="fas fa-comments"></i>
+                    <p><a href="{{ route('forum.show', ['id' => $project->id]) }}">Forum</a></p>
+                </div>
+            </div>
+        </div>
         <div id="project-members">
             <h3>Project Members</h3>
             <ul id="project-member-list">
