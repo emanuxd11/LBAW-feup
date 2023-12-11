@@ -35,7 +35,7 @@
                 </a>
                 
                 @if($project->isCoordinator(Auth::user()))
-                    <button class="member-leave-button button" onclick="showConfirmationPopup(event);">
+                    <button class="archive-button button" onclick="showPopup('archive-popup');">
                         <i class="fa-solid fa-box-archive"></i><br>(archive, fix css)
                     </button>
                     <form class="project-form" method="POST" 
@@ -43,9 +43,9 @@
                             id="archiveProjectForm">
                         @method('POST')
                         @csrf
-                        <div id="confirmation-popup" class="confirmation-popup hidden">
+                        <div id="archive-popup" class="confirmation-popup hidden">
                             <p>Are you sure you want to archive "{{ $project->name }}"? (This action cannot be undone!)</p>
-                            <button class="button cancel-button">No</button>
+                            <button type="button" class="button cancel-button" onclick="hidePopup('archive-popup')">No</button>
                             <button class="button confirm-button">Yes</button>
                         </div>
                     </form>
@@ -79,31 +79,31 @@
                             </a>
 
                             @if($user->id === Auth::user()->id)
-                                <button class="member-leave-button button" onclick="showConfirmationPopup(event);">
+                                <button class="member-leave-button button" onclick="showPopup('member-leave-popup');">
                                     <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
                                 </button>
-                                <form class="project-form" method="POST" 
+                                <form class="project-form" method="POST"
                                         action="{{ route('member_leave', ['project_id' => $project->id, 'user_id' => $user->id]) }}" 
                                         id="memberLeaveForm">
                                     @method('DELETE')
                                     @csrf
-                                    <div id="confirmation-popup" class="confirmation-popup hidden">
+                                    <div id="member-leave-popup" class="confirmation-popup hidden">
                                         <p>Are you sure you want to leave "{{ $project->name }}"?</p>
-                                        <button class="button cancel-button">No</button>
+                                        <button type="button" class="button cancel-button" onclick="hidePopup('member-leave-popup')">No</button>
                                         <button class="button confirm-button">Yes</button>
                                     </div>
                                 </form>
                                 
                             @elseif($project->isCoordinator(Auth::user()))
-                                <button class="remove-member-button button" onclick="showConfirmationPopup(event);">
+                                <button class="remove-member-button button" onclick="showPopup('remove-user-popup');">
                                     <i class="fas fa-trash"></i>
                                 </button>
                                 <form class="project-form" method="POST" action="{{ route('remove_member', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="removeMemberForm">
                                     @method('DELETE')
                                     @csrf
-                                    <div id="confirmation-popup" class="confirmation-popup hidden">
+                                    <div id="remove-user-popup" class="confirmation-popup hidden">
                                         <p>Are you sure you want to remove {{ $user->name }} from the project?</p>
-                                        <button class="button cancel-button">No</button>
+                                        <button type="button" class="button cancel-button" onclick="hidePopup('remove-user-popup')">No</button>
                                         <button class="button confirm-button">Yes</button>
                                     </div>
                                 </form>

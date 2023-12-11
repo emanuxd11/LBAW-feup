@@ -53,7 +53,8 @@ class ProjectPolicy
      */
     public function archive(User $user, Project $project): bool
     {
-      return (Auth::user()->is_admin || $project->isCoordinator($user)) && !$project->archived;
+        return $project->isCoordinator($user);
+    //   return (Auth::user()->is_admin || $project->isCoordinator($user)) && !$project->archived;
     }
 
     /**

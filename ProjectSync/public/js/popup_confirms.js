@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-const showConfirmationPopup = (event) => {
-    const currentPopup = document.getElementById('confirmation-popup');
+const showPopup = (element_id) => {
+    const currentPopup = document.getElementById(element_id);
     currentPopup.style.display = 'block';
 
     const cancelButton = currentPopup.querySelector('.cancel-button');
@@ -15,6 +15,11 @@ const showConfirmationPopup = (event) => {
 
     cancelButton.addEventListener('click', cancelRemoval);
     confirmButton.addEventListener('click', confirmRemoval);
+};
+
+const hidePopup = (element_id) => {
+    const currentPopup = document.getElementById(element_id);
+    currentPopup.style.display = 'none';
 };
 
 const cancelRemoval = () => {
