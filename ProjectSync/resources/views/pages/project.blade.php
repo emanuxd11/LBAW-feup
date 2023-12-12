@@ -8,6 +8,21 @@
     <script type="text/javascript" src="{{ asset('js/user_delete_popup.js') }}" defer></script>
 
     <section id="project">
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+        <script>
+            var pusher = new Pusher('8d48a604817a4cfba3b7', {
+            cluster: 'eu',
+            });
+
+            var channel = pusher.subscribe('notifications');
+            channel.bind('notification', function(data) {
+            // Handle the arrival of a new notification
+            console.log(data.message);
+            // You can update the UI or take other actions here
+            });
+        </script>
+
+
         <h2>{{ $project->name }}</h2>
         <p>Coordinator: <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}"><span>{{ $project->getCoordinator()->name }}</span></a></p>
 

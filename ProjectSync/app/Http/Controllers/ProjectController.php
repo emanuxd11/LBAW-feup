@@ -13,6 +13,8 @@ use App\Models\Project;
 use App\Models\User;
 use App\Models\Task;
 
+use App\Events\Notification;
+
 use App\Http\Controllers\AdminController;
 
 class ProjectController extends Controller
@@ -161,6 +163,10 @@ class ProjectController extends Controller
 
         // Add the user to the project
         $project->members()->attach($userId, ['iscoordinator' => false, 'isfavorite' => false]);
+        event(new Notification([
+            'message' => 'You have been added to the project ' . $project->name,
+            'user_id' => $userId,
+        ]));
 
         return response()->json(['success' => true]);
     }

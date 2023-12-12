@@ -9,6 +9,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\NotificationController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -92,3 +93,5 @@ Route::controller(ResetPasswordController::class)->group(function() {
     Route::get('password/reset/{token}', 'showResetForm')->name('password.reset');
     Route::post('password/reset', 'resetPassword')->name('password.update');
 });
+
+Route::post('/broadcast-notification', [NotificationController::class, 'broadcastNotification']);
