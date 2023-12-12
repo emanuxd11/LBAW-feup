@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
 
         xhr.onload = function() {
+            var alertDivs = document.querySelectorAll('.alert.alert-success');
+            alertDivs.forEach(function(alertDiv) {
+                alertDiv.remove();
+            });
+
             if (xhr.status >= 200 && xhr.status < 300) {
                 
                 if (action == 'unfavorite-project') {
@@ -27,6 +32,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     favorite_button.querySelector('i').classList.remove('fa-regular');
                     favorite_button.querySelector('i').classList.add('fa-solid');
                 }
+
+                var successMessage = document.createElement('div');
+                successMessage.classList.add('alert', 'alert-success');
+                successMessage.textContent = (action == 'favorite-project') 
+                    ? 'Project favorited successfully!'
+                    : 'Project removed from favorites.';
+                document.querySelector('.errors').appendChild(successMessage);
                 
             } else {
                 console.error('Error:', xhr.status, xhr.statusText);
