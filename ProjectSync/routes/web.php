@@ -62,6 +62,7 @@ Route::controller(ProjectController::class)->group(function () {
     Route::get('/projects/{id}/search_user', 'search_user')->name('project_search_user');
     Route::post('/projects/{id}/add_user', 'addUserToProject')->name('project_add_user');
     Route::get('/projects/{id}/search_task', 'search_task')->name('project_search_task');
+    Route::post('/projects/{project_id}/favorite', 'favorite')->name('project.favorite');
 });
 
 // Forum

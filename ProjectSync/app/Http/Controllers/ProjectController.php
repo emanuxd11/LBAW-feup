@@ -236,21 +236,23 @@ class ProjectController extends Controller
         return redirect()->back()->with('success', 'Coordinator changed successfully.');
     }
 
-    public function addToFav(Request $request, $projectId){
-        $project = Project::findOrFail($projectId);
+    
+    public function favorite(Request $request, $project_id)
+    {
+        $user = Auth::user();
+        $project = Project::findOrFail($project_id);
 
-        $request->validate([
-            'user_id' => 'required',
-        ]);
+        $this->authorize('favorite', [$project, $user]);
 
-        $this->authorize('add_to_favs', [$project, Auth::user()]);
+        $previous_status = $project->isFavoriteOf($user);
 
-        try {
-            $project->members()->updateExistingPivot($request->input('user_id'), ['isfavorite' => true]);
-        } catch (QueryException $e) {
-            return redirect()->back()->with('error', $e);
-        }
+        DB::table('projectmember')
+            ->updateOrInsert(
+                ['iduser' => $user->id, 'idproject' => $project->id],
+                ['isfavorite' => !$previous_status]
+            );
 
-        return redirect()->back()->with('success', 'Added project to favs successfully.');
+        // Respond with a JSON indicating the new favorite status
+        return response()->json(['is_favorite' => !$previous_status]);
     }
 }

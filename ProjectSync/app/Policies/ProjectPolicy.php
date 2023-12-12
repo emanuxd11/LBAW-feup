@@ -78,7 +78,12 @@ class ProjectPolicy
     {
         return Auth::check() && $project->isCoordinator($user);
     }
-    public function add_to_favs(User $user, Project $project): bool
+
+    /**
+     * Determine if the current user can favorite this project.
+     * (has to be part of the project)
+     */
+    public function favorite(User $user, Project $project): bool
     {
         return $project->isMember($user) && Auth::check();
     }

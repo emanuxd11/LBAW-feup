@@ -71,4 +71,15 @@ class Project extends Model
     {
         return $user->id === $this->getCoordinator()->id;
     }
+
+    /**
+     * Check if a user is has marked a project as favorite.
+     */
+    public function isFavoriteOf(User $user): bool
+    {
+        return $this->members()
+            ->where('iduser', $user->id)
+            ->where('isfavorite', true)
+            ->exists();
+    }
 }

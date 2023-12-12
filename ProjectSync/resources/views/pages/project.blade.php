@@ -4,6 +4,7 @@
 
 @section('content')
 
+    <script type="text/javascript" src="{{ asset('js/project_fav.js') }}" defer></script>
     <link href="{{ asset('css/project.css') }}" rel="stylesheet">
 
     @if($project->archived)
@@ -43,6 +44,23 @@
                     <i class="fas fa-user"></i>
                     <p>{{ $project->getCoordinator()->name }}</p>
                 </a>
+
+                @if(!Auth::user()->isadmin)
+                    <div class="favorite-button">
+                        <form method="POST" action="{{ route('project.favorite', ['project_id' => $project->id]) }}">
+                            @csrf
+                            @if($project->isFavoriteOf(Auth::user()))
+                                <button type="submit" id="favorite-button" class="favorite-button-solid" data-action="unfavorite-project">
+                                    <i class="fa-solid fa-star"></i>
+                                </button>
+                            @else
+                                <button type="submit" id="favorite-button" class="favorite-button-empty" data-action="favorite-project">
+                                    <i class="fa-regular fa-star"></i>
+                                </button>
+                            @endif
+                        </form>
+                    </div>
+                @endif
                 
                 @if($project->isCoordinator(Auth::user()))
                     <button class="archive-button button" onclick="showPopup('archive-popup');">
