@@ -27,16 +27,6 @@
             @endif
         </div>
 
-        <form class="project-form" method="POST" 
-            action="{{ route('project.add.fav', ['project_id' => $project->id]) }}" 
-            id="addFavoriteForm">
-            @method('POST')
-            @csrf
-            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-            <button type="submit">Add to favs</button>
-        </form>
-        
-        
         <div id="project-info-card">
             <h2>{{ $project->name }}</h2>
             <div id="project-links">

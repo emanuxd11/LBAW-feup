@@ -53,7 +53,6 @@ Route::controller(ProjectController::class)->group(function () {
     Route::get('/projects', 'list')->name('projects');
     Route::get('/projects/{id}', 'show');
     Route::put('/api/projects', 'create')->name('create_project');
-    Route::post('/api/projects/{project_id}/favorites', 'addToFav')->name('project.add.fav');
     Route::post('/api/projects/{project_id}', 'archive')->name('archive');
     Route::post('/api/projects/{project_id}/assignNewCoordinator', 'assignNewCoordinator')->name('assign.new.coordinator');
     Route::delete('/projects/{project_id}/remove_member/{user_id}', 'remove_member')->name('remove_member');
