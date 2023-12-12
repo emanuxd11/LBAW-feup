@@ -3,7 +3,10 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <script type="text/javascript" src="{{ asset('js/password_forms.js') }}" defer></script>
     <link href="{{ asset('css/register.css') }}" rel="stylesheet">
+    
     <div class="container mt-2">
         <div class="text-center mb-3">
             <p class="login-section-text" style="color: #006aa7;">

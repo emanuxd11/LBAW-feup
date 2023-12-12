@@ -93,23 +93,20 @@
                                         <button class="button confirm-button">Yes</button>
                                     </div>
                                 </form>
-                                
                             @elseif($project->isCoordinator(Auth::user()))
-                                <button class="remove-member-button button" onclick="showPopup('remove-user-popup');">
+                                <button class="remove-member-button button" onclick="showPopup('remove-{{ $user->id}}-popup');">
                                     <i class="fas fa-trash"></i>
                                 </button>
                                 <form class="project-form" method="POST" action="{{ route('remove_member', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="removeMemberForm">
                                     @method('DELETE')
                                     @csrf
-                                    <div id="remove-user-popup" class="confirmation-popup hidden">
+                                    <div id="remove-{{ $user->id }}-popup" class="confirmation-popup hidden">
                                         <p>Are you sure you want to remove {{ $user->name }} from the project?</p>
-                                        <button type="button" class="button cancel-button" onclick="hidePopup('remove-user-popup')">No</button>
+                                        <button type="button" class="button cancel-button" onclick="hidePopup('remove-{{ $user->id }}-popup')">No</button>
                                         <button class="button confirm-button">Yes</button>
                                     </div>
                                 </form>
-                                
                             @endif
-
                         </div>
                     </li>
                 @endforeach

@@ -59,36 +59,39 @@ document.addEventListener('DOMContentLoaded', async () => {
                 },
                 body: JSON.stringify({ userId: user.id })
             });
-
+    
             const data = await response.json();
-
+    
             if (data.success) {
                 const listItem = document.createElement('li');
-                listItem.classList.add('project-member');
-                const profilePageUrl = `/profile/${user.username}`;
+                listItem.setAttribute('data-id', user.id);
                 listItem.innerHTML = `
-                    <a href="${profilePageUrl}">
-                        <span>${user.name} (${user.username})</span>
-                    </a>
-                    
-                    <button class="remove-member-button button" onclick="showConfirmationPopup(event);">
-                        <i class="fas fa-trash"></i>
-                    </button>
-
-                    <form class="project-form" method="POST" action="/projects/${projectId}/remove_member/${user.id}" id="removeMemberForm">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="${document.querySelector('meta[name="csrf-token"]').getAttribute('content')}">
-
-                        <div class="confirmation-popup hidden">
-                            <p>Are you sure you want to remove ${user.name} from the project?</p>
-                            <button class="button" onclick="cancelRemoval(); return false;">No</button>
-                            <button class="button" onclick="document.getElementById('removeMemberForm').submit();">Yes</button>
-                        </div>
-                    </form>
+                    <div class="user-list-card">
+                        <a href="/profile/${user.username}">
+                            <div class="user-list-content">
+                                <span id="user-name-project">${user.name} (${user.username})</span>
+                            </div>
+                        </a>
+    
+                        <button class="remove-member-button button" onclick="showPopup('remove-${user.id}-popup');">
+                            <i class="fas fa-trash"></i>
+                        </button>
+    
+                        <form class="project-form" method="POST" action="/projects/${projectId}/remove_member/${user.id}" id="removeMemberForm-${user.id}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="${document.querySelector('meta[name="csrf-token"]').getAttribute('content')}">
+    
+                            <div id="remove-${user.id}-popup" class="confirmation-popup hidden">
+                                <p>Are you sure you want to remove ${user.name} from the project?</p>
+                                <button type="button" class="button cancel-button" onclick="hidePopup('remove-${user.id}-popup')">No</button>
+                                <button class="button confirm-button" onclick="document.getElementById('removeMemberForm-${user.id}').submit();">Yes</button>
+                            </div>
+                        </form>
+                    </div>
                 `;
-
+    
                 projectMemberList.appendChild(listItem);
-
+    
                 // Hide the no-members element
                 noMembersElement.style.display = 'none';
             } else {

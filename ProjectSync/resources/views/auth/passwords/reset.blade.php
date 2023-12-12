@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    <script type="text/javascript" src="{{ asset('js/password_forms.js') }}" defer></script>
+
     <div class="container mt-2">
         <div class="email-container">
             <div class="card email-card">

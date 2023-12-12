@@ -1,11 +1,3 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const removeButtons = document.querySelectorAll('.remove-member-button');
-
-    removeButtons.forEach(button => {
-        button.addEventListener('click', showConfirmationPopup);
-    });
-});
-
 const showPopup = (element_id) => {
     const currentPopup = document.getElementById(element_id);
     currentPopup.style.display = 'block';
