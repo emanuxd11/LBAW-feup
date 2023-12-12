@@ -36,23 +36,20 @@
                 </a>
 
                 @if(!Auth::user()->isadmin)
-                    {{-- mark favorite --}}
-                    <div class="favorite-button" data-project-id="{{ $project->id }}" data-user-id="{{ Auth::user()->id }}">
+                    <div class="favorite-button">
                         <form method="POST" action="{{ route('project.favorite', ['project_id' => $project->id]) }}">
                             @csrf
-                            <input type="hidden" name="favorite" class="post-form" value="{{ 'up' }}">
                             @if($project->isFavoriteOf(Auth::user()))
-                                <button type="submit" class="" data-action="favorite-button-pressed">
+                                <button type="submit" id="favorite-button" class="favorite-button-solid" data-action="unfavorite-project">
                                     <i class="fa-solid fa-star"></i>
                                 </button>
                             @else
-                                <button type="submit" class="upvote-button" data-action="up">
+                                <button type="submit" id="favorite-button" class="favorite-button-empty" data-action="favorite-project">
                                     <i class="fa-regular fa-star"></i>
                                 </button>
                             @endif
                         </form>
                     </div>
-                    
                 @endif
                 
                 @if($project->isCoordinator(Auth::user()))

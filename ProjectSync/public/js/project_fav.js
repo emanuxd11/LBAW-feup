@@ -1,47 +1,48 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var favoriteButtons = document.querySelectorAll('.favorite-button');
+    var favorite_button = document.getElementById("favorite-button");
 
-    favoriteButtons.forEach(function(button) {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
+    favorite_button.addEventListener('click', function(e) {
+        e.preventDefault();
 
-            var projectId = this.getAttribute('data-project-id');
-            var userId = this.getAttribute('data-user-id');
+        var action = this.getAttribute('data-action');
+        const project_id = window.location.pathname.split('/').pop();
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/projects/' + projectId + '/favorite', true);
-            xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/projects/' + project_id + '/favorite', true);
+        xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
 
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    var response = JSON.parse(xhr.responseText);
-
-                    var favoriteIcon = document.querySelector('.favorite-button i');
-                    if (favoriteIcon) {
-                        if (response.is_favorite) {
-                            favoriteIcon.classList.remove('fa-regular');
-                            favoriteIcon.classList.add('fa-solid');
-                        } else {
-                            favoriteIcon.classList.remove('fa-solid');
-                            favoriteIcon.classList.add('fa-regular');
-                        }
-                    }
-                } else {
-                    console.error('Error:', xhr.status, xhr.statusText);
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                
+                if (action == 'unfavorite-project') {
+                    favorite_button.classList.remove('favorite-button-solid');
+                    favorite_button.classList.add('favorite-button-empty');
+                    favorite_button.setAttribute('data-action', 'favorite-project');
+                    favorite_button.querySelector('i').classList.remove('fa-solid');
+                    favorite_button.querySelector('i').classList.add('fa-regular');
+                } else if (action == 'favorite-project') {
+                    favorite_button.classList.remove('favorite-button-empty');
+                    favorite_button.classList.add('favorite-button-solid');
+                    favorite_button.setAttribute('data-action', 'unfavorite-project');
+                    favorite_button.querySelector('i').classList.remove('fa-regular');
+                    favorite_button.querySelector('i').classList.add('fa-solid');
                 }
-            };
+                
+            } else {
+                console.error('Error:', xhr.status, xhr.statusText);
+            }
+        };
 
-            xhr.onerror = function () {
-                console.error('Network error');
-            };
+        xhr.onerror = function() {
+            console.error('Network error');
+        };
+        
+        xhr.send(JSON.stringify({
+            _token: '{{ csrf_token() }}',
+            upvote: action
+        }));
 
-            xhr.send(JSON.stringify({
-                _token: '{{ csrf_token() }}',
-                favorite: action
-            }));
-
-            favoriteButton.blur();
-        });
-    }
+        favorite_button.blur();
+    });
 });
+
