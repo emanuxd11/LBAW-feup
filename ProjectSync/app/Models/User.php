@@ -72,6 +72,9 @@ class User extends Authenticatable
         return $this->admin ?? DB::table('admin')->where('id', $this->id)->exists();
     }
 
+    /**
+     * List a user's favorite projects.
+     */
     public function favorite_projects()
     {
         return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')

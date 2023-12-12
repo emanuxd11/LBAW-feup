@@ -68,7 +68,8 @@
     transform: scale(1.05);
 }
 
-#active-projects {
+#active-projects,
+#favorite-projects {
     text-align: left;
     display: flex;
     flex-wrap: wrap;
