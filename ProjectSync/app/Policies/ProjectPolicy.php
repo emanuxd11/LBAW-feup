@@ -73,4 +73,13 @@ class ProjectPolicy
     {
         return $project->isMember($user) && Auth::check();
     }
+
+    /**
+     * Determine if the current user can favorite/unfavorite a project.
+     * (the user has to be long to the project)
+     */
+    public function favorite(User $user, Project $project): bool
+    {
+        return $project->isMember($user) && Auth::check();
+    }
 }

@@ -217,4 +217,23 @@ class ProjectController extends Controller
 
         return redirect()->back()->with('success', 'You are no longer part of \"' . $project->name . '\"!');
     }
+
+    public function favorite(Request $request, $project_id)
+    {
+        $user = Auth::user();
+        $project = Project::findOrFail($project_id);
+
+        $this->authorize('favorite', [$project, $user]);
+
+        $previous_status = $project->isFavoriteOf($user);
+
+        DB::table('projectmember')
+            ->updateOrInsert(
+                ['iduser' => $user->id, 'idproject' => $project->id],
+                ['isfavorite' => !$previous_status]
+            );
+
+        // Respond with a JSON indicating the new favorite status
+        return response()->json(['is_favorite' => !$previous_status]);
+    }
 }
