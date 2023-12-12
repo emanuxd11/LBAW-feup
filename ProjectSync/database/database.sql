@@ -96,7 +96,6 @@ CREATE TABLE ProjectMemberInvitation (
     PRIMARY KEY (idUser, idProject)
 );
 
-
 -- Create Post Table
 CREATE TABLE Post (
     id SERIAL PRIMARY KEY,

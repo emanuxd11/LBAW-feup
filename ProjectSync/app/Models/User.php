@@ -65,10 +65,16 @@ class User extends Authenticatable
             ->where('archived', FALSE);
     }
 
-    //If I am right, this will won't go to the database everytime it needs to check if the user is an admin
-    //This way it checks if the user is one or not and keeps the var stored in the class.
+    // If I am right, this will won't go (what?😂) to the database everytime it needs to check if the user is an admin
+    // This way it checks if the user is one or not and keeps the var stored in the class.
     public function getIsAdminAttribute()
     {
         return $this->admin ?? DB::table('admin')->where('id', $this->id)->exists();
+    }
+
+    public function favorite_projects()
+    {
+        return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')
+            ->wherePivot('isfavorite', true)->get();
     }
 }
