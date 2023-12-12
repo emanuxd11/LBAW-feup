@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 use App\Models\Project;
 use App\Models\User;
@@ -216,5 +217,40 @@ class ProjectController extends Controller
         }
 
         return redirect()->back()->with('success', 'You are no longer part of \"' . $project->name . '\"!');
+    }
+
+    public function assignNewCoordinator(Request $request, $projectId){
+        $project = Project::findOrFail($projectId);
+
+        $request->validate([
+            'old_id' => 'required',
+            'new_id' => 'required',
+        ]);
+
+        $this->authorize('assign_new_coordinator', [$project, Auth::user()]);
+
+        $project->members()->updateExistingPivot($request->input('old_id'), ['iscoordinator' => false]);
+
+        $project->members()->updateExistingPivot($request->input('new_id'), ['iscoordinator' => true]);
+
+        return redirect()->back()->with('success', 'Coordinator changed successfully.');
+    }
+
+    public function addToFav(Request $request, $projectId){
+        $project = Project::findOrFail($projectId);
+
+        $request->validate([
+            'user_id' => 'required',
+        ]);
+
+        $this->authorize('add_to_favs', [$project, Auth::user()]);
+
+        try {
+            $project->members()->updateExistingPivot($request->input('user_id'), ['isfavorite' => true]);
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', $e);
+        }
+
+        return redirect()->back()->with('success', 'Added project to favs successfully.');
     }
 }

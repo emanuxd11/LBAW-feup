@@ -25,6 +25,16 @@
                 </div>
             @endif
         </div>
+
+        <form class="project-form" method="POST" 
+            action="{{ route('project.add.fav', ['project_id' => $project->id]) }}" 
+            id="addFavoriteForm">
+            @method('POST')
+            @csrf
+            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+            <button type="submit">Add to favs</button>
+        </form>
+        
         
         <div id="project-info-card">
             <h2>{{ $project->name }}</h2>
@@ -48,6 +58,23 @@
                             <button type="button" class="button cancel-button" onclick="hidePopup('archive-popup')">No</button>
                             <button class="button confirm-button">Yes</button>
                         </div>
+                    </form>
+
+                    <form class="project-form" method="POST" 
+                            action="{{ route('assign.new.coordinator', ['project_id' => $project->id]) }}" 
+                            id="newProjectCoordinatorForm">
+                        @method('POST')
+                        @csrf
+                        <select id="username" name="new_id" class="project-form-input">
+                            <option value="" selected disabled>--------</option>
+                            @foreach($project->members as $user)
+                            @if (!$project->isCoordinator($user))
+                            <option value={{$user->id}}>{{ $user->name . ' (' . $user->username . ')' }}</option>
+                            @endif
+                            @endforeach
+                        </select>
+                        <input type="hidden" name="old_id" value="{{$project->getCoordinator()->id}}">
+                        <button type="submit">Submit</button>
                     </form>
                 @endif
 

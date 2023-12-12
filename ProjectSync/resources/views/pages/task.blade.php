@@ -121,7 +121,7 @@
             @forelse ($taskComments as $taskComment)
                 <div class="commentCard">
                     <div class="commentHeader">
-                        <p>Author:{{$taskComment->user->username}}</p>
+                        <p>Author:{{$taskComment->user->username ?? "deleted"}}</p>
                         <p>Date:{{$taskComment->created_at}}</p>
                         @if($taskComment->isedited)
                             <p>Edited</p>

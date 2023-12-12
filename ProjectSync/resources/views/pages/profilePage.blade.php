@@ -34,7 +34,7 @@
 
                             <div class="profile-image">
                                 @if($user->profile_pic !== null && $user->profile_pic !== '')
-                                    <img src="{{Auth::user()->profile_pic}}" alt="Profile Picture">
+                                    <img src="{{$user->profile_pic}}" alt="Profile Picture">
                                 @else
                                     <img src="/images/avatars/default-profile-pic.jpg" alt="Default Profile Picture">
                                 @endif

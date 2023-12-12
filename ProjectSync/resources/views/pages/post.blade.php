@@ -60,7 +60,7 @@
                     </div>
                 
                     <div class="author">
-                        <p>Created by: {{$post->author->username}}</p>
+                        <p>Created by: {{$post->author->username ?? "deleted"}}</p>
                         <p>Date: {{$post->date}}</p>
                         @if ($post->isedited)
                            <p>(edited)</p>
@@ -121,7 +121,7 @@
             @forelse ($postComments as $postComment)
             <div class="commentCard">
                 <div class="commentHeader">
-                    <p>Author:{{$postComment->author->username}}</p>
+                    <p>Author:{{$postComment->author->username ?? "deleted"}}</p>
                     <p>Date:{{$postComment->date}}</p>
                     @if($postComment->isedited)
                         <p>Edited</p>

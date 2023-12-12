@@ -47,6 +47,14 @@
                     <button type="submit" class="button">Save Changes</button>
                 </form>
 
+                <div class="deleteButton">
+                    <form method="post" action="{{ route('delete.account', ['username' => $user->username]) }}" enctype="multipart/form-data">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="button delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </form>
+                </div>
+
                 @if (session('success'))
                     <div class="error_message">
                         <p>{{session('success')}}</p>

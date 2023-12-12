@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use App\Models\Project;
+use App\Models\Post;
+use App\Models\PostComment;
+use App\Models\Message;
+use App\Models\Changes;
+use App\Models\TaskComments;
 
 class ProfileController extends Controller
 {
@@ -110,6 +116,39 @@ class ProfileController extends Controller
             return redirect()->route('editProfile', ['username' => $user->username])->with('error', 'Failed to update profile. Please try again.');
         }
 
+    }
+
+    public function deleteAccount(Request $request, $username)
+    {
+        if (!Auth::check()) {
+            return redirect("/login");
+        }
+
+        $user = User::where('username', $username)->first();
+
+        if (Auth::user()->id !== $user->id && !Auth::user()->isAdmin) {
+            return redirect()->route('profilePage', ['username' => $user->username]);
+        }
+
+        DB::table('projectmembertask')->where('user_id', $user->id)->delete();
+        DB::table('projectmember')->where('iduser', $user->id)->delete();
+        DB::table('projectmemberinvitation')->where('iduser', $user->id)->delete();
+        Post::where('author_id', $user->id)->update(['author_id' => null]);
+        PostComment::where('author_id', $user->id)->update(['author_id' => null]);
+        Message::where('sender_id', $user->id)->update(['sender_id'=> null]);
+        Message::where('receiver_id', $user->id)->update(['receiver_id'=> null]);
+        Changes::where('user_id', $user->id)->update(['user_id'=> null]);
+        DB::table('postupvote')->where('user_id', $user->id)->delete();
+        DB::table('usernotification')->where('user_id', $user->id)->delete();
+        TaskComments::where('user_id', $user->id)->update(['user_id' => null]);
+        
+        $user->delete();
+
+        if(Auth::user()->isAdmin){
+            return redirect()->route('adminPage')->with('success','User deleted successfully');
+        }
+
+        return redirect("/");
     }
 
 }

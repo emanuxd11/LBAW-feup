@@ -73,4 +73,13 @@ class ProjectPolicy
     {
         return $project->isMember($user) && Auth::check();
     }
+
+    public function assign_new_coordinator(User $user, Project $project): bool
+    {
+        return Auth::check() && $project->isCoordinator($user);
+    }
+    public function add_to_favs(User $user, Project $project): bool
+    {
+        return $project->isMember($user) && Auth::check();
+    }
 }

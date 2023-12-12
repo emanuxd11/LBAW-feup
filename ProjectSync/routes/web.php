@@ -53,7 +53,9 @@ Route::controller(ProjectController::class)->group(function () {
     Route::get('/projects', 'list')->name('projects');
     Route::get('/projects/{id}', 'show');
     Route::put('/api/projects', 'create')->name('create_project');
+    Route::post('/api/projects/{project_id}/favorites', 'addToFav')->name('project.add.fav');
     Route::post('/api/projects/{project_id}', 'archive')->name('archive');
+    Route::post('/api/projects/{project_id}/assignNewCoordinator', 'assignNewCoordinator')->name('assign.new.coordinator');
     Route::delete('/projects/{project_id}/remove_member/{user_id}', 'remove_member')->name('remove_member');
     Route::delete('/projects/{project_id}/member_leave/{user_id}', 'member_leave')->name('member_leave');
     // the ajax part
@@ -117,6 +119,7 @@ Route::controller(RegisterController::class)->group(function () {
 Route::get('/profile/{username}', [ProfileController::class, 'showProfilePage'])->name('profilePage');
 Route::get('/profile/{username}/edit', [ProfileController::class, 'editProfile'])->name('editProfile');
 Route::match(['post', 'put'],'/profile/{username}/update', [ProfileController::class, 'updateProfile'])->name('updateProfile');
+Route::delete('/profile/{username}/delete', [ProfileController::class, 'deleteAccount'])->name('delete.account');
 
 // Emails
 Route::controller(EmailController::class)->group(function() {
