@@ -1,12 +1,12 @@
 -- Drop existing tables if they exist
-DROP DATABASE IF EXISTS test;
-CREATE DATABASE test;
-\c test
+DROP DATABASE IF EXISTS lbaw2363;
+CREATE DATABASE lbaw2363;
+\c lbaw2363
 
-DROP SCHEMA IF EXISTS test;
-CREATE SCHEMA test;
+DROP SCHEMA IF EXISTS lbaw2363;
+CREATE SCHEMA lbaw2363;
 
-SET search_path TO test;
+SET search_path TO lbaw2363;
 
 DROP TABLE IF EXISTS "User" CASCADE;
 DROP TABLE IF EXISTS Admin CASCADE;
@@ -195,6 +195,7 @@ CREATE TABLE UserNotification(
     isChecked BOOLEAN NOT NULL
 );
 
+
 --INDEX 1
 CREATE INDEX index_projectmember_iduser ON ProjectMember USING btree(idUser); CLUSTER ProjectMember USING index_projectmember_iduser;
 
@@ -240,8 +241,9 @@ $BODY$
 BEGIN
         IF NEW.archived = TRUE THEN
             UPDATE ProjectMember SET isFavorite = FALSE WHERE idProject = NEW.id;
-            RETURN NULL;
-            END IF;
+            RETURN NEW;
+        END IF;
+        
         RETURN NEW;
 END
 $BODY$
@@ -252,19 +254,25 @@ CREATE TRIGGER remove_favorite_trigger
         FOR EACH ROW
         EXECUTE PROCEDURE remove_favorite();
 
-
 --TRIGGER 2
 CREATE FUNCTION favorite_restriction() RETURNS TRIGGER AS
 $BODY$
+DECLARE
+    favorite_count INTEGER;
 BEGIN
-        IF NEW.isCoordinator IS NOT NULL THEN
-            IF EXISTS (SELECT COUNT(*) FROM ProjectMember WHERE NEW.idUser = idUser AND isFavorite = TRUE) = 10 THEN
-                RAISE EXCEPTION 'An user cannot have more than 10 favorite projects.';
-                RETURN NULL;
-            END IF;
-        END IF;
-        RETURN NEW;
-END
+    -- Count the number of favorite projects for the current user
+    SELECT COUNT(*)
+    INTO favorite_count
+    FROM ProjectMember
+    WHERE idUser = NEW.idUser AND isFavorite = TRUE;
+
+    -- Check if the count is greater than 10
+    IF favorite_count > 10 THEN
+        RAISE EXCEPTION 'A project member cannot have more than 10 favorite projects.';
+    END IF;
+
+    RETURN NEW;
+END;
 $BODY$
 LANGUAGE plpgsql;
 
@@ -277,16 +285,25 @@ CREATE TRIGGER favorite_restriction_trigger
 CREATE FUNCTION one_coordinator_restriction() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-        IF EXISTS (SELECT COUNT(*) FROM ProjectMember WHERE NEW.idProject = idProject AND isCoordinator = TRUE ) > 0 THEN
-           RAISE EXCEPTION 'A project cannot have more than 1 coordinator.';
-           RETURN NULL;
-        END IF;
-        RETURN NEW;
-END
+    -- Check if there is more than one coordinator for the project
+    IF EXISTS (
+        SELECT 1
+        FROM ProjectMember
+        WHERE idProject = NEW.idProject AND isCoordinator = TRUE
+        HAVING COUNT(*) > 1
+    ) THEN
+        RAISE EXCEPTION 'A project cannot have more than one coordinator.';
+    END IF;
+
+    RETURN NEW;
+END;
 $BODY$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER one_coordinator_restriction_trigger
-        BEFORE UPDATE ON ProjectMember
-        FOR EACH ROW
-        EXECUTE PROCEDURE one_coordinator_restriction();
+-- CREATE TRIGGER one_coordinator_restriction_trigger
+--         BEFORE UPDATE ON ProjectMember
+--         FOR EACH ROW
+--         EXECUTE PROCEDURE one_coordinator_restriction();
+
+
+-- Insert some stuff to get started
