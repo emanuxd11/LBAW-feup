@@ -57,11 +57,13 @@ Route::controller(ProjectController::class)->group(function () {
     Route::post('/api/projects/{project_id}/assignNewCoordinator', 'assignNewCoordinator')->name('assign.new.coordinator');
     Route::delete('/projects/{project_id}/remove_member/{user_id}', 'remove_member')->name('remove_member');
     Route::delete('/projects/{project_id}/member_leave/{user_id}', 'member_leave')->name('member_leave');
+    Route::post('/projects/{project_id}/accept_invitation/{user_id}', 'acceptInvitation')->name('accept.project.invitation');
     // the ajax part
     Route::get('/projects/{id}/search_user', 'search_user')->name('project_search_user');
     Route::post('/projects/{id}/add_user', 'addUserToProject')->name('project_add_user');
     Route::get('/projects/{id}/search_task', 'search_task')->name('project_search_task');
     Route::post('/projects/{project_id}/favorite', 'favorite')->name('project.favorite');
+    Route::post('/projects/{id}/email_invite_user', 'sendProjectInvitation')->name('project.invite.user');
 });
 
 // Forum

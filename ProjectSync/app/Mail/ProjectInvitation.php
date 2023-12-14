@@ -1,6 +1,6 @@
 <?php
 
-// App\Mail\ResetPassword.php
+// App\Mail\ProjectInvitation.php
 
 namespace App\Mail;
 
@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ResetPassword extends Mailable
+class ProjectInvitation extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -33,7 +33,7 @@ class ResetPassword extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Reset Password',
+            subject: 'Project Invitation',
         );
     }
 
@@ -43,7 +43,7 @@ class ResetPassword extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.auth.passwords.reset_email',
+            view: 'emails.projects.invitation_email',
         );
     }
 
@@ -57,4 +57,3 @@ class ResetPassword extends Mailable
         return [];
     }
 }
-

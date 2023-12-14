@@ -4,15 +4,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\QueryException;
 
 use App\Models\Project;
 use App\Models\User;
 use App\Models\Task;
+
+use App\Mail\ProjectInvitation;
+use App\Mail\ResetPassword;
 
 use App\Http\Controllers\AdminController;
 
@@ -149,24 +152,62 @@ class ProjectController extends Controller
      */
     public function addUserToProject(Request $request, $projectId)
     {
+        // $userId = $request->input('userId');
+
+        // // Check if the user is an administrator
+        // $user = User::find($userId);
+        // if ($user && $user->isadmin) {
+        //     return response()->json(['error' => 'Cannot add administrators to the project.'], 400);
+        // }
+
+        // // Check if the user is already a member of the project
+        // $project = Project::find($projectId);
+        // if ($project->isMember(User::find($userId))) {
+        //     return response()->json(['error' => 'This user is already a member of the project.'], 400);
+        // }
+
+        // // Add the user to the project
+        // $project->members()->attach($userId, ['iscoordinator' => false, 'isfavorite' => false]);
+
+
+        // return response()->json(['success' => true]);
+        
+        // ^^^^^ old add user to project vvvvvv -> new invite user to project 
+
         $userId = $request->input('userId');
 
-        // Check if the user is an administrator
         $user = User::find($userId);
-        if ($user && $user->isAdmin) {
-            return response()->json(['error' => 'You cannot add an administrator to the project.'], 400);
+        if (!$user) {
+            return response()->json(['error' => "User {$userId} could not be found."], 404);
         }
 
-        // Check if the user is already a member of the project
         $project = Project::find($projectId);
-        if ($project->isMember(User::find($userId))) {
-            return response()->json(['error' => 'This user is already a member of the project.'], 400);
+        if (!$project) {
+            return response()->json(['error' => 'Project could not be found.'], 404);
         }
 
-        // Add the user to the project
-        $project->members()->attach($userId, ['iscoordinator' => false, 'isfavorite' => false]);
+        $existingInvitation = DB::table('projectmemberinvitation')
+            ->where('iduser', $user->id)
+            ->where('idproject', $project->id)
+            ->first();
 
-        return response()->json(['success' => true]);
+        if ($existingInvitation) {
+            return response()->json(['error' => 'This user already has a pending invitation.']);
+        }
+
+        DB::table('projectmemberinvitation')->insert([
+            'iduser' => $user->id,
+            'idproject' => $project->id,
+        ]);
+
+        try {
+            Mail::to($user->email)->send(new ProjectInvitation($project->name, $user->name));
+        } catch (\Exception $e) {
+            \Log::error('Error sending email: ' . $e->getMessage());
+            return response()->json(['error' => 'Error sending invitation email.'], 500);
+        }
+
+        return response()->json(['success' => $user->name . ' invited to project.'], 200);
     }
 
     public function search_task(Request $request, $projectId)
