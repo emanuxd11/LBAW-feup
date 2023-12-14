@@ -229,7 +229,7 @@ class ProjectController extends Controller
         // delete invitation
 
 
-        return $this->show($project_id);
+        return redirect()->route('project.show', ['id' => $project_id]);
     }
 
     public function search_task(Request $request, $projectId)

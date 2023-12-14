@@ -20,28 +20,17 @@
 
     <div id="redirect-message">
         <p>
-            Redirecting in <span id="countdown">5</span> seconds...
+            Redirecting...
         </p>
     </div>
 
     <script>
-        // Countdown timer
-        let seconds = 5; // Set the initial countdown time
-        const countdownElement = document.getElementById('countdown');
-
-        function updateCountdown() {
-            countdownElement.textContent = seconds;
-            if (seconds === 0) {
-                document.getElementById('redirect-form').submit();
-            } else {
-                seconds--;
-                setTimeout(updateCountdown, 1000);
-            }
-        }
-
-        // Start the countdown
-        updateCountdown();
+        // Immediately submit the form on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('redirect-form').submit();
+        });
     </script>
 
 @endsection
+
 
