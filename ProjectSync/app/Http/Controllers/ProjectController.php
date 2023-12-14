@@ -144,36 +144,16 @@ class ProjectController extends Controller
         })
         ->get();
 
+        // add logic to exclude users that already have pending invitations
+
         return response()->json($results);
     }
 
     /**
      * Adds user to project.
      */
-    public function addUserToProject(Request $request, $projectId)
+    public function inviteUserToProject(Request $request, $projectId)
     {
-        // $userId = $request->input('userId');
-
-        // // Check if the user is an administrator
-        // $user = User::find($userId);
-        // if ($user && $user->isadmin) {
-        //     return response()->json(['error' => 'Cannot add administrators to the project.'], 400);
-        // }
-
-        // // Check if the user is already a member of the project
-        // $project = Project::find($projectId);
-        // if ($project->isMember(User::find($userId))) {
-        //     return response()->json(['error' => 'This user is already a member of the project.'], 400);
-        // }
-
-        // // Add the user to the project
-        // $project->members()->attach($userId, ['iscoordinator' => false, 'isfavorite' => false]);
-
-
-        // return response()->json(['success' => true]);
-        
-        // ^^^^^ old add user to project vvvvvv -> new invite user to project 
-
         $userId = $request->input('userId');
 
         $user = User::find($userId);
@@ -191,6 +171,10 @@ class ProjectController extends Controller
             ->where('idproject', $project->id)
             ->first();
 
+        // add logic to handle checking if the invite is still valid 
+        // (less than a week old or something)
+        // and if it's not you may send another one
+
         if ($existingInvitation) {
             return response()->json(['error' => 'This user already has a pending invitation.']);
         }
@@ -201,13 +185,51 @@ class ProjectController extends Controller
         ]);
 
         try {
-            Mail::to($user->email)->send(new ProjectInvitation($project->name, $user->name));
+            Mail::to($user->email)->send(new ProjectInvitation($project->id, $project->name, $user->id, $user->username));
         } catch (\Exception $e) {
             \Log::error('Error sending email: ' . $e->getMessage());
             return response()->json(['error' => 'Error sending invitation email.'], 500);
         }
 
         return response()->json(['success' => $user->name . ' invited to project.'], 200);
+    }
+
+    public function acceptInvitationRedirect($project_id, $user_id) {
+        $user = User::find($user_id);
+        $project = Project::find($project_id);
+
+        if (!$user or !$project) {
+            return view('home')->with('error', 'Invalid invitation.');
+        }
+
+        if (!$this->authorize('accept_invitation', $project)) {
+            return view('home')->with('error', 'You are not allowed to accept this invitation.');
+        }
+
+        return view('pages.project_accepted', [
+            'project_id' => $project_id,
+            'user_id' => $user_id,
+        ]);
+    }
+
+    public function acceptInvitation($project_id, $user_id) {
+        $project = Project::find($project_id);
+        $user = User::find($user_id);
+
+        if (!$project or !$user) {
+            return view('home')->with('error', 'Invalid invitation.');
+        }
+
+        // add logic to check if the invitation is still valid
+
+
+        // add user to project
+        $project->members()->attach($user_id, ['iscoordinator' => false, 'isfavorite' => false]);
+
+        // delete invitation
+
+
+        return $this->show($project_id);
     }
 
     public function search_task(Request $request, $projectId)

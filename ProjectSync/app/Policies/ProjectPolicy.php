@@ -87,4 +87,22 @@ class ProjectPolicy
     {
         return $project->isMember($user) && Auth::check();
     }
+
+    /**
+     * Determine the current user can accept a project invitation.
+     * (must be logged in)
+     */
+    public function accept_invitation(User $user): bool
+    {
+        return Auth::check();
+    }
+
+    /**
+     * Determine the current user can join a project.
+     * (must be logged in and not already be part)
+     */
+    public function join_project(User $user, Project $project): bool
+    {
+        return Auth::check() && !$project->isMember($user);
+    }
 }

@@ -9,12 +9,12 @@
         <p>Hello, {{ $username }}!</p>
 
         <p>
-            You were invited to project xyz on Project Sync
+            You were invited to join "{{ $project_name }}" on Project Sync
         </p>
 
         <p>If you wish to accept this invitation, please click the link below:</p>
         <p class="centered-text">
-            <a class="button" href="{{ route('accept.project.invitation', $token) }}">
+            <a class="button" href="{{ route('accept.project.invitation.redirect', ['project_id' => $project_id, 'user_id' => $user_id]) }}">
                 Join Project
             </a>
         </p>

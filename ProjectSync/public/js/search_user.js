@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         results.forEach(user => {
             const resultItem = document.createElement('div');
             resultItem.textContent = user.name;
-            console.log(user)
             resultItem.addEventListener('click', async () => {
                 const updatedResults = results.filter(u => u.id !== user.id);
                 displaySearchResults(updatedResults, projectId);
@@ -51,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function inviteUserToProject(user, projectId) {
         try {
-            const response = await fetch(`/projects/${projectId}/add_user`, {
+            const response = await fetch(`/projects/${projectId}/invite_user`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
