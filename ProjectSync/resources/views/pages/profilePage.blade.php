@@ -52,16 +52,36 @@
 
         <div class="currentProjects">
             <div class="col-md-8 offset-md-2">
-                <h3>Projects</h3>           
-                <div class="showProjects">
-                    @forelse ($user->projects as $project)
-                        <div class="user">
-                            @include('partials.project', ['project' => $project])
+                @if(Auth::check() && Auth::user()->id == $user->id)
+                    <h3>Projects</h3>           
+                    <div class="showProjects">
+                        @forelse ($user->projects as $project)
+                            <div class="user">
+                                @include('partials.project', ['project' => $project])
+                            </div>
+                        @empty
+                            <h4>No projects found</h4>
+                        @endforelse
+                    </div>
+                @else
+                    @php
+                        $commonProjects = Auth::user()->projects->intersect($user->projects);
+                    @endphp
+
+                    @if($commonProjects->count() > 0)
+                        <h3>Common Projects</h3>
+                        <div class="showProjects">
+                            @foreach($commonProjects as $project)
+                                <div class="user">
+                                    @include('partials.project', ['project' => $project])
+                                </div>
+                            @endforeach
                         </div>
-                    @empty
-                        <h4>No projects found</h4>
-                    @endforelse
-                </div>
+                    @else
+                        <p>No common projects found</p>
+                    @endif
+                
+                @endif
             </div>
         </div>
     </div>
