@@ -56,7 +56,7 @@
                 <div class="showProjects">
                     @forelse ($user->projects as $project)
                         <div class="user">
-                            <h4>{{$project->name}}</h4>
+                            @include('partials.project', ['project' => $project])
                         </div>
                     @empty
                         <h4>No projects found</h4>

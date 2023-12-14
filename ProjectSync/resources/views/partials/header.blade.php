@@ -9,18 +9,26 @@
             <a class="button" href="{{ route('aboutUs') }}">About Us</a>
             <a class="button" href="{{ route('contacts') }}">Contacts</a>
             @if (Auth::check())
-                <a class="button" href="{{ url('/logout') }}">Logout</a>
-                <a class="profile-button" href="{{ route('profilePage', ['username' => Auth::user()->username]) }}">
+                <a class="profile-button" id="profile-dropdown-toggle">            
                     @if(Auth::user()->profile_pic !== null && Auth::user()->profile_pic !== '')
                         <img src="{{Auth::user()->profile_pic}}" alt="Profile Picture">
                     @else
                         <img src="/images/avatars/default-profile-pic.jpg" alt="Default Profile Picture">
                     @endif
                 </a>
+
+                <div class="profile-dropdown" id="profile-dropdown">
+                    <a href="{{ route('profilePage', ['username' => Auth::user()->username]) }}">View Profile</a>
+                    <a href="{{ url('/logout') }}">Logout</a>
+                </div>  
             @else
                 <a class="button" href="{{ route('login') }}">Login</a>
                 <a class="button" href="{{ route('register') }}">Register</a>
-            @endif
+            @endif  
         </div>
+
     </nav>
+
+    <script src="{{ asset('js/header.js') }}" defer></script>
+
 </header>
