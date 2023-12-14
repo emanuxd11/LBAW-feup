@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var successMessage = document.createElement('div');
                 successMessage.classList.add('alert', 'alert-success');
                 successMessage.textContent = (action == 'favorite-project') 
-                    ? 'Project favorited successfully!'
+                    ? 'This project is now in your favorites!'
                     : 'Project removed from favorites.';
                 document.querySelector('.errors').appendChild(successMessage);
                 

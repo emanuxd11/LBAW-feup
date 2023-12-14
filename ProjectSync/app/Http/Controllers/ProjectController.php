@@ -195,16 +195,21 @@ class ProjectController extends Controller
     }
 
     public function acceptInvitationRedirect($project_id, $user_id) {
-        $user = User::find($user_id);
+        /* $user = User::find($user_id);
         $project = Project::find($project_id);
+            ->where('iduser', $user->id)
+            ->where('idproject', $project->id)
+            ->first();
 
         if (!$user or !$project) {
             return view('home')->with('error', 'Invalid invitation.');
         }
 
         if (!$this->authorize('accept_invitation', $project)) {
-            return view('home')->with('error', 'You are not allowed to accept this invitation.');
+            return redirect()->route('home')->with('error', 'Invalid project invitation.');
         }
+        dont't really need any of the above since we're already checking for these things
+        in the other function (will delete probably) */
 
         return view('pages.project_accepted', [
             'project_id' => $project_id,
@@ -220,21 +225,22 @@ class ProjectController extends Controller
             ->where('idproject', $project->id)
             ->first();
 
-        if (!$project or !$user or !$invitation) {
-            return redirect()->route('home')->with('error', 'Invalid invitation.');
-        }
+        // also check if it is still valid in terms of timestamps
 
-        // add logic to check if the invitation exists
-        
-        // also check if it is still valid
+        if (!$project or !$user or !$invitation or $user_id != Auth::user()->id) {
+            return redirect()->route('home')->with('error', 'Invalid project invitation.');
+        }
 
         // add user to project
         $project->members()->attach($user_id, ['iscoordinator' => false, 'isfavorite' => false]);
 
         // delete invitation
+        DB::table('projectmemberinvitation')
+        ->where('iduser', $invitation->iduser)
+        ->where('idproject', $invitation->idproject)
+        ->delete();
 
-
-        return redirect()->route('project.show', ['id' => $project_id]);
+        return redirect()->route('project.show', ['id' => $project_id])->with('success', 'You\'re now part of "' . $project->name . '"!');
     }
 
     public function search_task(Request $request, $projectId)
