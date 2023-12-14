@@ -92,7 +92,7 @@
                 <select id="username" name="username" class="project-form-input">
                     <option value="" selected disabled>--------</option>
                     @foreach($task->members_not_in_task as $user)
-                    <option value={{$user->username}}>{{ $user->name . ' (' . $user->username . ')' }}</option>
+                        <option value={{$user->username}}>{{ $user->name . ' (' . $user->username . ')' }}</option>
                     @endforeach
                     
                 </select>

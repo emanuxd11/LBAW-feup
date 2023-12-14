@@ -6,6 +6,8 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('partials.messages')
+
     <div class="hero-section" id="hero-section">
         <div class="container">
             <div class="hero-content">

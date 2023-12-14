@@ -150,7 +150,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Adds user to project.
+     * Invites user to project.
      */
     public function inviteUserToProject(Request $request, $projectId)
     {
@@ -215,13 +215,18 @@ class ProjectController extends Controller
     public function acceptInvitation($project_id, $user_id) {
         $project = Project::find($project_id);
         $user = User::find($user_id);
+        $invitation = DB::table('projectmemberinvitation')
+            ->where('iduser', $user->id)
+            ->where('idproject', $project->id)
+            ->first();
 
-        if (!$project or !$user) {
-            return view('home')->with('error', 'Invalid invitation.');
+        if (!$project or !$user or !$invitation) {
+            return redirect()->route('home')->with('error', 'Invalid invitation.');
         }
 
-        // add logic to check if the invitation is still valid
-
+        // add logic to check if the invitation exists
+        
+        // also check if it is still valid
 
         // add user to project
         $project->members()->attach($user_id, ['iscoordinator' => false, 'isfavorite' => false]);
