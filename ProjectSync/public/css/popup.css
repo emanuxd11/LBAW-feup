@@ -11,12 +11,28 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 10000;
 }
-  
-.confirmation-popup p {
+
+.orphan-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #f7f3e9;
+    background-color: #172b4d;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+}
+
+.confirmation-popup p,
+.orphan-popup p {
     margin-bottom: 15px;
 }
   
-.confirmation-popup button {
+.confirmation-popup button,
+.orphan-popup button {
     margin-right: 10px;
 }
   

@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return new Promise((resolve, reject) => {
             const popUp = document.createElement('div');
             popUp.setAttribute('id', `invite-popup-${user.id}`);
-            popUp.setAttribute('class', 'confirmation-popup');
+            popUp.setAttribute('class', 'orphan-popup');
             popUp.style.display = 'block';
             popUp.innerHTML = `
                 <p>${user.name} already has a pending invitation.<br>Are you sure you want to resend?</p>
@@ -81,12 +81,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     
         function removeModalOverlay() {
-            // Remove modal overlay
-            document.body.removeChild(modalOverlay);
+            const modalOverlays = document.querySelectorAll('.modal-overlay');
+            modalOverlays.forEach(modalOverlay => {
+                document.removeChild(modalOverlay);
+            });
         }
     }
     
-
     async function inviteUserToProject(user, projectId) {
         if (user.hasPendingInvitation) {
             try {

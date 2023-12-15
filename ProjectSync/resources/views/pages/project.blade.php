@@ -40,7 +40,7 @@
                 
                 @if($project->isCoordinator(Auth::user()))
                     <button class="archive-button button" onclick="showPopup('archive-popup');">
-                        <i class="fa-solid fa-box-archive"></i><br>(archive, fix css)
+                        <i class="fa-solid fa-box-archive"></i>
                     </button>
                     <form class="project-form" method="POST" 
                             action="{{ route('archive', ['project_id' => $project->id]) }}" 
@@ -48,7 +48,7 @@
                         @method('POST')
                         @csrf
                         <div id="archive-popup" class="confirmation-popup hidden">
-                            <p>Are you sure you want to archive "{{ $project->name }}"? (This action cannot be undone!)</p>
+                            <p>Are you sure you want to archive "{{ $project->name }}"?<br>(This action cannot be undone!)</p>
                             <button type="button" class="button cancel-button" onclick="hidePopup('archive-popup')">No</button>
                             <button class="button confirm-button">Yes</button>
                         </div>
@@ -62,9 +62,9 @@
                         <select id="username" name="new_id" class="project-form-input">
                             <option value="" selected disabled>--------</option>
                             @foreach($project->members as $user)
-                            @if (!$project->isCoordinator($user))
-                            <option value={{$user->id}}>{{ $user->name . ' (' . $user->username . ')' }}</option>
-                            @endif
+                                @if (!$project->isCoordinator($user))
+                                    <option value={{ $user->id }}>{{ $user->name . ' (' . $user->username . ')' }}</option>
+                                @endif
                             @endforeach
                         </select>
                         <input type="hidden" name="old_id" value="{{$project->getCoordinator()->id}}">
