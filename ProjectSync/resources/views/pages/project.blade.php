@@ -135,13 +135,19 @@
             </ul>
             
             @if($project->isCoordinator(Auth::user()))
+                <script src="{{ asset('js/search_user.js') }}" defer></script>
+
                 <form class="project-form" id="addMemberForm">
-                    Add new team members<br>
+                    Invite new team members<br>
                     <input type="text" name="name" required placeholder="name or username" id="searchInput">
                     <ul id="searchResults"></ul>
+
+                    <div id="invite-popup" class="confirmation-popup hidden">
+                        <p>This user already has a pending invitation. Are you sure you want to resend?</p>
+                        <button type="button" class="button cancel-button" onclick="hidePopup('invite-popup')">No</button>
+                        <button class="button confirm-button">Yes</button>
+                    </div>
                 </form>
-        
-                <script src="{{ asset('js/search_user.js') }}" defer></script>
             @endif
         </div>
             
