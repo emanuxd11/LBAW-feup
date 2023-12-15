@@ -144,9 +144,18 @@ class ProjectController extends Controller
         })
         ->get();
 
-        // add logic to exclude users that already have pending invitations
+        $pendingInvitations = DB::table('projectmemberinvitation')
+            ->where('idproject', $projectId)
+            ->pluck('iduser')
+            ->toArray();
 
+            
+        $results->each(function ($user) use ($pendingInvitations) {
+            $user->hasPendingInvitation = in_array($user->id, $pendingInvitations);
+        });
+        
         return response()->json($results);
+        
     }
 
     /**

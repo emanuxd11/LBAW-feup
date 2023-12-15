@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         results.forEach(user => {
             const resultItem = document.createElement('div');
-            resultItem.textContent = user.name;
+            resultItem.textContent = user.name + (user.hasPendingInvitation ? " (pending)" : "");
             resultItem.addEventListener('click', async () => {
                 const updatedResults = results.filter(u => u.id !== user.id);
                 displaySearchResults(updatedResults, projectId);
@@ -49,6 +49,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     async function inviteUserToProject(user, projectId) {
+        if (user.hasPendingInvitation) {
+            // if the user already has a pending invitation the program should
+            // display a popup, and only after clicking the popup will it send
+            // another invite (to prevent spam)
+        }
+
         try {
             const response = await fetch(`/projects/${projectId}/invite_user`, {
                 method: 'POST',
@@ -65,7 +71,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (data.success) {
                 const listItem = document.createElement('li');
                 listItem.setAttribute('data-id', user.id);
-                listItem.innerHTML = `
+
+                if (user.hasPendingInvitation) {
+                    listItem.innerHTML = `
+                    <div class="user-list-card">
+                        <a href="/profile/${user.username}">
+                            <div class="user-list-content">
+                                <span id="user-name-project">${user.name} (${user.username}) (pending)</span>
+                            </div>
+                        </a>
+                    </div>
+                    `;    
+                } else {
+                    listItem.innerHTML = `
                     <div class="user-list-card">
                         <a href="/profile/${user.username}">
                             <div class="user-list-content">
@@ -73,7 +91,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </div>
                         </a>
                     </div>
-                `;
+                    `;
+                }
     
                 projectMemberList.appendChild(listItem);
     
