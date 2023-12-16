@@ -23,6 +23,9 @@ class TaskController extends Controller
         if(!$project->isMember(Auth::user()) && !Auth::user()->isAdmin){
             return redirect("/projects");
         }
+        if($task == null){
+            return redirect("/projects/" . $project_id);
+        }
         $taskComments = TaskComments::where('task_id',$task->id)->get();
 
         return view("pages.task",compact('task','taskComments'));
@@ -36,7 +39,7 @@ class TaskController extends Controller
         $request->validate([
             'name' => 'required|string|max:30',
             'description' => 'required|string|max:255',
-            'delivery_date' => 'nullable|date',
+            'delivery_date' => 'nullable|date|after:today',
         ]);
 
         $task = new Task([
@@ -51,9 +54,8 @@ class TaskController extends Controller
         // Check if the current user is authorized to create this task.
         $this->authorize('create', $task);
     
-        // Save the task and return it as JSON.
         $task->save();
-        return redirect('/projects/' . $project_id);
+        return redirect('/projects/' . $project_id)->with('success', 'Task created successfully.');
     }
     
 
@@ -68,7 +70,7 @@ class TaskController extends Controller
         $request->validate([
             'name' => 'nullable|string|max:30',
             'description' => 'nullable|string|max:255',
-            'delivery_date' => 'nullable|date',
+            'delivery_date' => 'nullable|date|after:today',
             'status' => 'nullable|in:To Do,Doing,Done',
             'username' => 'nullable|string|max:255',
         ]);

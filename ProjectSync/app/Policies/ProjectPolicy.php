@@ -57,6 +57,12 @@ class ProjectPolicy
     //   return (Auth::user()->is_admin || $project->isCoordinator($user)) && !$project->archived;
     }
 
+    public function update(User $user, Project $project): bool
+    {
+        return $project->isCoordinator($user);
+    //   return (Auth::user()->is_admin || $project->isCoordinator($user)) && !$project->archived;
+    }
+
     /**
      * Determine if the current user can remove a member (must be project coorinator). 
      */

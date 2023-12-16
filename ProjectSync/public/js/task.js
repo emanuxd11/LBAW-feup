@@ -18,6 +18,6 @@ function toggleEditTask() {
         document.getElementById('toggle_task_edit').textContent = 'Hide';
     } else {
         editTaskDiv.style.display = 'none';
-        document.getElementById('toggle_task_edit').textContent = 'Show Edit';
+        document.getElementById('toggle_task_edit').textContent = 'Show Edit Settings';
     }
 }

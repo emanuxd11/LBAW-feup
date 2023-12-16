@@ -27,6 +27,8 @@ class Project extends Model
         'name',
         'start_date',
         'delivery_date',
+        'icon_pic',
+        'description',
         'archived',
     ];
 

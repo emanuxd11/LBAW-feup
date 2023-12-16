@@ -75,9 +75,15 @@ class ProjectController extends Controller
      */
     public function create(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:30',
+            'description' => 'required|string|max:3000',
+            'delivery_date' => 'nullable|date|after:today',
+        ]);
         // Create a blank new Project.
         $project = new Project([
             'name' => $request->input('name'),
+            'description' => $request->input('description'),
             'start_date' => date('Y/m/d'),
             'delivery_date' => $request->input('delivery_date'),
             'archived' => false,
@@ -98,6 +104,38 @@ class ProjectController extends Controller
         DB::table('projectmember')->insert($data);
         
         return redirect('/projects');
+    }
+
+    public function update(Request $request,$project_id)
+    {
+        $request->validate([
+            'description' => 'nullable|string|max:3000',
+            'delivery_date' => 'nullable|date|after:today',
+        ]);
+        
+        $project = Project::find($project_id);
+
+        $this->authorize('update', $project);
+
+        $madeChange = false;
+
+        if($request->input('description')){
+            $project->delivery_datew = $request->input('description');
+            $madeChange = true;
+        }
+
+        if($request->input('delivery_date')){
+            $project->delivery_datew = $request->input('delivery_date');
+            $madeChange = true;
+        }
+
+        if(!$madeChange){
+            return redirect('/projects/' . $project_id)->with('error', 'Nothing was changed because user did not provide anything to change');
+        }
+
+        $project->save();
+        
+        return redirect('/projects/' . $project_id)->with('success', 'Project updated');
     }
 
     /**

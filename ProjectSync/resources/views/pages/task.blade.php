@@ -14,6 +14,12 @@
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
+        @elseif($errors->all())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
         @elseif(session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
@@ -70,6 +76,20 @@
             </div>
         </div>
 
+        <form method="POST" action="{{ route('edit_task',['id' => $task->id]) }}" class="project-form">
+            @method('POST')
+            @csrf
+            <p class="info-label">Add user:</p>
+            <select id="username" name="username" class="project-form-input">
+                <option value="" selected disabled>--------</option>
+                @foreach($task->members_not_in_task as $user)
+                <option value={{$user->username}}>{{ $user->name . ' (' . $user->username . ')' }}</option>
+                @endforeach
+                
+            </select>
+            <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Add User</button>
+        </form>
+
         <button onclick="toggleEditTask()" id="toggle_task_edit">Show Edit Settings</button>
         <div class="task-actions" id="task-actions" style="display:none;">
             <form method="POST" action="{{ route('edit_task',['id' => $task->id]) }}" class="project-form">
@@ -88,14 +108,6 @@
                 </select>
                 <p class="info-label">Delivery Date:</p>
                 <input type="date" name="delivery_date" class="project-form-input" style="background-color: #f7f3e9; color: #172b4d;">
-                <p class="info-label">Add user:</p>
-                <select id="username" name="username" class="project-form-input">
-                    <option value="" selected disabled>--------</option>
-                    @foreach($task->members_not_in_task as $user)
-                    <option value={{$user->username}}>{{ $user->name . ' (' . $user->username . ')' }}</option>
-                    @endforeach
-                    
-                </select>
                 <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
             </form>
         

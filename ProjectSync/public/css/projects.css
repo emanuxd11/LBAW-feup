@@ -149,3 +149,19 @@
 .hidden {
     display: none;
 }
+
+.input-group-bottom{
+    width: auto;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+textarea {
+    width: 100%;
+    padding: 8px;
+    background-color: #f7f3e9;
+    border-color: #172b4d;
+    border-radius: 10px;
+    border-width: 2px;
+    color: #172b4d;
+}
