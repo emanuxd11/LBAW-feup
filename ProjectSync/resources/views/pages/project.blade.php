@@ -131,8 +131,18 @@
                         </div>
                     </li>
                 @endforeach
-
             </ul>
+
+            {{-- <h3>Users With Pending Invitation</h3>
+            <ul>
+                @foreach($project->pending_users as $user)
+                    <li data-id="{{ $user->id }}">
+                        <div class="user-list-card">
+                            {{ $user->name }}
+                        </div>
+                    </li>
+                @endforeach
+            </ul> --}}
             
             @if($project->isCoordinator(Auth::user()))
                 <script src="{{ asset('js/search_user.js') }}" defer></script>
