@@ -98,7 +98,7 @@
                 <p class="info-label">Name:</p>
                 <input type="text" name="name" class="project-form-input" placeholder="ex: Create Articles" style="background-color: #f7f3e9; color: #172b4d;">
                 <p class="info-label">Description:</p>
-                <textarea name="description" class="task_description_area" placeholder="ex: Create Navbar with four different buttons ..."></textarea>
+                <textarea name="description" class="task_description_area" placeholder="ex: The objective of this project is to...."></textarea>
                 <p class="info-label">Status:</p>
                 <select id="status" name="status" class="project-form-input">
                     <option value="" selected disabled>{{$task->status}}</option>

@@ -92,6 +92,23 @@
                 </a>
             </div>
         </div>
+
+        <div class="projectDescriptionCard">
+            <h2>Project Description</h2>
+            <p>{{ $project->description }}<p>
+        </div>
+
+        <div class="projectSettingsCard">
+            <h2>Project Settings</h2>
+            <form method="POST" action="{{ route('project.update',['project_id' => $project->id]) }}" class="project-form">
+                @method('POST')
+                @csrf
+                <p class="info-label">Description:</p>
+                <textarea name="description" class="project_description_area" placeholder="{{$project->description}}"></textarea>
+                <input type="date" name="delivery_date" class="project_delivery_date">
+                <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
+            </form>
+        </div>
         
         <div id="project-members">
             <h3>Project Members</h3>

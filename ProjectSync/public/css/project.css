@@ -5,7 +5,7 @@
     align-items: center;
 }
 
-#project-info-card {
+#project-info-card, .projectDescriptionCard, .projectSettingsCard {
     background-color: #006aa7;
     color: #f7f3e9;
     padding: 20px;
@@ -366,4 +366,16 @@
 
 .task-card-search p {
     margin-bottom: 8px;
+}
+
+.project_description_area{
+    background-color: #f7f3e9;
+}
+
+input.project_delivery_date{
+    background-color: #f7f3e9;
+}
+
+.projectDescriptionCard{
+    word-wrap: break-word;
 }

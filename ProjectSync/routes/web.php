@@ -52,6 +52,7 @@ Route::delete('/delete_user', [AdminController::class, 'deleteUser'])->name('adm
 Route::controller(ProjectController::class)->group(function () {
     Route::get('/projects', 'list')->name('projects');
     Route::get('/projects/{id}', 'show');
+    Route::post('/projects/{project_id}/update', 'update')->name('project.update');
     Route::put('/api/projects', 'create')->name('create_project');
     Route::post('/api/projects/{project_id}', 'archive')->name('archive');
     Route::post('/api/projects/{project_id}/assignNewCoordinator', 'assignNewCoordinator')->name('assign.new.coordinator');

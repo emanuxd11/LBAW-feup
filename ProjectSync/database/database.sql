@@ -310,11 +310,11 @@ INSERT INTO "User" (name, username, email, password, phoneNumber, isDeactivated,
 
 INSERT INTO Admin (id) VALUES (1);
 
-INSERT INTO Project (name, start_date, delivery_date, archived) VALUES
-    ('LBAW', '2023-10-20', '2024-10-22', FALSE),
-    ('FSI', '2023-10-20', '2024-10-22', FALSE),
-    ('RCOM', '2023-10-20', '2024-10-22', FALSE),
-    ('PFL', '2023-10-20', '2024-10-22', FALSE);
+INSERT INTO Project (name, start_date, delivery_date, description,archived) VALUES
+    ('LBAW', '2023-10-20', '2024-10-22', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' ,FALSE),
+    ('FSI', '2023-10-20', '2024-10-22', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' ,FALSE),
+    ('RCOM', '2023-10-20', '2024-10-22', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' ,FALSE),
+    ('PFL', '2023-10-20', '2024-10-22', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' ,FALSE);
 
 INSERT INTO ProjectMember (idUser,idProject,isCoordinator,isFavorite) VALUES
     (2,1,TRUE,TRUE),

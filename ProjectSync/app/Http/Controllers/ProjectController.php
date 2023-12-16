@@ -120,12 +120,12 @@ class ProjectController extends Controller
         $madeChange = false;
 
         if($request->input('description')){
-            $project->delivery_datew = $request->input('description');
+            $project->description = $request->input('description');
             $madeChange = true;
         }
 
         if($request->input('delivery_date')){
-            $project->delivery_datew = $request->input('delivery_date');
+            $project->delivery_date = $request->input('delivery_date');
             $madeChange = true;
         }
 
