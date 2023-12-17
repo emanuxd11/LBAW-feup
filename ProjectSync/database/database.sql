@@ -92,6 +92,7 @@ CREATE TABLE ProjectMember (
 -- Create ProjectMemberInvitation Table
 CREATE TABLE ProjectMemberInvitation (
     id SERIAL PRIMARY KEY,
+    invitation_token VARCHAR NOT NULL,
     idUser INT REFERENCES "User"(id),
     idProject INT REFERENCES Project(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

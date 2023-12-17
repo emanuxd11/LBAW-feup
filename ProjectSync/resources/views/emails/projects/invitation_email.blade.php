@@ -14,7 +14,7 @@
 
         <p>If you wish to accept this invitation, please click the link below:</p>
         <p class="centered-text">
-            <a class="button" href="{{ route('accept.project.invitation.redirect', ['project_id' => $project_id, 'user_id' => $user_id]) }}">
+            <a class="button" href="{{ route('accept.project.invitation.redirect', ['project_id' => $project_id, 'user_id' => $user_id, 'token' => $token]) }}">
                 Join Project
             </a>
         </p>

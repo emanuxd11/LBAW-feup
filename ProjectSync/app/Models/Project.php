@@ -56,18 +56,17 @@ class Project extends Model
      */
     public function pending_users()
     {
-        // Calculate the timestamp one week ago
         $oneWeekAgo = Carbon::now()->subWeek();
 
-        // Retrieve users with valid pending invitations for the project
         $pendingUsers = DB::table('projectmemberinvitation')
-            ->join('user', 'user.id', '=', 'projectmemberinvitation.iduser')
+            ->join('User', 'User.id', '=', 'projectmemberinvitation.iduser')
             ->where('idproject', $this->id)
             ->where('created_at', '>', $oneWeekAgo)
-            ->select('user.*')
+            ->select('User.*')
+            ->distinct()
             ->get();
 
-        return response()->json($pendingUsers);
+        return $pendingUsers;
     }
 
     /**

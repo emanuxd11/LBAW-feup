@@ -105,4 +105,14 @@ class ProjectPolicy
     {
         return Auth::check() && !$project->isMember($user);
     }
+
+    /**
+     * Determine if a user can revoke another user's project invitations.
+     * (must be the coordinator)
+     */
+    public function revoke_invitations(User $user, Project $project): bool
+    {
+        // Only a project coordinator can do this.
+        return $project->isCoordinator($user);
+    }
 }

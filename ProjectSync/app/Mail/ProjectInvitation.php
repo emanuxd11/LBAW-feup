@@ -15,6 +15,7 @@ class ProjectInvitation extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $token;
     public $project_id;
     public $project_name;
     public $user_id;
@@ -23,8 +24,9 @@ class ProjectInvitation extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($project_id, $project_name, $user_id, $username)
+    public function __construct($token, $project_id, $project_name, $user_id, $username)
     {
+        $this->token = $token;
         $this->project_id = $project_id;
         $this->project_name = $project_name;
         $this->user_id = $user_id;

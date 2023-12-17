@@ -9,17 +9,15 @@
                 Welcome to our website! Please log in to access your account and explore our services.
             </p>
         </div>
+
         <div class="login-container">
             <div class="card login-card">
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}" class="login-form">
                         {{ csrf_field() }}
 
-                        @if (session('success'))
-                            <p class="success">
-                                {{ session('success') }}
-                            </p>
-                        @endif
+                        @include('partials.messages')
+
                         <div class="mb-3">
                             <label for="email" class="form-label">E-mail</label>
                             <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus class="form-control">
