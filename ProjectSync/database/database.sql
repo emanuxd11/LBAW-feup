@@ -91,9 +91,11 @@ CREATE TABLE ProjectMember (
 
 -- Create ProjectMemberInvitation Table
 CREATE TABLE ProjectMemberInvitation (
+    id SERIAL PRIMARY KEY,
+    invitation_token VARCHAR NOT NULL,
     idUser INT REFERENCES "User"(id),
     idProject INT REFERENCES Project(id),
-    PRIMARY KEY (idUser, idProject)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create Post Table
@@ -294,10 +296,10 @@ END;
 $BODY$
 LANGUAGE plpgsql;
 
--- CREATE TRIGGER one_coordinator_restriction_trigger
---         BEFORE UPDATE ON ProjectMember
---         FOR EACH ROW
---         EXECUTE PROCEDURE one_coordinator_restriction();
+CREATE TRIGGER one_coordinator_restriction_trigger
+        BEFORE UPDATE ON ProjectMember
+        FOR EACH ROW
+        EXECUTE PROCEDURE one_coordinator_restriction();
 
 
 -- Insert some stuff to get started

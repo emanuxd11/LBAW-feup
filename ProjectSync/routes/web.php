@@ -51,17 +51,21 @@ Route::delete('/delete_user', [AdminController::class, 'deleteUser'])->name('adm
 // Projects
 Route::controller(ProjectController::class)->group(function () {
     Route::get('/projects', 'list')->name('projects');
-    Route::get('/projects/{id}', 'show');
+    Route::get('/projects/{id}', 'show')->name('project.show');
     Route::put('/api/projects', 'create')->name('create_project');
     Route::post('/api/projects/{project_id}', 'archive')->name('archive');
     Route::post('/api/projects/{project_id}/assignNewCoordinator', 'assignNewCoordinator')->name('assign.new.coordinator');
     Route::delete('/projects/{project_id}/remove_member/{user_id}', 'remove_member')->name('remove_member');
     Route::delete('/projects/{project_id}/member_leave/{user_id}', 'member_leave')->name('member_leave');
+    Route::get('/projects/accept/invitation/redirect/{project_id}/{user_id}/{token}', 'acceptInvitationRedirect')->name('accept.project.invitation.redirect');
+    Route::post('/projects/{project_id}/accept_invitation/{user_id}/{token}', 'acceptInvitation')->name('accept.project.invitation');
+    Route::delete('/projects/revoke/invitations/{project_id}/{user_id}', 'revokeInvitations')->name('project.revoke.invitations');
     // the ajax part
     Route::get('/projects/{id}/search_user', 'search_user')->name('project_search_user');
-    Route::post('/projects/{id}/add_user', 'addUserToProject')->name('project_add_user');
+    Route::post('/projects/{id}/invite_user', 'inviteUserToProject')->name('project_invite_user');
     Route::get('/projects/{id}/search_task', 'search_task')->name('project_search_task');
     Route::post('/projects/{project_id}/favorite', 'favorite')->name('project.favorite');
+    Route::post('/projects/{id}/email_invite_user', 'sendProjectInvitation')->name('project.invite.user');
 });
 
 // Forum

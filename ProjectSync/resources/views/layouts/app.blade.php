@@ -20,6 +20,7 @@
     <link href="{{ asset('css/task.css') }}" rel="stylesheet">
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link href="{{ asset('css/contacts.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/popup.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/faq.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/contacts.js') }}" defer></script>
