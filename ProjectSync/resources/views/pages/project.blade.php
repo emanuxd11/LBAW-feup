@@ -163,7 +163,7 @@
             </ul>
             
             @if($project->isCoordinator(Auth::user()))
-                <script src="{{ asset('js/search_user.js') }}" defer></script>
+                <script src="{{ asset('js/invitations.js') }}" defer></script>
 
                 <form class="project-form" id="addMemberForm">
                     Invite new team members<br>
