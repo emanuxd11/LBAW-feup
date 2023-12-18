@@ -68,7 +68,7 @@
                             @endforeach
                         </select>
                         <input type="hidden" name="old_id" value="{{$project->getCoordinator()->id}}">
-                        <button type="submit">Submit</button>
+                        <button type="submit" class="project-submit-button">Submit</button>
                     </form>
                 @endif
 
