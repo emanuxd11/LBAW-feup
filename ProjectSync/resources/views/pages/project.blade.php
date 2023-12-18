@@ -11,21 +11,7 @@
         <h1>This project is has been archived by the coordinator.</h1>
     @endif
     <section id="project">
-        <div class="errors">
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @elseif ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
+        @include('partials.messages')
 
         <div id="project-info-card">
             <h2>{{ $project->name }}</h2>
@@ -54,7 +40,7 @@
                 
                 @if($project->isCoordinator(Auth::user()))
                     <button class="archive-button button" onclick="showPopup('archive-popup');">
-                        <i class="fa-solid fa-box-archive"></i><br>(archive, fix css)
+                        <i class="fa-solid fa-box-archive"></i>
                     </button>
                     <form class="project-form" method="POST" 
                             action="{{ route('archive', ['project_id' => $project->id]) }}" 
@@ -62,7 +48,7 @@
                         @method('POST')
                         @csrf
                         <div id="archive-popup" class="confirmation-popup hidden">
-                            <p>Are you sure you want to archive "{{ $project->name }}"? (This action cannot be undone!)</p>
+                            <p>Are you sure you want to archive "{{ $project->name }}"?<br>(This action cannot be undone!)</p>
                             <button type="button" class="button cancel-button" onclick="hidePopup('archive-popup')">No</button>
                             <button class="button confirm-button">Yes</button>
                         </div>
@@ -76,9 +62,9 @@
                         <select id="username" name="new_id" class="project-form-input">
                             <option value="" selected disabled>--------</option>
                             @foreach($project->members as $user)
-                            @if (!$project->isCoordinator($user))
-                            <option value={{$user->id}}>{{ $user->name . ' (' . $user->username . ')' }}</option>
-                            @endif
+                                @if (!$project->isCoordinator($user))
+                                    <option value={{ $user->id }}>{{ $user->name . ' (' . $user->username . ')' }}</option>
+                                @endif
                             @endforeach
                         </select>
                         <input type="hidden" name="old_id" value="{{$project->getCoordinator()->id}}">
@@ -113,10 +99,10 @@
         <div id="project-members">
             <h3>Project Members</h3>
             <ul id="project-member-list">
+                {{-- can't use forelse here since there is always one element (coordinator) --}}
                 @if(count($project->members) <= 1)
                     <p id="no-members">Looks like nobody has been added to the project yet.</p>
                 @endif
-        
                 @foreach($project->members as $user)
                     @if($project->isCoordinator($user))
                         @continue
@@ -162,17 +148,51 @@
                         </div>
                     </li>
                 @endforeach
+            </ul>
 
+            <h3>Users With Pending Invitation</h3>
+            <ul id="invited-users-list">
+                @forelse($project->pending_users() as $user)
+                    <li data-id="{{ $user->id }}">
+                        <div class="user-list-card pending-user">
+                            <a href="{{ route('profilePage', ['username' => $user->username]) }}">
+                                <div class="user-list-content">
+                                    <span id="user-name-project">{{ $user->name . ' (' . $user->username . ')' }}</span>
+                                </div>
+                            </a>
+                            <button class="revoke-invitation-button button" onclick="showPopup('revoke-{{ $user->id}}-popup');">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                            <form class="project-form" method="POST" action="{{ route('project.revoke.invitations', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="revokeInvitationForm">
+                                @method('DELETE')
+                                @csrf
+                                <div id="revoke-{{ $user->id }}-popup" class="confirmation-popup hidden">
+                                    <p>Are you sure you want to cancel {{ $user->name }}'s invitation?</p>
+                                    <button type="button" class="button cancel-button" onclick="hidePopup('revoke-{{ $user->id }}-popup')">No</button>
+                                    <button class="button confirm-button">Yes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                @empty
+                    <p id="no-invited-members">Looks like there aren't currently any users with pending invitations.</p>
+                @endforelse
             </ul>
             
             @if($project->isCoordinator(Auth::user()))
+                <script src="{{ asset('js/invitations.js') }}" defer></script>
+
                 <form class="project-form" id="addMemberForm">
-                    Add new team members<br>
+                    Invite new team members<br>
                     <input type="text" name="name" required placeholder="name or username" id="searchInput">
                     <ul id="searchResults"></ul>
+
+                    <div id="invite-popup" class="confirmation-popup hidden">
+                        <p>This user already has a pending invitation. Are you sure you want to resend?</p>
+                        <button type="button" class="button cancel-button" onclick="hidePopup('invite-popup')">No</button>
+                        <button class="button confirm-button">Yes</button>
+                    </div>
                 </form>
-        
-                <script src="{{ asset('js/search_user.js') }}" defer></script>
             @endif
         </div>
             
@@ -208,25 +228,16 @@
         
                 <script>
                     document.addEventListener('DOMContentLoaded', function () {
-                        // Function to check and show/hide the message
                         function checkAndDisplayMessage() {
                             var ulElement = document.getElementById('search_task_results');
                             var pElement = document.getElementById('hidden_task_attr');
-                
-                            // Check if the ul is empty
                             if (ulElement && ulElement.childElementCount === 0) {
-                                // If it's empty, unhide the p element
                                 pElement.removeAttribute('hidden');
                             } else {
-                                // If it's not empty, hide the p element
                                 pElement.setAttribute('hidden', 'true');
                             }
                         }
-                
-                        // Call the function initially
                         checkAndDisplayMessage();
-                
-                        // Listen for changes in the ul (e.g., when AJAX content is added)
                         var observer = new MutationObserver(checkAndDisplayMessage);
                         observer.observe(document.getElementById('search_task_results'), { childList: true });
                     });

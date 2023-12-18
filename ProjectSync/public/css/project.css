@@ -12,16 +12,21 @@
     border-radius: 8px;
     margin-bottom: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    /* transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; */
     width: 60%;
     margin: 50px auto;
     text-align: center;
-}
-
-#project-info-card:hover {
-    transform: scale(1.05);
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
 }
+
+/* 
+    removed animations for this card since they don't 
+    play nice with the modal overlay of some popups 
+*/ 
+/* #project-info-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+} */
 
 #project-info-card h2 {
     margin-bottom: 10px;
@@ -65,7 +70,8 @@
     font-size: 24px;
 }
 
-#project-members-card {
+#project-members-card,
+#invited-users-card {
     background-color: #f7f3e9;
     color: #172b4d;
     padding: 20px;
@@ -77,15 +83,18 @@
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-#project-members-card:hover {
+#project-members-card:hover,
+#invited-users-card:hover {
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
 }
 
-#project-members h3 {
+#project-members h3,
+#invited-users-card h3 {
     margin-bottom: 10px;
 }
 
-#project-member-list {
+#project-member-list,
+#invited-users-list {
     list-style-type: none;
     padding: 0;
 }
@@ -136,32 +145,6 @@
 
 .remove-member-button:hover i {
     transform: scale(1.05);
-}
-
-.confirmation-popup {
-    display: none;
-}
-
-.confirmation-popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #f7f3e9;
-    background-color: #172b4d;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-}
-
-.confirmation-popup p {
-    margin-bottom: 15px;
-}
-
-.confirmation-popup button {
-    margin-right: 10px;
 }
 
 #addMemberForm {

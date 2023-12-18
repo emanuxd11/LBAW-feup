@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-// Added to define Eloquent relationships.
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
+use Illuminate\Support\Facades\DB;
+
+use Carbon\Carbon;
+
 
 class Project extends Model
 {
@@ -47,6 +51,24 @@ class Project extends Model
     {
         return $this->belongsToMany(User::class, 'projectmember', 'idproject', 'iduser')
             ->withPivot(['iscoordinator', 'isfavorite']);
+    }
+
+    /**
+     * Retrieve a list of users with a valid pending invitation for this project.
+     */
+    public function pending_users()
+    {
+        $oneWeekAgo = Carbon::now()->subWeek();
+
+        $pendingUsers = DB::table('projectmemberinvitation')
+            ->join('User', 'User.id', '=', 'projectmemberinvitation.iduser')
+            ->where('idproject', $this->id)
+            ->where('created_at', '>', $oneWeekAgo)
+            ->select('User.*')
+            ->distinct()
+            ->get();
+
+        return $pendingUsers;
     }
 
     /**

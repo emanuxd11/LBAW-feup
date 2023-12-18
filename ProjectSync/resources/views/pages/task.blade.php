@@ -108,6 +108,14 @@
                 </select>
                 <p class="info-label">Delivery Date:</p>
                 <input type="date" name="delivery_date" class="project-form-input" style="background-color: #f7f3e9; color: #172b4d;">
+                <p class="info-label">Add user:</p>
+                <select id="username" name="username" class="project-form-input">
+                    <option value="" selected disabled>--------</option>
+                    @foreach($task->members_not_in_task as $user)
+                        <option value={{$user->username}}>{{ $user->name . ' (' . $user->username . ')' }}</option>
+                    @endforeach
+                    
+                </select>
                 <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
             </form>
         
