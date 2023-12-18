@@ -159,6 +159,8 @@ textarea.task_description {
     padding: 10px;
     word-wrap: break-word;
     margin-bottom: 15px;
+    border: 2px solid #172b4d;
+    border-radius: 4px;
 }
 
 .commentHeader{
