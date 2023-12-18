@@ -33,7 +33,7 @@ class PostController extends Controller{
 
         $request->validate([
             'title' => 'string|max:50',
-            'description' => 'string|max:1000',
+            'description' => 'string|max:10000',
         ]);
 
         $user = Auth::user();

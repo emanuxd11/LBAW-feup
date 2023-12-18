@@ -153,3 +153,26 @@ textarea.task_description {
     margin-top: -2vh;
     padding: 5px;
 }
+
+.commentCard{
+    background-color: #003366;
+    padding: 10px;
+    word-wrap: break-word;
+    margin-bottom: 15px;
+}
+
+.commentHeader{
+    display: flex;
+}
+
+.commentHeader p{
+    margin-right: 10px;
+}
+
+.editComment #editPost, #deletePost, #toggle_comment_edit{
+    background-color: #006aa7;
+}
+
+.editComment{
+    margin-bottom: -30px;
+}

@@ -142,10 +142,10 @@
                 <div class="commentCard">
                     <div class="commentHeader">
                         <p>Author:{{$taskComment->user->username ?? "deleted"}}</p>
-                        <p>Date:{{$taskComment->created_at}}</p>
                         @if($taskComment->isedited)
-                            <p>Edited</p>
+                            <p>(edited)</p>
                         @endif
+                        <p>Date:{{$taskComment->created_at}}</p>
                     </div>
         
                     <div class="commentBody">
@@ -161,7 +161,6 @@
                                 <form method="POST" action="{{ route('taskComment.update', ['id' => $task->id]) }}" class="updatePostForm">
                                     @csrf
                                     @method('POST')
-                                    <p class="createPost">Comment:</p>
                                     <textarea name="comment" class="post-form" placeholder="{{ $taskComment->comment }}"></textarea>
                                     <input type="hidden" name="id" class="post-form" value="{{ $taskComment->id }}">
                                     <button type="submit" id="editPost">Edit</button>

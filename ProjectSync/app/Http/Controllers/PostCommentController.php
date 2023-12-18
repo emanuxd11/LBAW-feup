@@ -19,7 +19,7 @@ class PostCommentController extends Controller{
     public function create(Request $request){
 
         $request->validate([
-            'comment' => 'string|max:255',
+            'comment' => 'string|max:3000',
         ]);
 
         $user = Auth::user();
@@ -45,7 +45,7 @@ class PostCommentController extends Controller{
     public function update(Request $request,$id){
 
         $request->validate([
-            'comment' => 'string|max:255',
+            'comment' => 'string|max:3000',
         ]);
 
         $postComment = PostComment::find($id);    

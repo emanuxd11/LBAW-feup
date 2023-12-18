@@ -17,7 +17,7 @@ class TaskCommentsController extends Controller
     {
 
         $request->validate([
-            'comment' => 'required|string|max:30',
+            'comment' => 'required|string|max:3000',
         ]);
 
         $taskComment = new TaskComments([
@@ -42,7 +42,7 @@ class TaskCommentsController extends Controller
         $task = Task::find($id);
 
         $request->validate([
-            'comment' => 'nullable|string|max:255',
+            'comment' => 'nullable|string|max:3000',
         ]);
 
         $this->authorize('update', $task);
@@ -55,6 +55,7 @@ class TaskCommentsController extends Controller
         }
 
         $taskComment->comment = $request->input('comment');
+        $taskComment->isedited = true;
         $taskComment->save();
         return redirect()->route('show_task', ['project_id' => $task->project_id, 'id' => $task->id])
                     ->with('success', 'Comment updated successfully.');
