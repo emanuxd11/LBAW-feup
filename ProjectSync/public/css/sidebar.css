@@ -1,0 +1,75 @@
+#content {
+    display: grid;
+    grid-template-columns: auto 1fr; /* Sidebar width and remaining width */
+    grid-template-rows: auto;
+    grid-template-areas: "sidebar content";
+    min-height: 100vh;
+    margin: 0;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+.sidebar img {
+    max-width: 100%;
+}
+
+.nav-menu {
+    margin-top: 20px;
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.nav-menu a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.content {
+    grid-area: content;
+    padding: 20px;
+}
+
+.side-bar-icon {
+    border-radius: 50%;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: #ffffff;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+/* +- provisório, só serve para mostrar que são favs até se arranjar uma solução melhor */
+#favorite-projects .side-bar-icon {
+    color: #d6c407;
+}
+
+.side-bar-icon span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+li.separator {
+    height: 5px;
+    border-radius: 3px;
+    background-color: #555;
+    margin: 10px 0;
+    list-style: none;
+}

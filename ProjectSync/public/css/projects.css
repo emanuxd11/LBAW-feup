@@ -70,11 +70,17 @@
 
 #active-projects,
 #favorite-projects {
-    text-align: left;
+    /* text-align: left;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: space-around;
+    justify-content: space-around; */
+}
+
+#active-projects ul,
+#favorite-projects ul,
+#dashboard ul {
+    margin-bottom: 0px;
 }
 
 .project {
