@@ -77,7 +77,6 @@ class AdminController extends Controller{
 
         $user = Auth::user();
 
-        // Check if the current user is authorized to do this.
         if(!$user->isAdmin){
             return redirect('/');
         }
@@ -90,6 +89,14 @@ class AdminController extends Controller{
             'password' => Hash::make($request->password),
             'isdeactivated' => false,
         ]);
+
+        if($request->input('user-type') == 'admin'){
+            $data = [
+                'id' => User::where('email',$request->email)->first()->id,
+            ];
+
+            DB::table('admin')->insert($data);
+        }
     
         return redirect()->route('adminPage')->with('success','User created successfully');
     }
@@ -98,7 +105,7 @@ class AdminController extends Controller{
         $userId = $request->input('userId');
         $user = User::findOrFail($userId);
         if($user->isAdmin){
-            return redirect()->route('adminPage')->with('error','Cant delete an admin');
+            return redirect()->route('adminPage')->with('error','Cannot delete an admin');
         }
 
         if(!Auth::user()->isAdmin){

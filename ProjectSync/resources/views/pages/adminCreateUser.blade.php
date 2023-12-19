@@ -56,6 +56,14 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="user-type" class="form-label">User Type</label>
+                            <select id="user-type" name="user-type" class="project-form-input">
+                                <option value="regular">Regular</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input id="password" type="password" name="password" required class="form-control">
                             @if ($errors->has('password'))
