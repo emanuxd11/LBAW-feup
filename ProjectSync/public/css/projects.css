@@ -94,14 +94,11 @@
     color: #f7f3e9;
 }
 
-.project a:hover {
-    color: #f2cf76;
-}
-
 
 .project:hover {
     transform: scale(1.05);
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+    color: #172b4d;
 }
 
 .project h3 {
@@ -110,7 +107,7 @@
 }
 
 .project-icons {
-    margin-top: 10px;
+    margin-top: 100px;
     display: flex;
     justify-content: space-around;
     width: 100%;
