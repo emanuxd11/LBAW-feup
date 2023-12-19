@@ -130,6 +130,23 @@ class ProfileController extends Controller
             return redirect()->route('profilePage', ['username' => $user->username]);
         }
 
+        $coordinatedProjects = $user->getCoordinatedProjects();
+
+        $checkIfUserHasToAssignCoord = [];
+        $projectsToArchive = [];
+
+        foreach($coordinatedProjects as $project){
+            if(count($project->members) == 1){
+                $projectsToArchive[] = $project;
+                continue;
+            }
+            $checkIfUserHasToAssignCoord[] = $project;
+        }
+
+        if($checkIfUserHasToAssignCoord != []){
+            return redirect()->route('editProfile', ['username' => $user->username])->with('error','Please assign new coordinators to your projects with more than 1 member.');
+        }
+
         DB::table('projectmembertask')->where('user_id', $user->id)->delete();
         DB::table('projectmember')->where('iduser', $user->id)->delete();
         DB::table('projectmemberinvitation')->where('iduser', $user->id)->delete();
@@ -143,6 +160,11 @@ class ProfileController extends Controller
         TaskComments::where('user_id', $user->id)->update(['user_id' => null]);
         
         $user->delete();
+
+        foreach($projectsToArchive as $project){
+            $project->archived = true;
+            $project->save();
+        }
 
         if(Auth::user()->isAdmin){
             return redirect()->route('adminPage')->with('success','User deleted successfully');
