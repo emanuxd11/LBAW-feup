@@ -67,6 +67,7 @@ class AdminController extends Controller{
         foreach($coordinatedProjects as $project){
             if(count($project->members) == 1){
                 $project->archived = true;
+                $project->save();
                 continue;
             }
             $arrayToPass[] = $project;
