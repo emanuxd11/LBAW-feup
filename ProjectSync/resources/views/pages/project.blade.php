@@ -16,10 +16,12 @@
         <div id="project-info-card">
             <h2>{{ $project->name }}</h2>
             <div id="project-links">
+                @if($project->getCoordinator() != null)
                 <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" class="link">
                     <i class="fas fa-user"></i>
                     <p>{{ $project->getCoordinator()->name }}</p>
                 </a>
+                @endif
 
                 @if(!Auth::user()->isadmin)
                     <div class="favorite-button">

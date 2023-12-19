@@ -51,6 +51,44 @@ class AdminController extends Controller{
         abort(403, 'Unauthorized'); // Or redirect to a different page
     }
 
+    public function showUserLogicPage(Request $request){
+        if (!Auth::check()){
+            return redirect("/login");
+        }
+        if(!Auth::user()->isAdmin){
+            return redirect("/projects");
+        }
+        $user = User::find($request->input('userId'));
+
+        $coordinatedProjects = $user->getCoordinatedProjects();
+
+        $arrayToPass = [];
+
+        foreach($coordinatedProjects as $project){
+            if(count($project->members) == 1){
+                $project->archived = true;
+                continue;
+            }
+            $arrayToPass[] = $project;
+        }
+
+        if($arrayToPass == []){
+            if($request->input('action') == 'delete'){
+                return $this->deleteUser($request);
+            }
+            else{
+                return $this->blockUser($request);
+            }
+        }
+
+        return view('pages.showUserLogic', [
+            'coordinatedProjects' => $arrayToPass,
+            'user' => $user,
+            'action' => $request->input('action'),
+        ]);
+
+    }
+
     public function search(Request $request)
     {
         $userQuery = $request->input('user_query');
@@ -63,6 +101,23 @@ class AdminController extends Controller{
             'userResults' => $userResults,
             'projectResults' => $projectResults,
         ]);
+    }
+
+    public function adminAssignNewCoordinator(Request $request){
+        $projectId = $request->input('projectId');
+        $project = Project::findOrFail($projectId);
+
+        $request->validate([
+            'old_id' => 'required',
+            'new_id' => 'required',
+        ]);
+
+        $project->members()->updateExistingPivot($request->input('old_id'), ['iscoordinator' => false]);
+
+        $project->members()->updateExistingPivot($request->input('new_id'), ['iscoordinator' => true]);
+        
+        
+        return $this->showUserLogicPage($request);
     }
 
     public function createUser(Request $request)
@@ -144,6 +199,7 @@ class AdminController extends Controller{
 
         return redirect()->route('adminPage')->with('success','User unblocked successfully.');
     }
+
 }
 
 ?>

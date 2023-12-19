@@ -18,7 +18,6 @@ class User extends Authenticatable
 
     protected $table = 'User';
 
-    // Don't add create and update timestamps in database.
     public $timestamps = false;
 
     /**
@@ -56,28 +55,25 @@ class User extends Authenticatable
     ];
     protected $appends = ['isAdmin'];
 
-    /**
-     * Get the projects for a user.
-     */
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')
             ->where('archived', FALSE);
     }
 
-    // If I am right, this will won't go (what?😂) to the database everytime it needs to check if the user is an admin
-    // This way it checks if the user is one or not and keeps the var stored in the class.
     public function getIsAdminAttribute()
     {
         return $this->admin ?? DB::table('admin')->where('id', $this->id)->exists();
     }
 
-    /**
-     * List a user's favorite projects.
-     */
     public function favorite_projects()
     {
         return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')
             ->wherePivot('isfavorite', true)->get();
+    }
+
+    public function getCoordinatedProjects(){
+        return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')
+            ->wherePivot('iscoordinator', true)->get();
     }
 }
