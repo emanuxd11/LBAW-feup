@@ -64,7 +64,6 @@ CREATE TABLE "User" (
 -- Create Admin Table (Extending User Table)
 CREATE TABLE Admin (
     id INT PRIMARY KEY REFERENCES "User"(id)
-    -- Add additional admin-specific fields here
 );
 
 -- Create Project Table

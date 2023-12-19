@@ -93,6 +93,9 @@ class Project extends Model
      */
     public function isCoordinator(User $user): bool
     {
+        if($this->getCoordinator() == null){
+            return false;
+        }
         return $user->id === $this->getCoordinator()->id;
     }
 
