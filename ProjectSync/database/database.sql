@@ -304,11 +304,11 @@ CREATE TRIGGER one_coordinator_restriction_trigger
 
 -- Insert some stuff to get started
 
-INSERT INTO "User" (name, username, email, password, phoneNumber, isDeactivated, profile_pic) VALUES 
-    ('Rúben Fonseca', 'rubenf11', 'up202108830@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '913111111', FALSE, NULL),
-    ('Miguel Marinho', 'kiryu', 'up202108822@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '912111111', FALSE, NULL),
-    ('Emanuel Maia', 'manu', 'up202107486@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '914111111', FALSE, '/images/avatars/manu.jpg'),
-    ('Alberto Serra', 'i_love_naruto', 'up202103627@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '915111111', FALSE, NULL);
+INSERT INTO "User" (name, username, email, password, phoneNumber, isDeactivated, bio, profile_pic) VALUES 
+    ('Rúben Fonseca', 'rubenf11', 'up202108830@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '913111111', FALSE, 'A passionate and results-oriented project manager with over 5 years of experience in bringing complex initiatives to life. Expertise in managing cross-functional teams, setting clear objectives, and delivering projects on time and within budget. Adept at utilizing project management software to streamline processes, track progress, and maintain transparency.' ,NULL),
+    ('Miguel Marinho', 'kiryu', 'up202108822@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '912111111', FALSE, 'Project coordinator with a knack for organizing and prioritizing tasks. Proven ability to navigate complex projects, manage multiple deadlines, and ensure seamless cross-team communication. Expertise in utilizing project management software to create detailed project plans, track progress, and identify potential risks.',NULL),
+    ('Emanuel Maia', 'manu', 'up202107486@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '914111111', FALSE, 'Project member with a passion for driving innovation and achieving ambitious goals. Expertise in developing comprehensive project roadmaps, identifying market opportunities, and aligning projects with business objectives.', '/images/avatars/manu.jpg'),
+    ('Alberto Serra', 'i_love_naruto', 'up202103627@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '915111111', FALSE, 'A creative and resourceful project analyst with a sharp eye for detail and a knack for problem-solving. Expertise in analyzing project data, identifying trends, and providing actionable insights. Proven ability to translate complex information into clear and concise reports.', NULL);
 
 INSERT INTO Admin (id) VALUES (1);
 
