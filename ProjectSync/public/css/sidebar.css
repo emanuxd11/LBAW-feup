@@ -1,10 +1,20 @@
 #content {
     display: grid;
-    grid-template-columns: auto 1fr; /* Sidebar width and remaining width */
+    grid-template-columns: 70px 1fr 200px; /* sidebar width and remaining width */
     grid-template-rows: auto;
-    grid-template-areas: "sidebar content";
-    min-height: 100vh;
+    grid-template-areas: "sidebar content members";
+    /* min-height: 100vh; */
+    /* height: calc(100vh - 96px); */ /* subtract the height of the header (disabled for now because project page stil takes more space) */
+    /* for now using min-height but goal is to use just height */
+    min-height: calc(100vh - 96px);
     margin: 0;
+}
+
+.members-sidebar {
+    grid-area: members;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
 }
 
 .sidebar {

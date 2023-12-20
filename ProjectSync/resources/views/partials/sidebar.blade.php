@@ -2,19 +2,6 @@
 
 <aside class="sidebar">
     <nav class="nav-menu">
-        <div id="dashboard">
-            <ul>
-                <li>
-                    <a href="{{ route('projects') }}" class="side-bar-icon">
-                        <span>
-                            <i class="fa-solid fa-plus"></i>
-                        </span>
-                    </a>
-                </li>
-                <li class="separator"></li>
-            </ul>
-        </div>
-        
         {{-- <h2>Your favorite projects:</h2>     --}}
         <div id="favorite-projects">
             @if (count(Auth::user()->favorite_projects()) > 0)
@@ -41,6 +28,19 @@
             @else
                 <p>Looks like you aren't related to any currently active projects. You can start by creating a new one!</p>
             @endif
+        </div>
+
+        <div id="dashboard">
+            <ul>
+                <li class="separator"></li>
+                <li>
+                    <a href="{{ route('projects') }}" class="side-bar-icon">
+                        <span>
+                            <i class="fa-solid fa-plus"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </nav>
 </aside>

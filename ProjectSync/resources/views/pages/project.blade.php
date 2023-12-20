@@ -9,6 +9,7 @@
 <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
 
 @include('partials.sidebar')
+@include('partials.members')
 
 @if($project->archived)
     <h1>This project is has been archived by the coordinator.</h1>
@@ -17,13 +18,14 @@
     @include('partials.messages')
 
     <div id="project-info-card">
-        <h2>{{ $project->name }}</h2>
+        
         <div id="project-links">
+            <h2>{{ $project->name }}</h2>
             @if($project->getCoordinator() != null)
-            <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" class="link">
-                <i class="fas fa-user"></i>
-                <p>{{ $project->getCoordinator()->name }}</p>
-            </a>
+                <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" class="link">
+                    <i class="fas fa-user"></i>
+                    <p>{{ $project->getCoordinator()->name }}</p>
+                </a>
             @endif
 
             @if(!Auth::user()->isadmin)
@@ -84,12 +86,13 @@
         </div>
     </div>
 
-    <div class="projectDescriptionCard">
+    {{-- these go into separate links --}}
+    {{-- <div class="projectDescriptionCard">
         <h2>Project Description</h2>
         <p>{{ $project->description }}<p>
-    </div>
+    </div> --}}
 
-    <div class="projectSettingsCard">
+    {{-- <div class="projectSettingsCard">
         <h2>Project Settings</h2>
         <form method="POST" action="{{ route('project.update',['project_id' => $project->id]) }}" class="project-form">
             @method('POST')
@@ -99,7 +102,7 @@
             <input type="date" name="delivery_date" class="project_delivery_date">
             <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
         </form>
-    </div>
+    </div> --}}
     
     <div id="project-members">
         <h3>Project Members</h3>
