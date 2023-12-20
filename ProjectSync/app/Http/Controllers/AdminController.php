@@ -117,6 +117,9 @@ class AdminController extends Controller{
 
         $project->members()->updateExistingPivot($request->input('new_id'), ['iscoordinator' => true]);
         
+        $description ='The project ' . $project->name . ' has a new coordinator.';
+        $members = $project->members;
+        $this->createNotification($members,$description);
         
         return $this->showUserLogicPage($request);
     }

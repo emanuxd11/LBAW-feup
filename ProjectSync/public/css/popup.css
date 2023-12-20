@@ -45,3 +45,15 @@
     background: rgba(0, 0, 0, 0.5); /* Adjust the transparency as needed */
     z-index: 9999; /* Adjust the z-index to ensure it's on top of other elements */
 }
+
+.larger-toast {
+    font-size: 22px;
+}
+
+.larger-header {
+    font-size: 28px;
+}
+
+.larger-body {
+    font-size: 20px;
+}

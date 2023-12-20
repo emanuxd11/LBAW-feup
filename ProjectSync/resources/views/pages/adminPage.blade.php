@@ -46,16 +46,16 @@
                         <h5 style="align-items: center;">
                             Username: {{$user->username}} | Email: {{$user->email}}
                             <div class="deleteOrBlock">
-                                <form method="GET" action="{{ route('adminPage.userLogic') }}">
+                                <form method="POST" action="{{ route('adminPage.userLogic') }}">
                                     @csrf
-                                    @method('GET')
+                                    @method('POST')
                                     <input type="hidden" name="userId" value="{{ $user->id }}">
                                     <input type="hidden" name="action" value="{{ 'block' }}">
                                     <button type="submit" class="button">@if(!$user->isdeactivated)Block User @else Unblock User @endif</button>
                                 </form>
-                                <form method="GET" action="{{ route('adminPage.userLogic') }}">
+                                <form method="POST" action="{{ route('adminPage.userLogic') }}">
                                     @csrf
-                                    @method('GET')
+                                    @method('POST')
                                     <input type="hidden" name="userId" value="{{ $user->id }}">
                                     <input type="hidden" name="action" value="{{ 'delete' }}">
                                     <button type="submit" class="button">Delete User</button>

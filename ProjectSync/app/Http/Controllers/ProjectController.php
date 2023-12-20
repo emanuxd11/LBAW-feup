@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\QueryException;
 
 use App\Models\Project;
+use App\Models\Notification;
 use App\Models\User;
 use App\Models\Task;
 
@@ -19,6 +20,8 @@ use App\Mail\ProjectInvitation;
 use App\Mail\ResetPassword;
 
 use App\Http\Controllers\AdminController;
+
+use App\Events\NotificationEvent;
 
 use Carbon\Carbon;
 
@@ -140,6 +143,10 @@ class ProjectController extends Controller
             return redirect('/projects/' . $project_id)->with('error', 'Nothing was changed because user did not provide anything to change');
         }
 
+        $description ='The project ' . $project->name . ' was updated.';
+        $members = $project->members;
+        $this->createNotification($members,$description);
+
         $project->save();
         
         return redirect('/projects/' . $project_id)->with('success', 'Project updated');
@@ -160,6 +167,10 @@ class ProjectController extends Controller
 
         $project->archived = true;
         $project->save();
+
+        $description ='The project ' . $project->name . ' was archived.';
+        $members = $project->members;
+        $this->createNotification($members,$description);
 
         return redirect('/projects')->with('success', '\"' . $project->name . '\" archived.');
     }
@@ -225,6 +236,9 @@ class ProjectController extends Controller
             'invitation_token' => $token,
         ]);
 
+        $description = 'Invited user ' . $user->username . ' to project.';
+        event(new NotificationEvent($request->id,$description));
+
         try {
             Mail::to($user->email)->send(new ProjectInvitation($token, $project->id, $project->name, $user->id, $user->username));
         } catch (\Exception $e) {
@@ -270,6 +284,10 @@ class ProjectController extends Controller
             ->where('iduser', $invitation->iduser)
             ->where('idproject', $invitation->idproject)
             ->delete();
+
+        $description ='The user ' . $user->username . ' accepted the invite to join project ' . $project->name  . '.';
+        $member = $project->getCoordinator();
+        $this->createNotification([$member],$description);
 
         return redirect()->route('project.show', ['id' => $project_id])->with('success', 'You\'re now part of "' . $project->name . '"!');
     }
@@ -328,6 +346,10 @@ class ProjectController extends Controller
             $task->members()->detach($userId);
         }
 
+        $description ='You have been removed from project ' . $project->name . '.';
+        $member = User::find($userId);
+        $this->createNotification([$member],$description);
+
         return redirect()->back()->with('success', 'User removed successfully.');
     }
 
@@ -343,6 +365,12 @@ class ProjectController extends Controller
         foreach ($project->tasks as $task) {
             $task->members()->detach($userId);
         }
+
+        $user = User::find($userId);
+
+        $description ='The user ' . $user->username . ' left from project ' . $project->name . '.';
+        $member = $project->getCoordinator();
+        $this->createNotification([$member],$description);
 
         return redirect()->back()->with('success', 'You are no longer part of \"' . $project->name . '\"!');
     }
@@ -360,6 +388,10 @@ class ProjectController extends Controller
         $project->members()->updateExistingPivot($request->input('old_id'), ['iscoordinator' => false]);
 
         $project->members()->updateExistingPivot($request->input('new_id'), ['iscoordinator' => true]);
+
+        $description ='The project ' . $project->name . ' has a new coordinator.';
+        $members = $project->members;
+        $this->createNotification($members,$description);
 
         return redirect()->back()->with('success', 'Coordinator changed successfully.');
     }
@@ -382,5 +414,17 @@ class ProjectController extends Controller
 
         // Respond with a JSON indicating the new favorite status
         return response()->json(['is_favorite' => !$previous_status]);
+    }
+
+    private function createNotification($receivers,$description)
+    {
+        $notification = Notification::create([
+            'description' => $description,
+            'date' => now(),
+        ]);
+
+        foreach($receivers as $user){
+            $user->notifications()->attach($notification, ['ischecked' => false]);
+        }
     }
 }

@@ -14,6 +14,8 @@ use App\Models\PostComment;
 use App\Models\Message;
 use App\Models\Changes;
 
+use App\Events\NotificationEvent;
+
 class PostController extends Controller{
 
     public function show(Request $request, $project_id,$id){
@@ -124,7 +126,7 @@ class PostController extends Controller{
             
             DB::table('postupvote')->insert($data);
         }
-    
+
         $post->save();
         return response()->json(['upvotes' => $post->upvotes]);
     }
