@@ -75,15 +75,14 @@
                                 <span id="user-name-project">{{ $user->name . ' (' . $user->username . ')' }}</span>
                             </div>
                             <div class="context-menu" id="contextMenu-{{ $user->id }}">
-                                <div class="context-menu-item" id="contextMenuItem-{{ $user->id }}">
-                                    <a id="context-menu-profile-{{ $user->id }}" href="{{ route('profilePage', ['username' => $user->username]) }}">Profile</a>
+                                <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
+                                    <a href="{{ route('profilePage', ['username' => $user->username]) }}">Profile</a>
                                 </div>
-                                <div class="context-menu-item" id="contextMenuItem-{{ $user->id }}">
+                                <div class="context-menu-item" id="contextMenuItemRevoke-{{ $user->id }}">
                                     <button class="revoke-invitation-button text-button" onclick="showPopup('revoke-{{ $user->id }}-popup');">
-                                        {{-- <i class="fa-solid fa-xmark"></i> --}}
                                         Cancel Invitation
                                     </button>
-                                    <form class="project-form" method="POST" action="{{ route('project.revoke.invitations', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="revokeInvitationForm">
+                                    <form class="project-form" method="POST" action="{{ route('project.revoke.invitations', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="revokeInvitationForm-{{ $user->id }}">
                                         @method('DELETE')
                                         @csrf
                                         <div id="revoke-{{ $user->id }}-popup" class="confirmation-popup hidden">
@@ -93,7 +92,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="context-menu-item" id="contextMenuItem-{{ $user->id }}">
+                                <div class="context-menu-item" id="contextMenuItemHide-{{ $user->id }}">
                                     should hide menu
                                 </div>
                             </div>
@@ -105,14 +104,32 @@
 
         <script>
             function showContextMenu(userId) {
-                const contextMenu = document.getElementById(`contextMenu-` + userId);
+                // close others before opening
+                document.querySelectorAll('.context-menu').forEach(el => {
+                    el.style.display = "none";
+                });
+
+                const contextMenu = document.getElementById(`contextMenu-${userId}`);
                 contextMenu.style.left = `${event.pageX}px`;
                 contextMenu.style.top = `${event.pageY}px`;
                 contextMenu.style.display = 'block';
                 console.log("Opened new context menu")
 
-                document.getElementById(`contextMenuItem-${userId}`).addEventListener('click', function() {
-                    console.log(`Clicked context menu item for user ID: ${userId}`);
+                document.getElementById(`contextMenuItemProfile-${userId}`).addEventListener('click', function(event) {
+                    event.stopPropagation(); // Stop the click event from reaching the container div
+                    console.log(`Clicked Profile context menu item for user ID: ${userId}`);
+                    contextMenu.style.display = 'none';
+                });
+
+                document.getElementById(`contextMenuItemRevoke-${userId}`).addEventListener('click', function(event) {
+                    event.stopPropagation(); // Stop the click event from reaching the container div
+                    console.log(`Clicked Revoke context menu item for user ID: ${userId}`);
+                    contextMenu.style.display = 'none';
+                });
+
+                document.getElementById(`contextMenuItemHide-${userId}`).addEventListener('click', function(event) {
+                    event.stopPropagation(); // Stop the click event from reaching the container div
+                    console.log(`Clicked Hide context menu item for user ID: ${userId}`);
                     contextMenu.style.display = 'none';
                 });
 
