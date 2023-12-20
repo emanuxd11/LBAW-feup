@@ -141,6 +141,10 @@ class ProjectController extends Controller
             return redirect('/projects/' . $project_id)->with('error', 'Nothing was changed because user did not provide anything to change');
         }
 
+        $description ='The project ' . $project->name . ' was updated.';
+        $members = $project->members;
+        $this->createNotification($members,$description);
+
         $project->save();
         
         return redirect('/projects/' . $project_id)->with('success', 'Project updated');
@@ -161,6 +165,10 @@ class ProjectController extends Controller
 
         $project->archived = true;
         $project->save();
+
+        $description ='The project ' . $project->name . ' was archived.';
+        $members = $project->members;
+        $this->createNotification($members,$description);
 
         return redirect('/projects')->with('success', '\"' . $project->name . '\" archived.');
     }
@@ -272,6 +280,10 @@ class ProjectController extends Controller
             ->where('idproject', $invitation->idproject)
             ->delete();
 
+        $description ='The user ' . $user->username . ' accepted the invite to join project ' . $project->name  . '.';
+        $member = $project->getCoordinator();
+        $this->createNotification([$member],$description);
+
         return redirect()->route('project.show', ['id' => $project_id])->with('success', 'You\'re now part of "' . $project->name . '"!');
     }
 
@@ -329,6 +341,10 @@ class ProjectController extends Controller
             $task->members()->detach($userId);
         }
 
+        $description ='You have been removed from project ' . $project->name . '.';
+        $member = User::find($userId);
+        $this->createNotification([$member],$description);
+
         return redirect()->back()->with('success', 'User removed successfully.');
     }
 
@@ -344,6 +360,12 @@ class ProjectController extends Controller
         foreach ($project->tasks as $task) {
             $task->members()->detach($userId);
         }
+
+        $user = User::find($userId);
+
+        $description ='The user ' . $user->username . ' left from project ' . $project->name . '.';
+        $member = $project->getCoordinator();
+        $this->createNotification([$member],$description);
 
         return redirect()->back()->with('success', 'You are no longer part of \"' . $project->name . '\"!');
     }
@@ -361,6 +383,10 @@ class ProjectController extends Controller
         $project->members()->updateExistingPivot($request->input('old_id'), ['iscoordinator' => false]);
 
         $project->members()->updateExistingPivot($request->input('new_id'), ['iscoordinator' => true]);
+
+        $description ='The project ' . $project->name . ' has a new coordinator.';
+        $members = $project->members;
+        $this->createNotification($members,$description);
 
         return redirect()->back()->with('success', 'Coordinator changed successfully.');
     }
