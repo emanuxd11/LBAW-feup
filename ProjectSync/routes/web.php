@@ -48,7 +48,7 @@ Route::get('/create_user_form', [AdminController::class, 'showCreateUserForm'])-
 Route::post('/block_user', [AdminController::class, 'blockUser'])->name('adminPage.block');
 Route::put('/create_user', [AdminController::class, 'createUser'])->name('adminPage.create_user');
 Route::delete('/delete_user', [AdminController::class, 'deleteUser'])->name('adminPage.delete');
-Route::get('/userHandleLogic', [AdminController::class, 'showUserLogicPage'])->name('adminPage.userLogic');
+Route::post('/userHandleLogic', [AdminController::class, 'showUserLogicPage'])->name('adminPage.userLogic');
 Route::post('/assignNewCoordinator', [AdminController::class, 'adminAssignNewCoordinator'])->name('admin.assign.new.coordinator');
 
 // Projects

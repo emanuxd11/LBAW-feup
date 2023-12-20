@@ -1,0 +1,26 @@
+.body{
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+
+.card-body{
+    background-color: #172b4d;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.card-body h2, p{
+    color:white
+}
+
+select{
+    width: 100%;
+}
+
+button{
+    color: white;
+}
