@@ -98,7 +98,7 @@
 }
 
 .user-list-card {
-    display: flex;
+    /* display: flex; */
     align-items: center;
     justify-content: space-between;
     background-color: #006aa7;
@@ -106,12 +106,14 @@
     border-color: #172b4d;
     border-width: 2px;
     color: #f7f3e9;
-    padding: 15px;
+    padding: 5px;
     border-radius: 8px;
     margin-bottom: 10px;
+    margin: 0px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .user-list-card:hover {
@@ -125,7 +127,7 @@
 
 #user-name-project {
     color: #f7f3e9;
-    margin-right: 150px;
+    /* margin-right: 150px; */
 }
 
 #favorite-button, .archive-button, .project-submit-button{

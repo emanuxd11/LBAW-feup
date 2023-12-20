@@ -307,7 +307,12 @@ INSERT INTO "User" (name, username, email, password, phoneNumber, isDeactivated,
     ('Rúben Fonseca', 'rubenf11', 'up202108830@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '913111111', FALSE, 'A passionate and results-oriented project manager with over 5 years of experience in bringing complex initiatives to life. Expertise in managing cross-functional teams, setting clear objectives, and delivering projects on time and within budget. Adept at utilizing project management software to streamline processes, track progress, and maintain transparency.' ,NULL),
     ('Miguel Marinho', 'kiryu', 'up202108822@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '912111111', FALSE, 'Project coordinator with a knack for organizing and prioritizing tasks. Proven ability to navigate complex projects, manage multiple deadlines, and ensure seamless cross-team communication. Expertise in utilizing project management software to create detailed project plans, track progress, and identify potential risks.',NULL),
     ('Emanuel Maia', 'manu', 'up202107486@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '914111111', FALSE, 'Project member with a passion for driving innovation and achieving ambitious goals. Expertise in developing comprehensive project roadmaps, identifying market opportunities, and aligning projects with business objectives.', '/images/avatars/manu.jpg'),
-    ('Alberto Serra', 'i_love_naruto', 'up202103627@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '915111111', FALSE, 'A creative and resourceful project analyst with a sharp eye for detail and a knack for problem-solving. Expertise in analyzing project data, identifying trends, and providing actionable insights. Proven ability to translate complex information into clear and concise reports.', NULL);
+    ('Alberto Serra', 'i_love_naruto', 'up202103627@up.pt', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '915111111', FALSE, 'A creative and resourceful project analyst with a sharp eye for detail and a knack for problem-solving. Expertise in analyzing project data, identifying trends, and providing actionable insights. Proven ability to translate complex information into clear and concise reports.', NULL),
+    ('John Doe', 'john_doe', 'john.doe@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '916111111', FALSE, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', NULL),
+    ('Jane Smith', 'jane_smith', 'jane.smith@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '917111111', FALSE, 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', NULL),
+    ('Alice Johnson', 'alice_j', 'alice.johnson@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '918111111', FALSE, 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', NULL),
+    ('Bob Anderson', 'bob_a', 'bob.anderson@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '919111111', FALSE, 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', NULL),
+    ('Eva Martinez', 'eva_m', 'eva.martinez@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', '920111111', FALSE, 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL);
 
 INSERT INTO Admin (id) VALUES (1);
 
@@ -325,7 +330,13 @@ INSERT INTO ProjectMember (idUser,idProject,isCoordinator,isFavorite) VALUES
     -- (3,1,FALSE,TRUE),
     (3,2,FALSE,TRUE),
     (3,3,TRUE,TRUE),
-    (3,4,TRUE,TRUE);
+    (3,4,TRUE,TRUE),
+    (3, 1, FALSE, FALSE),
+    (4, 1, FALSE, FALSE),
+    (5, 1, FALSE, FALSE),
+    -- (6, 1, FALSE, FALSE),
+    -- (7, 1, FALSE, FALSE),
+    (8, 1, FALSE, FALSE);
 
 INSERT INTO Task (name, description, start_date, delivery_date, status, project_id) VALUES
     ('Task 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.

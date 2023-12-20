@@ -105,9 +105,8 @@
     </div> --}}
     
     <div id="project-members">
-        <h3>Project Members</h3>
+        {{-- <h3>Project Members</h3>
         <ul id="project-member-list">
-            {{-- can't use forelse here since there is always one element (coordinator) --}}
             @if(count($project->members) <= 1)
                 <p id="no-members">Looks like nobody has been added to the project yet.</p>
             @endif
@@ -156,9 +155,9 @@
                     </div>
                 </li>
             @endforeach
-        </ul>
+        </ul> --}}
 
-        <h3>Users With Pending Invitation</h3>
+        {{-- <h3>Users With Pending Invitation</h3>
         <ul id="invited-users-list">
             @forelse($project->pending_users() as $user)
                 <li data-id="{{ $user->id }}">
@@ -185,7 +184,7 @@
             @empty
                 <p id="no-invited-members">Looks like there aren't currently any users with pending invitations.</p>
             @endforelse
-        </ul>
+        </ul> --}}
         
         @if($project->isCoordinator(Auth::user()))
             <script src="{{ asset('js/invitations.js') }}" defer></script>
