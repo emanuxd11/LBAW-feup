@@ -47,14 +47,14 @@ class ForumController extends Controller{
 
         $query = $request->input('query');
 
-        if($request->input('best')){
+        if($request->input('filter') == 'upvotes'){
             $forumPosts = Post::where('project_id', $projectId)->where('title','ilike','%'.$query.'%')->orderby('upvotes','desc')->get();
         }
-        else if($request->input('newest')){
-            $forumPosts = Post::where('project_id', $projectId)->where('title','ilike','%'.$query.'%')->orderby('date','asc')->get();
-        }
-        else if($request->input('oldest')){
+        else if($request->input('filter') == 'date_des'){
             $forumPosts = Post::where('project_id', $projectId)->where('title','ilike','%'.$query.'%')->orderby('date','desc')->get();
+        }
+        else if($request->input('filter') == 'date_asc'){
+            $forumPosts = Post::where('project_id', $projectId)->where('title','ilike','%'.$query.'%')->orderby('date','asc')->get();
         }
         else{
             $forumPosts = Post::where('project_id', $projectId)->where('title','ilike','%'.$query.'%')->get();

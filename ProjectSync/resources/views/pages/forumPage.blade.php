@@ -47,19 +47,23 @@
         <div class="search-bar">
             <form id="searchForm" action="{{ route('forum.search', ['id' => request('id')]) }}" method="GET">
                 @csrf
-                <label class="filters">
+                <div class="filters">
                     <label>  
-                      <input type="radio" name="best" value="upvotes"> Best
+                      <input type="radio" name="filter" value="upvotes"> Best
                     </label>
                     
                     <label>
-                      <input type="radio" name="oldest" value="date_asc"> Oldest
+                      <input type="radio" name="filter" value="date_asc"> Oldest
                     </label>
                     
                     <label>
-                      <input type="radio" name="newest" value="date_des"> Newest
+                      <input type="radio" name="filter" value="date_des"> Newest
                     </label>
-                </label>
+
+                    <label>
+                        <input type="radio" name="filter" value="none"> None
+                    </label>
+                </div>
                 <div class="searchBarFlex">
                     <input type="text" class="searchPosts" id="searchInput" name="query" placeholder="Search Posts...">
                     <button type="submit"><p>Search Posts</p></button>
