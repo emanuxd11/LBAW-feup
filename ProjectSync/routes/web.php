@@ -9,6 +9,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TaskCommentsController;
@@ -138,4 +139,10 @@ Route::controller(ResetPasswordController::class)->group(function() {
     Route::get('password/reset', 'showLinkRequestForm')->name('password.request');
     Route::get('password/reset/{token}', 'showResetForm')->name('password.reset');
     Route::post('password/reset', 'resetPassword')->name('password.update');
+});
+
+Route::controller(NotificationController::class)->group(function() {
+    Route::get('{username}/notifications', 'show')->name('notification.show');
+    Route::post('{username}/notifications/check', 'check')->name('notification.check');
+    Route::post('{username}/notifications/checkAll', 'checkAll')->name('notification.checkAll');
 });

@@ -178,8 +178,7 @@ CREATE TABLE Changes (
 CREATE TABLE Notification (
     id SERIAL PRIMARY KEY,
     description VARCHAR NOT NULL,
-    date DATE NOT NULL,
-    origin VARCHAR NOT NULL
+    date DATE NOT NULL
 );
 
 -- Create UserNotification Table

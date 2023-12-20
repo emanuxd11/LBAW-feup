@@ -1,0 +1,36 @@
+.NotificationsBody{
+    margin: auto;
+    width: 50%;
+    align-items: center;
+    text-align: center;
+}
+
+div.checkAll{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+button.checkAll{
+    margin-top: 5px;
+    color:white;
+}
+
+.notificationCard{
+    background-color: #172b4d;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.notificationCard p, h4.notDesc{
+    text-align: start;
+    color:white;
+}
+
+.notificationHeader{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: -30px;
+}

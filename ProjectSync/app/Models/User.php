@@ -76,4 +76,16 @@ class User extends Authenticatable
         return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')
             ->wherePivot('iscoordinator', true)->get();
     }
+
+    public function notifications()
+    {
+        return $this->belongsToMany(Notification::class, 'usernotification', 'user_id', 'notification_id');
+    }
+
+    public function unseen_notifications()
+    {
+        return $this->belongsToMany(Notification::class, 'usernotification', 'user_id', 'notification_id')
+            ->wherePivot('ischecked', false);
+    }
+
 }

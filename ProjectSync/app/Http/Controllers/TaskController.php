@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Task;
+use App\Models\Notification;
 use App\Models\Project;
 use App\Models\User;
 
@@ -29,6 +30,18 @@ class TaskController extends Controller
         $taskComments = TaskComments::where('task_id',$task->id)->get();
 
         return view("pages.task",compact('task','taskComments'));
+    }
+
+    private function createNotification($receivers,$description)
+    {
+        $notification = Notification::create([
+            'description' => $description,
+            'date' => now(),
+        ]);
+
+        foreach($receivers as $user){
+            $user->notifications()->attach($notification, ['ischecked' => false]);
+        }
     }
     /**
      * Creates a new item.
@@ -64,7 +77,6 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Find the item.
         $task = Task::find($id);
 
         $request->validate([
@@ -75,7 +87,6 @@ class TaskController extends Controller
             'username' => 'nullable|string|max:255',
         ]);
 
-        // Check if the current user is authorized to update this item.
         $this->authorize('update', $task);
 
         if($request->input('name')){
@@ -93,6 +104,8 @@ class TaskController extends Controller
         if($request->input('description')){
             $task->description = $request->input('description');
         }
+
+        $members = $task->members;
 
         if($request->input('username')){
             $user = User::where('username', $request->input('username'))->first();
@@ -112,11 +125,14 @@ class TaskController extends Controller
                 'user_id' => $user->id,
                 'task_id' => $task->id,
             ];
-            
+            $description ='You have been added to task ' . $task->name . ' from project ' . Project::find($task->project_id)->name;
+            $this->createNotification([$user],$description);
             DB::table('projectmembertask')->insert($data);
         }
 
-        // Save the item and return it as JSON.
+        $description ='The task ' . $task->name . ' from project ' . Project::find($task->project_id)->name . ' has been updated.';
+        $this->createNotification($members,$description);
+
         $task->save();
         return redirect()->route('show_task', ['project_id' => $task->project_id, 'id' => $task->id])
                     ->with('success', 'Task updated successfully.');
@@ -127,12 +143,12 @@ class TaskController extends Controller
      */
     public function delete(Request $request, $id)
     {
-        // Find the item.
         $task = Task::find($id);
         $project_id = $task->project_id;
 
-        // Check if the current user is authorized to delete this item.
         $this->authorize('delete', $task);
+        $description ='The task ' . $task->name . ' from project ' . Project::find($project_id)->name . ' has been deleted.';
+        $this->createNotification($task->members,$description);
         DB::table('projectmembertask')->where('task_id', $task->id)->delete();
         TaskComments::where('task_id', $task->id)->delete();
         $task->delete();
@@ -143,8 +159,14 @@ class TaskController extends Controller
         $task = Task::find($id);
         $this->authorize('update', $task);
 
+        $user = User::find($request->input('user_id'));
         DB::table('projectmembertask')->where('task_id', $task->id)->where('user_id',$request->input('user_id'))->delete();
+
+        $description ='You have been removed from task ' . $task->name . ' from project ' . Project::find($task->project_id)->name;
+        $this->createNotification([$user],$description);
+
         return redirect()->route('show_task', ['project_id' => $task->project_id, 'id' => $task->id])
                     ->with('success', 'User removed successfully.');
     }
+
 }

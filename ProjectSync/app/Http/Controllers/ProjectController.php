@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\QueryException;
 
 use App\Models\Project;
+use App\Models\Notification;
 use App\Models\User;
 use App\Models\Task;
 
@@ -382,5 +383,17 @@ class ProjectController extends Controller
 
         // Respond with a JSON indicating the new favorite status
         return response()->json(['is_favorite' => !$previous_status]);
+    }
+
+    private function createNotification($receivers,$description)
+    {
+        $notification = Notification::create([
+            'description' => $description,
+            'date' => now(),
+        ]);
+
+        foreach($receivers as $user){
+            $user->notifications()->attach($notification, ['ischecked' => false]);
+        }
     }
 }
