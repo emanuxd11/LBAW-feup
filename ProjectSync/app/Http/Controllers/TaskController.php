@@ -12,6 +12,8 @@ use App\Models\Notification;
 use App\Models\Project;
 use App\Models\User;
 
+use App\Events\NotificationEvent;
+
 class TaskController extends Controller
 {
 
@@ -134,6 +136,7 @@ class TaskController extends Controller
         $this->createNotification($members,$description);
 
         $task->save();
+
         return redirect()->route('show_task', ['project_id' => $task->project_id, 'id' => $task->id])
                     ->with('success', 'Task updated successfully.');
     }

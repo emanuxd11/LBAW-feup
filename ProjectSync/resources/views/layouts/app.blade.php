@@ -26,10 +26,15 @@
     <script type="text/javascript" src="{{ asset('js/contacts.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/about.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/popup_confirms.js') }}" defer></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js" defer></script>
+    <script type="text/javascript" src="{{ asset('js/pusher.js') }}" defer></script>
 </head>
 <body>
     <main>
         @include('partials.header')
+        <div aria-live="polite" aria-atomic="true" style="position: fixed; bottom: 10px; right: 10px;">
+            <div id="toastContainer"></div>
+        </div>
         <section id="content">
             @yield('content')
         </section>

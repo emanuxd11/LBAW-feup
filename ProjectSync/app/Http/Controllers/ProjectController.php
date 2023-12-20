@@ -21,6 +21,8 @@ use App\Mail\ResetPassword;
 
 use App\Http\Controllers\AdminController;
 
+use App\Events\NotificationEvent;
+
 use Carbon\Carbon;
 
 
@@ -233,6 +235,9 @@ class ProjectController extends Controller
             'created_at' => now(),
             'invitation_token' => $token,
         ]);
+
+        $description = 'Invited user ' . $user->username . ' to project.';
+        event(new NotificationEvent($request->id,$description));
 
         try {
             Mail::to($user->email)->send(new ProjectInvitation($token, $project->id, $project->name, $user->id, $user->username));

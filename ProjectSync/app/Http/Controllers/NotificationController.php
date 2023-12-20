@@ -23,7 +23,7 @@ class NotificationController extends Controller{
             return redirect()->back();
         }
 
-        $notifications = $user->unseen_notifications;
+        $notifications = $user->unseen_notifications->reverse();
 
         return view("pages.notifications",compact('notifications'));
     }
