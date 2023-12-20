@@ -14,6 +14,7 @@ use Illuminate\Database\QueryException;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\Task;
+use App\Models\Changes;
 
 use App\Mail\ProjectInvitation;
 use App\Mail\ResetPassword;
@@ -382,5 +383,22 @@ class ProjectController extends Controller
 
         // Respond with a JSON indicating the new favorite status
         return response()->json(['is_favorite' => !$previous_status]);
+    }
+
+    public function showProjectChanges($project_id)
+    {
+        $project = Project::find($project_id);
+
+        // Check if the user is a member of the project or an admin
+        if (!$project || (!$project->isMember(Auth::user()) && !Auth::user()->isAdmin)) {
+            return redirect("/projects");
+        }
+
+        $changes = Changes::with('project')
+        ->where('project_id', $project_id)
+        ->orderBy('date', 'desc')
+        ->get();
+
+        return view('pages.changes', compact('project', 'changes'));
     }
 }

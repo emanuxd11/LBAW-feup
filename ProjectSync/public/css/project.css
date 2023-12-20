@@ -36,6 +36,7 @@
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
+    position: relative;
 }
 
 .link {
@@ -130,17 +131,18 @@
     margin-right: 150px;
 }
 
-#favorite-button, .archive-button, .project-submit-button{
+#favorite-button, #changes-button, .archive-button, .project-submit-button{
     background-color: #172b4d;
     color: #f7f3e9;
     cursor: pointer;
 }
 
-#favorite-button:hover, .archive-button:hover, .project-submit-button:hover{
+#favorite-button:hover, #changes-button:hover, .archive-button:hover, .project-submit-button:hover{
     color: #172b4d;
     background-color: #f7f3e9;
     cursor: pointer;
 }
+
 
 .remove-member-button {
     background-color: #172b4d;

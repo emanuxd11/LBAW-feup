@@ -169,7 +169,7 @@ CREATE TABLE Message (
 CREATE TABLE Changes (
     id SERIAL PRIMARY KEY,
     text VARCHAR,
-    date DATE,
+    date TIMESTAMP,
     project_id INT REFERENCES Project(id),
     user_id INT REFERENCES "User"(id)
 );

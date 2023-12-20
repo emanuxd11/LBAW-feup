@@ -63,6 +63,7 @@ Route::controller(ProjectController::class)->group(function () {
     Route::get('/projects/accept/invitation/redirect/{project_id}/{user_id}/{token}', 'acceptInvitationRedirect')->name('accept.project.invitation.redirect');
     Route::post('/projects/{project_id}/accept_invitation/{user_id}/{token}', 'acceptInvitation')->name('accept.project.invitation');
     Route::delete('/projects/revoke/invitations/{project_id}/{user_id}', 'revokeInvitations')->name('project.revoke.invitations');
+    Route::get('/projects/{project_id}/changes', 'App\Http\Controllers\ProjectController@showProjectChanges')->name('project_changes');
     // the ajax part
     Route::get('/projects/{id}/search_user', 'search_user')->name('project_search_user');
     Route::post('/projects/{id}/invite_user', 'inviteUserToProject')->name('project_invite_user');

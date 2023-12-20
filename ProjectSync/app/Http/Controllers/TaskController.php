@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Task;
 use App\Models\Project;
 use App\Models\User;
+use App\Models\Changes;
 
 class TaskController extends Controller
 {
@@ -75,6 +76,13 @@ class TaskController extends Controller
             'username' => 'nullable|string|max:255',
         ]);
 
+        $changes_before = [
+            'name' => $task->name,
+            'description' => $task->description,
+            'status' => $task->status,
+            'delivery_date' => $task->delivery_date,
+        ];
+
         // Check if the current user is authorized to update this item.
         $this->authorize('update', $task);
 
@@ -115,6 +123,42 @@ class TaskController extends Controller
             
             DB::table('projectmembertask')->insert($data);
         }
+
+        $changes_after = [
+            'name' => $task->name,
+            'description' => $task->description,
+            'status' => $task->status,
+            'delivery_date' => $task->delivery_date,
+        ];
+    
+        // Compare changes and generate text
+        $changeText = "Task $task->name updated. Changes: ";
+        $changedFields = [];
+    
+        foreach ($changes_after as $field => $after) {
+            if ($changes_before[$field] !== $after) {
+                if($field === 'description'){
+                    $changedFields[] = "description updated";
+                }
+                else{
+                    $before = "<strong>{$changes_before[$field]}</strong>";
+                    $after = "<strong>{$after}</strong>";
+                    $changedFields[] = "{$field} updated from {$before} to {$after} at ";
+                }
+                
+            }
+        }
+    
+        $changeText .= implode('<br>', $changedFields);
+
+        $change = new Changes([
+            'text' => $changeText,
+            'date' => now()->format('Y-m-d H:i:s'),
+            'project_id' => $task->project_id,
+            'user_id' => Auth::id(),
+        ]);
+
+        $change->save();
 
         // Save the item and return it as JSON.
         $task->save();

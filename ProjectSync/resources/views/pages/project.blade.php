@@ -5,6 +5,7 @@
 @section('content')
 
     <script type="text/javascript" src="{{ asset('js/project_fav.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/project_changes.js') }}" defer></script>
     <link href="{{ asset('css/project.css') }}" rel="stylesheet">
 
     @if($project->archived)
@@ -41,6 +42,10 @@
                 @endif
                 
                 @if($project->isCoordinator(Auth::user()))
+                    <form class="project-form">
+                        <a href="{{ route('project_changes', ['project_id' => $project->id]) }}" id="changes-button" class="button"><i class="fas fa-history"></i></a>
+                    </form>
+
                     <button class="archive-button button" onclick="showPopup('archive-popup');">
                         <i class="fa-solid fa-box-archive"></i>
                     </button>
@@ -55,6 +60,7 @@
                             <button class="button confirm-button">Yes</button>
                         </div>
                     </form>
+
 
                     <form class="project-form" method="POST" 
                             action="{{ route('assign.new.coordinator', ['project_id' => $project->id]) }}" 
@@ -248,5 +254,6 @@
                 <script src="{{ asset('js/search_tasks.js') }}" defer></script>
             </div>
         </div>
+    </div>
     </section>
 @endsection

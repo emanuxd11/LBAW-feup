@@ -49,4 +49,10 @@ class Task extends Model
         $ids_from_members_not_in_task = $this->members()->pluck('id');
         return $this->project->members()->whereNotIn('id', $ids_from_members_not_in_task);
     }
+
+    public function changes()
+    {
+        return $this->hasMany(Changes::class, 'project_id', 'project_id');
+    }
+
 }
