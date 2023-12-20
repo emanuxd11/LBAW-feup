@@ -79,9 +79,9 @@
                                     <a href="{{ route('profilePage', ['username' => $user->username]) }}">Profile</a>
                                 </div>
                                 <div class="context-menu-item" id="contextMenuItemRevoke-{{ $user->id }}">
-                                    <button class="revoke-invitation-button text-button" onclick="showPopup('revoke-{{ $user->id }}-popup');">
+                                    <div class="revoke-invitation-button text-button" onclick="showPopup('revoke-{{ $user->id }}-popup', event);">
                                         Cancel Invitation
-                                    </button>
+                                    </div>
                                     <form class="project-form" method="POST" action="{{ route('project.revoke.invitations', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="revokeInvitationForm-{{ $user->id }}">
                                         @method('DELETE')
                                         @csrf
@@ -92,9 +92,6 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="context-menu-item" id="contextMenuItemHide-{{ $user->id }}">
-                                    should hide menu
-                                </div>
                             </div>
                         </div>
                     </li>
@@ -104,42 +101,61 @@
 
         <script>
             function showContextMenu(userId) {
-                // close others before opening
-                document.querySelectorAll('.context-menu').forEach(el => {
-                    el.style.display = "none";
-                });
+                function hideAllContextMenus() {
+                    document.querySelectorAll('.context-menu').forEach(el => {
+                        el.style.display = 'none';
+                    });
+                }
+                hideAllContextMenus();
 
                 const contextMenu = document.getElementById(`contextMenu-${userId}`);
-                contextMenu.style.left = `${event.pageX}px`;
-                contextMenu.style.top = `${event.pageY}px`;
+                const pageX = event.pageX;
+                const pageY = event.pageY;
+                const menuWidth = 176;
+                const screenWidth = window.innerWidth;
+                if (pageX + menuWidth <= screenWidth) {
+                    contextMenu.style.left = `${pageX}px`;
+                } else {
+                    contextMenu.style.left = `${pageX - menuWidth}px`;
+                }
+
+                contextMenu.style.top = `${pageY}px`;
                 contextMenu.style.display = 'block';
                 console.log("Opened new context menu")
 
                 document.getElementById(`contextMenuItemProfile-${userId}`).addEventListener('click', function(event) {
-                    event.stopPropagation(); // Stop the click event from reaching the container div
+                    event.stopPropagation();
                     console.log(`Clicked Profile context menu item for user ID: ${userId}`);
-                    contextMenu.style.display = 'none';
+                    hideAllContextMenus();
                 });
 
                 document.getElementById(`contextMenuItemRevoke-${userId}`).addEventListener('click', function(event) {
-                    event.stopPropagation(); // Stop the click event from reaching the container div
+                    event.stopPropagation();
                     console.log(`Clicked Revoke context menu item for user ID: ${userId}`);
-                    contextMenu.style.display = 'none';
-                });
-
-                document.getElementById(`contextMenuItemHide-${userId}`).addEventListener('click', function(event) {
-                    event.stopPropagation(); // Stop the click event from reaching the container div
-                    console.log(`Clicked Hide context menu item for user ID: ${userId}`);
-                    contextMenu.style.display = 'none';
+                    hideAllContextMenus();
                 });
 
                 document.addEventListener('keydown', function(event) {
-                    if (event.key === 'Escape') {
+                    if (event.key === 'Escape' && contextMenu.style.display !== 'none') {
                         console.log('Hiding context menu on escape')
+                        hideAllContextMenus();
+                    }
+                });
+
+                document.body.addEventListener('mousedown', function(event) {
+                    const isClickInsideContextMenu = contextMenu.contains(event.target);
+                    if (!isClickInsideContextMenu) {
+                        console.log('Clicked outside context menu. Hiding context menu');
                         contextMenu.style.display = 'none';
                     }
                 });
             }
+
+            window.addEventListener('resize', function() {
+                document.querySelectorAll('.context-menu').forEach(el => {
+                    el.style.display = 'none'
+                });
+            });
         </script>
 
         <style>
