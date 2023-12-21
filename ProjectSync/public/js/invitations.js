@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function displaySearchResults(results, projectId) {
         searchResults.innerHTML = '';
-
+        
         results.forEach(user => {
-            const resultItem = document.createElement('div');
+            const resultItem = document.createElement('li');
             resultItem.textContent = user.name + (user.hasPendingInvitation ? " (pending)" : "");
             resultItem.addEventListener('click', async () => {
                 const updatedResults = results.filter(u => u.id !== user.id);
@@ -76,12 +76,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
     
-        function removeModalOverlay() {
-            const modalOverlays = document.querySelectorAll('.modal-overlay');
-            modalOverlays.forEach(modalOverlay => {
-                document.removeChild(modalOverlay);
-            });
-        }
+        // function removeModalOverlay() {
+        //     const modalOverlays = document.querySelectorAll('.modal-overlay');
+        //     modalOverlays.forEach(modalOverlay => {
+        //         document.removeChild(modalOverlay);
+        //     });
+        // }
     }
     
     async function inviteUserToProject(user, projectId) {
