@@ -110,11 +110,12 @@ class ProjectController extends Controller
         $data = [
             'iduser' => Auth::user()->id,
             'idproject' => $project->id,
+            'isfavorite' => false,
             'iscoordinator' => true,
         ];
         DB::table('projectmember')->insert($data);
         
-        return redirect('/projects');
+        return redirect('/projects' . '/' . $project->id);
     }
 
     public function update(Request $request,$project_id)

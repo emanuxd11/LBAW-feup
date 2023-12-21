@@ -11,28 +11,24 @@
                     </li>
                     <li class="separator"></li>
                 </ul>
-            @else
-                {{-- <p>Looks like you haven't marked any projects as favorite yet. You can do this by clicking the star icon on a project's page!</p> --}}
             @endif
         </div>
 
         {{-- <h2>Your active projects:</h2>     --}}
         <div id="active-projects">
             {{-- update this to only show the projects that aren't favorited --}}
-            @if (count(Auth::user()->projects) > 0)
+            @if (count(Auth::user()->unfavorite_projects()) > 0)
                 <ul>
                     <li>
-                        @each('partials.project_icon', Auth::user()->projects, 'project')
+                        @each('partials.project_icon', Auth::user()->unfavorite_projects(), 'project')
                     </li>
+                    <li class="separator"></li>
                 </ul>
-            @else
-                <p>Looks like you aren't related to any currently active projects. You can start by creating a new one!</p>
             @endif
         </div>
 
         <div id="dashboard">
             <ul>
-                <li class="separator"></li>
                 <li>
                     <a href="{{ route('projects') }}" class="side-bar-icon">
                         <span>

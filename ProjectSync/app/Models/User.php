@@ -73,6 +73,12 @@ class User extends Authenticatable
             ->wherePivot('isfavorite', true)->get();
     }
 
+    public function unfavorite_projects()
+    {
+        return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')
+            ->wherePivot('isfavorite', '!=', true)->get();
+    }
+
     public function getCoordinatedProjects(){
         return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')
             ->wherePivot('iscoordinator', true)->get();
