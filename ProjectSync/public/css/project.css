@@ -4,7 +4,7 @@
     align-items: center;
 }
 
-.project-info-card {
+.project-info-card, .task-card{
     /* background-color: #006aa7; */
     color: #f7f3e9;
     padding: 0;
@@ -19,11 +19,21 @@
 }
 
 div#project-settings-container {
-    position: fixed;
+    position: absolute;
     top: 8%;
     left: 50%;
     transform: translate(-50%, -8%);
-    max-height: 80vh;
+    max-width: 50%; /* Adjust the width as needed */
+    max-height: 49vh;
+    margin-top: 10px;
+}
+
+div#project-settings-container form.project-form {
+    margin: 0 60px; /* Adjust the margin value as needed */
+}
+
+div#project-settings-container h2{
+    margin-top: 5px;
 }
 
 /* 
@@ -41,7 +51,7 @@ div#project-settings-container {
 
 #project-links {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 20px;
     height: 50px;
     width: 100%;
@@ -182,10 +192,66 @@ div#project-settings-container {
     cursor: pointer;
 } */
 
-#favorite-button:hover, #changes-button, .archive-button:hover, .project-submit-button:hover{
-    /* color: #172b4d;
-    background-color: #f7f3e9; */
+#changes-button:hover, .archive-button:hover, .project-submit-button:hover{
+    color: #172b4d;
+    background-color: #f7f3e9; 
     cursor: pointer;
+}
+
+#changes-button, .archive-button, .exit-button{
+    background-color: #172b4d;
+    color: #f7f3e9;
+    top: 15%;
+    left: 0%;
+    
+    max-height: 80vh;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.project-submit-button {
+    background-color: #172b4d;
+    color: #f7f3e9;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#changes-button:hover,
+.archive-button:hover,
+.project-submit-button:hover, .exit-button:hover {
+    color: #172b4d;
+    background-color: #f7f3e9; 
+    cursor: pointer;
+    transform: background-color 0.3s ease-in-out; /* Add this line to remove the scaling effect on hover */
+}
+
+.project-submit-button:hover {
+    color: #172b4d;
+    background-color: #f7f3e9; 
+    cursor: pointer;
+}
+
+.top-left-buttons {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.archive-button,
+#changes-button {
+    margin-left: -22px;
+}
+
+#changes-button{
+    margin-left: -150px;
+}
+
+.exit-button{
+    margin-right: -970px;
 }
 
 .remove-member-button {
@@ -264,14 +330,13 @@ ul#searchResults {
 .task-card {
     background-color: #006aa7;
     color: #f7f3e9;
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-    box-shadow: 0 8px 16px rgba(23, 43, 77, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    width: 100%;
-    margin-bottom: 100px;
-    margin-top: 50px;
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    transform: translate(-50%, -8%);
+    max-width: 50%; /* Adjust the width as needed */
+    max-height: 49vh;
+    margin-top: 10px;
 
 }
 

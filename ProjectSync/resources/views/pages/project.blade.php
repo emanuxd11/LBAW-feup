@@ -25,6 +25,37 @@
     <div id="project-settings-container" class="hidden modal project-info-card scrollable opaque-project-container">
         <h2>Project Settings</h2>
 
+        <div class="top-left-buttons">
+            {{-- archive --}}
+            
+            <form class="project-form" method="POST" 
+                    action="{{ route('archive', ['project_id' => $project->id]) }}" 
+                    id="archiveProjectForm">
+                @method('POST')
+                @csrf
+                <button class="archive-button button" onclick="showPopup('archive-popup');">
+                    <i class="fa-solid fa-box-archive"></i>
+                </button>
+                <div id="archive-popup" class="confirmation-popup hidden">
+                    <p>Are you sure you want to archive "{{ $project->name }}"?<br>(This action cannot be undone!)</p>
+                    <button type="button" class="button cancel-button" onclick="hidePopup('archive-popup')">No</button>
+                    <button class="button confirm-button">Yes</button>
+                </div>
+            </form>
+
+            {{-- changes record --}}
+            <form class="project-form">
+                <a href="{{ route('project_changes', ['project_id' => $project->id]) }}" id="changes-button" class="button"><i class="fas fa-history"></i></a>
+            </form>
+
+            <form class="project-form">
+                <button class="exit-button" onclick="hideProjectSettings(event)" id="close-project-settings">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </form>
+
+        </div>
+
         {{-- change description --}}
         <form method="POST" action="{{ route('project.update',['project_id' => $project->id]) }}" class="project-form">
             @method('POST')
@@ -33,28 +64,6 @@
             <textarea name="description" class="project_description_area" placeholder="{{$project->description}}"></textarea>
             <input type="date" name="delivery_date" class="project_delivery_date">
             <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
-        </form>
-
-        {{-- changes record --}}
-
-        <form class="project-form">
-            <a href="{{ route('project_changes', ['project_id' => $project->id]) }}" id="changes-button" class="button"><i class="fas fa-history"></i></a>
-        </form>
-
-        {{-- archive --}}
-        <button class="archive-button button" onclick="showPopup('archive-popup');">
-            <i class="fa-solid fa-box-archive"></i>
-        </button>
-        <form class="project-form" method="POST" 
-                action="{{ route('archive', ['project_id' => $project->id]) }}" 
-                id="archiveProjectForm">
-            @method('POST')
-            @csrf
-            <div id="archive-popup" class="confirmation-popup hidden">
-                <p>Are you sure you want to archive "{{ $project->name }}"?<br>(This action cannot be undone!)</p>
-                <button type="button" class="button cancel-button" onclick="hidePopup('archive-popup')">No</button>
-                <button class="button confirm-button">Yes</button>
-            </div>
         </form>
 
         {{-- change coordinator --}}
