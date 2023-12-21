@@ -18,7 +18,7 @@
     /* box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2); */
 }
 
-div#project-settings-container {
+div#project-settings-container, div#create-task-container {
     position: absolute;
     top: 8%;
     left: 50%;
@@ -28,9 +28,16 @@ div#project-settings-container {
     margin-top: 10px;
 }
 
+
 div#project-settings-container form.project-form {
     margin: 0 60px; /* Adjust the margin value as needed */
 }
+
+.exit-button2{
+    margin-right: 75px;
+}
+
+
 
 div#project-settings-container h2{
     margin-top: 5px;
@@ -200,7 +207,7 @@ div#project-settings-container h2{
     cursor: pointer;
 }
 
-#changes-button, .archive-button, .exit-button{
+#changes-button, .archive-button, .exit-button, div#create-task-container button{
     background-color: #172b4d;
     color: #f7f3e9;
     top: 15%;
@@ -222,7 +229,7 @@ div#project-settings-container h2{
 
 #changes-button:hover,
 .archive-button:hover,
-.project-submit-button:hover, .exit-button:hover {
+.project-submit-button:hover, .exit-button:hover, div#create-task-container button:hover {
     color: #172b4d;
     background-color: #f7f3e9; 
     cursor: pointer;
@@ -241,11 +248,39 @@ div#project-settings-container h2{
     left: 20px;
     display: flex;
     flex-direction: row;
+    margin-bottom: 100px;
+}
+
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.title h2{
+    margin-left: 320px;
 }
 
 .archive-button,
 #changes-button {
     margin-left: -22px;
+}
+
+
+#create-task-container .button {
+    background-color: #172b4d;
+    color: #f7f3e9;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#create-task-container button:hover {
+    background-color: #f7f3e9;
+    color: #172b4d;
 }
 
 #changes-button{
@@ -506,10 +541,4 @@ input.project_delivery_date{
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
 }
 
-div#create-task-container {
-    position: fixed;
-    top: 8%;
-    left: 50%;
-    transform: translate(-50%, -8%);
-    max-height: 80vh;
-}
+
