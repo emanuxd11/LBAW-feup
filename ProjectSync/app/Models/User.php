@@ -32,6 +32,7 @@ class User extends Authenticatable
         'username',
         'phonenumber',
         'isdeactivated',
+        'profile_pic',
     ];
 
     /**

@@ -387,7 +387,7 @@ class ProjectController extends Controller
         $member = User::find($userId);
         $this->createNotification([$member],$description);
 
-        return redirect()->back()->with('success', 'User removed successfully.');
+        return redirect()->back()/* ->with('success', 'User removed successfully.') */;
     }
 
     public function member_leave($projectId, $userId)

@@ -130,12 +130,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                         showContextMenu(user.id);
                     });
 
-                    console.log(user)
-                
+                    const pfp_path = user.profile_pic;
+                    if (pfp_path == null || pfp_path == undefined) {
+                        pfp_path = '/images/avatars/default-profile-pic.jpg';
+                    }
+                    const pfp_alt = user.profile_pic == 'Default Profile Picture' ? 'Default Profile Picture' : `${user.username} Profile Picture`;
+
                     listItem.innerHTML = `
                         <div class="user-list-card pending-user">
                             <div class="user-profile-image">
-                                <img src="/images/avatars/default-profile-pic.jpg" alt="Default Profile Picture">
+                                <img src=${pfp_path} alt="${pfp_alt}">
                             </div>
                             <div class="pending-user-list-content" oncontextmenu="showContextMenu(event, ${user.id})">
                                 <span id="user-name-project">${user.name}</span>
