@@ -18,7 +18,6 @@
     z-index: 10000;
     overflow:auto;
     max-height: calc(100vh - 96px);
-
 }
 
 .sidebar {

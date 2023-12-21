@@ -6,6 +6,7 @@
 
 <script type="text/javascript" src="{{ asset('js/project_fav.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/project_func.js') }}" defer></script>
+<script src="{{ asset('js/search_tasks.js') }}" defer></script>
 
 <link href="{{ asset('css/project.css') }}" rel="stylesheet">
 <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
@@ -73,78 +74,49 @@
 
     <div class="project-info-card">
         <div id="project-links">
-            <h2>{{ $project->name }}</h2>
-            @if($project->getCoordinator() != null)
+            {{-- @if($project->getCoordinator() != null)
                 <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" class="link">
                     <i class="fas fa-user"></i>
                     <p>{{ $project->getCoordinator()->name }}</p>
                 </a>
-            @endif
+            @endif --}}
 
             @if(!Auth::user()->isadmin)
-                <div class="favorite-button">
+                <div id="favorite-button-container">
                     <form method="POST" action="{{ route('project.favorite', ['project_id' => $project->id]) }}">
                         @csrf
                         @if($project->isFavoriteOf(Auth::user()))
-                            <button type="submit" id="favorite-button" class="favorite-button-solid" data-action="unfavorite-project">
+                            <a type="submit" id="favorite-button" class="favorite-button-solid scales-on-hover" data-action="unfavorite-project">
                                 <i class="fa-solid fa-star"></i>
-                            </button>
+                            </a>
                         @else
-                            <button type="submit" id="favorite-button" class="favorite-button-empty" data-action="favorite-project">
+                            <a type="submit" id="favorite-button" class="favorite-button-empty scales-on-hover" data-action="favorite-project">
                                 <i class="fa-regular fa-star"></i>
-                            </button>
+                            </a>
                         @endif
+                        {{ $project->name }}
                     </form>
                 </div>
             @endif
+
+            <div class="" id="search-task-container">
+                <form class="task-form project-form" id="search_task_form">
+                    <p hidden id="hidden_task_attr">Looks like there are no tasks.</p>
+                    <input type="text" name="task" required placeholder="Search tasks by name or status" id="search_task_input" class="project-form">
+                </form>
+            </div>
             
-            @if($project->isCoordinator(Auth::user()))
-                <button class="archive-button button" onclick="showPopup('archive-popup');">
-                    <i class="fa-solid fa-box-archive"></i>
-                </button>
-                <form class="project-form" method="POST" 
-                        action="{{ route('archive', ['project_id' => $project->id]) }}" 
-                        id="archiveProjectForm">
-                    @method('POST')
-                    @csrf
-                    <div id="archive-popup" class="confirmation-popup hidden">
-                        <p>Are you sure you want to archive "{{ $project->name }}"?<br>(This action cannot be undone!)</p>
-                        <button type="button" class="button cancel-button" onclick="hidePopup('archive-popup')">No</button>
-                        <button class="button confirm-button">Yes</button>
-                    </div>
-                </form>
-
-                <form class="project-form" method="POST" 
-                        action="{{ route('assign.new.coordinator', ['project_id' => $project->id]) }}" 
-                        id="newProjectCoordinatorForm">
-                    @method('POST')
-                    @csrf
-                    <select id="username" name="new_id" class="project-form-input">
-                        <option value="" selected disabled>--------</option>
-                        @foreach($project->members as $user)
-                            @if (!$project->isCoordinator($user))
-                                <option value={{ $user->id }}>{{ $user->name . ' (' . $user->username . ')' }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <input type="hidden" name="old_id" value="{{$project->getCoordinator()->id}}">
-                    <button type="submit" class="project-submit-button">Submit</button>
-                </form>
-            @endif
-
-            <a href="{{ route('forum.show', ['id' => $project->id]) }}" class="link">
-                <i class="fas fa-comments"></i>
-                <p>Forum</p>
-            </a>
-
-            <div id="project-settings-activate" onclick="showProjectSettings(event)">
-                <i class="fa-solid fa-gear"></i>
+            <div id="forumLinkContainer">
+                <a href="{{ route('forum.show', ['id' => $project->id]) }}" class="scales-on-hover" type="submit">
+                    <i class="fas fa-comments"></i>
+                </a>
+                Forum
             </div>
 
+            <a type="submit" id="project-settings-activate" class="scales-on-hover" onclick="showProjectSettings(event)">
+                <i class="fa-solid fa-gear"></i>
+            </a>
         </div>
-
-        
-
     </div>
 
     {{-- these go into separate links --}}
@@ -265,7 +237,7 @@
     </div>
         
     <div id="tasks">
-        <div class="task-card">
+        {{-- <div class="task-card">
             <h3>Create New Task</h3>
             <form class="task-form project-form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
                 @method('PUT')
@@ -281,37 +253,25 @@
                 <br>
                 <button type="submit" class="button"><i class="fas fa-plus"></i></button>
             </form>
-        </div>
+        </div> --}}
     
-        <h3>Your pending tasks:</h3>
-    
-        <!-- task search -->
-        <div class="task-card search_task">
-            <form class="task-form project-form" id="search_task_form">
-                <p hidden id="hidden_task_attr">Looks like there are no tasks.</p>
-                <label id="hidden_task_search" for="search_task_input">Search for task:</label>
-                <input type="text" name="task" required placeholder="Search by name or status" id="search_task_input" class="project-form">
-                <ul id="search_task_results"></ul>
-            </form>
-    
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    function checkAndDisplayMessage() {
-                        var ulElement = document.getElementById('search_task_results');
-                        var pElement = document.getElementById('hidden_task_attr');
-                        if (ulElement && ulElement.childElementCount === 0) {
-                            pElement.removeAttribute('hidden');
-                        } else {
-                            pElement.setAttribute('hidden', 'true');
-                        }
-                    }
-                    checkAndDisplayMessage();
-                    var observer = new MutationObserver(checkAndDisplayMessage);
-                    observer.observe(document.getElementById('search_task_results'), { childList: true });
-                });
-            </script>
+        
 
-            <script src="{{ asset('js/search_tasks.js') }}" defer></script>
+        <div id="task-container">
+            <div class="task-list-container scrollable" id="task-todo-container">
+                <h3>To Do</h3>
+                <ul id="tasks-todo" class="task-list"></ul>
+            </div>
+
+            <div class="task-list-container scrollable" id="task-doing-container">
+                <h3>Doing</h3>
+                <ul id="tasks-doing" class="task-list"></ul>
+            </div>
+
+            <div class="task-list-container scrollable" id="task-done-container">
+                <h3>Done</h3>
+                <ul id="tasks-done" class="task-list"></ul>
+            </div>
         </div>
     </div>
 </section>

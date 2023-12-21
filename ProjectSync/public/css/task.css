@@ -178,3 +178,102 @@ textarea.task_description {
 .editComment{
     margin-bottom: -30px;
 }
+
+#task-container {
+    display: grid;
+    grid-template-columns: auto auto auto; /* sidebar width and remaining width */
+    grid-template-rows: 1;
+    grid-template-areas: "todo doing done";
+    /* min-height: 100vh; */
+    /* height: calc(100vh - 96px); */ /* subtract the height of the header (disabled for now because project page stil takes more space) */
+    /* for now using min-height but goal is to use just height */
+    /* min-height: calc(100vh - 96px); */
+    /* margin: 0; */
+}
+
+/* #tasks-todo {
+    grid-area: "todo";
+}
+
+#tasks-doing {
+    grid-area: "doing";
+}
+
+#tasks-done {
+    grid-area: "done";
+} */
+
+div#tasks-todo-container {
+    height: auto;
+    grid-area: "todo";
+}
+
+div#tasks-doing-container {
+    height: auto;
+    grid-area: "doing";
+}
+
+div#tasks-done-container {
+    height: auto;
+    grid-area: "done";
+}
+
+.task-list-container {
+    background-color: #172b4d;
+    margin-top: 15px;
+    margin-left: 50px;
+    margin-right: 50px;
+    width: 350px;
+    min-height: 300px;
+    max-height: 700px;
+    /* height: 700px; */
+    /* max-height: 800px; */
+    border-radius: 20px;
+}
+
+.task-list-container > h3 {
+    color: #f7f3e9;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.task-list {
+    list-style: none;
+}
+
+.task-card-search {
+    background-color: #f7f3e9;
+    color: #172b4d;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    box-shadow: 0 24px 48px rgba(23, 43, 77, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    min-width: 250px;
+    /* max-width: 400px;  */
+    cursor: pointer;
+}
+
+.task-card-search:hover {
+    box-shadow: 0 16px 32px rgba(23, 43, 77, 0.2);
+    transform: scale(1.02);
+}
+
+h3.task-card-search {
+    margin-bottom: 10px;
+}
+
+.task-card-search h3:hover {
+    transform: scale(1.03);
+}
+
+.task-card-search p {
+    margin-bottom: 8px;
+}
+
+#taskPreviewTitle {
+    font-size: 20px;
+}
