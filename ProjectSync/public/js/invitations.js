@@ -129,6 +129,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     listItem.addEventListener('click', function() {
                         showContextMenu(user.id);
                     });
+
+                    console.log(user)
                 
                     listItem.innerHTML = `
                         <div class="user-list-card pending-user">
@@ -161,15 +163,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </div>
                         </div>
                     `;
-                
                     userList.appendChild(listItem);
                 }
                 
-                
-                let successMessage = document.createElement('div');
-                successMessage.classList.add('alert', 'alert-success');
-                successMessage.textContent = `Project invitation sent to ${user.name}!`;
-                document.querySelector('.errors').appendChild(successMessage);
+                // don't add success message as this clutters the screen
+                // and we already have notifications
+                // let successMessage = document.createElement('div');
+                // successMessage.classList.add('alert', 'alert-success');
+                // successMessage.textContent = `Project invitation sent to ${user.name}!`;
+                // document.querySelector('.errors').appendChild(successMessage);
     
                 const noMembersElement = document.getElementById('no-invited-members');
                 if (noMembersElement) {
