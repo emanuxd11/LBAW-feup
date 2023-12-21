@@ -4,17 +4,26 @@
     align-items: center;
 }
 
-#project-info-card, .projectDescriptionCard, .projectSettingsCard {
+.project-info-card {
     background-color: #006aa7;
     color: #f7f3e9;
     padding: 5px 20px;
     border-radius: 8px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    /* transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     width: 80%;
     margin: 20px;
+    width: 80%;
     text-align: center;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+div#project-settings-container {
+    position: fixed;
+    top: 8%;
+    left: 50%;
+    transform: translate(-50%, -8%);
+    max-height: 80vh;
 }
 
 /* 
@@ -118,7 +127,6 @@
     margin: 0;
     text-align: center;
 }
-
 
 .user-list-card {
     /* display: flex; */
@@ -391,6 +399,7 @@ ul#searchResults {
 
 .project_description_area{
     background-color: #f7f3e9;
+    min-height: 105px;
 }
 
 input.project_delivery_date{

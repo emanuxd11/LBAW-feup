@@ -182,3 +182,7 @@ li.separator {
 .context-menu-item .text-button:hover {
     background-color: #2159a8;
 }
+
+#invite-members-activate:hover {
+    cursor: pointer;
+}

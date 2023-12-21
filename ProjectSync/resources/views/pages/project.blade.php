@@ -6,6 +6,7 @@
 
 <script type="text/javascript" src="{{ asset('js/project_fav.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/project_func.js') }}" defer></script>
+
 <link href="{{ asset('css/project.css') }}" rel="stylesheet">
 <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
 
@@ -15,11 +16,62 @@
 @if($project->archived)
     <h1>This project is has been archived by the coordinator.</h1>
 @endif
+
+{{-- Hidden div for project coordinator settings --}}
+@if($project->isCoordinator(Auth::user()))
+    <div id="project-settings-container" class="hidden modal project-info-card scrollable">
+        <h2>Project Settings</h2>
+
+        {{-- change description --}}
+        <form method="POST" action="{{ route('project.update',['project_id' => $project->id]) }}" class="project-form">
+            @method('POST')
+            @csrf
+            <p class="info-label">Description:</p>
+            <textarea name="description" class="project_description_area" placeholder="{{$project->description}}"></textarea>
+            <input type="date" name="delivery_date" class="project_delivery_date">
+            <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
+        </form>
+
+        {{-- archive --}}
+        <button class="archive-button button" onclick="showPopup('archive-popup');">
+            <i class="fa-solid fa-box-archive"></i>
+        </button>
+        <form class="project-form" method="POST" 
+                action="{{ route('archive', ['project_id' => $project->id]) }}" 
+                id="archiveProjectForm">
+            @method('POST')
+            @csrf
+            <div id="archive-popup" class="confirmation-popup hidden">
+                <p>Are you sure you want to archive "{{ $project->name }}"?<br>(This action cannot be undone!)</p>
+                <button type="button" class="button cancel-button" onclick="hidePopup('archive-popup')">No</button>
+                <button class="button confirm-button">Yes</button>
+            </div>
+        </form>
+
+        {{-- change coordinator --}}
+        <form class="project-form" method="POST" 
+                action="{{ route('assign.new.coordinator', ['project_id' => $project->id]) }}" 
+                id="newProjectCoordinatorForm">
+            @method('POST')
+            @csrf
+            <select id="username" name="new_id" class="project-form-input">
+                <option value="" selected disabled>--------</option>
+                @foreach($project->members as $user)
+                    @if (!$project->isCoordinator($user))
+                        <option value={{ $user->id }}>{{ $user->name . ' (' . $user->username . ')' }}</option>
+                    @endif
+                @endforeach
+            </select>
+            <input type="hidden" name="old_id" value="{{$project->getCoordinator()->id}}">
+            <button type="submit" class="project-submit-button">Submit</button>
+        </form>
+    </div> 
+@endif
+
 <section id="project">
     @include('partials.messages')
 
-    <div id="project-info-card">
-        
+    <div class="project-info-card">
         <div id="project-links">
             <h2>{{ $project->name }}</h2>
             @if($project->getCoordinator() != null)
@@ -84,7 +136,15 @@
                 <i class="fas fa-comments"></i>
                 <p>Forum</p>
             </a>
+
+            <div id="project-settings-activate" onclick="showProjectSettings(event)">
+                <i class="fa-solid fa-gear"></i>
+            </div>
+
         </div>
+
+        
+
     </div>
 
     {{-- these go into separate links --}}
