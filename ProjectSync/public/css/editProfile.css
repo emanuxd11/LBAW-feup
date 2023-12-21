@@ -1,0 +1,85 @@
+#EditProfile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-profile-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 150px auto;
+    box-sizing: border-box;
+    background-color: #006aa7;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add shadow to the card */
+}
+
+.edit-profile-card {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.edit-profile-card-header {
+    background-color: #172b4d;
+    color: #f7f3e9;
+    font-weight: bold;
+    font-size: x-large;
+    padding: 22px;
+    border-radius: 15px 15px 0 0;
+}
+
+.edit-profile-card-body {
+    padding: 20px;
+}
+
+.edit-profile-form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #f7f3e9; /* Change label color */
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 12px; /* Increase input padding for a thicker appearance */
+    border: 1px solid #172b4d;
+    border-radius: 5px;
+    background-color: #f7f3e9;
+    color: #172b4d;
+}
+
+textarea {
+    resize: none;
+}
+
+.edit-profile-button,
+.button.delete-button {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 40px;
+    width: 40%;
+    margin-top: 10px;
+    background-color: #172b4d;
+    color: #f7f3e9;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button.delete-button {
+    background-color: #ff4d4d;
+}
+
+.error_message {
+    margin-top: 10px;
+    font-size: large;
+    color: #f7f3e9;
+}
