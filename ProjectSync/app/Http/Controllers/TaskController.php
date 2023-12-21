@@ -54,6 +54,18 @@ class TaskController extends Controller
 
         // Check if the current user is authorized to create this task.
         $this->authorize('create', $task);
+
+        $user = Auth::user();
+
+        $changeText = "Task {$task->name} created by $user->username.";
+        $change = new Changes([
+            'text' => $changeText,
+            'date' => now()->format('Y-m-d H:i:s'),
+            'project_id' => $task->project_id,
+            'user_id' => Auth::id(),
+        ]);
+
+        $change->save();
     
         $task->save();
         return redirect('/projects/' . $project_id)->with('success', 'Task created successfully.');
@@ -130,9 +142,11 @@ class TaskController extends Controller
             'status' => $task->status,
             'delivery_date' => $task->delivery_date,
         ];
+
+        $user = Auth::user();
     
         // Compare changes and generate text
-        $changeText = "Task $task->name updated. Changes: ";
+        $changeText = "Task $task->name updated by $user->username. Changes: ";
         $changedFields = [];
     
         foreach ($changes_after as $field => $after) {
@@ -143,7 +157,7 @@ class TaskController extends Controller
                 else{
                     $before = "<strong>{$changes_before[$field]}</strong>";
                     $after = "<strong>{$after}</strong>";
-                    $changedFields[] = "{$field} updated from {$before} to {$after} at ";
+                    $changedFields[] = "{$field} updated from {$before} to {$after}";
                 }
                 
             }

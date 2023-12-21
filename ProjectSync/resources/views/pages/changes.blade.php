@@ -9,12 +9,9 @@
     <ul>
         @foreach ($changes as $change)
             <li>
-                <strong>{{ $change->date }}</strong> - {!! $change->text !!} by
-                @php
-                    $user = \App\Models\User::find($change->user_id);
-                    echo $user ? $user->username : 'Unknown User';
-                @endphp
-
+                           
+                <strong>{{ $change->date }}</strong> - {!! $change->text !!}
+                
             </li>
         @endforeach
     </ul>

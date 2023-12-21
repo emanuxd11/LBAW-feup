@@ -141,6 +141,18 @@ class ProjectController extends Controller
             return redirect('/projects/' . $project_id)->with('error', 'Nothing was changed because user did not provide anything to change');
         }
 
+        $user = Auth::user();
+
+        $changeText = "Project updated by $user->username.";
+        $change = new Changes([
+            'text' => $changeText,
+            'date' => now()->format('Y-m-d H:i:s'),
+            'project_id' => $project_id,
+            'user_id' => Auth::id(),
+        ]);
+
+        $change->save();
+
         $project->save();
         
         return redirect('/projects/' . $project_id)->with('success', 'Project updated');
@@ -263,6 +275,18 @@ class ProjectController extends Controller
             return redirect()->route('home')->with('error', 'Invalid project invitation.');
         }
 
+        $new_user = User::find($user_id);
+
+        $changeText = "User {$new_user->username} joined project.";
+        $change = new Changes([
+            'text' => $changeText,
+            'date' => now()->format('Y-m-d H:i:s'),
+            'project_id' => $project_id,
+            'user_id' => Auth::id(),
+        ]);
+
+        $change->save();
+
         // add user to project
         $project->members()->attach($user_id, ['iscoordinator' => false, 'isfavorite' => false]);
 
@@ -322,12 +346,26 @@ class ProjectController extends Controller
 
         $this->authorize('remove_member', [$project, Auth::user()]);
 
+        $removedUser = User::find($userId);
+
         $project->members()->detach($userId);
 
         // Remove the user from all tasks in the project
         foreach ($project->tasks as $task) {
             $task->members()->detach($userId);
         }
+
+        $author = Auth::user();
+
+        $changeText = "User {$removedUser->username} removed from project by $author->username.";
+        $change = new Changes([
+            'text' => $changeText,
+            'date' => now()->format('Y-m-d H:i:s'),
+            'project_id' => $projectId,
+            'user_id' => Auth::id(),
+        ]);
+
+        $change->save();
 
         return redirect()->back()->with('success', 'User removed successfully.');
     }
@@ -338,12 +376,24 @@ class ProjectController extends Controller
 
         $this->authorize('member_leave', [$project, Auth::user()]);
 
+        $leavingUser = User::find($userId);
+
         $project->members()->detach($userId);
 
         // Remove the user from all tasks in the project
         foreach ($project->tasks as $task) {
             $task->members()->detach($userId);
         }
+
+        $changeText = "User {$leavingUser->username} left project.";
+        $change = new Changes([
+            'text' => $changeText,
+            'date' => now()->format('Y-m-d H:i:s'),
+            'project_id' => $projectId,
+            'user_id' => Auth::id(),
+        ]);
+
+        $change->save();
 
         return redirect()->back()->with('success', 'You are no longer part of \"' . $project->name . '\"!');
     }
