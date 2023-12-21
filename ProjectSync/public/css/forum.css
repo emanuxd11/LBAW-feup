@@ -1,5 +1,13 @@
 .backButton h3 a{
-    color: darkblue
+    color: #172b4d;
+    margin-right: 10px;
+}
+
+div.backButton {
+    width: 50%;
+    margin: auto;
+    margin-top: 5px;
+    text-align: start;
 }
 
 .ForumBody{
@@ -12,46 +20,63 @@
     margin: auto;
 }
 
-li.post{
-    background-color: #006aa7;
-    list-style-type: none
-}
-
-li.post .preview:hover{
-    background-color: #46b2f1;
-}
-
 .listOfPosts{
-    margin: auto;
     width: 50%;
+    margin: auto;
+    align-items: left;
+    word-wrap: break-word;
+    padding: 0px;
 }
 
-.listOfPosts h3{
+div.preview{
+    word-wrap: break-word;
+    width: 95%;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+}
+
+div.upvote-downvote{
+    width: 5%;
+    align-items: center;
+    text-align: center;
+}
+
+li.post{
+    background-color: #172b4d;
+}
+
+div.preview:hover{
+    background-color: #006AA7;
+}
+
+.listOfPosts ul{
+    width: 100%;
+    list-style: none;
+}
+
+span.upvotes-count{
     color: white;
 }
 
-.listOfPosts p{
+.listOfPosts h3, p{
     color: white;
+}
+
+.listOfPosts div.preview p.header{
+    margin-bottom: 0px;
 }
 
 p.noPosts{
     color: black
 }
 
-.post_content_preview{
-    display: flex;
+.upvote-button-pressed, .downvote-button-pressed{
+    color: orange
 }
 
 form.upvote{
     margin-bottom: -10px;
-}
-
-form.downvote{
-    margin:auto
-}
-
-.upvote-downvote{
-    width: 10%;
 }
 
 .upvote-button, .downvote-button,.upvote-button-pressed, .downvote-button-pressed{
@@ -60,17 +85,19 @@ form.downvote{
     padding-right: 0px;
 }
 
-.upvote-button-pressed, .downvote-button-pressed{
-    color: orange
-}
-
 .upvotes-count{
     font-size: 20px;
-    margin-right: 2px;
 }
 
-.preview{
-    width: 110%;
+li.post{
+    align-items: start;
+    text-align: start;
+    word-wrap: break-word;
+}
+
+
+.post_content_preview{
+    display: flex;
 }
 
 .search-bar{
@@ -96,6 +123,40 @@ form.downvote{
     display: flex;
 }
 
+.createPost{
+    background-color: #172b4d;
+    padding: 1px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+}
+
+.createPost p, h4{
+    color:white;
+}
+
+.createPost p{
+    font-size: 20px;
+}
+
+.createPost .button{
+    margin-bottom: 0px;
+}
+
+.createPost .post-form{
+    color: black;
+    width: 95%;
+    background-color: white;
+}
+
+.createPost .title-form {
+    width: 95%;
+    background-color: white;
+}
+
+.search-bar .searchPosts{
+    width: 95%;
+    background-color: white;
+}
 
 
 

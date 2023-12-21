@@ -35,9 +35,9 @@
             @method('PUT')
             @csrf
             <p class="createPost">Title:</p>
-            <input type="text" name="title" class="post-form">
+            <input type="text" name="title" class="title-form" placeholder="Post title...">
             <p class="createPost">Description:</p>
-            <textarea name="description" class="post-form"></textarea>
+            <textarea name="description" class="post-form" placeholder="Post content..."></textarea>
             <input type="hidden" name="project_id" class="post-form" value="{{ request('id') }}">
             <button type="submit" class="button">POST</button>
         </form>
@@ -72,7 +72,7 @@
         </div>
     </div>
     
-    <div class="listOfPosts">
+    <div class="listOfPosts" style="word-wrap: break-word;">
         <ul class="listOfPosts" id="postList">
             @forelse ($forumPosts as $post)
                 @include('partials.post_preview', ['post' => $post])
