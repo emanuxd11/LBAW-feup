@@ -33,12 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     favorite_button.querySelector('i').classList.add('fa-solid');
                 }
 
-                var successMessage = document.createElement('div');
-                successMessage.classList.add('alert', 'alert-success');
-                successMessage.textContent = (action == 'favorite-project') 
-                    ? 'Project added to favorites!'
-                    : 'Project removed from favorites.';
-                document.querySelector('.errors').appendChild(successMessage);
+                // var successMessage = document.createElement('div');
+                // successMessage.classList.add('alert', 'alert-success');
+                // successMessage.textContent = (action == 'favorite-project') 
+                //     ? 'Project added to favorites!'
+                //     : 'Project removed from favorites.';
+                // document.querySelector('.errors').appendChild(successMessage);
                 
             } else {
                 console.error('Error:', xhr.status, xhr.statusText);

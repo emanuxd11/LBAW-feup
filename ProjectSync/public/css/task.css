@@ -270,15 +270,11 @@ div#tasks-done-container {
 
 .task-card-search:hover {
     box-shadow: 0 16px 32px rgba(23, 43, 77, 0.2);
-    transform: scale(1.02);
+    transform: scale(1.015);
 }
 
 h3.task-card-search {
     margin-bottom: 10px;
-}
-
-.task-card-search h3:hover {
-    transform: scale(1.03);
 }
 
 .task-card-search p {

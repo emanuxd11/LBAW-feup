@@ -37,17 +37,21 @@ document.addEventListener('DOMContentLoaded', function () {
             var taskCard = document.createElement('div');
             taskCard.className = 'task-card-search';
     
-            var taskLink = document.createElement('a');
-            taskLink.href = `/api/projects/${project_id}/task/${task.id}`;
-            taskLink.innerHTML = `<h3 id="taskPreviewTitle">${task.name}</h3>`;
-            taskCard.appendChild(taskLink);
+            // var taskLink = document.createElement('a');
+            // taskLink.href = `/api/projects/${project_id}/task/${task.id}`;
+            // taskLink.innerHTML = `<h3 id="taskPreviewTitle">${task.name}</h3>`;
+            // taskCard.appendChild(taskLink);
     
             var taskDetails = document.createElement('div');
             taskDetails.innerHTML = `
+                <h3 id="taskPreviewTitle">${task.name}</h3>
                 <p>Task started on ${task.start_date}</p>
                 <p>Needs to be done by ${task.delivery_date ?? "No delivery date available"}</p>
             `;
             taskCard.appendChild(taskDetails);
+            taskCard.addEventListener('click', function () {
+                window.location.href = `/api/projects/${project_id}/task/${task.id}`;
+            });
     
             // Update the event listener to attach it to taskItem
             taskItem.addEventListener('click', function () {
