@@ -7,7 +7,7 @@
             @if (count(Auth::user()->favorite_projects()) > 0)
                 <ul>
                     <li>
-                        @each('partials.project', Auth::user()->favorite_projects(), 'project')
+                        @each('partials.project_icon', Auth::user()->favorite_projects(), 'project')
                     </li>
                     <li class="separator"></li>
                 </ul>
@@ -22,7 +22,7 @@
             @if (count(Auth::user()->projects) > 0)
                 <ul>
                     <li>
-                        @each('partials.project', Auth::user()->projects, 'project')
+                        @each('partials.project_icon', Auth::user()->projects, 'project')
                     </li>
                 </ul>
             @else
