@@ -88,7 +88,15 @@
 
 {{-- Hidden div for creating tasks --}}
 <div id="create-task-container" class="hidden modal project-info-card opaque-project-container">
-    <h2>Create New Task</h2>
+    <div class="title">
+        <h2>Create New Task</h2>
+        <form class="project-form">
+            <button class="exit-button2" onclick="hideCreateTask(event)" id="close-project-settings">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </form>
+    </div>
+
     <form class="task-form project-form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
         @method('PUT')
         @csrf

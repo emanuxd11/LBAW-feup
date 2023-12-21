@@ -1,0 +1,16 @@
+h3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.changes{
+    margin-bottom: 15px;
+    text-align: left; /* Center the content within each li element */
+    margin: 0 550px;
+}
