@@ -1,6 +1,28 @@
 <!-- resources/views/partials/members.blade.php -->
 
-<aside class="members-sidebar">
+@if($project->isCoordinator(Auth::user()))
+    <div class="hidden modal" id="invite-users-container">
+        <script src="{{ asset('js/invitations.js') }}" defer></script>
+
+        <form class="project-form" id="addMemberForm">
+                <a onclick="hideInviteUsers(event)" id="close-user-invite">
+                    <i class="fa-solid fa-xmark"></i>
+                </a>
+                <p id="invite-members-p">Invite new team members</p>
+            <input type="text" name="name" required autocomplete="off" placeholder="name or username" id="searchInput">
+            
+            <ul id="searchResults" class="scrollable"></ul>
+
+            <div id="invite-popup" class="confirmation-popup hidden">
+                <p>This user already has a pending invitation. Are you sure you want to resend?</p>
+                <button type="button" class="button cancel-button" onclick="hidePopup('invite-popup')">No</button>
+                <button class="button confirm-button">Yes</button>
+            </div>
+        </form>
+    </div>
+@endif 
+
+<aside class="members-sidebar scrollable">
     <nav class="nav-menu">
         <h6>Project Coordinator</h6>
         <ul id="project-coordinator">
@@ -12,7 +34,14 @@
                 @endif
             </li>
         </ul>
-        <h6>Project Member - {{ count($project->members) - 1 }}</h6>
+        <h6 id="project-member-header">
+            <p>Project Member - {{ count($project->members) - 1 }} </p>
+            @if($project->isCoordinator(Auth::user()))
+                <div id="invite-members-activate" onclick="showInviteUsers(event)">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+            @endif
+        </h6>
         <ul id="project-member-list">
             {{-- can't use forelse here since there is always one element (coordinator) --}}
             @if(count($project->members) <= 1)
@@ -76,13 +105,15 @@
                             </div>
                             <div class="context-menu" id="contextMenu-{{ $user->id }}">
                                 <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
-                                    <a href="{{ route('profilePage', ['username' => $user->username]) }}">Profile</a>
+                                    <a class="text-button" href="{{ route('profilePage', ['username' => $user->username]) }}">
+                                        Profile
+                                    </a>
                                 </div>
                                 <div class="context-menu-item" id="contextMenuItemRevoke-{{ $user->id }}">
-                                    <div class="revoke-invitation-button text-button" onclick="showPopup('revoke-{{ $user->id }}-popup', event);">
+                                    <a class="critical-button text-button" onclick="showPopup('revoke-{{ $user->id }}-popup', event);">
                                         Cancel Invitation
-                                    </div>
-                                    <form class="project-form" method="POST" action="{{ route('project.revoke.invitations', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="revokeInvitationForm-{{ $user->id }}">
+                                    </a>
+                                    <form class="project-form hidden-form" method="POST" action="{{ route('project.revoke.invitations', ['project_id' => $project->id, 'user_id' => $user->id]) }}">
                                         @method('DELETE')
                                         @csrf
                                         <div id="revoke-{{ $user->id }}-popup" class="confirmation-popup hidden">
@@ -98,97 +129,5 @@
                 @endforeach
             </ul>
         @endif
-
-        <script>
-            function showContextMenu(userId) {
-                function hideAllContextMenus() {
-                    document.querySelectorAll('.context-menu').forEach(el => {
-                        el.style.display = 'none';
-                    });
-                }
-                hideAllContextMenus();
-
-                const contextMenu = document.getElementById(`contextMenu-${userId}`);
-                const pageX = event.pageX;
-                const pageY = event.pageY;
-                const menuWidth = 176;
-                const screenWidth = window.innerWidth;
-                if (pageX + menuWidth <= screenWidth) {
-                    contextMenu.style.left = `${pageX}px`;
-                } else {
-                    contextMenu.style.left = `${pageX - menuWidth}px`;
-                }
-
-                contextMenu.style.top = `${pageY}px`;
-                contextMenu.style.display = 'block';
-                console.log("Opened new context menu")
-
-                document.getElementById(`contextMenuItemProfile-${userId}`).addEventListener('click', function(event) {
-                    event.stopPropagation();
-                    console.log(`Clicked Profile context menu item for user ID: ${userId}`);
-                    hideAllContextMenus();
-                });
-
-                document.getElementById(`contextMenuItemRevoke-${userId}`).addEventListener('click', function(event) {
-                    event.stopPropagation();
-                    console.log(`Clicked Revoke context menu item for user ID: ${userId}`);
-                    hideAllContextMenus();
-                });
-
-                document.addEventListener('keydown', function(event) {
-                    if (event.key === 'Escape' && contextMenu.style.display !== 'none') {
-                        console.log('Hiding context menu on escape')
-                        hideAllContextMenus();
-                    }
-                });
-
-                document.body.addEventListener('mousedown', function(event) {
-                    const isClickInsideContextMenu = contextMenu.contains(event.target);
-                    if (!isClickInsideContextMenu) {
-                        console.log('Clicked outside context menu. Hiding context menu');
-                        contextMenu.style.display = 'none';
-                    }
-                });
-            }
-
-            window.addEventListener('resize', function() {
-                document.querySelectorAll('.context-menu').forEach(el => {
-                    el.style.display = 'none'
-                });
-            });
-        </script>
-
-        <style>
-            .context-menu {
-                display: none;
-                position: fixed;
-                background-color: #5f5f5f;
-                border: 1px solid #ddd;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                padding: 5px;
-                z-index: 1000;
-            }
-
-            .context-menu-item {
-                cursor: pointer;
-                padding: 5px;
-                color: #fbfbfb;
-            }
-
-            .text-button {
-                background: none;
-                border: none;
-                padding: 0;
-                margin: 0;
-                font: inherit;
-                cursor: pointer;
-                color: #3498db; /* Change the text color as needed */
-                transition: color 0.3s ease; /* Add a smooth transition effect for the color change */
-            }
-
-            .text-button:hover {
-                color: #e74c3c; /* Change the hover color as needed */
-            }
-        </style>
     </nav>
 </aside>

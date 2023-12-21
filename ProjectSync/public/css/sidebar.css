@@ -16,11 +16,15 @@
     color: #fff;
     padding: 10px;
     z-index: 10000;
+    overflow:auto;
+    max-height: calc(100vh - 96px);
+
 }
 
 .sidebar {
     grid-area: sidebar;
     background-color: #333;
+    /* background: linear-gradient(to bottom, #333, #172b4d); */
     color: #fff;
     padding: 10px;
 }
@@ -69,6 +73,11 @@
     color: #ffffff;
     margin-top: 3px;
     margin-bottom: 3px;
+    transition: border-radius 0.1s ease-out;
+}
+
+.side-bar-icon:hover {
+    border-radius: 30%;
 }
 
 /* +- provisório, só serve para mostrar que são favs até se arranjar uma solução melhor */
@@ -89,4 +98,87 @@ li.separator {
     background-color: #555;
     margin: 10px 0;
     list-style: none;
+}
+
+#project-member-header {
+    margin-bottom: 0px;
+    display: inline-flex;
+}
+
+#project-member-header p {
+    margin-bottom: 10px;
+}
+
+#invite-members-activate {
+    margin-left: 10px;
+    padding-top: 3px;
+    font-size: 13px;
+    color: #fff;
+}
+
+.context-menu {
+    position: absolute;
+    background-color: #2c3e50;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #34495e;
+    z-index: 100;
+    display: none;
+    border-radius: 8px;
+    /* max-height: 200px; */
+}
+
+.context-menu-item {
+    padding: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-bottom: 1px solid #34495e;
+    max-height: 38px;
+}
+
+.context-menu-item:last-child {
+    border-bottom: none;
+}
+
+.context-menu-item:hover {
+    background-color: #2e4053;
+}
+
+.context-menu-item a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.context-menu-item a.text-button {
+    text-align: left;
+    color: #fff;
+    /* background-color: #e74c3c; */
+    /* border: 1px solid #c0392b; */
+    padding: 4px 12px;
+    border-radius: 4px;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.context-menu-item a.critical-button {
+    color: #de1818;
+    /* background-color: #e74c3c; */
+    /* border: 1px solid #c0392b; */
+    padding: 4px 12px;
+    border-radius: 4px;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.context-menu-item a.critical-button:hover {
+    background-color: #c0392b;
+    color: #fff;
+}
+
+.context-menu-item .text-button:hover {
+    background-color: #2159a8;
 }

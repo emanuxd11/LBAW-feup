@@ -5,6 +5,7 @@
 @section('content')
 
 <script type="text/javascript" src="{{ asset('js/project_fav.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/project_func.js') }}" defer></script>
 <link href="{{ asset('css/project.css') }}" rel="stylesheet">
 <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
 
@@ -186,7 +187,7 @@
             @endforelse
         </ul> --}}
         
-        @if($project->isCoordinator(Auth::user()))
+        {{-- @if($project->isCoordinator(Auth::user()))
             <script src="{{ asset('js/invitations.js') }}" defer></script>
 
             <form class="project-form" id="addMemberForm">
@@ -200,7 +201,7 @@
                     <button class="button confirm-button">Yes</button>
                 </div>
             </form>
-        @endif
+        @endif --}}
     </div>
         
     <div id="tasks">

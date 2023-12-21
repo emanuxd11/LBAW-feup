@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function displaySearchResults(results, projectId) {
         searchResults.innerHTML = '';
-
+        
         results.forEach(user => {
-            const resultItem = document.createElement('div');
+            const resultItem = document.createElement('li');
             resultItem.textContent = user.name + (user.hasPendingInvitation ? " (pending)" : "");
             resultItem.addEventListener('click', async () => {
                 const updatedResults = results.filter(u => u.id !== user.id);
