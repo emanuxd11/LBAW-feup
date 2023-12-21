@@ -20,7 +20,7 @@
 
 {{-- Hidden div for project coordinator settings --}}
 @if($project->isCoordinator(Auth::user()))
-    <div id="project-settings-container" class="hidden modal project-info-card scrollable">
+    <div id="project-settings-container" class="hidden modal project-info-card scrollable opaque-project-container">
         <h2>Project Settings</h2>
 
         {{-- change description --}}
@@ -69,18 +69,31 @@
     </div> 
 @endif
 
+{{-- hidden div for creating tasks --}}
+<div id="create-task-container" class="hidden modal project-info-card opaque-project-container">
+    <h2>Create New Task</h2>
+    <form class="task-form project-form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
+        @method('PUT')
+        @csrf
+
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required placeholder="ex: Create New Navbar">
+
+        <label for="description">Description:</label><br>
+        <input type="text" id="description" name="description" required placeholder="ex: Create Navbar with four different buttons ...">
+        
+        <label for="delivery_date">Delivery Date:</label><br>
+        <input type="date" id="delivery_date" name="delivery_date">
+        
+        <button type="submit" class="button"><i class="fas fa-plus"></i></button>
+    </form>
+</div>
+
 <section id="project">
     @include('partials.messages')
 
     <div class="project-info-card">
         <div id="project-links">
-            {{-- @if($project->getCoordinator() != null)
-                <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" class="link">
-                    <i class="fas fa-user"></i>
-                    <p>{{ $project->getCoordinator()->name }}</p>
-                </a>
-            @endif --}}
-
             @if(!Auth::user()->isadmin)
                 <div id="favorite-button-container">
                     <form method="POST" action="{{ route('project.favorite', ['project_id' => $project->id]) }}">
@@ -101,8 +114,9 @@
 
             <div class="" id="search-task-container">
                 <form class="task-form project-form" id="search_task_form">
-                    <p hidden id="hidden_task_attr">Looks like there are no tasks.</p>
-                    <input type="text" name="task" required placeholder="Search tasks by name or status" id="search_task_input" class="project-form">
+                    <input type="text" name="task" 
+                        required placeholder="Search tasks by name or status" 
+                        id="search_task_input" class="project-form">
                 </form>
             </div>
             
@@ -254,23 +268,39 @@
                 <button type="submit" class="button"><i class="fas fa-plus"></i></button>
             </form>
         </div> --}}
-    
-        
 
         <div id="task-container">
-            <div class="task-list-container scrollable" id="task-todo-container">
+            <div class="task-list-container" id="task-todo-container">
                 <h3>To Do</h3>
-                <ul id="tasks-todo" class="task-list"></ul>
+                <div class="scrollable task-list-inner-container">
+                    <ul id="tasks-todo" class="task-list"></ul>
+                </div>
+                <div id="addTaskButton">
+                    <i class="fa-solid fa-plus scales-on-hover" onclick="showCreateTask(event)"></i>
+                    Add Task
+                </div>
             </div>
 
             <div class="task-list-container scrollable" id="task-doing-container">
                 <h3>Doing</h3>
-                <ul id="tasks-doing" class="task-list"></ul>
+                <div class="scrollable task-list-inner-container">
+                    <ul id="tasks-doing" class="task-list"></ul>
+                </div>
+                <div id="addTaskButton">
+                    <i class="fa-solid fa-plus scales-on-hover" onclick="showCreateTask(event)"></i>
+                    Add Task
+                </div>
             </div>
 
             <div class="task-list-container scrollable" id="task-done-container">
                 <h3>Done</h3>
-                <ul id="tasks-done" class="task-list"></ul>
+                <div class="scrollable task-list-inner-container">
+                    <ul id="tasks-done" class="task-list"></ul>
+                </div>
+                <div id="addTaskButton">
+                    <i class="fa-solid fa-plus scales-on-hover" onclick="showCreateTask(event)"></i>
+                    Add Task
+                </div>
             </div>
         </div>
     </div>

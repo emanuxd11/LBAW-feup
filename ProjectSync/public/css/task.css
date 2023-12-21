@@ -113,7 +113,7 @@ textarea.task_description {
 }
 
 .backButton a{
-    color: f7f3e9;
+    color: #f7f3e9;
 }
 
 .task-title-div{
@@ -224,8 +224,7 @@ div#tasks-done-container {
     margin-left: 50px;
     margin-right: 50px;
     width: 350px;
-    min-height: 300px;
-    max-height: 700px;
+    height: 700px;
     /* height: 700px; */
     /* max-height: 800px; */
     border-radius: 20px;
@@ -233,12 +232,22 @@ div#tasks-done-container {
 
 .task-list-container > h3 {
     color: #f7f3e9;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     margin-top: 10px;
+}
+
+.task-list-inner-container {
+    height: 570px;
 }
 
 .task-list {
     list-style: none;
+}
+
+#addTaskButton {
+    margin-top: 10px;
+    color: #f7f3e9;
+    font-size: 24px;
 }
 
 .task-card-search {
@@ -255,6 +264,10 @@ div#tasks-done-container {
     min-width: 250px;
     /* max-width: 400px;  */
     cursor: pointer;
+}
+
+.task-card-search:first-child {
+    margin-top: 0px;
 }
 
 .task-card-search:hover {

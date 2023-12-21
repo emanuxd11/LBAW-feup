@@ -127,3 +127,36 @@ const hideProjectSettings = (event) => {
     currentPopup.style.display = 'none';
     removeModalOverlay();
 };
+
+const showCreateTask = (event) => {
+    if (event) {
+        event.stopPropagation();
+    }
+
+    const modalOverlay = document.createElement('div');
+    modalOverlay.classList.add('modal-overlay');
+    modalOverlay.style.zIndex = 99999;
+    document.body.appendChild(modalOverlay);
+
+    const currentPopup = document.getElementById("create-task-container");
+    currentPopup.style.display = 'block';
+    currentPopup.style.zIndex = 100000;
+    currentPopup.style.position = 'fixed';
+    currentPopup.style.top = '15%';
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && currentPopup.style.display !== 'none') {
+            console.log('Create task popup menu on escape')
+            hideCreateTask(event)
+        }
+    });
+};
+
+const hideCreateTask = (event) => {
+    if (event) {
+        event.stopPropagation();
+    }
+    const currentPopup = document.getElementById("create-task-container");
+    currentPopup.style.display = 'none';
+    removeModalOverlay();
+};
