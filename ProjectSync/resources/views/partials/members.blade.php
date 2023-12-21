@@ -52,43 +52,32 @@
                     @continue
                 @endif
                 
-                <li data-id="{{ $user->id }}">
-                    <div class="user-list-card">
-                        <a href="{{ route('profilePage', ['username' => $user->username]) }}">
-                            <div class="user-list-content">
-                                <span id="user-name-project">{{ $user->name . ' (' . $user->username . ')' }}</span>
+                <li data-id="{{ $user->id }}" class="pending-user-right-clickable" onclick="showContextMenu({{ $user->id }})">
+                    <div class="user-list-card pending-user">
+                        <div class="pending-user-list-content" oncontextmenu="showContextMenu(event, {{ $user->id }})">
+                            <span id="user-name-project">{{ $user->name . ' (' . $user->username . ')' }}</span>
+                        </div>
+                        <div class="context-menu" id="contextMenu-{{ $user->id }}">
+                            <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
+                                <a class="text-button" href="{{ route('profilePage', ['username' => $user->username]) }}">
+                                    Profile
+                                </a>
                             </div>
-                        </a>
-
-                        {{-- @if($user->id === Auth::user()->id)
-                            <button class="member-leave-button button" onclick="showPopup('member-leave-popup');">
-                                <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
-                            </button>
-                            <form class="project-form" method="POST"
-                                    action="{{ route('member_leave', ['project_id' => $project->id, 'user_id' => $user->id]) }}" 
-                                    id="memberLeaveForm">
-                                @method('DELETE')
-                                @csrf
-                                <div id="member-leave-popup" class="confirmation-popup hidden">
-                                    <p>Are you sure you want to leave "{{ $project->name }}"?</p>
-                                    <button type="button" class="button cancel-button" onclick="hidePopup('member-leave-popup')">No</button>
-                                    <button class="button confirm-button">Yes</button>
-                                </div>
-                            </form>
-                        @elseif($project->isCoordinator(Auth::user()))
-                            <button class="remove-member-button button" onclick="showPopup('remove-{{ $user->id}}-popup');">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            <form class="project-form" method="POST" action="{{ route('remove_member', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="removeMemberForm">
-                                @method('DELETE')
-                                @csrf
-                                <div id="remove-{{ $user->id }}-popup" class="confirmation-popup hidden">
-                                    <p>Are you sure you want to remove {{ $user->name }} from the project?</p>
-                                    <button type="button" class="button cancel-button" onclick="hidePopup('remove-{{ $user->id }}-popup')">No</button>
-                                    <button class="button confirm-button">Yes</button>
-                                </div>
-                            </form>
-                        @endif --}}
+                            <div class="context-menu-item" id="contextMenuItemRevoke-{{ $user->id }}">
+                                <a class="critical-button text-button" onclick="showPopup('remove-{{ $user->id }}-popup', event);">
+                                    Remove {{ $user->username }}
+                                </a>
+                                <form class="project-form hidden-form" method="POST" action="{{ route('remove_member', ['project_id' => $project->id, 'user_id' => $user->id]) }}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <div id="remove-{{ $user->id }}-popup" class="confirmation-popup hidden">
+                                        <p>Are you sure you want to remove {{ $user->name }} from the project?</p>
+                                        <button type="button" class="button cancel-button" onclick="hidePopup('remove-{{ $user->id }}-popup')">No</button>
+                                        <button class="button confirm-button">Yes</button>
+                                    </div>    
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </li>
             @endforeach
