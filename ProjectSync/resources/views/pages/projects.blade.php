@@ -5,6 +5,9 @@
 @section('content')
 
 <link href="{{ asset('css/projects.css') }}" rel="stylesheet">
+<link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
+
+@include('partials.sidebar')
 
 <section id="projects">
     @if(session('success'))
@@ -44,24 +47,6 @@
                 </button>
             </div>
         </form>
-    </div>
-
-    <h2>Your favorite projects:</h2>    
-    <div id="favorite-projects">
-        @if (count(Auth::user()->favorite_projects()) > 0)
-            @each('partials.project', Auth::user()->favorite_projects(), 'project')
-        @else
-            <p>Looks like you haven't marked any projects as favorite yet. You can do this by clicking the star icon on a project's page!</p>
-        @endif
-    </div>
-
-    <h2>Your active projects:</h2>    
-    <div id="active-projects">
-        @if (count($projects) > 0)
-            @each('partials.project', $projects, 'project')
-        @else
-            <p>Looks like you aren't related to any currently active projects. You can start by creating a new one!</p>
-        @endif
     </div>
 </section>
 

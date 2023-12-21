@@ -1,4 +1,8 @@
-const showPopup = (element_id) => {
+const showPopup = (element_id, event) => {
+    if (event) {
+        event.stopPropagation();
+    }
+
     const modalOverlay = document.createElement('div');
     modalOverlay.classList.add('modal-overlay');
     document.body.appendChild(modalOverlay);

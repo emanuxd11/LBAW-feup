@@ -1,22 +1,29 @@
-
 #project {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#project-info-card, .projectDescriptionCard, .projectSettingsCard {
+.project-info-card {
     background-color: #006aa7;
     color: #f7f3e9;
-    padding: 20px;
+    padding: 5px 20px;
     border-radius: 8px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    /* transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; */
-    width: 60%;
-    margin: 80px auto;
-    margin-top: 120px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 80%;
+    margin: 20px;
+    width: 80%;
     text-align: center;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+div#project-settings-container {
+    position: fixed;
+    top: 8%;
+    left: 50%;
+    transform: translate(-50%, -8%);
+    max-height: 80vh;
 }
 
 /* 
@@ -70,6 +77,10 @@
     font-size: 24px;
 }
 
+#invite-users-container {
+    overflow: hidden;
+}
+
 #project-members-card,
 #invited-users-card {
     background-color: #f7f3e9;
@@ -99,8 +110,26 @@
     padding: 0;
 }
 
+#close-user-invite {
+    margin-right: 20px;
+}
+
+#close-user-invite {
+    margin-left: 405px;
+    cursor: pointer;
+}
+
+#text-container {
+    margin-top: 10px; /* Adjust as needed */
+}
+
+#invite-members-p {
+    margin: 0;
+    text-align: center;
+}
+
 .user-list-card {
-    display: flex;
+    /* display: flex; */
     align-items: center;
     justify-content: space-between;
     background-color: #006aa7;
@@ -108,12 +137,14 @@
     border-color: #172b4d;
     border-width: 2px;
     color: #f7f3e9;
-    padding: 15px;
+    padding: 5px;
     border-radius: 8px;
     margin-bottom: 10px;
+    margin: 0px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .user-list-card:hover {
@@ -127,7 +158,7 @@
 
 #user-name-project {
     color: #f7f3e9;
-    margin-right: 150px;
+    /* margin-right: 150px; */
 }
 
 #favorite-button, .archive-button, .project-submit-button{
@@ -162,7 +193,7 @@
 #addMemberForm {
     background-color: #172b4d;
     color: #f7f3e9;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     margin: 20px auto;
     width: 450px; 
@@ -190,17 +221,20 @@
     width: 80%;
 }
 
-#searchResults {
+ul#searchResults {
     list-style-type: none;
     padding: 0;
+    overflow: auto;
+    max-height: 50vh;
 }
 
 #searchResults li {
-    background-color: #f7f3e9;
-    color: #172b4d;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 5px;
+    /* maybe add some styles later but the current ones suck lol */
+    /* background-color: #f7f3e9;
+    color: #172b4d; */
+    /* padding: 10px; */
+    /* border-radius: 5px; */
+    /* margin-bottom: 5px; */
 }
 
 #tasks {
@@ -365,6 +399,7 @@
 
 .project_description_area{
     background-color: #f7f3e9;
+    min-height: 105px;
 }
 
 input.project_delivery_date{

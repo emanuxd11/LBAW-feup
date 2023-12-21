@@ -97,3 +97,27 @@ footer {
   text-align: center;
   font-size: 16px;
 }
+
+/* important for scrollable divs just add this class */
+.scrollable {
+  overflow: auto;
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #999 transparent;
+
+  /* WebKit browsers (Chrome, Safari) */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border: 4px;
+    border-radius: 50px;
+    background-clip: padding-box;  
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
