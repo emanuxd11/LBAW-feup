@@ -24,13 +24,24 @@
 
 <aside class="members-sidebar scrollable">
     <nav class="nav-menu">
-        <h6>Project Coordinator</h6>
-        <ul id="project-coordinator">
-            <li>
-                @if($project->getCoordinator() != null)
-                    <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" id="user-name-project">
-                        <p><i class="fas fa-user"></i> {{ $project->getCoordinator()->name }}</p>
-                    </a>
+        <h6 id="project-member-header">
+            <p>Project Coordinator</p>
+        </h6>
+        <ul id="project-member-list">
+            <li>  
+                @if ($project->getCoordinator() != null)
+                    <div class="user-list-card">
+                        <div class="user-profile-image">
+                            @if($project->getCoordinator()->profile_pic !== null && $project->getCoordinator()->profile_pic !== '')
+                                <img src="{{ $project->getCoordinator()->profile_pic }}" alt="Profile Picture">
+                            @else
+                                <img src="/images/avatars/default-profile-pic.jpg" alt="Default Profile Picture">
+                            @endif
+                        </div>
+                        <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" id="user-name-project" class="pending-user-list-content">
+                            <span id="user-name-project">{{ $project->getCoordinator()->name }}</span>
+                        </a>
+                    </div>
                 @endif
             </li>
         </ul>
@@ -51,11 +62,18 @@
                 @if($project->isCoordinator($user))
                     @continue
                 @endif
-                
                 <li data-id="{{ $user->id }}" class="pending-user-right-clickable" onclick="showContextMenu({{ $user->id }})">
                     <div class="user-list-card pending-user">
+                    
+                        <div class="user-profile-image">
+                            @if($user->profile_pic !== null && $user->profile_pic !== '')
+                                <img src="{{ $user->profile_pic }}" alt="Profile Picture">
+                            @else
+                                <img src="/images/avatars/default-profile-pic.jpg" alt="Default Profile Picture">
+                            @endif
+                        </div>
                         <div class="pending-user-list-content" oncontextmenu="showContextMenu(event, {{ $user->id }})">
-                            <span id="user-name-project">{{ $user->name . ' (' . $user->username . ')' }}</span>
+                            <span id="user-name-project">{{ $user->name }}</span>
                         </div>
                         <div class="context-menu" id="contextMenu-{{ $user->id }}">
                             <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
@@ -84,13 +102,24 @@
         </ul>
 
         @if($project->isCoordinator(Auth::user()))
-            <h6>Pending Invitations - {{ count($project->pending_users()) }}</h6>
+            <h6 id="project-member-header">
+                <p>
+                    Pending Invitations - {{ count($project->pending_users()) }}
+                </p>
+            </h6>
             <ul id="invited-users-list">
                 @foreach($project->pending_users() as $user)
                     <li data-id="{{ $user->id }}" class="pending-user-right-clickable" onclick="showContextMenu({{ $user->id }})">
                         <div class="user-list-card pending-user">
+                            <div class="user-profile-image">
+                                @if($user->profile_pic !== null && $user->profile_pic !== '')
+                                    <img src="{{ $user->profile_pic }}" alt="Profile Picture">
+                                @else
+                                    <img src="/images/avatars/default-profile-pic.jpg" alt="Default Profile Picture">
+                                @endif
+                            </div>
                             <div class="pending-user-list-content" oncontextmenu="showContextMenu(event, {{ $user->id }})">
-                                <span id="user-name-project">{{ $user->name . ' (' . $user->username . ')' }}</span>
+                                <span id="user-name-project">{{ $user->name }}</span>
                             </div>
                             <div class="context-menu" id="contextMenu-{{ $user->id }}">
                                 <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
