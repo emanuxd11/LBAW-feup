@@ -32,7 +32,7 @@
 <body>
     <main>
         @include('partials.header')
-        <div aria-live="polite" aria-atomic="true" style="position: fixed; bottom: 10px; right: 10px;">
+        <div aria-live="polite" aria-atomic="true" style="position: fixed; bottom: 10px; right: 10px; z-index: 999999999;">
             <div id="toastContainer"></div>
         </div>
         <section id="content">

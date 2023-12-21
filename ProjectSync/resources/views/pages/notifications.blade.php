@@ -9,7 +9,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="NotificationsBody">
     <div class="checkAll">
-        <h2 class="title">Your Notifications</h2>
+        <h2 class="title">Your Notifications ({{count($notifications)}})</h2>
         @if(count($notifications) > 0)
         <form method="POST" action="{{ route('notification.checkAll', ['username' => request('username')]) }}">
             @method('POST')

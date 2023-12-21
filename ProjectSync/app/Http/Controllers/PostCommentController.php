@@ -54,14 +54,14 @@ class PostCommentController extends Controller{
         $postComment->comment = $request->input('comment');
         $postComment->isedited = true;
         $post = $postComment->post;
-        $project = Project::find($post->project_id)->first();
+        $project = Project::find($post->project_id);
         $postComment->save();
         return redirect('projects/' . $project->id . '/forum/post/' . $post->id)->with('success', 'Comment updated successfully.');
     }
 
     public function delete(Request $request,$id){
 
-        $project = Project::find($request->input('project_id'))->first();
+        $project = Project::find($request->input('project_id'));
         $postComment = PostComment::find($id);
 
         $this->authorize('delete', $postComment);
