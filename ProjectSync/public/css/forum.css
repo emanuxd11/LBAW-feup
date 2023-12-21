@@ -40,14 +40,17 @@ div.upvote-downvote{
     width: 5%;
     align-items: center;
     text-align: center;
+    padding-top: 7px;
 }
 
 li.post{
     background-color: #172b4d;
+    border-radius: 7px;
 }
 
 div.preview:hover{
     background-color: #006AA7;
+    border-radius: 7px;
 }
 
 .listOfPosts ul{
