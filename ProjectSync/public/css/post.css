@@ -1,33 +1,27 @@
 .backButton h3 a{
-    color: black;
+    color: #172b4d;
+    margin-right: 10px;
 }
 
-.backButton{
-    justify-content: start;
+div.backButton {
+    margin: auto;
+    margin-top: 5px;
     text-align: start;
-}
-
-.backButton h3 a:hover{
-    color: #3490dc;
+    align-items: baseline;
 }
 
 .Body{
     text-align: center;
     justify-content: center;
-    padding-left: 30vh;
-    width: 75%;
-}
-
-form.upvote{
-    margin-bottom: -10px;
-}
-
-form.downvote{
-    margin:auto
+    width: 50%;
+    margin: auto;
+    padding: 10px;
 }
 
 .upvote-downvote{
-    width: 10%;
+    margin-top: 6px;
+    margin-right: 5px;
+    color: white;
 }
 
 .upvote-button, .downvote-button,.upvote-button-pressed, .downvote-button-pressed{
@@ -44,54 +38,110 @@ form.downvote{
     margin-bottom: -23px;
 }
 
-.upvotes-count{
+.postHeader{
+    background-color: #172b4d;
+    padding-left: 10px;
+    border-radius: 10px;
+}
+
+.postHeader .upvotes-count{
     font-size: 20px;
-    margin-right: 2px;
 }
 
-.postHeader {
-    display: flex;
-    justify-content: start; 
-    align-items: center;
-    text-align: center;
+form.upvote{
+    margin-bottom: -10px;
 }
 
-.author{
-    margin-top: -3vh;
+.postHeader, .author{
     display: flex;
 }
 
-.author p {
-    margin-right: 1vh;
+.author p{
+    margin-right: 10px;
 }
 
 .postInfo{
-    margin-left: -2vh;
+    text-align: start;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
-.postDescription {
+.postInfo p, .postTitle h3{
+    color: white;
+}
+
+.postInfo .author p{
+    margin-bottom: 0px;
+}
+
+.postSettings{
+    align-items: baseline;
+    text-align: start;
+    margin-top: 10px;
+}
+
+.alterPostOptions{
+    background-color: #172b4d;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.alterPostOptions p, h3.title{
+    color: white;
+}
+
+.post-form-textarea, .comment-form-textarea{
+    background-color: white;
+    border-radius: 5px;
+}
+
+.deletePost .deleteButton{
+    background-color: #F7F3E9;
+    font-size: 16px;
+    margin-bottom: 0px;
+}
+
+#toggle_post_edit{
+    margin-top: -5px;
+    background-color: #172b4d;
+    font-size: 12px;
+    color: white;
+}
+
+.showComments{
     text-align: start;
 }
 
-.postTitle, .postBody{
+.showComments p.commentCount, .showComments p.noComments{
+    color: #172b4d;
+    font-size: 24px;
+}
+
+.showComments #toggle_comment_edit{
+    background-color: #F7F3E9;
+    font-size: 12px;
+    color: #172b4d;
     text-align: start;
 }
 
-.commentHeader{
-    display: flex;
-    justify-content: start; 
-    align-items: center;
-    text-align: center;
-}
-
-.commentHeader p{
-    margin-right: 1vh;
-}
-
-.commentBody p{
+.showComments p, h4.edit{
+    color: white;
     text-align: start;
 }
 
-.editComment{
+.createComment{
+    align-items: baseline;
+    text-align: start;
+}
+
+.createComment .createPost{
+    background-color: #172b4d;
+    font-size: 12px;
+    color: white;
+}
+
+.createComment h3{
     text-align: start;
 }

@@ -55,10 +55,6 @@
                 </div>
         
                 <div class="postInfo">
-                    <div class="postTitle">
-                        <h3>{{$post->title}}</h3>
-                    </div>
-                
                     <div class="author">
                         <p>Created by: {{$post->author->username ?? "deleted"}}</p>
                         <p>Date: {{$post->date}}</p>
@@ -67,27 +63,31 @@
                         @endif
                     </div>
 
+                    <div class="postTitle">
+                        <h3>{{$post->title}}</h3>
+                    </div>
+
                     <div class="postDescription">
                         <p>{{$post->description}}</p>
                     </div>
                 </div>
             </div>
 
-            <div class="postBody">
+            <div class="postSettings">
 
                 @if (Auth::user()->id == $post->author_id || Auth::user()->isAdmin)
                 <button onclick="toggleEditPost()" id="toggle_post_edit">Show Edit Settings</button>
                 <div id= "alterPostOptions" class="alterPostOptions" style="display: none;">
-                    <h3>Edit Post</h3>
+                    <h3 class="title">Edit Post</h3>
                     @if (Auth::user()->id == $post->author_id)
                     <div class="editPost">
                         <form method="POST" action="{{ route('post.update', ['id' => $post->id]) }}" class="updatePostForm">
                             @csrf
                             @method('POST')
                             <p class="createPost">Description:</p>
-                            <textarea name="description" class="post-form" placeholder="{{ $post->description }}"></textarea>
+                            <textarea name="description" class="post-form-textarea" placeholder="{{ $post->description }}"></textarea>
                             <input type="hidden" name="project_id" class="post-form" value="{{ $post->project_id }}">
-                            <button type="submit" class="editPost">Edit</button>
+                            <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
                         </form> 
                     </div>
                     @endif
@@ -96,7 +96,7 @@
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="project_id" class="post-form" value="{{ $post->project_id }}">
-                            <button type="submit" class="deletePost">Delete</button>
+                            <button type="submit" class="deleteButton" class="button delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
                         </form>            
                     </div>
                 </div>
@@ -110,14 +110,15 @@
                 @csrf
                 @method('PUT')
                 <h3>Create comment</h3>
-                <textarea name="comment" class="post-form"></textarea>
+                <textarea name="comment" class="comment-form-textarea" placeholder="Ex: This post was very helpfull thx"></textarea>
                 <input type="hidden" name="project_id" class="post-form" value="{{ $post->project_id }}">
                 <input type="hidden" name="post_id" class="post-form" value="{{ $post->id }}">
-                <button type="submit" class="deletePost">Create</button>
+                <button type="submit" class="CreatePost">Create</button>
             </form>   
         </div>
     
         <div class="showComments">
+            <p class="commentCount">Found {{count($postComments)}} comments.</p>
             @forelse ($postComments as $postComment)
             <div class="commentCard">
                 <div class="commentHeader">
@@ -135,7 +136,7 @@
                 @if (Auth::user()->id == $postComment->author_id || Auth::user()->isAdmin)
                     <button onclick="toggleEditComment({{$postComment->id}})" class="toggle_comment_edit" id="toggle_comment_edit" data-id="{{ $postComment->id }}">Edit</button>
                     <div class="editComment" id="editComment" data-id="{{ $postComment->id }}" style="display:none;">
-                        <h4>Edit Comment</h4>
+                        <h4 class="edit">Edit Comment</h4>
                         @if (Auth::user()->id == $postComment->author_id)
                             <form method="POST" action="{{ route('postComment.update', ['id' => $postComment->id]) }}" class="updatePostForm">
                                 @csrf
@@ -143,7 +144,7 @@
                                 <p class="createPost">Comment:</p>
                                 <textarea name="comment" class="post-form" placeholder="{{ $postComment->comment }}"></textarea>
                                 <input type="hidden" name="project_id" class="post-form" value="{{ request('project_id') }}">
-                                <button type="submit" class="editPost">Edit</button>
+                                <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
                             </form> 
                         @endif
 
@@ -151,13 +152,13 @@
                             @csrf
                             @method('DELETE')
                             <input type="hidden" name="project_id" class="post-form" value="{{ request('project_id') }}">
-                            <button type="submit" class="deletePost">Delete</button>
+                            <button type="submit" class="button delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
                         </form>
                     </div>
                 @endif
             </div>
             @empty
-               <p>No comments</p>
+               <p class="noComments">No comments</p>
             @endforelse
         </div>
     

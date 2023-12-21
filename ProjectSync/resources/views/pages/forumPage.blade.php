@@ -10,27 +10,26 @@
 <script type="text/javascript" src="{{ asset('js/search_posts.js') }}" defer></script>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="ForumBody">
+    <div class="errors">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @elseif ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
     <div class="backButton">
         <h3><a href="/projects/{{ request('id') }}">&larr;</a>List of Posts</h3>
     </div>
 
     <div class="createPost">
-        <div class="errors">
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @elseif ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
-        
         <form action="{{ route('post.create') }}" method="post">
             @method('PUT')
             @csrf

@@ -66,7 +66,7 @@ class PostController extends Controller{
         ]);
 
         $post = Post::find($id);    
-        $project = Project::find($post->project_id)->first();
+        $project = Project::find($post->project_id);
 
         $this->authorize('update', $post);
         
@@ -82,7 +82,7 @@ class PostController extends Controller{
     public function delete(Request $request,$id){
 
         $user = Auth::user();
-        $project = Project::find($request->input('project_id'))->first();
+        $project = Project::find($request->input('project_id'));
         $post = Post::find($id);
 
         $this->authorize('delete', $post);
