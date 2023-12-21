@@ -20,7 +20,7 @@
 
                         <div class="mb-3">
                             <label for="email" class="form-label">E-mail</label>
-                            <input id="email"  placeholder="ex: abc123@email.com"type="email" name="email" value="{{ old('email') }}" required autofocus class="form-control">
+                            <input id="email"  placeholder="ex: abc123@email.com" type="email" name="email" value="{{ old('email') }}" required autofocus class="form-control">
                             @if ($errors->has('email'))
                                 <span class="error">
                                     {{ $errors->first('email') }}
