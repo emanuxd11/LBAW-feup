@@ -20,7 +20,7 @@
 
                         <div class="mb-3">
                             <label for="email" class="form-label">E-mail</label>
-                            <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus class="form-control">
+                            <input id="email"  placeholder="ex: abc123@email.com"type="email" name="email" value="{{ old('email') }}" required autofocus class="form-control">
                             @if ($errors->has('email'))
                                 <span class="error">
                                     {{ $errors->first('email') }}
@@ -30,7 +30,7 @@
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input id="password" type="password" name="password" required class="form-control">
+                            <input id="password" type="password" name="password" placeholder="ex: 12345678" class="form-control">
                             @if ($errors->has('password'))
                                 <span class="error">
                                     {{ $errors->first('password') }}

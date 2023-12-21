@@ -16,27 +16,28 @@
 
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" name="name" id="name" placeholder="{{ $user->name }}">
+                        <input type="text" name="name" placeholder="ex: John Bill" id="name" placeholder="{{ $user->name }}">
                     </div>
 
                     <div class="form-group">
                         <label for="username">Username:</label>
-                        <input type="text" name="username" id="username" placeholder="{{ $user->username }}">
+                        <input type="text" placeholder="ex: john1234" name="username" id="username" placeholder="{{ $user->username }}">
                     </div>
 
                     <div class="form-group">
                         <label for="phonenumber">Phone Number:</label>
-                        <input type="text" name="phonenumber" id="phonenumber" placeholder="{{ $user->phonenumber }}">
+                        <input type="text" name="phonenumber" placeholder="ex: 917918916" id="phonenumber" placeholder="{{ $user->phonenumber }}">
                     </div>
 
                     <div class="form-group">
                         <label for="password">New Password:</label>
-                        <input type="password" name="password" id="password">
+                        <input type="password" name="password" placeholder="ex: 12345678" id="password">
                     </div>
 
                     <div class="form-group">
                         <label for="bio">Change Bio:</label>
-                        <textarea name="bio" id="bio" rows="5" style="height: 300px; resize: none;" placeholder="{{ $user->bio }}"></textarea>
+                        <textarea  name="bio" id="bio" placeholder="ex: Adept at utilizing project management software to streamline processes, track progress, and maintain transparency. Excels in fostering collaboration, motivating team members, and ensuring a positive work environment." 
+                        rows="5" style="height: 300px; resize: none;" placeholder="{{ $user->bio }}"></textarea>
                     </div>
 
                     <div class="form-group">
