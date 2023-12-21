@@ -11,6 +11,7 @@ use App\Models\Task;
 use App\Models\Notification;
 use App\Models\Project;
 use App\Models\User;
+use App\Models\Changes;
 
 use App\Events\NotificationEvent;
 
@@ -68,6 +69,18 @@ class TaskController extends Controller
 
         // Check if the current user is authorized to create this task.
         $this->authorize('create', $task);
+
+        $user = Auth::user();
+
+        $changeText = "Task {$task->name} created by $user->username.";
+        $change = new Changes([
+            'text' => $changeText,
+            'date' => now()->format('Y-m-d H:i:s'),
+            'project_id' => $task->project_id,
+            'user_id' => Auth::id(),
+        ]);
+
+        $change->save();
     
         $task->save();
         return redirect('/projects/' . $project_id)->with('success', 'Task created successfully.');
@@ -88,6 +101,14 @@ class TaskController extends Controller
             'status' => 'nullable|in:To Do,Doing,Done',
             'username' => 'nullable|string|max:255',
         ]);
+
+        $changes_before = [
+            'name' => $task->name,
+            'description' => $task->description,
+            'status' => $task->status,
+            'delivery_date' => $task->delivery_date,
+        ];
+
 
         $this->authorize('update', $task);
 
@@ -131,6 +152,44 @@ class TaskController extends Controller
             $this->createNotification([$user],$description);
             DB::table('projectmembertask')->insert($data);
         }
+
+        $changes_after = [
+            'name' => $task->name,
+            'description' => $task->description,
+            'status' => $task->status,
+            'delivery_date' => $task->delivery_date,
+        ];
+
+        $user = Auth::user();
+    
+        // Compare changes and generate text
+        $changeText = "Task $task->name updated by $user->username. Changes: ";
+        $changedFields = [];
+    
+        foreach ($changes_after as $field => $after) {
+            if ($changes_before[$field] !== $after) {
+                if($field === 'description'){
+                    $changedFields[] = "description updated";
+                }
+                else{
+                    $before = "<strong>{$changes_before[$field]}</strong>";
+                    $after = "<strong>{$after}</strong>";
+                    $changedFields[] = "{$field} updated from {$before} to {$after}";
+                }
+                
+            }
+        }
+    
+        $changeText .= implode('<br>', $changedFields);
+
+        $change = new Changes([
+            'text' => $changeText,
+            'date' => now()->format('Y-m-d H:i:s'),
+            'project_id' => $task->project_id,
+            'user_id' => Auth::id(),
+        ]);
+
+        $change->save();
 
         $description ='The task ' . $task->name . ' from project ' . Project::find($task->project_id)->name . ' has been updated.';
         $this->createNotification($members,$description);

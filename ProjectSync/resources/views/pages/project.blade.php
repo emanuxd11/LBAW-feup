@@ -7,6 +7,8 @@
 <script type="text/javascript" src="{{ asset('js/project_fav.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/project_func.js') }}" defer></script>
 <script src="{{ asset('js/search_tasks.js') }}" defer></script>
+<script type="text/javascript" src="{{ asset('js/project_changes.js') }}" defer></script>
+
 
 <link href="{{ asset('css/project.css') }}" rel="stylesheet">
 <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
@@ -31,6 +33,12 @@
             <textarea name="description" class="project_description_area" placeholder="{{$project->description}}"></textarea>
             <input type="date" name="delivery_date" class="project_delivery_date">
             <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
+        </form>
+
+        {{-- changes record --}}
+
+        <form class="project-form">
+            <a href="{{ route('project_changes', ['project_id' => $project->id]) }}" id="changes-button" class="button"><i class="fas fa-history"></i></a>
         </form>
 
         {{-- archive --}}

@@ -45,6 +45,7 @@ div#project-settings-container {
     margin-top: 20px;
     height: 50px;
     width: 100%;
+    position: relative;
 }
 
 .link {
@@ -181,7 +182,7 @@ div#project-settings-container {
     cursor: pointer;
 } */
 
-#favorite-button:hover, .archive-button:hover, .project-submit-button:hover{
+#favorite-button:hover, #changes-button, .archive-button:hover, .project-submit-button:hover{
     /* color: #172b4d;
     background-color: #f7f3e9; */
     cursor: pointer;

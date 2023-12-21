@@ -15,6 +15,7 @@ use App\Models\Project;
 use App\Models\Notification;
 use App\Models\User;
 use App\Models\Task;
+use App\Models\Changes;
 
 use App\Mail\ProjectInvitation;
 use App\Mail\ResetPassword;
@@ -142,6 +143,18 @@ class ProjectController extends Controller
         if(!$madeChange){
             return redirect('/projects/' . $project_id)->with('error', 'Nothing was changed because user did not provide anything to change');
         }
+
+        $user = Auth::user();
+
+        $changeText = "Project updated by $user->username.";
+        $change = new Changes([
+            'text' => $changeText,
+            'date' => now()->format('Y-m-d H:i:s'),
+            'project_id' => $project_id,
+            'user_id' => Auth::id(),
+        ]);
+
+        $change->save();
 
         $description ='The project ' . $project->name . ' was updated.';
         $members = $project->members;
@@ -289,6 +302,18 @@ class ProjectController extends Controller
         $member = $project->getCoordinator();
         $this->createNotification([$member],$description);
 
+        $new_user = User::find($user_id);
+
+        $changeText = "User {$new_user->username} joined project.";
+        $change = new Changes([
+            'text' => $changeText,
+            'date' => now()->format('Y-m-d H:i:s'),
+            'project_id' => $project_id,
+            'user_id' => Auth::id(),
+        ]);
+
+        $change->save();
+
         return redirect()->route('project.show', ['id' => $project_id])->with('success', 'You\'re now part of "' . $project->name . '"!');
     }
 
@@ -339,12 +364,24 @@ class ProjectController extends Controller
 
         $this->authorize('remove_member', [$project, Auth::user()]);
 
+        $removedUser = User::find($userId);
+
         $project->members()->detach($userId);
 
         // Remove the user from all tasks in the project
         foreach ($project->tasks as $task) {
             $task->members()->detach($userId);
         }
+
+        $author = Auth::user();
+
+        $changeText = "User {$removedUser->username} removed from project by $author->username.";
+        $change = new Changes([
+            'text' => $changeText,
+            'date' => now()->format('Y-m-d H:i:s'),
+            'project_id' => $projectId,
+            'user_id' => Auth::id(),
+        ]);
 
         $description ='You have been removed from project ' . $project->name . '.';
         $member = User::find($userId);
@@ -359,12 +396,24 @@ class ProjectController extends Controller
 
         $this->authorize('member_leave', [$project, Auth::user()]);
 
+        $leavingUser = User::find($userId);
+
         $project->members()->detach($userId);
 
         // Remove the user from all tasks in the project
         foreach ($project->tasks as $task) {
             $task->members()->detach($userId);
         }
+
+        $changeText = "User {$leavingUser->username} left project.";
+        $change = new Changes([
+            'text' => $changeText,
+            'date' => now()->format('Y-m-d H:i:s'),
+            'project_id' => $projectId,
+            'user_id' => Auth::id(),
+        ]);
+
+        $change->save();
 
         $user = User::find($userId);
 
@@ -426,5 +475,22 @@ class ProjectController extends Controller
         foreach($receivers as $user){
             $user->notifications()->attach($notification, ['ischecked' => false]);
         }
+    }
+
+    public function showProjectChanges($project_id)
+    {
+        $project = Project::find($project_id);
+
+        // Check if the user is a member of the project or an admin
+        if (!$project || (!$project->isMember(Auth::user()) && !Auth::user()->isAdmin)) {
+            return redirect("/projects");
+        }
+
+        $changes = Changes::with('project')
+        ->where('project_id', $project_id)
+        ->orderBy('date', 'desc')
+        ->get();
+
+        return view('pages.changes', compact('project', 'changes'));
     }
 }
