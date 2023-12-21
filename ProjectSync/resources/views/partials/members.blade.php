@@ -24,13 +24,24 @@
 
 <aside class="members-sidebar scrollable">
     <nav class="nav-menu">
-        <h6>Project Coordinator</h6>
-        <ul id="project-coordinator">
-            <li>
-                @if($project->getCoordinator() != null)
-                    <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" id="user-name-project">
-                        <p><i class="fas fa-user"></i> {{ $project->getCoordinator()->name }}</p>
-                    </a>
+        <h6 id="project-member-header">
+            <p>Project Coordinator</p>
+        </h6>
+        <ul id="project-member-list">
+            <li>  
+                @if ($project->getCoordinator() != null)
+                    <div class="user-list-card">
+                        <div class="user-profile-image">
+                            @if($project->getCoordinator()->profile_pic !== null && $project->getCoordinator()->profile_pic !== '')
+                                <img src="{{ $project->getCoordinator()->profile_pic }}" alt="Profile Picture">
+                            @else
+                                <img src="/images/avatars/default-profile-pic.jpg" alt="Default Profile Picture">
+                            @endif
+                        </div>
+                        <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" id="user-name-project" class="pending-user-list-content">
+                            <span id="user-name-project">{{ $project->getCoordinator()->name }}</span>
+                        </a>
+                    </div>
                 @endif
             </li>
         </ul>
@@ -51,57 +62,64 @@
                 @if($project->isCoordinator($user))
                     @continue
                 @endif
-                
-                <li data-id="{{ $user->id }}">
-                    <div class="user-list-card">
-                        <a href="{{ route('profilePage', ['username' => $user->username]) }}">
-                            <div class="user-list-content">
-                                <span id="user-name-project">{{ $user->name . ' (' . $user->username . ')' }}</span>
+                <li data-id="{{ $user->id }}" class="pending-user-right-clickable" onclick="showContextMenu({{ $user->id }})">
+                    <div class="user-list-card pending-user">
+                    
+                        <div class="user-profile-image">
+                            @if($user->profile_pic !== null && $user->profile_pic !== '')
+                                <img src="{{ $user->profile_pic }}" alt="Profile Picture">
+                            @else
+                                <img src="/images/avatars/default-profile-pic.jpg" alt="Default Profile Picture">
+                            @endif
+                        </div>
+                        <div class="pending-user-list-content" oncontextmenu="showContextMenu(event, {{ $user->id }})">
+                            <span id="user-name-project">{{ $user->name }}</span>
+                        </div>
+                        <div class="context-menu" id="contextMenu-{{ $user->id }}">
+                            <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
+                                <a class="text-button" href="{{ route('profilePage', ['username' => $user->username]) }}">
+                                    Profile
+                                </a>
                             </div>
-                        </a>
-
-                        {{-- @if($user->id === Auth::user()->id)
-                            <button class="member-leave-button button" onclick="showPopup('member-leave-popup');">
-                                <i class="fa-sharp fa-solid fa-arrow-right-from-bracket"></i>
-                            </button>
-                            <form class="project-form" method="POST"
-                                    action="{{ route('member_leave', ['project_id' => $project->id, 'user_id' => $user->id]) }}" 
-                                    id="memberLeaveForm">
-                                @method('DELETE')
-                                @csrf
-                                <div id="member-leave-popup" class="confirmation-popup hidden">
-                                    <p>Are you sure you want to leave "{{ $project->name }}"?</p>
-                                    <button type="button" class="button cancel-button" onclick="hidePopup('member-leave-popup')">No</button>
-                                    <button class="button confirm-button">Yes</button>
-                                </div>
-                            </form>
-                        @elseif($project->isCoordinator(Auth::user()))
-                            <button class="remove-member-button button" onclick="showPopup('remove-{{ $user->id}}-popup');">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            <form class="project-form" method="POST" action="{{ route('remove_member', ['project_id' => $project->id, 'user_id' => $user->id]) }}" id="removeMemberForm">
-                                @method('DELETE')
-                                @csrf
-                                <div id="remove-{{ $user->id }}-popup" class="confirmation-popup hidden">
-                                    <p>Are you sure you want to remove {{ $user->name }} from the project?</p>
-                                    <button type="button" class="button cancel-button" onclick="hidePopup('remove-{{ $user->id }}-popup')">No</button>
-                                    <button class="button confirm-button">Yes</button>
-                                </div>
-                            </form>
-                        @endif --}}
+                            <div class="context-menu-item" id="contextMenuItemRevoke-{{ $user->id }}">
+                                <a class="critical-button text-button" onclick="showPopup('remove-{{ $user->id }}-popup', event);">
+                                    Remove {{ $user->username }}
+                                </a>
+                                <form class="project-form hidden-form" method="POST" action="{{ route('remove_member', ['project_id' => $project->id, 'user_id' => $user->id]) }}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <div id="remove-{{ $user->id }}-popup" class="confirmation-popup hidden">
+                                        <p>Are you sure you want to remove {{ $user->name }} from the project?</p>
+                                        <button type="button" class="button cancel-button" onclick="hidePopup('remove-{{ $user->id }}-popup')">No</button>
+                                        <button class="button confirm-button">Yes</button>
+                                    </div>    
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </li>
             @endforeach
         </ul>
 
         @if($project->isCoordinator(Auth::user()))
-            <h6>Pending Invitations - {{ count($project->pending_users()) }}</h6>
+            <h6 id="project-member-header">
+                <p>
+                    Pending Invitations - {{ count($project->pending_users()) }}
+                </p>
+            </h6>
             <ul id="invited-users-list">
                 @foreach($project->pending_users() as $user)
                     <li data-id="{{ $user->id }}" class="pending-user-right-clickable" onclick="showContextMenu({{ $user->id }})">
                         <div class="user-list-card pending-user">
+                            <div class="user-profile-image">
+                                @if($user->profile_pic !== null && $user->profile_pic !== '')
+                                    <img src="{{ $user->profile_pic }}" alt="Profile Picture">
+                                @else
+                                    <img src="/images/avatars/default-profile-pic.jpg" alt="Default Profile Picture">
+                                @endif
+                            </div>
                             <div class="pending-user-list-content" oncontextmenu="showContextMenu(event, {{ $user->id }})">
-                                <span id="user-name-project">{{ $user->name . ' (' . $user->username . ')' }}</span>
+                                <span id="user-name-project">{{ $user->name }}</span>
                             </div>
                             <div class="context-menu" id="contextMenu-{{ $user->id }}">
                                 <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">

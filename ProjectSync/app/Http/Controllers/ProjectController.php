@@ -339,7 +339,7 @@ class ProjectController extends Controller
 
         }
 
-        return redirect()->back()->with('success', 'Invitation cancelled.');
+        return redirect()->back()/*->with('success', 'Invitation cancelled.')*/;
     }
 
     public function search_task(Request $request, $projectId)

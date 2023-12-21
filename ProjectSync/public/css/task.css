@@ -224,9 +224,7 @@ div#tasks-done-container {
     margin-left: 50px;
     margin-right: 50px;
     width: 350px;
-    height: 700px;
-    /* height: 700px; */
-    /* max-height: 800px; */
+    height: 100%;
     border-radius: 20px;
 }
 

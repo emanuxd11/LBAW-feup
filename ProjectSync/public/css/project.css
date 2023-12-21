@@ -111,6 +111,12 @@ div#project-settings-container {
 #invited-users-list {
     list-style-type: none;
     padding: 0;
+    margin-bottom: 40px;
+}
+
+#project-member-list li,
+#invited-users-list li {
+    margin-bottom: 2px;
 }
 
 #close-user-invite {
@@ -132,26 +138,22 @@ div#project-settings-container {
 }
 
 .user-list-card {
-    /* display: flex; */
+    display: flex;
     align-items: center;
-    justify-content: space-between;
-    background-color: #006aa7;
-    border: solid;
-    border-color: #172b4d;
-    border-width: 2px;
+    justify-content: flex-start;
+    text-align: left;
     color: #f7f3e9;
     padding: 5px;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
     margin: 0px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: background-color 0.3s; 
     cursor: pointer;
     font-size: 14px;
 }
 
 .user-list-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #4a4a4a;
 }
 
 .user-list-content {

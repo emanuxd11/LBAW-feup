@@ -77,7 +77,7 @@
     </div> 
 @endif
 
-{{-- hidden div for creating tasks --}}
+{{-- Hidden div for creating tasks --}}
 <div id="create-task-container" class="hidden modal project-info-card opaque-project-container">
     <h2>Create New Task</h2>
     <form class="task-form project-form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">

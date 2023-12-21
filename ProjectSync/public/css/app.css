@@ -10,6 +10,7 @@ main > header {
   background-color: #006aa7; /* Blue header background */
   padding: 1em;
   margin: 0; /* Set margin to 0 */
+  /* width: 100%; */
 }
 
 main > header h1 {

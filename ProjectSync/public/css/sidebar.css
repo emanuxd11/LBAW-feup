@@ -1,12 +1,9 @@
 #content {
     display: grid;
-    grid-template-columns: 70px 1fr 250px; /* sidebar width and remaining width */
+    grid-template-columns: 70px 1fr 240px; /* sidebar width and remaining width */
     grid-template-rows: auto;
     grid-template-areas: "sidebar content members";
-    /* min-height: 100vh; */
-    /* height: calc(100vh - 96px); */ /* subtract the height of the header (disabled for now because project page stil takes more space) */
-    /* for now using min-height but goal is to use just height */
-    min-height: calc(100vh - 96px);
+    height: calc(100vh - 96px);
     margin: 0;
 }
 
@@ -16,14 +13,11 @@
     color: #fff;
     padding: 10px;
     z-index: 10000;
-    overflow:auto;
-    max-height: calc(100vh - 96px);
 }
 
 .sidebar {
     grid-area: sidebar;
     background-color: #333;
-    /* background: linear-gradient(to bottom, #333, #172b4d); */
     color: #fff;
     padding: 10px;
 }
@@ -162,7 +156,7 @@ li.separator {
 }
 
 .context-menu-item a.critical-button {
-    color: #de1818;
+    color: #ff0000;
     /* background-color: #e74c3c; */
     /* border: 1px solid #c0392b; */
     padding: 4px 12px;
@@ -184,4 +178,15 @@ li.separator {
 
 #invite-members-activate:hover {
     cursor: pointer;
+}
+
+div.user-list-card span {
+    color: #f7f3e9;
+}
+
+.user-list-card .user-profile-image img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
 }

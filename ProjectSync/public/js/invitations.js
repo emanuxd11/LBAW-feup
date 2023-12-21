@@ -123,38 +123,55 @@ document.addEventListener('DOMContentLoaded', async () => {
                 listItem.setAttribute('data-id', user.id);
     
                 if (!user.hasPendingInvitation) {
+                    const listItem = document.createElement('li');
+                    listItem.setAttribute('data-id', user.id);
+                    listItem.classList.add('pending-user-right-clickable');
+                    listItem.addEventListener('click', function() {
+                        showContextMenu(user.id);
+                    });
+
+                    console.log(user)
+                
                     listItem.innerHTML = `
-                        <div class="user-list-card">
-                            <a href="/profile/${user.username}">
-                                <div class="user-list-content">
-                                    <span id="user-name-project">${user.name} (${user.username})</span>
+                        <div class="user-list-card pending-user">
+                            <div class="user-profile-image">
+                                <img src="/images/avatars/default-profile-pic.jpg" alt="Default Profile Picture">
+                            </div>
+                            <div class="pending-user-list-content" oncontextmenu="showContextMenu(event, ${user.id})">
+                                <span id="user-name-project">${user.name}</span>
+                            </div>
+                            <div class="context-menu" id="contextMenu-${user.id}" style="display: none;">
+                                <div class="context-menu-item" id="contextMenuItemProfile-${user.id}">
+                                    <a class="text-button" href="/profile/${user.username}">
+                                        Profile
+                                    </a>
                                 </div>
-                            </a>
-
-                            <button class="revoke-invitation-button button" onclick="showPopup('revoke-${user.id}-popup');">
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-
-                            <form class="project-form" method="POST" action="/projects/revoke/invitations/${projectId}/${user.id}" id="revokeInvitationForm-${user.id}">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_token" value="${document.querySelector('meta[name="csrf-token"]').getAttribute('content')}">
-
-                                <div id="revoke-${user.id}-popup" class="confirmation-popup hidden">
-                                    <p>Are you sure you want to cancel ${user.name}'s invitation?</p>
-                                    <button type="button" class="button cancel-button" onclick="hidePopup('revoke-${user.id}-popup')">No</button>
-                                    <button class="button confirm-button" onclick="document.getElementById('revokeMemberForm-${user.id}').submit();">Yes</button>
+                                <div class="context-menu-item" id="contextMenuItemRevoke-${user.id}">
+                                    <a class="critical-button text-button" onclick="showPopup('revoke-${user.id}-popup', event);">
+                                        Cancel Invitation
+                                    </a>
+                                    <form class="project-form hidden-form" method="POST" action="/projects/revoke/invitations/1/${user.id}">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="${document.querySelector('meta[name="csrf-token"]').getAttribute('content')}" autocomplete="off">
+                                        <div id="revoke-${user.id}-popup" class="confirmation-popup hidden">
+                                            <p>Are you sure you want to cancel ${user.name}'s invitation?</p>
+                                            <button type="button" class="button cancel-button" onclick="hidePopup('revoke-${user.id}-popup')">No</button>
+                                            <button class="button confirm-button" onclick="document.getElementById('revokeInvitationForm-${user.id}').submit();">Yes</button>
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
-
                     `;
                     userList.appendChild(listItem);
                 }
                 
-                let successMessage = document.createElement('div');
-                successMessage.classList.add('alert', 'alert-success');
-                successMessage.textContent = `Project invitation sent to ${user.name}!`;
-                document.querySelector('.errors').appendChild(successMessage);
+                // don't add success message as this clutters the screen
+                // and we already have notifications
+                // let successMessage = document.createElement('div');
+                // successMessage.classList.add('alert', 'alert-success');
+                // successMessage.textContent = `Project invitation sent to ${user.name}!`;
+                // document.querySelector('.errors').appendChild(successMessage);
     
                 const noMembersElement = document.getElementById('no-invited-members');
                 if (noMembersElement) {
