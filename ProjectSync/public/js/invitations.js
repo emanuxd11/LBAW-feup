@@ -76,12 +76,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
     
-        function removeModalOverlay() {
-            const modalOverlays = document.querySelectorAll('.modal-overlay');
-            modalOverlays.forEach(modalOverlay => {
-                document.removeChild(modalOverlay);
-            });
-        }
+        // function removeModalOverlay() {
+        //     const modalOverlays = document.querySelectorAll('.modal-overlay');
+        //     modalOverlays.forEach(modalOverlay => {
+        //         document.removeChild(modalOverlay);
+        //     });
+        // }
     }
     
     async function inviteUserToProject(user, projectId) {
