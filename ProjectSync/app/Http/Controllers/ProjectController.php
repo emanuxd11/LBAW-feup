@@ -41,6 +41,10 @@ class ProjectController extends Controller
             // Check if the current user can see (show) the project.
             $this->authorize('show', $project);
 
+            if($project->archived && !(Auth::user()->isAdmin || $project->isCoordinator(Auth::user()))){
+                return redirect('/')->with('error','You cannot see this project because it was archived.');
+            }
+
             // User is authorized, continue with displaying the project.
             return view('pages.project', [
                 'project' => $project

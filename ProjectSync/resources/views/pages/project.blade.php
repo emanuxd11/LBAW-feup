@@ -15,10 +15,6 @@
 @include('partials.sidebar', ['current_project_id' => $project->id])
 @include('partials.members')
 
-@if($project->archived)
-    <h1>This project is has been archived by the coordinator.</h1>
-@endif
-
 {{-- Hidden div for project coordinator settings --}}
 @if($project->isCoordinator(Auth::user()))
     <div id="project-settings-container" class="hidden modal opaque-project-container scrollable">
@@ -127,6 +123,10 @@
 
 <section id="project">
     @include('partials.messages')
+
+    @if($project->archived)
+        <h1>This project has been archived by the coordinator.</h1>
+    @endif
 
     <div class="project-info-card">
         <div id="project-links">
