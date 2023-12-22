@@ -83,7 +83,7 @@ class TaskController extends Controller
         $change->save();
     
         $task->save();
-        return redirect('/projects/' . $project_id)->with('success', 'Task created successfully.');
+        return redirect('/projects/' . $project_id)/* ->with('success', 'Task created successfully.') */;
     }
     
 

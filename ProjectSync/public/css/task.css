@@ -182,26 +182,62 @@ textarea.task_description {
 #task-container {
     display: grid;
     grid-template-columns: auto auto auto; /* sidebar width and remaining width */
-    grid-template-rows: 1;
+    /* grid-template-rows: 1; */
     grid-template-areas: "todo doing done";
     /* min-height: 100vh; */
     /* height: calc(100vh - 96px); */ /* subtract the height of the header (disabled for now because project page stil takes more space) */
     /* for now using min-height but goal is to use just height */
     /* min-height: calc(100vh - 96px); */
     /* margin: 0; */
+    margin-bottom: 40px;
 }
 
-/* #tasks-todo {
-    grid-area: "todo";
+@media (max-width: 1499px) {
+    #task-container {
+        grid-template-columns: auto auto; /* Two columns */
+        grid-template-rows: auto auto; /* Two rows */
+        grid-template-areas:
+            "todo doing"
+            "done done";
+        margin-bottom: 40px;
+        row-gap: 50px;
+    }
+
+    section#project {
+        max-height: calc(100vh - 96px);
+
+        overflow: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #999 transparent;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #999;
+            border: 4px;
+            border-radius: 50px;
+            background-clip: padding-box;  
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+    }
 }
 
-#tasks-doing {
-    grid-area: "doing";
+@media (max-width: 1230px) {
+    #task-container {
+        grid-template-columns: auto; /* Change to a single column layout */
+        grid-template-rows: auto auto auto; /* Rows instead of columns */
+        grid-template-areas:
+            "todo"
+            "doing"
+            "done";
+    }
 }
 
-#tasks-done {
-    grid-area: "done";
-} */
 
 div#tasks-todo-container {
     height: auto;
@@ -226,6 +262,21 @@ div#tasks-done-container {
     width: 350px;
     height: 100%;
     border-radius: 20px;
+    transition: margin 0.3s ease;
+}
+
+@media (min-width: 1670px) {
+    .task-list-container {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+}
+
+@media (max-width: 1669px) and (min-width: 1500px) {
+    .task-list-container {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 }
 
 .task-list-container > h3 {

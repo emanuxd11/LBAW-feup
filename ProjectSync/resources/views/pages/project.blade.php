@@ -9,7 +9,6 @@
 <script src="{{ asset('js/search_tasks.js') }}" defer></script>
 <script type="text/javascript" src="{{ asset('js/project_changes.js') }}" defer></script>
 
-
 <link href="{{ asset('css/project.css') }}" rel="stylesheet">
 <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
 
@@ -22,7 +21,7 @@
 
 {{-- Hidden div for project coordinator settings --}}
 @if($project->isCoordinator(Auth::user()))
-    <div id="project-settings-container" class="hidden modal project-info-card scrollable opaque-project-container">
+    <div id="project-settings-container" class="hidden modal opaque-project-container">
         <h2>Project Settings</h2>
 
         <div class="top-left-buttons">
@@ -48,12 +47,11 @@
                 <a href="{{ route('project_changes', ['project_id' => $project->id]) }}" id="changes-button" class="button"><i class="fas fa-history"></i></a>
             </form>
 
-            <form class="project-form">
+            <div class="project-form">
                 <button class="exit-button" onclick="hideProjectSettings(event)" id="close-project-settings">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
-            </form>
-
+            </div>
         </div>
 
         {{-- change description --}}
@@ -87,7 +85,7 @@
 @endif
 
 {{-- Hidden div for creating tasks --}}
-<div id="create-task-container" class="hidden modal project-info-card opaque-project-container">
+<div id="create-task-container" class="hidden modal opaque-project-container">
     <div class="title">
         <h2>Create New Task</h2>
         <form class="project-form">
@@ -152,9 +150,11 @@
                 Forum
             </div>
 
-            <a type="submit" id="project-settings-activate" class="scales-on-hover" onclick="showProjectSettings(event)">
-                <i class="fa-solid fa-gear"></i>
-            </a>
+            @if($project->isCoordinator(Auth::user()))
+                <a id="project-settings-activate" class="scales-on-hover" onclick="showProjectSettings(event)">
+                    <i class="fa-solid fa-gear"></i>
+                </a>
+            @endif
         </div>
     </div>
         
