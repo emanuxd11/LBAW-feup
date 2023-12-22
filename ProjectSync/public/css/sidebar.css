@@ -57,7 +57,7 @@
 
 .side-bar-icon {
     border-radius: 50%;
-    background-color: #000000;
+    background-color: #071226;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -109,7 +109,7 @@
 
 .current-project-icon {
     border-radius: 30%;
-    background-color: #000000;
+    background-color: #071226;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -140,9 +140,9 @@
     height: 100%;
 }
 
-/* +- provisório, só serve para mostrar que são favs até se arranjar uma solução melhor */
-#favorite-projects .side-bar-icon {
-    color: #d6c407;
+#favorite-projects .side-bar-icon,
+#favorite-projects .current-project-icon {
+    color: #ffd700;
 }
 
 li.separator {
