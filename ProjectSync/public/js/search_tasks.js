@@ -43,10 +43,21 @@ document.addEventListener('DOMContentLoaded', function () {
             // taskCard.appendChild(taskLink);
     
             var taskDetails = document.createElement('div');
+
+            date = task.delivery_date === null
+            ? "No delivery date available"
+            : "Needs to be done by " + task.delivery_date;
+
+            date = task.status === 'Done'
+            ? ""
+            : date;
+
             taskDetails.innerHTML = `
-                <h3 id="taskPreviewTitle">${task.name}</h3>
-                <p>Task started on ${task.start_date}</p>
-                <p>Needs to be done by ${task.delivery_date ?? "No delivery date available"}</p>
+                <div class="taskPreview"">
+                <h3 id="taskPreviewTitle" style="font-weight: bold;">${task.name}</h3>
+                <p style="text-align: start;">${task.description.substring(0,100) + "...."}</p>
+                <p style="font-weight: bold;text-align: start;">${date}</p>
+                </div>
             `;
             taskCard.appendChild(taskDetails);
             taskCard.addEventListener('click', function () {

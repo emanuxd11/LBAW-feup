@@ -7,11 +7,11 @@
 .edit-profile-container {
     width: 80%;
     max-width: 600px;
-    margin: 150px auto;
+    margin:30px auto;
     box-sizing: border-box;
     background-color: #006aa7;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add shadow to the card */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .edit-profile-card {
@@ -82,4 +82,8 @@ textarea {
     margin-top: 10px;
     font-size: large;
     color: #f7f3e9;
+}
+
+#profile_pic{
+    color: white;
 }

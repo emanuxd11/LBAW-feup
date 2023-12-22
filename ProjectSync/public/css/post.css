@@ -78,6 +78,9 @@ form.upvote{
     text-align: start;
     padding-right: 10px;
     padding-left: 10px;
+    margin: auto;
+    word-wrap: break-word;
+    width: 95%;
 }
 
 .postInfo p, .postTitle h3{
