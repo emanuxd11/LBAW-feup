@@ -45,17 +45,21 @@ document.addEventListener('DOMContentLoaded', function () {
             var taskDetails = document.createElement('div');
     
             date = task.delivery_date === null
-                ? "No delivery date available"
-                : "Needs to be done by " + task.delivery_date;
+                ? ''
+                : `<p style="font-weight: bold;text-align: start;">Deadline: ${formatDate(task.delivery_date)}</p>`
     
             date = task.status === 'Done'
                 ? ""
                 : date;
+            
+            const description = task.description.length < 100
+                ? task.description
+                : `${task.description.substring(0, 100) + "..."}`
     
             taskDetails.innerHTML = `
                 <div class="taskPreview">
                 <h3 id="taskPreviewTitle" style="font-weight: bold;">${task.name}</h3>
-                <p style="text-align: start;">${task.description.substring(0, 100) + "...."}</p>
+                <p style="text-align: start;">${description}</p>
                 <p style="font-weight: bold;text-align: start;">${date}</p>
                 </div>
             `;
@@ -71,3 +75,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+function formatDate(inputDate) {
+    const date = new Date(inputDate);
+    
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  }
