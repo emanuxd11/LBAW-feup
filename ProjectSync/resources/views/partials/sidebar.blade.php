@@ -1,6 +1,6 @@
 <!-- resources/views/partials/sidebar.blade.php -->
 
-<aside class="sidebar">
+<aside class="sidebar" id="side-bar-projects">
     <nav class="nav-menu">
         <div id="favorite-projects">
             @if (count(Auth::user()->favorite_projects()) > 0)

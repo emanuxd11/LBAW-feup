@@ -71,6 +71,7 @@ Route::controller(ProjectController::class)->group(function () {
     Route::get('/projects/{id}/search_task', 'search_task')->name('project_search_task');
     Route::post('/projects/{project_id}/favorite', 'favorite')->name('project.favorite');
     Route::post('/projects/{id}/email_invite_user', 'sendProjectInvitation')->name('project.invite.user');
+    Route::get('/projects/favorite/sidebar/reload/{project_id}', 'loadSideBarView')->name('load-sidebar-view');
 });
 
 // Forum

@@ -37,6 +37,10 @@
     margin-bottom: 0;
 }
 
+.nav-menu li {
+    list-style: none;
+}
+
 .sidebar .nav-menu a {
     display: block;
     color: #fff;

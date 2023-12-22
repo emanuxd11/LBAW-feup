@@ -498,4 +498,18 @@ class ProjectController extends Controller
 
         return view('pages.changes', compact('project', 'changes'));
     }
+
+    public function loadSideBarView($project_id)
+    {
+        try {
+            $htmlContent = view('partials.sidebar')->with(['current_project_id' => $project_id])->render();
+            return response()->json(['html' => $htmlContent]);
+        } catch (\Exception $e) {
+            // Log the error
+            \Log::error('Error in loadSideBarView: ' . $e->getMessage());
+
+            // Return an error response
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
+    }
 }

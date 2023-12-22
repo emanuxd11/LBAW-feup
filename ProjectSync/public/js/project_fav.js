@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 //     : 'Project removed from favorites.';
                 // document.querySelector('.errors').appendChild(successMessage);
                 
+                fetchDataAndRefreshDiv('side-bar-projects');
+
             } else {
                 console.error('Error:', xhr.status, xhr.statusText);
             }
@@ -50,10 +52,57 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         
         xhr.send(JSON.stringify({
-            _token: '{{ csrf_token() }}',
             upvote: action
         }));
 
         favorite_button.blur();
     });
 });
+
+function updateDivContent(divId, jsonResponse) {
+    var targetDiv = document.getElementById(divId);
+    if (targetDiv && jsonResponse && jsonResponse.html) {
+        var tempContainer = document.createElement('div');
+        tempContainer.innerHTML = jsonResponse.html;
+        tempContainer = tempContainer.querySelector(`#${divId}`);
+        targetDiv.innerHTML = '';
+        var navElement = document.createElement('nav');
+        navElement.classList.add('nav-menu');
+        targetDiv.appendChild(navElement);
+        var childNodes = tempContainer.childNodes;
+        if (childNodes[1]) {
+            navElement.appendChild(childNodes[1].cloneNode(true));
+        }
+    }
+}
+
+// Example of making an AJAX request and updating a specific div
+function fetchDataAndRefreshDiv(divId) {
+    var xhr = new XMLHttpRequest();
+
+    var currentUrl = window.location.href;
+    var pathArray = currentUrl.split('/');
+    var cleanPathArray = pathArray.filter(function (segment) {
+        return segment !== '';
+    });
+    var project_id = cleanPathArray[cleanPathArray.length - 1];
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // Parse the JSON response
+                var jsonResponse = JSON.parse(xhr.responseText);
+
+                // Update the specified div with the new content
+                updateDivContent(divId, jsonResponse);
+
+            } else {
+                console.error('Error:', xhr.statusText);
+            }
+        }
+    };
+
+    // Adjust the URL to the endpoint that returns the updated HTML
+    xhr.open('GET', `/projects/favorite/sidebar/reload/${project_id}`, true);
+    xhr.send();
+}
