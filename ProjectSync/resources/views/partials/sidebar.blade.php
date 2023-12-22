@@ -40,13 +40,13 @@
             <ul>
                 <li>
                     @if ($current_project_id == -1)
-                        <a href="{{ route('projects') }}" class="current-project-icon">
+                        <a href="{{ route('projects') }}" class="current-project-icon" data-title="Create Project">
                             <span>
                                 <i class="fa-solid fa-plus"></i>
                             </span>
                         </a>
                     @else
-                        <a href="{{ route('projects') }}" class="side-bar-icon">
+                        <a href="{{ route('projects') }}" class="side-bar-icon" data-title="Create Project">
                             <span>
                                 <i class="fa-solid fa-plus"></i>
                             </span>
