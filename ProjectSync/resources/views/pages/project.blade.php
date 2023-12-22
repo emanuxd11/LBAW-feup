@@ -21,94 +21,107 @@
 
 {{-- Hidden div for project coordinator settings --}}
 @if($project->isCoordinator(Auth::user()))
-    <div id="project-settings-container" class="hidden modal opaque-project-container">
-
-        <div class="top-left-buttons-new">
-            {{-- archive --}}
-            
-            <form class="project-form-top" method="POST" 
-                    action="{{ route('archive', ['project_id' => $project->id]) }}" 
-                    id="archiveProjectForm">
-                @method('POST')
-                @csrf
-                <a class="archive-button button" id="archive-button" onclick="showPopup('archive-popup');">
-                    Archive<i class="fa-solid fa-box-archive"></i>
-                </a>
-                <div id="archive-popup" class="confirmation-popup hidden">
-                    <p>Are you sure you want to archive "{{ $project->name }}"?<br>(This action cannot be undone!)</p>
-                    <button type="button" class="button cancel-button" onclick="hidePopup('archive-popup')">No</button>
-                    <button class="button confirm-button">Yes</button>
-                </div>
-            </form>
-
-            <h2 class="title">Project Settings</h2>
-
-            {{-- changes record --}}
-            <form class="project-form-top">
-                <a href="{{ route('project_changes', ['project_id' => $project->id]) }}" id="changes-button" class="button">TimeLine  <i class="fas fa-history"></i></a>
-            </form>
-
-        </div>
-
-        {{-- change description --}}
-        <form method="POST" action="{{ route('project.update',['project_id' => $project->id]) }}" class="project-form">
-            @method('POST')
-            @csrf
-            <p class="info-label">Description:</p>
-            <textarea name="description" class="project_description_area" placeholder="{{$project->description}}"></textarea>
-            <input type="date" name="delivery_date" class="project_delivery_date">
-            <button type="submit" class="button edit-button"><i class="fas fa-edit"></i> Edit</button>
-        </form>
+    <div id="project-settings-container" class="hidden modal opaque-project-container scrollable">
+        <h2 id="projectSettingsTitle">Project Settings</h2>
 
         {{-- change coordinator --}}
-        <h3 class="changeCoordinator">Change Coordinator</h3>
+        <h3 class="changeCordinator" id="changeCoordinator">Change Coordinator</h3>
         <form class="project-form" method="POST" 
                 action="{{ route('assign.new.coordinator', ['project_id' => $project->id]) }}" 
                 id="newProjectCoordinatorForm">
             @method('POST')
             @csrf
-            <select id="username" name="new_id" class="project-form-input">
-                <option value="" selected disabled>--------</option>
-                @foreach($project->members as $user)
-                    @if (!$project->isCoordinator($user))
-                        <option value={{ $user->id }}>{{ $user->name . ' (' . $user->username . ')' }}</option>
-                    @endif
-                @endforeach
-            </select>
-            <input type="hidden" name="old_id" value="{{$project->getCoordinator()->id}}">
-            <button type="submit" class="project-submit-button">Submit</button>
+            <div id="changeCoordinatorContainer">
+                <select id="username" name="new_id" class="project-form-input">
+                    <option value="" selected disabled>{{ $project->getCoordinator()->name }}</option>
+                    @foreach($project->members as $user)
+                        @if (!$project->isCoordinator($user))
+                            <option value={{ $user->id }}>{{ $user->name . ' (' . $user->username . ')' }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            
+                <input type="hidden" name="old_id" value="{{$project->getCoordinator()->id}}">
+                <button type="submit" class="project-submit-button">Confirm</button>
+            </div>
         </form>
-        <div class="project-form">
-            <button class="exit-button" onclick="hideProjectSettings(event)" id="close-project-settings">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+
+        {{-- changes record --}}
+        <div style="display: flex;">
+            <div id="changesAndArchiveWrapper">
+                <form class="project-form-top">
+                    <a href="{{ route('project_changes', ['project_id' => $project->id]) }}" id="changes-button" class="button">TimeLine  <i class="fas fa-history"></i></a>
+                    <p class="info-label">View project change history</p>
+                </form>
+            </div>
+    
+            <div id="changesAndArchiveWrapper">
+                <form class="project-form-top" method="POST" 
+                        action="{{ route('archive', ['project_id' => $project->id]) }}" 
+                        id="archiveProjectForm">
+                    @method('POST')
+                    @csrf
+                    <a class="archive-button button" id="archive-button" onclick="showPopup('archive-popup');">
+                        Archive <i class="fa-solid fa-box-archive"></i>
+                    </a>
+                    <p class="info-label">Archive this project</p>
+                    
+                    <div id="archive-popup" class="confirmation-popup hidden">
+                        <p>Are you sure you want to archive "{{ $project->name }}"?<br>(This action cannot be undone!)</p>
+                        <button type="button" class="button cancel-button" onclick="hidePopup('archive-popup')">No</button>
+                        <button class="button confirm-button">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {{-- change description --}}
+        <div id="changeDescWrapper">
+            <form method="POST" action="{{ route('project.update',['project_id' => $project->id]) }}" class="project-form">
+                @method('POST')
+                @csrf
+                <p class="info-label">Description:</p>
+                <textarea name="description" class="project_description_area" placeholder="{{$project->description}}"></textarea>
+                <p class="info-label">Delivery Date (currently {{ strval($project->delivery_date) }}):</p>
+                <input type="date" name="delivery_date" class="project_delivery_date">
+            
+                <div id="submitWrapper">
+                    <button type="submit" class="button edit-button" id="submitChangesButton"><i class="fas fa-edit"></i> Save</button>
+                    <button type="button" class="exit-button" onclick="hideProjectSettings(event)" id="close-project-settings">
+                        Cancel
+                    </button>
+                </div>
+            </form>
         </div>
     </div> 
 @endif
 
 {{-- Hidden div for creating tasks --}}
 <div id="create-task-container" class="hidden modal opaque-project-container">
-    <div class="title">
-        <h2>Create New Task</h2>
-    </div>
-
+    <h2 id="projectSettingsTitle">Create New Task</h2>
+    
     <form class="task-form project-form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
         @method('PUT')
         @csrf
 
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required placeholder="ex: Create New Navbar">
-
-        <label for="description">Description:</label><br>
-        <input type="text" id="description" name="description" required placeholder="ex: Create Navbar with four different buttons ...">
+        <div style="align-items:baseline;width:100%">
+            <p class="info-label">Name:</p>
+            <input type="text" id="name" name="name" required placeholder="ex: Create New Navbar">
+    
+            <p class="info-label">Description:</p>
+            <textarea type="text" id="description" name="description" class="project_description_area" required placeholder="ex: Create Navbar with four different buttons ..."></textarea>
         
-        <label for="delivery_date">Delivery Date:</label><br>
-        <input type="date" id="delivery_date" name="delivery_date">
+            <p class="info-label">Delivery Date:</p>
+            <input type="date" id="delivery_date" name="delivery_date">
+            
+            <div id="submitWrapper">
+                <button type="submit" class="button edit-button" id="submitChangesButton">Create</button>
+                <button type="button" class="exit-button" onclick="hideCreateTask(event)" id="close-project-settings">
+                    Cancel
+                </button>
+            </div>
+        </div>
         
-        <button type="submit" class="confirm-button">Create</button>
-        <a class="button" onclick="hideCreateTask(event)" id="close-project-settings">
-            Cancel
-        </a>
     </form>
 </div>
 

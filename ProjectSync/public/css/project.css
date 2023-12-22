@@ -32,8 +32,12 @@ div#project-settings-container, div#create-task-container {
     left: 50%;
     transform: translate(-50%, -8%);
     max-width: 60%;
-    max-height: 60vh;
+    max-height: 65vh;
     margin-top: 10px;
+}
+
+div#create-task-container {
+    height: auto;
 }
 
 
@@ -45,10 +49,8 @@ div#project-settings-container form.project-form {
     margin-right: 75px;
 }
 
-
-
 div#project-settings-container h2{
-    margin-top: 5px;
+    margin-top: 20px;
 }
 
 /* 
@@ -215,16 +217,6 @@ div#project-settings-container h2{
     cursor: pointer;
 }
 
-div#create-task-container button{
-    background-color: #172b4d;
-    color: #f7f3e9;
-    top: 15%;
-    left: 0%;
-    
-    max-height: 80vh;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
 
 .project-submit-button {
     background-color: #172b4d;
@@ -234,6 +226,18 @@ div#create-task-container button{
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }
+
+div#create-task-container button{
+    background-color: #172b4d;
+    color: #f7f3e9;
+    top: 15%;
+    left: 0%;
+    
+    /* max-height: 80vh; */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
 
 #changes-button:hover,
 .archive-button:hover,
@@ -270,7 +274,6 @@ div#create-task-container button{
 .title h2{
     margin-left: 320px;
 }
-
 
 #create-task-container .button {
     background-color: #172b4d;
@@ -479,9 +482,10 @@ ul#searchResults {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
-.project_description_area{
+.project_description_area {
     background-color: #f7f3e9;
     min-height: 105px;
+    margin-bottom: 0px;
 }
 
 input.project_delivery_date{
@@ -571,7 +575,6 @@ div.project-form {
     align-items: center;
     align-content: center;
     margin: auto;
-    width: 50%;
 }
 
 a#archive-button{
@@ -592,4 +595,101 @@ h2.title{
     margin-top: 25px;
 }
 
+#changeCoordinator {
+    margin-bottom: 10px;
+    text-align: left;
+    margin-left: 60px;
+}
 
+#changeCoordinatorContainer {
+    display: flex;
+}
+
+#changeCoordinatorContainer > button {
+    margin-left: 10px;
+}
+
+#submitWrapper {
+    display: flex;
+}
+
+#submitWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#submitWrapper.button, 
+#submitWrapper.exit-button {
+    margin: 5px;
+}
+
+#submitChangesButton {
+    margin-right: 10px;
+}
+
+#close-project-settings {
+    margin-left: 10px;
+}
+
+#changesAndArchiveWrapper {
+    display: flex;
+    margin-left: 60px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#changesAndArchiveWrapper form {
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#changesAndArchiveWrapper p {
+    margin-left: 10px;
+}
+
+#changeDescWrapper {
+    margin-left: 60px;
+    margin-right: 60px;
+    background-color: #172b4d;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+#changeDescWrapper p {
+    padding-top: 20px;
+}
+
+h2#projectSettingsTitle {
+    margin-top: 20px;
+}
+
+div#create-task-container {
+    align-items: baseline;
+}
+
+#create-task-container form {
+    margin: 60px;
+}
+
+#create-task-container input {
+    width: 100%;
+}
+
+#create-task-container textarea {
+    margin-bottom: 15px;
+}
+
+#create-task-container p {
+    text-align: start;
+}
+
+#create-task-container button {
+    margin: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0px 10px;
+    font-size: 16px;
+}
