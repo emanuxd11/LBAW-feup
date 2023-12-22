@@ -90,36 +90,40 @@ class ProjectController extends Controller
      */
     public function create(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:30',
-            'description' => 'required|string|max:3000',
-            'delivery_date' => 'nullable|date|after:today',
-        ]);
-        // Create a blank new Project.
-        $project = new Project([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'start_date' => date('Y/m/d'),
-            'delivery_date' => $request->input('delivery_date'),
-            'archived' => false,
-        ]);
-
-        // Check if the current user is authorized to create this project.
-        $this->authorize('create', $project);
-
-        // Save the project and return it as JSON.
-        $project->save();
-
-        // Add coordinator
-        $data = [
-            'iduser' => Auth::user()->id,
-            'idproject' => $project->id,
-            'isfavorite' => false,
-            'iscoordinator' => true,
-        ];
-        DB::table('projectmember')->insert($data);
-        
-        return redirect('/projects' . '/' . $project->id);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:30',
+                'description' => 'required|string|max:3000',
+                'delivery_date' => 'nullable|date|after:today',
+            ]);
+            // Create a blank new Project.
+            $project = new Project([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'start_date' => date('Y/m/d'),
+                'delivery_date' => $request->input('delivery_date'),
+                'archived' => false,
+            ]);
+    
+            // Check if the current user is authorized to create this project.
+            $this->authorize('create', $project);
+    
+            // Save the project and return it as JSON.
+            $project->save();
+    
+            // Add coordinator
+            $data = [
+                'iduser' => Auth::user()->id,
+                'idproject' => $project->id,
+                'isfavorite' => false,
+                'iscoordinator' => true,
+            ];
+            DB::table('projectmember')->insert($data);
+            
+            return redirect('/projects' . '/' . $project->id);
+        } catch (\Exception $e) {
+            return redirect('/projects' . '/')->with('error', 'Project already exists.');
+        }
     }
 
     public function update(Request $request,$project_id)
