@@ -32,9 +32,9 @@
                     id="archiveProjectForm">
                 @method('POST')
                 @csrf
-                <button class="archive-button button" onclick="showPopup('archive-popup');">
+                <a class="archive-button button" onclick="showPopup('archive-popup');">
                     <i class="fa-solid fa-box-archive"></i>
-                </button>
+                </a>
                 <div id="archive-popup" class="confirmation-popup hidden">
                     <p>Are you sure you want to archive "{{ $project->name }}"?<br>(This action cannot be undone!)</p>
                     <button type="button" class="button cancel-button" onclick="hidePopup('archive-popup')">No</button>
