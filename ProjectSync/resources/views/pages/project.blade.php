@@ -12,7 +12,7 @@
 <link href="{{ asset('css/project.css') }}" rel="stylesheet">
 <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
 
-@include('partials.sidebar')
+@include('partials.sidebar', ['current_project_id' => $project->id])
 @include('partials.members')
 
 @if($project->archived)

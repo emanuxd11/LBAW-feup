@@ -2,25 +2,34 @@
 
 <aside class="sidebar">
     <nav class="nav-menu">
-        {{-- <h2>Your favorite projects:</h2>     --}}
         <div id="favorite-projects">
             @if (count(Auth::user()->favorite_projects()) > 0)
                 <ul>
                     <li>
-                        @each('partials.project_icon', Auth::user()->favorite_projects(), 'project')
+                        @foreach(Auth::user()->favorite_projects() as $project)
+                            @if ($project->id == $current_project_id)
+                                @include('partials.project_icon_current', ['project' => $project])
+                            @else
+                                @include('partials.project_icon', ['project' => $project])
+                            @endif
+                        @endforeach
                     </li>
                     <li class="separator"></li>
                 </ul>
             @endif
         </div>
 
-        {{-- <h2>Your active projects:</h2>     --}}
         <div id="active-projects">
-            {{-- update this to only show the projects that aren't favorited --}}
             @if (count(Auth::user()->unfavorite_projects()) > 0)
                 <ul>
                     <li>
-                        @each('partials.project_icon', Auth::user()->unfavorite_projects(), 'project')
+                        @foreach(Auth::user()->unfavorite_projects() as $project)
+                            @if ($project->id == $current_project_id)
+                                @include('partials.project_icon_current', ['project' => $project])
+                            @else
+                                @include('partials.project_icon', ['project' => $project])
+                            @endif
+                        @endforeach
                     </li>
                     <li class="separator"></li>
                 </ul>
@@ -30,11 +39,19 @@
         <div id="dashboard">
             <ul>
                 <li>
-                    <a href="{{ route('projects') }}" class="side-bar-icon">
-                        <span>
-                            <i class="fa-solid fa-plus"></i>
-                        </span>
-                    </a>
+                    @if ($current_project_id == -1)
+                        <a href="{{ route('projects') }}" class="side-bar-icon current-project-icon">
+                            <span>
+                                <i class="fa-solid fa-plus"></i>
+                            </span>
+                        </a>
+                    @else
+                        <a href="{{ route('projects') }}" class="side-bar-icon">
+                            <span>
+                                <i class="fa-solid fa-plus"></i>
+                            </span>
+                        </a>
+                    @endif
                 </li>
             </ul>
         </div>
