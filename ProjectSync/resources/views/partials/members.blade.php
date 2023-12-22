@@ -75,7 +75,7 @@
                             <div class="context-menu" id="contextMenu-{{ $user->id }}">
                                 <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
                                     <a class="text-button" href="{{ route('profilePage', ['username' => $user->username]) }}">
-                                        Profile
+                                        {{$user->username}}'s profile
                                     </a>
                                 </div>
                                 <div class="context-menu-item" id="contextMenuItemRevoke-{{ $user->id }}">
@@ -97,7 +97,7 @@
                         <div class="context-menu" id="contextMenu-{{ $user->id }}">
                             <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
                                 <a class="text-button" href="{{ route('profilePage', ['username' => $user->username]) }}">
-                                    Profile
+                                    {{$user->username}}'s profile
                                 </a>
                             </div>
                             <div class="context-menu-item" id="contextMenuItemRevoke-{{ $user->id }}" style="display:none;"></div>
@@ -107,7 +107,7 @@
                             <div class="context-menu" id="contextMenu-{{ $user->id }}">
                                 <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
                                     <a class="text-button" href="{{ route('profilePage', ['username' => $user->username]) }}">
-                                        Profile
+                                        View Profile
                                     </a>
                                 </div>
                                 <div class="context-menu-item" id="contextMenuItemRevoke-{{ $user->id }}">
@@ -154,12 +154,12 @@
                             <div class="context-menu" id="contextMenu-{{ $user->id }}">
                                 <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
                                     <a class="text-button" href="{{ route('profilePage', ['username' => $user->username]) }}">
-                                        Profile
+                                        {{$user->username}}'s profile
                                     </a>
                                 </div>
                                 <div class="context-menu-item" id="contextMenuItemRevoke-{{ $user->id }}">
                                     <a class="critical-button text-button" onclick="showPopup('revoke-{{ $user->id }}-popup', event);">
-                                        Cancel Invitation
+                                        Cancel {{$user->username}}'s invitation
                                     </a>
                                     <form class="project-form hidden-form" method="POST" action="{{ route('project.revoke.invitations', ['project_id' => $project->id, 'user_id' => $user->id]) }}">
                                         @method('DELETE')
