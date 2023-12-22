@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (action == 'unfavorite-project') {
                     favorite_button.classList.remove('favorite-button-solid');
                     favorite_button.classList.add('favorite-button-empty');
+                    favorite_button.setAttribute('title', 'Favorite Project');
                     favorite_button.setAttribute('data-action', 'favorite-project');
                     favorite_button.querySelector('i').classList.remove('fa-solid');
                     favorite_button.querySelector('i').classList.add('fa-regular');
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     favorite_button.classList.remove('favorite-button-empty');
                     favorite_button.classList.add('favorite-button-solid');
                     favorite_button.setAttribute('data-action', 'unfavorite-project');
+                    favorite_button.setAttribute('title', 'Unfavorite Project');
                     favorite_button.querySelector('i').classList.remove('fa-regular');
                     favorite_button.querySelector('i').classList.add('fa-solid');
                 }

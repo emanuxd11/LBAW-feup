@@ -125,6 +125,19 @@
     </form>
 </div>
 
+{{-- Hidden div for project description --}}
+<div id="project-description-container" class="hidden modal opaque-project-container">
+    <h2 id="projectSettingsTitle">Project Description</h2>
+    
+    <div id="innerDescriptionContainer" class="scrollable">
+        {{ $project->description }}
+    </div>
+
+    <div id="submitWrapper">
+        <button type="button" class="button edit-button" id="submitChangesButton" onclick="hideProjectDescription(event)">Back</button>
+    </div>
+</div>
+
 <section id="project">
     @include('partials.messages')
 
@@ -135,11 +148,11 @@
                     <form method="POST" action="{{ route('project.favorite', ['project_id' => $project->id]) }}">
                         @csrf
                         @if($project->isFavoriteOf(Auth::user()))
-                            <a type="submit" id="favorite-button" class="favorite-button-solid scales-on-hover" data-action="unfavorite-project">
+                            <a type="submit" id="favorite-button" class="favorite-button-solid scales-on-hover" data-action="unfavorite-project" title="Unfavorite Project">
                                 <i class="fa-solid fa-star"></i>
                             </a>
                         @else
-                            <a type="submit" id="favorite-button" class="favorite-button-empty scales-on-hover" data-action="favorite-project">
+                            <a type="submit" id="favorite-button" class="favorite-button-empty scales-on-hover" data-action="favorite-project" title="Favorite Project">
                                 <i class="fa-regular fa-star"></i>
                             </a>
                         @endif
@@ -152,21 +165,31 @@
                 <form class="task-form project-form" id="search_task_form">
                     <input type="text" name="task" 
                         required placeholder="Search tasks by name or status" 
-                        id="search_task_input" class="project-form">
+                        id="search_task_input" class="project-form"
+                        title="Search For Tasks">
                 </form>
             </div>
             
             <div id="forumLinkContainer">
-                <a href="{{ route('forum.show', ['id' => $project->id]) }}" class="scales-on-hover" type="submit">
+                <a href="{{ route('forum.show', ['id' => $project->id]) }}" class="scales-on-hover" type="submit" title="Open Forum">
                     <i class="fas fa-comments"></i>
                 </a>
                 Forum
             </div>
 
             @if($project->isCoordinator(Auth::user()))
-                <a id="project-settings-activate" class="scales-on-hover" onclick="showProjectSettings(event)">
-                    <i class="fa-solid fa-gear"></i>
-                </a>
+                <div id="forumLinkContainer">
+                    <a class="scales-on-hover" onclick="showProjectSettings(event)" title="Project Settings">
+                        <i class="fa-solid fa-gear"></i>
+                    </a>
+                </div>
+            @else
+                <div id="forumLinkContainer">
+                    <a class="scales-on-hover" onclick="showProjectDescription(event)" title="View Description">
+                        <i class="fa-solid fa-scroll"></i>
+                    </a>
+                    Description
+                </div>
             @endif
         </div>
     </div>

@@ -160,3 +160,38 @@ const hideCreateTask = (event) => {
     currentPopup.style.display = 'none';
     removeModalOverlay();
 };
+
+const showProjectDescription = (event) => {
+    if (event) {
+        event.stopPropagation();
+    }
+
+    const modalOverlay = document.createElement('div');
+    modalOverlay.classList.add('modal-overlay');
+    modalOverlay.style.zIndex = 99999;
+    document.body.appendChild(modalOverlay);
+
+    const currentPopup = document.getElementById("project-description-container");
+    currentPopup.style.display = 'block';
+    currentPopup.style.zIndex = 100000;
+    currentPopup.style.position = 'fixed';
+    const topPosition = (window.innerHeight - currentPopup.offsetHeight) / 2;
+    const leftPosition = (window.innerWidth - currentPopup.offsetWidth) / 2;
+    currentPopup.style.top = `${topPosition}px`;
+    currentPopup.style.left = `${leftPosition}px`;
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && currentPopup.style.display !== 'none') {
+            hideProjectDescription(event)
+        }
+    });
+};
+
+const hideProjectDescription = (event) => {
+    if (event) {
+        event.stopPropagation();
+    }
+    const currentPopup = document.getElementById("project-description-container");
+    currentPopup.style.display = 'none';
+    removeModalOverlay();
+};

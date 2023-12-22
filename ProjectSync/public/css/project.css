@@ -692,3 +692,30 @@ div#create-task-container {
     padding: 0px 10px;
     font-size: 16px;
 }
+
+#project-description-container {
+    width: 38%;
+    height: auto;
+    max-height: 90%;
+    background-color: #172b4d;
+}
+
+#project-description-container button {
+    margin-bottom: 20px;
+}
+
+#innerDescriptionContainer {
+    background-color: #f7f3e9;
+    color: #172b4d;
+    margin: 60px;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+    white-space: pre-line;
+    max-height: 70vh;
+}
