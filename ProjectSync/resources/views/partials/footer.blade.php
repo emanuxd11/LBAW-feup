@@ -19,11 +19,8 @@
     </div>
     <div class="footer-section">
         <h4><i class="fas fa-link"></i> Quick Links</h4>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-        </ul>
+        <a href="#">Privacy Policy</a><div></div>
+        <a href="{{ route('aboutUs') }}">About Us</a><div></div>
+        <a href="{{ route('home') }}">Home</a><div></div>
     </div>
 </footer>
