@@ -28,20 +28,20 @@
             <p>Project Coordinator</p>
         </h6>
         <ul id="project-member-list">
-            <li>  
+            <li>
                 @if ($project->getCoordinator() != null)
-                    <div class="user-list-card">
-                        <div class="user-profile-image">
-                            @if($project->getCoordinator()->profile_pic !== null && $project->getCoordinator()->profile_pic !== '')
-                                <img src="{{ $project->getCoordinator()->profile_pic }}" alt="Profile Picture">
-                            @else
-                                <img src="/images/avatars/default-profile-pic.jpg" alt="Default Profile Picture">
-                            @endif
-                        </div>
-                        <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" id="user-name-project" class="pending-user-list-content">
+                    <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" id="user-name-project" class="pending-user-list-content">
+                        <div class="user-list-card">
+                            <div class="user-profile-image">
+                                @if($project->getCoordinator()->profile_pic !== null && $project->getCoordinator()->profile_pic !== '')
+                                    <img src="{{ $project->getCoordinator()->profile_pic }}" alt="Profile Picture">
+                                @else
+                                    <img src="/images/avatars/default-profile-pic.jpg" alt="Default Profile Picture">
+                                @endif
+                            </div>
                             <span id="user-name-project">{{ $project->getCoordinator()->name }}</span>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 @endif
             </li>
         </ul>
@@ -54,10 +54,6 @@
             @endif
         </h6>
         <ul id="project-member-list">
-            {{-- can't use forelse here since there is always one element (coordinator) --}}
-            @if(count($project->members) <= 1)
-                {{-- <p id="no-members">Looks like nobody has been added to the project yet.</p> --}}
-            @endif
             @foreach($project->members as $user)
                 @if($project->isCoordinator($user))
                     @continue

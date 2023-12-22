@@ -57,4 +57,3 @@ document.addEventListener('DOMContentLoaded', function () {
         favorite_button.blur();
     });
 });
-
