@@ -48,10 +48,24 @@
     </div>
 
     <div class="currentProjects">
-        @if(Auth::check() && Auth::user()->id == $user->id)
+        @if(Auth::check() && (Auth::user()->id == $user->id || Auth::user()->isAdmin))
             <h3>Projects</h3>
             <div class="showProjects">
                 @forelse ($user->projects as $project)
+                    <div class="user">
+                        @include('partials.project', ['project' => $project])
+                    </div>
+                @empty
+                    <h4>No projects found</h4>
+                @endforelse
+            </div>
+            @if(Auth::user()->isAdmin && Auth::user()->id != $user->id)
+            <h3>{{$user->username}}' s archived projects</h3>
+            @else
+            <h3>Your Archived Projects</h3>
+            @endif
+            <div class="showProjects">
+                @forelse ($user->archived_projects as $project)
                     <div class="user">
                         @include('partials.project', ['project' => $project])
                     </div>
