@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+use App\Models\Notification;
 use App\Models\User;
 use App\Models\Project;
 use App\Models\Post;
@@ -204,6 +205,16 @@ class AdminController extends Controller{
         return redirect()->route('adminPage')->with('success','User unblocked successfully.');
     }
 
-}
+    private function createNotification($receivers,$description)
+    {
+        $notification = Notification::create([
+            'description' => $description,
+            'date' => now(),
+        ]);
 
+        foreach($receivers as $user){
+            $user->notifications()->attach($notification, ['ischecked' => false]);
+        }
+    }
+}
 ?>
