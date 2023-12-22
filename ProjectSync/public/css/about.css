@@ -10,21 +10,21 @@
     cursor: pointer;
     margin-bottom: 20px;
     width: 70%;
-    border: 1px solid #006aa7; /* Blue border */
-    border-radius: 8px; /* Add rounded corners */
-    overflow: hidden; /* Hide overflow for rounded corners */
-    box-shadow: 0 6px 12px rgba(0, 106, 167, 0.4); /* More noticeable shadow */
+    border: 1px solid #006aa7; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    box-shadow: 0 6px 12px rgba(0, 106, 167, 0.4); 
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .about-card:hover {
-    transform: scale(1.02); /* Add a slight scale effect on hover */
-    box-shadow: 0 12px 24px rgba(0, 106, 167, 0.6); /* Enhance shadow on hover */
-    background-color: #f6e3b2; /* Dark beige background color on hover */
+    transform: scale(1.02); 
+    box-shadow: 0 12px 24px rgba(0, 106, 167, 0.6);
+    background-color: #f6e3b2; 
 }
 
 .about-page {
-    color: #006aa7; /* Blue text color */
+    color: #006aa7; 
     padding: 20px;
     width: 100%;
     border: none;
@@ -33,13 +33,13 @@
 }
 
 .about-body {
-    text-align: justify; /* Adjust text alignment */
+    text-align: justify; 
     padding: 20px;
-    background-color: #006aa7; /* Blue background color for the answer */
-    color: #f7f3e9; /* White text color for the answer */
+    background-color: #006aa7; 
+    color: #f7f3e9; 
     display: none;
     overflow: hidden;
-    border-bottom-left-radius: 8px; /* Add rounded corners to the body */
+    border-bottom-left-radius: 8px; 
     border-bottom-right-radius: 8px;
 }
 
@@ -48,19 +48,18 @@
 }
 
 #about-heading {
-    color: #006aa7; /* Blue text color */
-    text-align: center; /* Center the text */
-    margin-bottom: 20px; /* Add some space at the bottom for better aesthetics */
+    color: #006aa7; 
+    text-align: center; 
+    margin-bottom: 20px; 
 }
 
 .about-page:after {
-    content: "\25BC"; /* Down arrow icon */
+    content: "\25BC"; 
     font-size: 13px;
     float: right;
     margin-left: 5px;
 }
 
-/* Add margin to the icons for space */
 .animated-icon {
-    margin-left: 10px; /* Adjust the margin as needed */
+    margin-left: 10px;
 }

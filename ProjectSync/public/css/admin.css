@@ -13,7 +13,7 @@
 .admin-page .searchUsers {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Add space between items */
+    justify-content: space-between; 
 }
 
 .admin-page form {
@@ -22,18 +22,18 @@
 }
 
 .admin-page input[type="text"] {
-    flex-grow: 1; /* Adjust the width of the input */
-    margin-right: 10px; /* Add space between input and button */
+    flex-grow: 1; 
+    margin-right: 10px; 
 }
 
 .admin-page h4 {
     font-size: 18px;
-    color: #7f8c8d; /* Medium gray text color */
+    color: #7f8c8d; 
 }
 
 .admin-page h5 {
     font-size: 16px;
-    color: #7f8c8d; /* Medium gray text color */
+    color: #7f8c8d; 
 }
 
 .admin-page .user {
@@ -43,26 +43,26 @@
 }
 
 .user h5{
-    display: flex; /* Use flexbox for centering */
-    align-items: center; /* Center vertically */
+    display: flex; 
+    align-items: center; 
     flex-direction: column;
 }
 
 .admin-page .button {
-    background-color: #ff0000; /* Red button background */
-    color: #f7f3e9; /* Dark text color */
-    /*padding: 10px 20px; /* Adjusted padding */
+    background-color: #ff0000; 
+    color: #f7f3e9; 
+    /*padding: 10px 20px;  */
     border-radius: 5px;
     text-decoration: none;
     font-size: 14px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform for hover animation */
-    margin-top: 5px; /* Adjusted margin to center vertically with h5 */
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    margin-top: 5px; 
 }
 
 .admin-page .button:hover {
-    background-color: #d60000; /* Darker red on hover */
-    transform: scale(1.05); /* Add scaling effect on hover */
-    color: #f7f3e9; /* Dark text color */
+    background-color: #d60000; 
+    transform: scale(1.05); 
+    color: #f7f3e9; 
 }
 
 .show-users span {
@@ -76,7 +76,7 @@
 }
 
 .search-bar{
-    flex-grow: 1; /* Allow the search bar to grow and take available space */
+    flex-grow: 1; 
 }
 
 .search-bar button{
@@ -89,15 +89,15 @@
 
 admin-page .current-users,
 .admin-page .current-projects {
-    margin-top: 30px; /* Adjust the margin for spacing */
+    margin-top: 30px; 
 }
 
 .admin-page .current-projects {
-    border-top: 1.5px solid #ccc; /* Add a 2px solid border on the top */
+    border-top: 1.5px solid #ccc; 
 }
 
 .admin-page .current-projects {
-    padding-top: 30px; /* Adjust padding for spacing */
+    padding-top: 30px; 
 }
 
 
@@ -134,7 +134,7 @@ admin-page .current-users,
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Adjust the margin as needed */
+    margin-top: 20px; 
 }
 
 .admin-page .current-projects .show-projects {
@@ -176,10 +176,10 @@ admin-page .current-users,
 .profile-image img {
     width: 15%;
     height: auto;
-    border-radius: 50%; /* Make the image circular */
-    border: 3px solid #fff; /* Add a white border */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
-    aspect-ratio: 1 / 1; /* Ensure a perfect circle */
+    border-radius: 50%; 
+    border: 3px solid #fff; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); 
+    aspect-ratio: 1 / 1; 
     margin-bottom: 4px;
 }
 

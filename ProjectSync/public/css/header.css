@@ -5,9 +5,9 @@ body {
 
 /* Modern Header Styles */
 .modern-header {
-    background-color: #006aa7; /* Light blue background */
+    background-color: #006aa7; 
     padding: 20px;
-    color: #172b4d; /* Dark text color */
+    color: #172b4d; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,30 +15,30 @@ body {
 
 .modern-header h1 {
     margin: 0;
-    font-size: 36px; /* Increase the font size for ProjectSync */
-    font-family: 'YourNewFont', sans-serif; /* Change 'YourNewFont' to the desired font-family */
-    color: #f7f3e9; /* Match the background color of the app */
-    display: flex; /* Use flexbox for the logo */
-    align-items: center; /* Center the text and icon vertically */
+    font-size: 36px; 
+    font-family: 'YourNewFont', sans-serif; 
+    color: #f7f3e9; 
+    display: flex;
+    align-items: center; 
 }
 
 .modern-header #projectSyncLogo:hover {
-    transform: scale(1.05); /* Add scaling effect on hover */
-    transition: transform 0.5s ease; /* Adjust the duration for a slower effect */
+    transform: scale(1.05); 
+    transition: transform 0.5s ease; 
 }
 
 .modern-header h1 img {
-    margin-right: 10px; /* Add some spacing between text and icon */
-    transition: transform 0.3s ease, filter 0.3s ease; /* Add smooth transition for transform and filter */
+    margin-right: 10px; 
+    transition: transform 0.3s ease, filter 0.3s ease; 
 }
 
 .modern-header h1:hover img {
-    transform: rotate(360deg); /* Rotate the icon on hover */
-    filter: brightness(1.5); /* Add brightness effect on hover */
+    transform: rotate(360deg); 
+    filter: brightness(1.5); 
 }
 
 .modern-header h1:hover {
-    cursor: pointer; /* Add pointer cursor on hover */
+    cursor: pointer;
 }
 
 .modern-header nav {
@@ -55,23 +55,23 @@ body {
 
 .modern-header .buttons-container {
     display: flex;
-    align-items: center; /* Align items vertically in the center */
+    align-items: center; 
 }
 
 .modern-header .profile-button img {
     width: 100%;
     height: 50px;
-    border-radius: 50%; /* Make the image circular */
-    border: 3px solid #fff; /* Add a white border */
-    box-shadow: 0 0 0px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
-    aspect-ratio: 1 / 1; /* Ensure a perfect circle */
+    border-radius: 50%; 
+    border: 3px solid #fff; 
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.3); 
+    aspect-ratio: 1 / 1; 
     margin-bottom: 6px;
-    transition: transform 0.3s ease, filter 0.3s ease; /* Add smooth transition for transform and filter */
+    transition: transform 0.3s ease, filter 0.3s ease; 
 }
 
 .modern-header .profile-button:hover img {
-    transform: rotate(360deg); /* Rotate the icon on hover */
-    filter: brightness(1.5); /* Add brightness effect on hover */
+    transform: rotate(360deg); 
+    filter: brightness(1.5); 
 }
 
 .modern-header .button,
@@ -83,18 +83,18 @@ body {
 }
 
 .modern-header .button {
-    background-color: #f7f3e9; /* Bright beige button background */
-    color: #172b4d; /* Dark text color */
+    background-color: #f7f3e9; 
+    color: #172b4d; 
     padding: 15px 25px;
     border-radius: 5px;
-    display: flex; /* Use flexbox */
-    justify-content: center; /* Center the text horizontally */
-    align-items: center; /* Center the text vertically */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .modern-header .button:hover {
-    background-color: #ffe4b5; /* Lighter beige on hover */
+    background-color: #ffe4b5; 
     transform: scale(1.05);
 }
 
@@ -105,23 +105,23 @@ body {
 .modern-header a img {
     width: 100%;
     height: 50px;
-    border-radius: 50%; /* Make the image circular */
-    border: 3px solid #fff; /* Add a white border */
-    box-shadow: 0 0 0px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
-    aspect-ratio: 1 / 1; /* Ensure a perfect circle */
+    border-radius: 50%; 
+    border: 3px solid #fff; 
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.3); 
+    aspect-ratio: 1 / 1; 
     margin-bottom: 6px;
 }
 
 .profile-dropdown {
     display: none;
     position: absolute;
-    top: 75px; /* Adjust the distance from the profile button */
+    top: 75px; 
     right: 0;
-    background-color: #2c3e50; /* Updated background color */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    background-color: #2c3e50; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 10001;
-    border-top-left-radius: 8px; /* Updated border radius */
-    border-bottom-left-radius: 8px; /* Updated border radius */
+    border-top-left-radius: 8px; 
+    border-bottom-left-radius: 8px; 
 }
 
 .profile-dropdown a {
@@ -129,11 +129,11 @@ body {
     display: block;
     padding: 10px;
     margin: 4px;
-    color: #ffffff; /* Dropdown text color */
+    color: #ffffff; 
     text-decoration: none;
     transition: background-color 0.3s;
-    border-top-left-radius: 8px; /* Updated border radius */
-    border-bottom-left-radius: 8px; /* Updated border radius */
+    border-top-left-radius: 8px; 
+    border-bottom-left-radius: 8px; 
 }
 
 .profile-dropdown a:hover {

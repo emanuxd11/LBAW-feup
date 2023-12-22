@@ -1,13 +1,13 @@
 body {
   background-color: #f7f3e9; /* Bright beige background */
-  color: #172b4d; /* Dark text color */
+  color: #172b4d; 
 }
 
 main > header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #006aa7; /* Blue header background */
+  background-color: #006aa7; 
   padding: 1em;
   margin: 0; /* Set margin to 0 */
   /* width: 100%; */
@@ -15,55 +15,55 @@ main > header {
 
 main > header h1 {
   margin: 0;
-  font-size: 1.8rem; /* Adjust font size */
-  color: c; /* White text color */
+  font-size: 1.8rem; 
+  color: c; 
 }
 
 #cards article.card {
-  background-color: #f7f3e9; /* White card background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  background-color: #f7f3e9; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 #cards article.card header {
-  background-color: #006aa7; /* Blue header background for cards */
-  color: #f7f3e9; /* White text color for card headers */
+  background-color: #006aa7; 
+  color: #f7f3e9; 
 }
 
 #cards article.card li label a {
-  color: #0079bf; /* Blue color for links in cards */
+  color: #0079bf; 
 }
 
 #content > form {
-  background-color: #f7f3e9; /* White form background */
-  border: 1px solid #f6e3b2; /* Light gray border */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  background-color: #f7f3e9; 
+  border: 1px solid #f6e3b2; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 #content > form input {
-  background-color: #f6e3b2; /* Light gray input background */
+  background-color: #f6e3b2; 
 }
 
 button,
 a.button,
 a.button.button-outline,
 a {
-  color: #172b4d; /* Set text color for buttons and links */
+  color: #172b4d; 
 }
 
 button,
 a.button {
-  background-color: #006aa7; /* Blue button background */
-  border-color: #006aa7; /* Blue button border color */
+  background-color: #006aa7; 
+  border-color: #006aa7; 
 }
 
 a.button.button-outline {
-  color: #006aa7; /* Blue color for button outlines */
+  color: #006aa7; 
 }
 
 input[type=text]:focus,
 input[type=email]:focus,
 input[type=password]:focus {
-  border-color: #006aa7; /* Blue border color for focused inputs */
+  border-color: #006aa7; 
 }
 
 a.button {
@@ -91,10 +91,10 @@ main {
 
 footer {
   padding: 10px;
-  margin-top: auto; /* Push the footer to the bottom of the container */
+  margin-top: auto; 
   height: 50px;
-  background-color: #006aa7; /* Background color */
-  color: white; /* Text color */
+  background-color: #006aa7; 
+  color: white; 
   text-align: center;
   font-size: 16px;
 }
