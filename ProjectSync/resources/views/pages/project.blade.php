@@ -166,7 +166,7 @@
                     <input type="text" name="task" 
                         required placeholder="Search tasks by name or status" 
                         id="search_task_input" class="project-form"
-                        title="Search For Tasks">
+                        title="Search for tasks">
                 </form>
             </div>
             
@@ -202,7 +202,7 @@
                     <ul id="tasks-todo" class="task-list"></ul>
                 </div>
                 <div id="addTaskButton">
-                    <i class="fa-solid fa-plus scales-on-hover" onclick="showCreateTask(event)"></i>
+                    <i class="fa-solid fa-plus scales-on-hover" onclick="showCreateTask(event)" title="Create new task"></i>
                     Add Task
                 </div>
             </div>
@@ -213,7 +213,7 @@
                     <ul id="tasks-doing" class="task-list"></ul>
                 </div>
                 <div id="addTaskButton">
-                    <i class="fa-solid fa-plus scales-on-hover" onclick="showCreateTask(event)"></i>
+                    <i class="fa-solid fa-plus scales-on-hover" onclick="showCreateTask(event)" title="Create new task"></i>
                     Add Task
                 </div>
             </div>
@@ -224,7 +224,7 @@
                     <ul id="tasks-done" class="task-list"></ul>
                 </div>
                 <div id="addTaskButton">
-                    <i class="fa-solid fa-plus scales-on-hover" onclick="showCreateTask(event)"></i>
+                    <i class="fa-solid fa-plus scales-on-hover" onclick="showCreateTask(event)" title="Create new task"></i>
                     Add Task
                 </div>
             </div>
