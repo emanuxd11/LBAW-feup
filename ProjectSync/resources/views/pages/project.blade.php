@@ -15,10 +15,6 @@
 @include('partials.sidebar', ['current_project_id' => $project->id])
 @include('partials.members')
 
-@if($project->archived)
-    <h1>This project is has been archived by the coordinator.</h1>
-@endif
-
 {{-- Hidden div for project coordinator settings --}}
 @if($project->isCoordinator(Auth::user()))
     <div id="project-settings-container" class="hidden modal opaque-project-container scrollable">
@@ -141,9 +137,13 @@
 <section id="project">
     @include('partials.messages')
 
+    @if($project->archived)
+        <h1>This project has been archived by the coordinator.</h1>
+    @endif
+
     <div class="project-info-card">
         <div id="project-links">
-            @if(!Auth::user()->isadmin)
+            @if(!(Auth::user()->isadmin || $project->archived))
                 <div id="favorite-button-container">
                     <form method="POST" action="{{ route('project.favorite', ['project_id' => $project->id]) }}">
                         @csrf
@@ -177,7 +177,7 @@
                 Forum
             </div>
 
-            @if($project->isCoordinator(Auth::user()))
+            @if($project->isCoordinator(Auth::user()) && !$project->archived)
                 <div id="forumLinkContainer">
                     <a class="scales-on-hover" onclick="showProjectSettings(event)" title="Project Settings">
                         <i class="fa-solid fa-gear"></i>

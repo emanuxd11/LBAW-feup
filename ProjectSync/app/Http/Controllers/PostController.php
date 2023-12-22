@@ -26,6 +26,10 @@ class PostController extends Controller{
 
         $post = Post::find($id);
 
+        if($project->archived && !($project->isCoordinator($user) || $user->isAdmin)){
+            return redirect()->route('home')->with('error','Cannot enter post of an archived project.');
+        }
+
         $postComments = PostComment::where('post_id',$post->id)->orderBy('date')->get();
 
         return view("pages.post",compact('post','postComments'));

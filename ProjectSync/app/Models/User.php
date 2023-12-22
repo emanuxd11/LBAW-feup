@@ -62,6 +62,12 @@ class User extends Authenticatable
             ->where('archived', FALSE);
     }
 
+    public function archived_projects()
+    {
+        return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')
+            ->where('archived', TRUE)->where('iscoordinator', true);
+    }
+
     public function getIsAdminAttribute()
     {
         return $this->admin ?? DB::table('admin')->where('id', $this->id)->exists();
@@ -76,7 +82,7 @@ class User extends Authenticatable
     public function unfavorite_projects()
     {
         return $this->belongsToMany(Project::class, 'projectmember', 'iduser', 'idproject')
-            ->wherePivot('isfavorite', '!=', true)->get();
+            ->wherePivot('isfavorite', '!=', true)->where('archived', FALSE)->get();
     }
 
     public function getCoordinatedProjects(){
