@@ -3,8 +3,9 @@
     grid-template-columns: 70px 1fr 240px; /* sidebar width and remaining width */
     grid-template-rows: auto;
     grid-template-areas: "sidebar content members";
-    height: calc(100vh - 96px);
+    /* height: calc(100vh); */
     margin: 0;
+    z-index: 1000;
 }
 
 .members-sidebar {
