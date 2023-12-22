@@ -38,7 +38,7 @@ div#project-settings-container, div#create-task-container {
 
 
 div#project-settings-container form.project-form {
-    margin: 0 60px; /* Adjust the margin value as needed */
+    margin: 0 60px;
 }
 
 .exit-button2{
@@ -215,7 +215,7 @@ div#project-settings-container h2{
     cursor: pointer;
 }
 
-#changes-button, .archive-button, .exit-button, div#create-task-container button{
+div#create-task-container button{
     background-color: #172b4d;
     color: #f7f3e9;
     top: 15%;
@@ -271,11 +271,6 @@ div#project-settings-container h2{
     margin-left: 320px;
 }
 
-.archive-button,
-#changes-button {
-    margin-left: -22px;
-}
-
 
 #create-task-container .button {
     background-color: #172b4d;
@@ -289,14 +284,6 @@ div#project-settings-container h2{
 #create-task-container button:hover {
     background-color: #f7f3e9;
     color: #172b4d;
-}
-
-#changes-button{
-    margin-left: -150px;
-}
-
-.exit-button{
-    margin-right: -970px;
 }
 
 .remove-member-button {
@@ -547,6 +534,62 @@ input.project_delivery_date{
     margin-top: 0px;
     text-align: center;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+h3.changeCoordinator{
+    text-align: start;
+    margin-left: 60px;
+}
+
+a#archive-button{
+    background-color: #172b4d;
+}
+
+a#archive-button:hover{
+    background-color: white;
+}
+
+div.project-form {
+    text-align: center;
+}
+
+.exit-button{
+    text-align: center;
+    background-color: #172b4d;
+    color: white;
+}
+
+.exit-button:hover{
+    text-align: center;
+    background-color: white;
+    color: #172b4d;
+}
+
+.top-left-buttons-new{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    margin: auto;
+    width: 50%;
+}
+
+a#archive-button{
+    margin-top: 10px;
+}
+
+a#changes-button{
+    margin-top: 10px;
+    background-color: #172b4d;
+    color: white;
+}
+
+h2.title{
+    margin-bottom: 3px;
+}
+
+.project-form-top{
+    margin-top: 25px;
 }
 
 

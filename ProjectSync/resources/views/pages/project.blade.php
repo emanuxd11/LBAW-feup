@@ -22,18 +22,17 @@
 {{-- Hidden div for project coordinator settings --}}
 @if($project->isCoordinator(Auth::user()))
     <div id="project-settings-container" class="hidden modal opaque-project-container">
-        <h2>Project Settings</h2>
 
-        <div class="top-left-buttons">
+        <div class="top-left-buttons-new">
             {{-- archive --}}
             
-            <form class="project-form" method="POST" 
+            <form class="project-form-top" method="POST" 
                     action="{{ route('archive', ['project_id' => $project->id]) }}" 
                     id="archiveProjectForm">
                 @method('POST')
                 @csrf
-                <a class="archive-button button" onclick="showPopup('archive-popup');">
-                    <i class="fa-solid fa-box-archive"></i>
+                <a class="archive-button button" id="archive-button" onclick="showPopup('archive-popup');">
+                    Archive<i class="fa-solid fa-box-archive"></i>
                 </a>
                 <div id="archive-popup" class="confirmation-popup hidden">
                     <p>Are you sure you want to archive "{{ $project->name }}"?<br>(This action cannot be undone!)</p>
@@ -42,16 +41,13 @@
                 </div>
             </form>
 
+            <h2 class="title">Project Settings</h2>
+
             {{-- changes record --}}
-            <form class="project-form">
-                <a href="{{ route('project_changes', ['project_id' => $project->id]) }}" id="changes-button" class="button"><i class="fas fa-history"></i></a>
+            <form class="project-form-top">
+                <a href="{{ route('project_changes', ['project_id' => $project->id]) }}" id="changes-button" class="button">TimeLine  <i class="fas fa-history"></i></a>
             </form>
 
-            <div class="project-form">
-                <button class="exit-button" onclick="hideProjectSettings(event)" id="close-project-settings">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
         </div>
 
         {{-- change description --}}
@@ -65,6 +61,7 @@
         </form>
 
         {{-- change coordinator --}}
+        <h3 class="changeCoordinator">Change Coordinator</h3>
         <form class="project-form" method="POST" 
                 action="{{ route('assign.new.coordinator', ['project_id' => $project->id]) }}" 
                 id="newProjectCoordinatorForm">
@@ -81,6 +78,11 @@
             <input type="hidden" name="old_id" value="{{$project->getCoordinator()->id}}">
             <button type="submit" class="project-submit-button">Submit</button>
         </form>
+        <div class="project-form">
+            <button class="exit-button" onclick="hideProjectSettings(event)" id="close-project-settings">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
     </div> 
 @endif
 
