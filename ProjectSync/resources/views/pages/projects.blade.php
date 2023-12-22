@@ -50,4 +50,19 @@
     </div>
 </section>
 
+<style>
+    section#content {
+        grid-template-columns: 70px 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: "sidebar content";
+        height: 80vh;
+    }
+
+    @media (min-width: 2500px) {
+        section#content {
+            height: 100vh;
+        }
+    }
+</style>
+
 @endsection

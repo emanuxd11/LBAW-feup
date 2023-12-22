@@ -1,12 +1,11 @@
 #content {
     display: grid;
-    grid-template-columns: 70px 1fr 240px; /* sidebar width and remaining width */
+    grid-template-columns: 70px 1fr 240px;
     grid-template-rows: auto;
     grid-template-areas: "sidebar content members";
     /* height: calc(100vh); */
     margin: 0;
     z-index: 1000;
-    height: 100vh;
 }
 
 .members-sidebar {
