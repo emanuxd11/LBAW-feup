@@ -7,7 +7,7 @@
 <link href="{{ asset('css/projects.css') }}" rel="stylesheet">
 <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
 
-@include('partials.sidebar')
+@include('partials.sidebar', ['current_project_id' => -1])
 
 <section id="projects">
     @if(session('success'))

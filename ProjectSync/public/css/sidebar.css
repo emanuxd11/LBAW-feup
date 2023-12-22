@@ -67,16 +67,8 @@
     color: #ffffff;
     margin-top: 3px;
     margin-bottom: 3px;
-    transition: border-radius 0.1s ease-out;
-}
-
-.side-bar-icon:hover {
-    border-radius: 30%;
-}
-
-/* +- provisório, só serve para mostrar que são favs até se arranjar uma solução melhor */
-#favorite-projects .side-bar-icon {
-    color: #d6c407;
+    position: relative;
+    transition: border-radius 0.3s;
 }
 
 .side-bar-icon span {
@@ -84,6 +76,73 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+}
+
+.side-bar-icon::before {
+    content: '';
+    width: 0px;
+    height: 0px;
+    background-color: #f7f3e9;
+    position: absolute;
+    left: -10px;
+    top: 14px;
+    border-radius: 0 4px 4px 0;
+    transition: width 0.3s, height 0.3s;
+}
+
+.side-bar-icon:hover {
+    border-radius: 30%;
+}
+
+.side-bar-icon:hover::before {
+    width: 5px;
+    height: 21px;
+}
+
+.side-bar-icon span,
+.current-project-icon span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.current-project-icon {
+    border-radius: 30%;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: #ffffff;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    position: relative;
+}
+
+.current-project-icon::before {
+    content: '';
+    width: 5px;
+    height: 42px;
+    background-color: #f7f3e9;
+    position: absolute;
+    left: -10px;
+    top: 4px;
+    border-radius: 0 4px 4px 0;
+}
+
+.side-bar-icon span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* +- provisório, só serve para mostrar que são favs até se arranjar uma solução melhor */
+#favorite-projects .side-bar-icon {
+    color: #d6c407;
 }
 
 li.separator {
