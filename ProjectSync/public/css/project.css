@@ -32,7 +32,7 @@ div#project-settings-container, div#create-task-container {
     left: 50%;
     transform: translate(-50%, -8%);
     max-width: 60%;
-    max-height: 60vh;
+    max-height: 65vh;
     margin-top: 10px;
 }
 
@@ -48,7 +48,7 @@ div#project-settings-container form.project-form {
 
 
 div#project-settings-container h2{
-    margin-top: 5px;
+    margin-top: 20px;
 }
 
 /* 
@@ -479,9 +479,10 @@ ul#searchResults {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
-.project_description_area{
+.project_description_area {
     background-color: #f7f3e9;
     min-height: 105px;
+    margin-bottom: 0px;
 }
 
 input.project_delivery_date{
@@ -571,7 +572,6 @@ div.project-form {
     align-items: center;
     align-content: center;
     margin: auto;
-    width: 50%;
 }
 
 a#archive-button{
@@ -592,4 +592,69 @@ h2.title{
     margin-top: 25px;
 }
 
+#changeCoordinator {
+    margin-bottom: 10px;
+    text-align: left;
+    margin-left: 60px;
+}
 
+#changeCoordinatorContainer {
+    display: flex;
+}
+
+#changeCoordinatorContainer > button {
+    margin-left: 10px;
+}
+
+#submitWrapper {
+    display: flex;
+}
+
+#submitWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#submitWrapper.button, 
+#submitWrapper.exit-button {
+    margin: 5px;
+}
+
+#submitChangesButton {
+    margin-right: 10px;
+}
+
+#close-project-settings {
+    margin-left: 10px;
+}
+
+#changesAndArchiveWrapper {
+    display: flex;
+    margin-left: 60px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#changesAndArchiveWrapper form {
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#changesAndArchiveWrapper p {
+    margin-left: 10px;
+}
+
+#changeDescWrapper {
+    margin-left: 60px;
+    margin-right: 60px;
+    background-color: #172b4d;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+#changeDescWrapper p {
+    padding-top: 20px;
+}
