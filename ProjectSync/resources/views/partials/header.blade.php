@@ -21,7 +21,7 @@
                 <div class="profile-dropdown" id="profile-dropdown">
                     <a href="{{ route('profilePage', ['username' => Auth::user()->username]) }}">View Profile</a>
                     <a href="{{ route('notification.show', ['username' => Auth::user()->username]) }}">Notifications ({{count(Auth::user()->unseen_notifications)}})</a>
-                    <a href="{{ url('/logout') }}">Logout</a>
+                    <a class="prf-logout" href="{{ url('/logout') }}">Logout</a>
                 </div>  
             @else
                 <a class="button" href="{{ route('login') }}">Login</a>
