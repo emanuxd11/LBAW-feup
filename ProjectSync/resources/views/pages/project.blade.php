@@ -88,11 +88,6 @@
 <div id="create-task-container" class="hidden modal opaque-project-container">
     <div class="title">
         <h2>Create New Task</h2>
-        <form class="project-form">
-            <button class="exit-button2" onclick="hideCreateTask(event)" id="close-project-settings">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </form>
     </div>
 
     <form class="task-form project-form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
@@ -108,7 +103,10 @@
         <label for="delivery_date">Delivery Date:</label><br>
         <input type="date" id="delivery_date" name="delivery_date">
         
-        <button type="submit" class="button"><i class="fas fa-plus"></i></button>
+        <button type="submit" class="confirm-button">Create</button>
+        <a class="button" onclick="hideCreateTask(event)" id="close-project-settings">
+            Cancel
+        </a>
     </form>
 </div>
 
