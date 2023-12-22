@@ -68,7 +68,11 @@
                                     @method('DELETE')
                                     @csrf
                                     <input type="hidden" name="user_id" value="{{$user->id}}" class="project-form">
-                                    <button type="submit" class="button delete-button-user"><i class="fas fa-trash-alt"></i></button>
+                                    @if(!$task->project->archived)
+                                        <button type="submit" class="button delete-button-user"><i class="fas fa-trash-alt"></i></button>
+                                    @else
+                                        <button type="submit" class="button delete-button-user" disabled><i class="fas fa-trash-alt"></i></button>
+                                    @endif
                                 </form>
                             </div>
                         @endforeach
@@ -76,6 +80,7 @@
             </div>
         </div>
 
+        @if(!$task->project->archived)
         <form method="POST" action="{{ route('edit_task',['id' => $task->id]) }}" class="project-form">
             @method('POST')
             @csrf
@@ -125,9 +130,11 @@
                 <button type="submit" class="button delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
             </form>
         </div>
+        @endif
 
         <h3>Comments</h3>
 
+        @if(!$task->project->archived)
         <div class="createComment">
             <form method="POST" action="{{ route('taskComment.create',['id' => $task->id]) }}">
                 @method('PUT')
@@ -136,6 +143,7 @@
                 <button type="submit" id="submit-create-comment">Create</button>
             </form>
         </div>
+        @endif
 
         <div class="listOfComments">
             @forelse ($taskComments as $taskComment)

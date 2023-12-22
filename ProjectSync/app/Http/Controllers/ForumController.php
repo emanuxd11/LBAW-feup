@@ -28,6 +28,10 @@ class ForumController extends Controller{
             return redirect("/projects");
         }
 
+        if($project->archived && !($project->isCoordinator(Auth::user()) || Auth::user()->isAdmin)){
+            return redirect("/projects")->with('error','Only the coordinator of this archived project is allowed on this page.');
+        }
+
         $forumPosts = Post::where('project_id', $projectId)->get();
 
         return view('pages.forumPage', compact('forumPosts'));

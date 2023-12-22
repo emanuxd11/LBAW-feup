@@ -4,7 +4,9 @@
             <form method="POST" class="upvote" action="{{ route('post.upvote', ['id' => $post->id]) }}">
                 @csrf
                 <input type="hidden" name="upvote" class="post-form" value="{{ 'up' }}">
-                @if ($post->user_upvoted(Auth::user()))
+                @if($post->project->archived)
+                <button type="submit" class="upvote-button" data-action="up" disabled>&#9650;</button>
+                @elseif ($post->user_upvoted(Auth::user()))
                 <button type="submit" class="upvote-button-pressed" data-action="up">&#9650;</button>
                 @else
                 <button type="submit" class="upvote-button" data-action="up">&#9650;</button>
@@ -14,7 +16,9 @@
             <form method="POST" class="downvote" action="{{ route('post.upvote', ['id' => $post->id]) }}">
                 @csrf
                 <input type="hidden" name="upvote" class="post-form" value="{{ 'down' }}">
-                @if ($post->user_downvoted(Auth::user()))
+                @if($post->project->archived)
+                <button type="submit" class="downvote-button" data-action="down" disabled>&#9660;</button>
+                @elseif ($post->user_downvoted(Auth::user()))
                 <button type="submit" class="downvote-button-pressed" data-action="down">&#9660;</button>
                 @else
                 <button type="submit" class="downvote-button" data-action="down">&#9660;</button>

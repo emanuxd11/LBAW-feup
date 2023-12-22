@@ -38,7 +38,11 @@
             <p class="createPost">Description:</p>
             <textarea name="description" class="post-form" placeholder="Post content..."></textarea>
             <input type="hidden" name="project_id" class="post-form" value="{{ request('id') }}">
+            @if(!App\Models\Project::find(request('id'))->archived)
             <button type="submit" class="button">POST</button>
+            @else
+            <button type="submit" class="button" disabled>POST</button>
+            @endif
         </form>
     </div>
 

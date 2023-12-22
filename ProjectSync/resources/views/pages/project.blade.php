@@ -130,7 +130,7 @@
 
     <div class="project-info-card">
         <div id="project-links">
-            @if(!Auth::user()->isadmin)
+            @if(!(Auth::user()->isadmin || $project->archived))
                 <div id="favorite-button-container">
                     <form method="POST" action="{{ route('project.favorite', ['project_id' => $project->id]) }}">
                         @csrf
@@ -163,7 +163,7 @@
                 Forum
             </div>
 
-            @if($project->isCoordinator(Auth::user()))
+            @if($project->isCoordinator(Auth::user()) && !$project->archived)
                 <a id="project-settings-activate" class="scales-on-hover" onclick="showProjectSettings(event)">
                     <i class="fa-solid fa-gear"></i>
                 </a>

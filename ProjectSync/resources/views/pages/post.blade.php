@@ -36,7 +36,9 @@
                     <form method="POST" action="{{ route('post.upvote', ['id' => $post->id]) }}">
                         @csrf
                         <input type="hidden" name="upvote" class="post-form" value="{{ 'up' }}">
-                        @if ($post->user_upvoted(Auth::user()))
+                        @if ($post->project->archived)
+                        <button type="submit" class="upvote-button" data-action="up" disabled>&#9650;</button>
+                        @elseif ($post->user_upvoted(Auth::user()))
                         <button type="submit" class="upvote-button-pressed" data-action="up">&#9650;</button>
                         @else
                         <button type="submit" class="upvote-button" data-action="up">&#9650;</button>
@@ -46,7 +48,9 @@
                     <form method="POST" action="{{ route('post.upvote', ['id' => $post->id]) }}">
                         @csrf
                         <input type="hidden" name="upvote" class="post-form" value="{{ 'down' }}">
-                        @if ($post->user_downvoted(Auth::user()))
+                        @if ($post->project->archived)
+                        <button type="submit" class="downvote-button" data-action="down" disabled>&#9660;</button>
+                        @elseif ($post->user_downvoted(Auth::user()))
                         <button type="submit" class="downvote-button-pressed" data-action="down">&#9660;</button>
                         @else
                         <button type="submit" class="downvote-button" data-action="down">&#9660;</button>
@@ -75,6 +79,7 @@
 
             <div class="postSettings">
 
+                @if(!$post->project->archived)
                 @if (Auth::user()->id == $post->author_id || Auth::user()->isAdmin)
                 <button onclick="toggleEditPost()" id="toggle_post_edit">Show Edit Settings</button>
                 <div id= "alterPostOptions" class="alterPostOptions" style="display: none;">
@@ -101,10 +106,11 @@
                     </div>
                 </div>
                 @endif
-
+                @endif
             </div>
         </div>
-    
+
+        @if(!$post->project->archived)
         <div class="createComment">
             <form method="POST" action="{{ route('postComment.create') }}" class="createPostCommentForm">
                 @csrf
@@ -116,6 +122,7 @@
                 <button type="submit" class="CreatePost">Create</button>
             </form>   
         </div>
+        @endif
     
         <div class="showComments">
             <p class="commentCount">Found {{count($postComments)}} comments.</p>
@@ -132,7 +139,7 @@
                 <div class="commentBody">
                     <p>{{$postComment->comment}}</p>
                 </div>
-
+                @if(!$post->project->archived)
                 @if (Auth::user()->id == $postComment->author_id || Auth::user()->isAdmin)
                     <button onclick="toggleEditComment({{$postComment->id}})" class="toggle_comment_edit" id="toggle_comment_edit" data-id="{{ $postComment->id }}">Edit</button>
                     <div class="editComment" id="editComment" data-id="{{ $postComment->id }}" style="display:none;">
@@ -155,6 +162,7 @@
                             <button type="submit" class="button delete-button"><i class="fas fa-trash-alt"></i> Delete</button>
                         </form>
                     </div>
+                @endif
                 @endif
             </div>
             @empty
