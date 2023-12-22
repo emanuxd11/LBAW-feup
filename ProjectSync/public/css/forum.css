@@ -34,6 +34,8 @@ div.preview{
     padding-left: 10px;
     padding-right: 10px;
     position: relative;
+    padding-bottom: 20px;
+    padding-top: 10px;
 }
 
 div.upvote-downvote{
@@ -74,8 +76,22 @@ p.noPosts{
     color: black
 }
 
-.upvote-button-pressed, .downvote-button-pressed{
-    color: orange
+.upvote-button-pressed{
+    color: orange;
+    background-color: transparent;
+    border: none;
+}
+
+.downvote-button-pressed{
+    color: #6903f9;
+    background-color: transparent;
+    border: none;
+}
+
+.upvote-button, .downvote-button{
+    color:white;
+    background-color: transparent;
+    border: none;
 }
 
 form.upvote{

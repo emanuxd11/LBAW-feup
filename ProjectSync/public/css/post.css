@@ -30,12 +30,26 @@ div.backButton {
     padding-right: 0px;
 }
 
-.upvote-button-pressed, .downvote-button-pressed{
+.upvote-button-pressed{
     color: orange;
+    background-color: grey;
+    border: none;
+}
+
+.downvote-button-pressed{
+    color: #6903f9;
+    background-color: transparent;
+    border: none;
 }
 
 .upvote-button, .upvote-button-pressed{
     margin-bottom: -23px;
+}
+
+.upvote-button, .downvote-button{
+    color:white;
+    background-color: transparent;
+    border: none;
 }
 
 .postHeader{
@@ -117,6 +131,10 @@ form.upvote{
 .showComments p.commentCount, .showComments p.noComments{
     color: #172b4d;
     font-size: 24px;
+}
+
+div.showComments div.commentCard{
+    background-color: #172b4d;
 }
 
 .showComments #toggle_comment_edit{

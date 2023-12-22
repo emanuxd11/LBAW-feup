@@ -10,9 +10,12 @@ class HomeController extends Controller
 {
     public function index()
     {   
-        if (Auth::user()) {
-            return view('pages.projects');
+        if (!Auth::user()) {
+            return view('home');
         }
-        return view('home');
+        if(Auth::user()->isAdmin){
+            return redirect()->route('adminPage');
+        }
+        return view('pages.projects');
     }
 }
