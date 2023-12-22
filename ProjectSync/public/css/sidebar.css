@@ -6,6 +6,7 @@
     /* height: calc(100vh); */
     margin: 0;
     z-index: 1000;
+    height: 100vh;
 }
 
 .members-sidebar {
