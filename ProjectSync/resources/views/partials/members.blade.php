@@ -97,6 +97,15 @@
                                     </form>
                                 </div>
                             </div>
+                        @elseif ($user->id != Auth::user()->id)
+                        <div class="context-menu" id="contextMenu-{{ $user->id }}">
+                            <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
+                                <a class="text-button" href="{{ route('profilePage', ['username' => $user->username]) }}">
+                                    Profile
+                                </a>
+                            </div>
+                            <div class="context-menu-item" id="contextMenuItemRevoke-{{ $user->id }}" style="display:none;"></div>
+                        </div>
                         @endif
                         @if($user->id == Auth::user()->id)
                             <div class="context-menu" id="contextMenu-{{ $user->id }}">
