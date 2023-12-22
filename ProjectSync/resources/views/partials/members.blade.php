@@ -30,7 +30,7 @@
         <ul id="project-member-list">
             <li>
                 @if ($project->getCoordinator() != null)
-                    <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" id="user-name-project" class="pending-user-list-content">
+                    <a href="{{ route('profilePage', ['username' => $project->getCoordinator()->username]) }}" id="user-name-project" class="pending-user-list-content" title="View Profile">
                         <div class="user-list-card">
                             <div class="user-profile-image">
                                 @if($project->getCoordinator()->profile_pic !== null && $project->getCoordinator()->profile_pic !== '')
@@ -48,7 +48,7 @@
         <h6 id="project-member-header">
             <p>Project Member - {{ count($project->members) - 1 }} </p>
             @if($project->isCoordinator(Auth::user()))
-                <div id="invite-members-activate" onclick="showInviteUsers(event)">
+                <div id="invite-members-activate" onclick="showInviteUsers(event)" title="Invite users">
                     <i class="fa-solid fa-plus"></i>
                 </div>
             @endif
@@ -58,8 +58,8 @@
                 @if($project->isCoordinator($user))
                     @continue
                 @endif
-                <li data-id="{{ $user->id }}" class="pending-user-right-clickable" onclick="showContextMenu({{ $user->id }})">
-                    <div class="user-list-card pending-user">
+                <li data-id="{{ $user->id }}" class="pending-user-right-clickable" onclick="showContextMenu({{ $user->id }})" >
+                    <div class="user-list-card pending-user" title="Options">
                     
                         <div class="user-profile-image">
                             @if($user->profile_pic !== null && $user->profile_pic !== '')
@@ -94,7 +94,7 @@
                                 </div>
                             </div>
                         @elseif ($user->id != Auth::user()->id)
-                        <div class="context-menu" id="contextMenu-{{ $user->id }}">
+                        <div class="context-menu" id="contextMenu-{{ $user->id }}" title="Options">
                             <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
                                 <a class="text-button" href="{{ route('profilePage', ['username' => $user->username]) }}">
                                     {{$user->username}}'s profile
@@ -104,7 +104,7 @@
                         </div>
                         @endif
                         @if($user->id == Auth::user()->id)
-                            <div class="context-menu" id="contextMenu-{{ $user->id }}">
+                            <div class="context-menu" id="contextMenu-{{ $user->id }}" title="Options">
                                 <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
                                     <a class="text-button" href="{{ route('profilePage', ['username' => $user->username]) }}">
                                         View Profile
@@ -140,7 +140,7 @@
             <ul id="invited-users-list">
                 @foreach($project->pending_users() as $user)
                     <li data-id="{{ $user->id }}" class="pending-user-right-clickable" onclick="showContextMenu({{ $user->id }})">
-                        <div class="user-list-card pending-user">
+                        <div class="user-list-card pending-user" title="Options">
                             <div class="user-profile-image">
                                 @if($user->profile_pic !== null && $user->profile_pic !== '')
                                     <img src="{{ $user->profile_pic }}" alt="Profile Picture">
@@ -151,7 +151,7 @@
                             <div class="pending-user-list-content" oncontextmenu="showContextMenu(event, {{ $user->id }})">
                                 <span id="user-name-project">{{ $user->name }}</span>
                             </div>
-                            <div class="context-menu" id="contextMenu-{{ $user->id }}">
+                            <div class="context-menu" id="contextMenu-{{ $user->id }}" title="Options">
                                 <div class="context-menu-item" id="contextMenuItemProfile-{{ $user->id }}">
                                     <a class="text-button" href="{{ route('profilePage', ['username' => $user->username]) }}">
                                         {{$user->username}}'s profile

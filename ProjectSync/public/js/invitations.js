@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     let pfp_alt = user.profile_pic == 'Default Profile Picture' ? 'Default Profile Picture' : `${user.username} Profile Picture`;
 
                     listItem.innerHTML = `
-                        <div class="user-list-card pending-user">
+                        <div class="user-list-card pending-user" title="Options">
                             <div class="user-profile-image">
                                 <img src=${pfp_path} alt="${pfp_alt}">
                             </div>
