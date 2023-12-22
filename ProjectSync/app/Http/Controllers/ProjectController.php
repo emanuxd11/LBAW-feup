@@ -250,6 +250,10 @@ class ProjectController extends Controller
             'invitation_token' => $token,
         ]);
 
+        $description ='Your have been invited to project ' . $project->name . '. Please check your email.';
+        $member = $user;
+        $this->createNotification([$member],$description);
+
         $description = 'Invited user ' . $user->username . ' to project.';
         event(new NotificationEvent($request->id,$description));
 
