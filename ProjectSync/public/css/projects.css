@@ -136,14 +136,20 @@
     padding: 12px;
     cursor: pointer;
     margin-bottom: 20px;
-    width: 60%;
-    margin: 20px auto;
+    width: 70%;
+    margin: 100px auto;
     margin-bottom: 50px;
     transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     border-color: #172b4d;
     border-width: 10px;
     border-radius: 10px;
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 1500px) {
+    #toggle-create-project {
+        margin: auto auto;
+    }
 }
 
 #toggle-create-project:hover {

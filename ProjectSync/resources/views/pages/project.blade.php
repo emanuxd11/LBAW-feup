@@ -196,4 +196,12 @@
     </div>
 </section>
 
+<style>
+    @media (min-width: 2300px) {
+        section#content {
+            height: 100vh;
+        }
+    }
+</style>
+
 @endsection

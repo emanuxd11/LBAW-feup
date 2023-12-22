@@ -130,11 +130,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                         showContextMenu(user.id);
                     });
 
-                    const pfp_path = user.profile_pic;
+                    let pfp_path = user.profile_pic;
                     if (pfp_path == null || pfp_path == undefined) {
                         pfp_path = '/images/avatars/default-profile-pic.jpg';
                     }
-                    const pfp_alt = user.profile_pic == 'Default Profile Picture' ? 'Default Profile Picture' : `${user.username} Profile Picture`;
+                    let pfp_alt = user.profile_pic == 'Default Profile Picture' ? 'Default Profile Picture' : `${user.username} Profile Picture`;
 
                     listItem.innerHTML = `
                         <div class="user-list-card pending-user">

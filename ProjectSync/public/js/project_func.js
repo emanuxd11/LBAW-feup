@@ -9,16 +9,16 @@ function showContextMenu(userId) {
     const contextMenu = document.getElementById(`contextMenu-${userId}`);
     const pageX = event.pageX;
     const pageY = event.pageY;
-    const menuWidth = 176;
+    
+    contextMenu.style.display = 'block';
+    const menuWidth = contextMenu.offsetWidth;
     const screenWidth = window.innerWidth;
     if (pageX + menuWidth <= screenWidth) {
         contextMenu.style.left = `${pageX}px`;
     } else {
         contextMenu.style.left = `${pageX - menuWidth}px`;
     }
-
     contextMenu.style.top = `${pageY}px`;
-    contextMenu.style.display = 'block';
     console.log("Opened new context menu")
 
     document.getElementById(`contextMenuItemProfile-${userId}`).addEventListener('click', function(event) {
