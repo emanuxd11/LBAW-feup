@@ -36,6 +36,10 @@ div#project-settings-container, div#create-task-container {
     margin-top: 10px;
 }
 
+div#create-task-container {
+    height: auto;
+}
+
 
 div#project-settings-container form.project-form {
     margin: 0 60px;
@@ -44,8 +48,6 @@ div#project-settings-container form.project-form {
 .exit-button2{
     margin-right: 75px;
 }
-
-
 
 div#project-settings-container h2{
     margin-top: 20px;
@@ -215,16 +217,6 @@ div#project-settings-container h2{
     cursor: pointer;
 }
 
-div#create-task-container button{
-    background-color: #172b4d;
-    color: #f7f3e9;
-    top: 15%;
-    left: 0%;
-    
-    max-height: 80vh;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
 
 .project-submit-button {
     background-color: #172b4d;
@@ -234,6 +226,18 @@ div#create-task-container button{
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }
+
+div#create-task-container button{
+    background-color: #172b4d;
+    color: #f7f3e9;
+    top: 15%;
+    left: 0%;
+    
+    /* max-height: 80vh; */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
 
 #changes-button:hover,
 .archive-button:hover,
@@ -270,7 +274,6 @@ div#create-task-container button{
 .title h2{
     margin-left: 320px;
 }
-
 
 #create-task-container .button {
     background-color: #172b4d;
@@ -657,4 +660,36 @@ h2.title{
 
 #changeDescWrapper p {
     padding-top: 20px;
+}
+
+h2#projectSettingsTitle {
+    margin-top: 20px;
+}
+
+div#create-task-container {
+    align-items: baseline;
+}
+
+#create-task-container form {
+    margin: 60px;
+}
+
+#create-task-container input {
+    width: 100%;
+}
+
+#create-task-container textarea {
+    margin-bottom: 15px;
+}
+
+#create-task-container p {
+    text-align: start;
+}
+
+#create-task-container button {
+    margin: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0px 10px;
+    font-size: 16px;
 }

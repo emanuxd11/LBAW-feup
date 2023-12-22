@@ -98,27 +98,30 @@
 
 {{-- Hidden div for creating tasks --}}
 <div id="create-task-container" class="hidden modal opaque-project-container">
-    <div class="title">
-        <h2>Create New Task</h2>
-    </div>
-
+    <h2 id="projectSettingsTitle">Create New Task</h2>
+    
     <form class="task-form project-form" method="POST" action="{{ route('create_task', ['project_id' => $project->id]) }}">
         @method('PUT')
         @csrf
 
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required placeholder="ex: Create New Navbar">
-
-        <label for="description">Description:</label><br>
-        <input type="text" id="description" name="description" required placeholder="ex: Create Navbar with four different buttons ...">
+        <div style="align-items:baseline;width:100%">
+            <p class="info-label">Name:</p>
+            <input type="text" id="name" name="name" required placeholder="ex: Create New Navbar">
+    
+            <p class="info-label">Description:</p>
+            <textarea type="text" id="description" name="description" class="project_description_area" required placeholder="ex: Create Navbar with four different buttons ..."></textarea>
         
-        <label for="delivery_date">Delivery Date:</label><br>
-        <input type="date" id="delivery_date" name="delivery_date">
+            <p class="info-label">Delivery Date:</p>
+            <input type="date" id="delivery_date" name="delivery_date">
+            
+            <div id="submitWrapper">
+                <button type="submit" class="button edit-button" id="submitChangesButton">Create</button>
+                <button type="button" class="exit-button" onclick="hideCreateTask(event)" id="close-project-settings">
+                    Cancel
+                </button>
+            </div>
+        </div>
         
-        <button type="submit" class="confirm-button">Create</button>
-        <a class="button" onclick="hideCreateTask(event)" id="close-project-settings">
-            Cancel
-        </a>
     </form>
 </div>
 
