@@ -10,7 +10,8 @@
 
 .members-sidebar {
     grid-area: members;
-    background-color: #333;
+    /* background-color: #333; */
+    background: linear-gradient(to bottom, #006aa7, #171923, #172b4d);
     color: #fff;
     padding: 10px;
     z-index: 10000;
@@ -18,9 +19,9 @@
 
 .sidebar {
     grid-area: sidebar;
-    background-color: #333;
-    color: #fff;
     padding: 10px;
+    background: linear-gradient(to bottom, #006aa7, #171923, #172b4d);
+    color: #fff;
 }
 
 .sidebar img {

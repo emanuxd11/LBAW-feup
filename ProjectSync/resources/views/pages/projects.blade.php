@@ -10,17 +10,7 @@
 @include('partials.sidebar', ['current_project_id' => -1])
 
 <section id="projects">
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @elseif($errors->all())
-        <div class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-                <p>{{ $error }}</p>
-            @endforeach
-        </div>
-    @endif
+    @include('partials.messages')
     <div id="toggle-create-project" class="hover-card">
         <h2>Create New Project</h2>
         <form class="project-form" method="POST" action="{{ route('create_project') }}">
