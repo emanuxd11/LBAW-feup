@@ -44,7 +44,12 @@ php artisan clear
 php artisan db:seed
 php artisan serve
 ```
-Note: `clear` shouldn't be needed unless you're actively working on the routes and `db:seed` only needs to be run once.
+Notes: 
+- `clear` shouldn't be needed unless you're actively working on the routes and `db:seed` only needs to be run once.
+- Sending emails might not work due to expired SMTP service keys.
+If emails don't work and you wish to use this functionality, you can create an account on a service such as [Brevo](https://www.brevo.com/),
+which is what we used, and follow [these instructions](https://git.fe.up.pt/lbaw/laravel-integrations/-/tree/develop/01-send-email#smtp-configuration)
+to make the appropriate changes in `.env`.
 
 # Credits
 ### This project was developed by the LEIC students:
