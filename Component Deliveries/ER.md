@@ -30,7 +30,7 @@ The main goal of this artifact is to identify and describe our system's actors a
 
 
 ### 1. Actors
-![actor_diagram_def](images\diagram.png)
+![actor_diagram_def](https://git.fe.up.pt/lbaw/lbaw2324/lbaw2363/-/raw/main/Component%20Deliveries/images/diagram.png?ref_type=heads)
 
 <br><br><br>
 
@@ -39,8 +39,8 @@ The main goal of this artifact is to identify and describe our system's actors a
 | Visitor             | User with no account. Can only access the homepage and the about us pages. Can also create an account. |
 | Logged user  | Generic user that has an account and access to public information, can create projects and accept/decline invites.                                            |
 | Post Author | Logged user that can delete or edit its own post. |
-| Project Member         | Logged user that can manage tasks, has access to project information, can send messages to other project members whitin the same project and can be assigned or assign themselves to a task.                                                                                                                       |
-| Project Coordinator | Team member user that can edit project details and is responsible for the management of users whitin their project. Can also assign tasks to other project members.                                               |
+| Project Member         | Logged user that can manage tasks, has access to project information, can send messages to other project members within the same project and can be assigned or assign themselves to a task.                                                                                                                       |
+| Project Coordinator | Team member user that can edit project details and is responsible for the management of users within their project. Can also assign tasks to other project members.                                               |
 | Admin               | Authenticated user that can browse and view project details and manage users.                                                                                   |
 
 ### 2. User Stories
@@ -49,21 +49,21 @@ The main goal of this artifact is to identify and describe our system's actors a
 
 | Identifier | Name        | Priority | Description                                                                                                             |
 | ---------- | ----------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
-| US201 | Log-in | High |As a visitor, I want to authenticate into my account so I can access it. |
-| US202 | Sign-up | High | As a visitor, I want to create an account so I can authenticate into my account. |
-| US203 | Home | High | As a visitor, I want to access home page, so I can see a presentation of the website. |
+| US101 | Log-in | High | As a visitor, I want to authenticate into my account so I can access it. |
+| US102 | Sign-up | High | As a visitor, I want to create an account so I can authenticate into my account. |
+| US103 | Home | High | As a visitor, I want to access home page, so I can see a presentation of the website. |
               
 
 #### 2.2. Logged User
 
 | Identifier | Name                       | Priority | Description                                                                                                                                                    |
 | ---------- | -------------------------- | -------- | ----------------------------------------|
-| US101 | Create Project | High | As a logged user, I want to create a project, so that I can start working on a new project. |
-| US102 | View Projects | High | As a logged user, I want to view my projects so I can see all my projects that I’m working on and switch between them. |
-| US103 | Mark project as favorite | High | As a logged user, I want to mark projects as favorites so I can see all my favorite projects. |
-| US104 | Edit Profile | High | As a logged user, I want to edit my profile so I can manage my personal information. |
-| US105 | Logout | High | As a logged user, I want to logout from my account. |
-| US106 | Notification When Assigned to Project | High | As a logged user, I want to receive a notification whenever I'm assigned to a new project, so I can be aware of the projects I'm working on. |
+| US201 | Create Project | High | As a logged user, I want to be able to create a project, so that I can start working on a new project. |
+| US202 | View Projects | High | As a logged user, I want to be able to view my projects so I can see all the projects I’m working on and switch between them. |
+| US203 | Mark project as favorite | High | As a logged user, I want to be able to mark projects as favorites so I can see all my favorite projects. |
+| US204 | Edit Profile | High | As a logged user, I want to be able to edit my profile so I can manage my personal information. |
+| US205 | Logout | High | As a logged user, I want to be able to logout from my account. |
+| US206 | Notification When Assigned to Project | High | As a logged user, I want to receive a notification whenever I'm assigned to a new project, so I can be aware of the projects I'm working on. |
 
 #### 2.3. Project Member
 
@@ -98,15 +98,15 @@ The main goal of this artifact is to identify and describe our system's actors a
 
 | Identifier | Name                       | Priority | Description                                                                                                                   |
 | ---------- | -------------------------- | -------- | --------------------------------------------|
-| US501 | Add user | High | As a project coordinator, I want add a user into the project so that user can work on it. |
-| US502 | Assign new coordinator | High | As a project coordinator, I want to assign a team member as a new project coordinator so that member has new priorities. |
-| US503 | Edit project details | High | As a project coordinator, I want to edit project details so I can update projects details. |
-| US504 | Assign task to member | High | As a project coordinator, I want to assign a task to a member so that member can see which tasks must do. |
-| US505 | Remove project member | High | As a project coordinator, I want to remove a team member so that member can´t participate on the project anymore. |
-| US506 | Archive project | High | As a project coordinator, I want to archive a project so I can store old projects that are concluded or desactivated. |
-| US507 | Completed Task in Project Managed | High | As a project coordinator, I want to receive notifications whenever taks are completed in one of my projects, so as to know how my teams are working. |
+| US501 | Add user | High | As a project coordinator, I want to be able to add users into the project so that they can work on it. |
+| US502 | Assign new coordinator | High | As a project coordinator, I want to be able to assign a team member as a new project coordinator so as to give that member new responsibilities. |
+| US503 | Edit project details | High | As a project coordinator, I want to be able to edit a project's details so I can update information related to said project. |
+| US504 | Assign task to member | High | As a project coordinator, I want to be able to assign tasks to members so that members can see which tasks they must do. |
+| US505 | Remove project member | High | As a project coordinator, I want to be able to remove members from the team so that said members can't participate on the project anymore. |
+| US506 | Archive project | High | As a project coordinator, I want to be able to archive projects so I can store old projects that are concluded or deactivated. |
+| US507 | Completed Task in Project Managed | High | As a project coordinator, I want to receive notifications whenever tasks are completed in one of my projects, so as to know how my teams are working. |
 | US508 | Notification When User Accepts Project Invitation | Medium | As a project coordinator, I want to receive notifications whenever a user accepts a project invitation, so I know when users join a project I manage. | 
-| US509 | Manage members permissions | Low | As a project coordinator, I want to manage members permissions so I can add or remove permissions for each team member. |
+| US509 | Manage members permissions | Low | As a project coordinator, I want to be able to manage member permissions so that I can add or remove permissions for each team member. |
 
 
 
@@ -118,7 +118,7 @@ The main goal of this artifact is to identify and describe our system's actors a
 | US601 | Browse Projects | High | As an administrator, I want to be able to browse projects, so I can quickly find what is being worked on. | 
 | US602 | View Project Details | High | As an administrator, I want to be able to view the details of each project, so I can dive deeper into exactly what is being worked on. | 
 | US603 | Block User Accounts | High | As an administrator, I want to be able to block users from accessing their account, so I can eliminate malicious users from the platform. | 
-| US604 | Send DMs to Users | Ultra Low | As an administrator, I want to be able to send direct messages to users, so I can resolve conflicts and help organize projects. |
+| US604 | Send DMs to Users | Ultra Low | As an administrator, I want to be able to send direct messages to users, so I can help resolve conflicts and help organize projects. |
 
 
 ### 3. Supplementary Requirements
@@ -149,6 +149,9 @@ The main goal of this artifact is to identify and describe our system's actors a
 |  **TR04** | **Accessibility**  | **The system must ensure that everyone can access the pages, regardless of the web browser they use.** |
 |  TR05 |  Web application | The system should be implemented as a web application with dynamic pages (HTML5, JavaScript, CSS3 and PHP). It is crucial that a user is able to access the application without having to install specific applications.  |
 |  **TR06** | **Security** | **The website should be safe to use by protecting user and project information from potential attackers.**|
+| TR07 | Scalability | The system must be prepared to deal with the growth in the number of users. | 
+| TR08 | Portability | The server-side system should work across different platforms. |
+| TR09 | Robustness | The system must be prepared to handle and continue functioning when errors occur. |
 
 
 
@@ -170,48 +173,41 @@ This artifact primarily aims to craft a prototype for the user interface, incorp
 
 A sitemap serves as a graphical depiction illustrating the interconnections among various web pages within a website, offering a comprehensive overview of how the content is structured and interconnected. It encompasses all intended web pages and offers a bird's-eye view of the website's information architecture, revealing the arrangement and hierarchy of information within the site.
 
-![Sitemap](images\sitemap_2363.png)
+![Sitemap](https://git.fe.up.pt/lbaw/lbaw2324/lbaw2363/-/raw/main/Component%20Deliveries/images/sitemap_2363.png?ref_type=heads)
 
 
-The **ProjectSync** system is structured into five primary domains, encompassing static pages for system information dissemination (Static Pages), pages facilitating the exploration and organization of the project teams and tasks (Project Pages), individual user-specific pages such as the user profile (Authenticated User Pages), authentication pages for user login and registration (Users Authentication Pages), and sections dedicated to administrative functionalities (Admin Pages).
+The **ProjectSync** system is structured into five primary domains, encompassing static pages for system
+information dissemination (Static Pages), pages facilitating the exploration and organization of the project
+teams and tasks (Project Pages), individual user-specific pages such as the user profile (Authenticated User
+Pages), authentication pages for user login and registration (Users Authentication Pages), and sections
+dedicated to administrative functionalities (Admin Pages).
 
 
 ### 2. Wireframes
 
 Wireframes serve as essential blueprints in the realm of web design and application development. They offer a structured visualization of layout concepts, content placement, and the overarching design at the page level. These wireframes meticulously allocate space, provide a clear hierarchy of content, and illuminate the availability of various features within the design canvas. Furthermore, wireframes are invaluable tools that help streamline the decision-making process and ensure that design ideas are effectively communicated among team members and stakeholders.
 
-For the **ProjectSync** system, the wireframes for the **HomePage (UI01)**, the **Login page (UI06)** and the **Project Workspace (UI07)** are presented below.
+For the **ProjectSync** system, the wireframes for the **Home Page(UI01)**, the **Login Page(UI06)** and the
+**Project Workspace(UI07)** are presented below.
 
 #### UI01: HomePage
 
-![Homepage](images\wireframe_1.png)
+![Homepage](https://git.fe.up.pt/lbaw/lbaw2324/lbaw2363/-/raw/main/Component%20Deliveries/images/wireframe_1.png?ref_type=heads)
 
 - `1` Users can click in the website logo in order to go to the home page.
 - `2` Users can login in their accounts or create a new by registering.
-- `3` This area contains the pages related to the FAQ's or additional information abou the platform.
+- `3` This area contains the pages related to the FAQ or additional information about the platform.
 - `4` The images showcase how the website looks and functions.
 - `5` Another way for users to access the login and/or register area.
-
-<br><br><br><br>
-
-#### UI06: Login
-
-![Login](images\wireframe_login.png)
-
-- `1` Users can click in the website logo in order to go to the home page.
-- `3` This area contains the pages related to the FAQ's or additional information abou the platform.
-- `4` In case the user already have an account, he can fill the form with his personal info and login by clicking the button.
-- `5` If the user do not have an account, he can click in the register button to be redirected to the register page.
-
 
 
 #### UI07: Project Workspace
 
-![ProjectWorkspace](images\wireframe_2.png)
+![ProjectWorkspace](https://git.fe.up.pt/lbaw/lbaw2324/lbaw2363/-/raw/main/Component%20Deliveries/images/wireframe_2.png?ref_type=heads)
 
 - `1` Users can click in the website logo in order to go to the home page.
 - `2` This area contains the users notifications warning and the option to sign out of the account session.
-- `3` By clicking at the star next to the project name, the user selects this projet as a favourite.
+- `3` By clicking at the star next to the project name, the user selects this project as a favourite.
 - `4` The search bar is dedicated to the finding of project tasks.
 - `5` Button that redirects the user to the list of project members.
 - `6` Projects boards that showcase the current tasks status and the completion of the project.
@@ -219,16 +215,26 @@ For the **ProjectSync** system, the wireframes for the **HomePage (UI01)**, the 
 - `8` Side bar that allows to create another project and to go to the user profile by clicking in the user icon.
 
 
+#### UI06: Login
+
+![Login](https://git.fe.up.pt/lbaw/lbaw2324/lbaw2363/-/raw/main/Component%20Deliveries/images/wireframe_login.png?ref_type=heads)
+
+- `1` Users can click in the website logo in order to go to the home page.
+- `3` This area contains the pages related to the FAQ or additional information about the platform.
+- `4` In case the user already have an account, he can fill the form with his personal info and login by clicking the button.
+- `5` If the user do not have an account, he can click in the register button to be redirected to the register page.
+
+
 ### Extra Wireframes
 
 #### UI07: Project Options in workspace
 
-![ProjectOptions](images\wireframe_project_options.png)
+![ProjectOptions](https://git.fe.up.pt/lbaw/lbaw2324/lbaw2363/-/raw/main/Component%20Deliveries/images/wireframe_project_options.png?ref_type=heads)
 
 
 #### UI08: Create Project 
 
-![CreateProject](images\wireframe_create_project.png)
+![CreateProject](https://git.fe.up.pt/lbaw/lbaw2324/lbaw2363/-/raw/main/Component%20Deliveries/images/wireframe_create_project.png?ref_type=heads)
 
 
 ---
@@ -239,7 +245,7 @@ For the **ProjectSync** system, the wireframes for the **HomePage (UI01)**, the 
 
 
 ***
-GROUP2363, 01/10/2023
+GROUP2363, 1/10/2023
 
 | Name                  | E-Mail            |
 | --------------------- | ----------------- |
