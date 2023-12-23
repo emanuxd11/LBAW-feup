@@ -9,6 +9,9 @@ The [Laravel](https://laravel.com/) PHP framework was used to build this. For mo
 [ER](https://github.com/emanuxd11/LBAW-feup/blob/main/Component%20Deliveries/ER.md), [EBD](https://github.com/emanuxd11/LBAW-feup/blob/main/Component%20Deliveries/EBD.md),
 [EAP](https://github.com/emanuxd11/LBAW-feup/blob/main/Component%20Deliveries/eap.md) and [PA](https://github.com/emanuxd11/LBAW-feup/blob/main/Component%20Deliveries/pa.md).
 
+### YouTube video showcasing functionalities (link):
+[![screenshot of dashboard](https://github.com/emanuxd11/LBAW-feup/blob/main/filesExtra/screenshot-2023-12-23_14%3A57%3A36.png)](https://www.youtube.com/watch?v=_xkL9mtCYWg)
+
 # Dependencies (for running locally)
 This project requires a few dependencies:
 ### On Debian/Ubuntu:
@@ -29,7 +32,7 @@ And then enabling `mbstring` `pgsql` `xml` and `curl` extensions in `/etc/php/ph
 
 Note: If you're on Arch Linux, you will probably be using a higher version of php such as 8.2. In my experience this was fine and there were no issues, but if any problems arise, this could be a factor.
 
-Alternatively, there is also an AUR package for php 8.1, althought I have not personally tested it so I cannot vouch for its safety/functionality.
+Alternatively, there is also an AUR package for php 8.1, though I have not personally tested it so I cannot vouch for its safety/functionality.
 
 # Running locally
 After you're done installing all dependencies, `cd` into the ProjectSync directory and run:
