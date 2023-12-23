@@ -12,17 +12,23 @@ The UML class diagram serves as a visual blueprint for the Conceptual Data Model
 
 This iterative approach ensures that the Conceptual Data Model provides a comprehensive and accurate representation of the domain, paving the way for successful database design and development. It forms the basis upon which more detailed models and physical databases are constructed in later stages.
 
+
+
 ### 1\. Class diagram
 
 The diagram in this section represents the main organizational titles, the relationships between them, attributes, multiplicity, and other constraints.
 
 ![UML_lbaw](https://git.fe.up.pt/lbaw/lbaw2324/lbaw2363/-/raw/main/Component%20Deliveries/images/Updated_UML.png?ref_type=heads)
 
+
+
 ### 2\. Additional Business Rules
 
 \-A user can only have up to 10 favorite projects.\
 -When a user account is deleted, their work in their projects is not deleted.\
 -A user can be a member of multiple projects.
+
+
 
 ---
 
@@ -49,6 +55,8 @@ The diagram in this section represents the main organizational titles, the relat
 | R10 | Changes(<ins>id</ins> **PK**, text, date, user_id→User, project_id→Project) |
 | R11 | Notification(<ins>id</ins> **PK**, description **NN**, date **NN**, origin **NN**) |
 | R12 | UserNotification(<ins>user_id→User</ins> **PK**, <ins>notification_id→Notification</ins> **PK**, isChecked **NN**) |
+
+
 
 **Abbreviations used:**
 
@@ -83,12 +91,16 @@ The diagram in this section represents the main organizational titles, the relat
 | FD0104 | email → { id, name, username, password, phone_number, is_deactivated } |
 | **NORMAL FORM** | BCNF |
 
+
+
 | **TABLE R02** | Admin |
 |---------------|------|
 | **Keys** | { id } |
 | **Functional Dependencies:** |  |
 | FD0101 | *none* |
 | **NORMAL FORM** | BCNF |
+
+
 
 | **TABLE R03** | Project |
 |---------------|------|
@@ -98,12 +110,16 @@ The diagram in this section represents the main organizational titles, the relat
 | FD0102 | name → { id, start_date, delivery_date, archived } |
 | **NORMAL FORM** | BCNF |
 
+
+
 | **TABLE R04** | ProjectMember |
 |---------------|------|
 | **Keys** | { user_id, project_id } |
 | **Functional Dependencies:** |  |
 | FD0101 |  { user_id, project_id } → { is_coordinator, is_favorite } |
 | **NORMAL FORM** | BCNF |
+
+
 
 | **TABLE R05** | Post |
 |---------------|------|
@@ -112,12 +128,16 @@ The diagram in this section represents the main organizational titles, the relat
 | FD0101 | id → { title, description, upvotes, date, is_edited, project_id, author_id } |
 | **NORMAL FORM** | BCNF |
 
+
+
 | **TABLE R06** | PostComment |
 |---------------|------|
 | **Keys** | { id } |
 | **Functional Dependencies:** |  |
 | FD0101 | id → { comment, date, is_edited, parent_post_id, parent_comment_id, author_id } |
 | **NORMAL FORM** | BCNF |
+
+
 
 | **TABLE R07** | Task |
 |---------------|------|
@@ -126,12 +146,16 @@ The diagram in this section represents the main organizational titles, the relat
 | FD0101 | id → { name, description, start_date, delivery_date, status } |
 | **NORMAL FORM** | BCNF |
 
+
+
 | **TABLE R08** | ProjectMemmberTask |
 |---------------|------|
 | **Keys** | { user_id, task_id } |
 | **Functional Dependencies:** |  |
 | FD0101 | *none* |
 | **NORMAL FORM** | BCNF |
+
+
 
 | **TABLE R09** | Message |
 |---------------|------|
@@ -140,6 +164,8 @@ The diagram in this section represents the main organizational titles, the relat
 | FD0101 | id → { text, date, sender_id, receiver_id } |
 | **NORMAL FORM** | BCNF |
 
+
+
 | **TABLE R10** | Changes |
 |---------------|------|
 | **Keys** | { id } |
@@ -147,12 +173,16 @@ The diagram in this section represents the main organizational titles, the relat
 | FD0101 | id → { text, date, user_id, project_id } |
 | **NORMAL FORM** | BCNF |
 
+
+
 | **TABLE R11** | Notification |
 |---------------|------|
 | **Keys** | { id } |
 | **Functional Dependencies:** |  |
 | FD0101 | id → { description, date, origin } |
 | **NORMAL FORM** | BCNF |
+
+
 
 | **TABLE R12** | UserNotification |
 |---------------|------|
@@ -162,6 +192,8 @@ The diagram in this section represents the main organizational titles, the relat
 | **NORMAL FORM** | BCNF |
 
 > No further normalization was needed for this schema, as each of the relations presented already conform with BCNF, considering they are all in 3NF and have no overlapping candidate keys.
+
+
 
 ---
 
@@ -186,7 +218,7 @@ Understanding the **workload** is a crucial step in shaping the application's da
 | **Relation reference** | **Relation Name** | **Order of magnitude** | **Estimated growth** |
 |------------------------|-------------------|------------------------|----------------------|
 | R01 | user | 10.000 (tens of thousands) | 10 (tens)/day |
-| R02 | admin | 100 (hundreds | 1 (one)/day |
+| R02 | admin | 100 (hundreds) | 1 (one)/day |
 | R03 | notification | 10.000 (tens of thousands) | 10 (tens)/day |
 | R04 | user_notification | 10.000 (tens of thousands) | 10 (tens)/day |
 | R05 | message | 10.000 (tens of thousands) | 10 (tens)/day |
@@ -223,6 +255,7 @@ Understanding the **workload** is a crucial step in shaping the application's da
 CREATE INDEX index_projectmember_iduser ON ProjectMember USING btree(idUser); CLUSTER ProjectMember USING index_projectmember_iduser;
 ```
 
+
 | **Index** | IDX02 |
 |-----------|-------|
 | **Relation** | Message |
@@ -236,18 +269,20 @@ CREATE INDEX index_projectmember_iduser ON ProjectMember USING btree(idUser); CL
 CREATE INDEX index_message_sender_receiver ON Message USING btree(sender_id, receiver_id);
 ```
 
+
 | **Index** | IDX03 |
 |-----------|-------|
-| **Relation** | Task |
-| **Attribute** | user_assigned_id |
+| **Relation** | ProjectMemberTask |
+| **Attribute** | user_id, task_id |
 | **Type** | B-tree |
 | **Cardinality** | Medium |
 | **Clustering** | No |
-| **Justification** | Table Task will be large because it will save each task defined for a project and a very common query to filter every task assigned for an project member will be necessary, so an index is useful. It has medium cardinality due to multiple tuples having the same user_assigned_id and medium update frequency, so clustering isn't a good option, because it won't be efficient. |
+| **Justification** | Table ProjectMemberTask will be large because it will save each task defined for a project and a very common query to filter every task assigned for an project member will be necessary, so an index is useful. It has medium cardinality due to multiple tuples having the same user_assigned_id and medium update frequency, so clustering isn't a good option, because it won't be efficient. |
 
 ```sql
 CREATE INDEX index_task_assigned_member ON ProjectMemberTask USING btree(user_id,task_id);
 ```
+
 
 #### 2.2. Full-text Search Indices
 
@@ -292,6 +327,8 @@ FOR EACH ROW
 EXECUTE PROCEDURE post_search_update();
 ```
 
+
+
 ### 3\. Triggers
 
 > Triggers and user-defined functions play a crucial role in automating tasks in response to changes in the database. They are often employed to enforce business rules, which ensure data consistency and adherence to specific guidelines. This combination of triggers and user-defined functions forms a powerful mechanism for maintaining data integrity within the database.
@@ -319,6 +356,8 @@ CREATE TRIGGER remove_favorite_trigger
         EXECUTE PROCEDURE remove_favorite();
 ```
 
+
+
 | **Trigger** | TRIGGER02 |
 |-------------|-----------|
 | **Description** | A user cannot have more than 10 favorite projects |
@@ -344,6 +383,8 @@ CREATE TRIGGER favorite_restriction_trigger
         EXECUTE PROCEDURE favorite_restriction();
 ```
 
+
+
 | **Trigger** | TRIGGER03 |
 |-------------|-----------|
 | **Description** | A project can only have 1 coordinator at the same time. |
@@ -366,6 +407,8 @@ CREATE TRIGGER one_coordinator_restriction_trigger
         FOR EACH ROW
         EXECUTE PROCEDURE one_coordinator_restriction();
 ```
+
+
 
 ### 4\. Transactions
 
@@ -398,6 +441,7 @@ WHERE Task.status = 'TO DO'
 END TRANSACTION;
 ```
 
+
 | Transaction | TRAN02 |
 |-------------|--------|
 | Description | Get tasks in the 'To Do' status |
@@ -420,12 +464,15 @@ INSERT INTO ProjectMemberTask (user_id, task_id)
 END TRANSACTION;
 ```
 
+
 ## Annex A. SQL Code
 
 - **SQL Schemas**: SQL schemas are useful for organizing database objects into logical groups, providing a way to separate and manage database structures. They help maintain database clarity, security, and access control by categorizing tables, views, and other objects under distinct schemas. By using schemas, you can better structure and control the database, making it easier to manage, maintain, and secure.
 - **Database Scripts**: The EBD component includes essential database scripts in this annex.
 - **Separate Elements**: It's crucial to present the database creation script (for building and rebuilding the database) and the population script (containing test data with plausible values) as separate elements.
 - **Git Repository**: To enhance collaboration, it's recommended to include this code in the group's Git repository and provide accessible links.
+
+
 
 ### A.1. Database schema
 
@@ -690,6 +737,7 @@ CREATE TRIGGER one_coordinator_restriction_trigger
         EXECUTE PROCEDURE one_coordinator_restriction();
 ```
 
+
 ### A.2. Database population
 
 ```sql
@@ -730,7 +778,7 @@ INSERT INTO ProjectMember (idUser,idProject,isCoordinator,isFavorite) VALUES (1,
 (2,10,FALSE,TRUE);
 
 INSERT INTO ProjectMemberInvitation (idUser,idProject,inviteAccepted) VALUES (1,3,TRUE),
-(1,3,TRUE),
+(1,4,TRUE),
 (3,6,TRUE),
 (4,3,TRUE),
 (10,2,TRUE),
@@ -829,6 +877,7 @@ INSERT INTO UserNotification (user_id,notification_id,isChecked) VALUES (1,1,FAL
 (4,10,FALSE);
 ```
 
+
 ---
 
 ## Revision history
@@ -843,4 +892,3 @@ GROUP2363, 22/10/2023
 | Emanuel Maia | up202107486@up.pt |
 | Miguel Marinho | up202108822@up.pt |
 | Rúben Fonseca | up202108830@up.pt |
-
